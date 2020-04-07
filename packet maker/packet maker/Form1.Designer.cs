@@ -221,7 +221,7 @@
             this.translate.Controls.Add(this.trasBtn);
             this.translate.Controls.Add(this.transOut);
             this.translate.Controls.Add(this.transIn);
-            this.translate.Location = new System.Drawing.Point(892, 102);
+            this.translate.Location = new System.Drawing.Point(112, 61);
             this.translate.Name = "translate";
             this.translate.Size = new System.Drawing.Size(505, 374);
             this.translate.TabIndex = 16;

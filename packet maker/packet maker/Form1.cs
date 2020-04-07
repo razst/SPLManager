@@ -109,6 +109,15 @@ namespace packet_maker
             int subtypearr = Convert.ToInt32(bitarr[5], 16);
             int lenarr = Convert.ToInt32(bitarr[9] + bitarr[8] + bitarr[7] + bitarr[6], 16);
 
+            int typeDex = options.typenum.FindIndex(item => item.id == typearr);
+            int subtypeDex = options.typenum[typeDex].subTypes.FindIndex(item => item.id == subtypearr);
+            Console.WriteLine(typeDex);
+            Console.WriteLine(subtypeDex);
+            foreach (Params par in options.typenum[typeDex].subTypes[subtypeDex])
+            {
+
+            }
+
 
             string temp= null;
             for (int i= bitarr.Length-1; i>=10; i--)
@@ -141,7 +150,7 @@ namespace packet_maker
         private void Form1_Load(object sender, EventArgs e)
         {
             //http://jsonviewer.stack.hu/
-            StreamReader re = new StreamReader(@"C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet.json");
+            StreamReader re = new StreamReader(@"packet.json");
             JsonTextReader reader = new JsonTextReader(re);
             JsonSerializer Serializer = new JsonSerializer();
             object parsedData = Serializer.Deserialize(reader);

@@ -20,7 +20,7 @@ namespace packet_maker
         public string name { get; set; }
         public string desc { get; set; }
         [JsonProperty("inParams")]
-        public IList<Params> parmas { get; set; }
+        public List<Params> parmas { get; set; }
 
 
         public IEnumerator<Params> GetEnumerator()
@@ -35,7 +35,7 @@ namespace packet_maker
         public string name { get; set; }
         public string desc { get; set; }
         [JsonProperty("subtypes")]
-        public IList<SubType> subTypes { get; set; }
+        public List<SubType> subTypes { get; set; }
 
 
         public IEnumerator<SubType> GetEnumerator()
@@ -47,7 +47,7 @@ namespace packet_maker
     public class TypeList
     {
         [JsonProperty("types")]
-        public IList<Type> typenum { get; set; }
+        public List<Type> typenum { get; set; }
 
 
 

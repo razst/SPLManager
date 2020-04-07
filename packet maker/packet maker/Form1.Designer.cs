@@ -31,13 +31,13 @@
             this.ID = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dataTxb = new System.Windows.Forms.TextBox();
             this.IDTxb = new System.Windows.Forms.TextBox();
             this.OkBtn = new System.Windows.Forms.Button();
             this.makeOut = new System.Windows.Forms.TextBox();
             this.make = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dataTypesDGV = new System.Windows.Forms.DataGridView();
+            this.descSubType = new System.Windows.Forms.Label();
+            this.descType = new System.Windows.Forms.Label();
             this.subtypeCB = new System.Windows.Forms.ComboBox();
             this.typeCB = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -47,16 +47,13 @@
             this.trasBtn = new System.Windows.Forms.Button();
             this.transOut = new System.Windows.Forms.TextBox();
             this.transIn = new System.Windows.Forms.TextBox();
-            this.descType = new System.Windows.Forms.Label();
-            this.descSubType = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.make.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.translate.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // ID
@@ -86,22 +83,6 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "subtype:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "data:";
-            // 
-            // dataTxb
-            // 
-            this.dataTxb.Location = new System.Drawing.Point(80, 13);
-            this.dataTxb.Name = "dataTxb";
-            this.dataTxb.Size = new System.Drawing.Size(120, 20);
-            this.dataTxb.TabIndex = 6;
-            // 
             // IDTxb
             // 
             this.IDTxb.Location = new System.Drawing.Point(63, 16);
@@ -111,7 +92,7 @@
             // 
             // OkBtn
             // 
-            this.OkBtn.Location = new System.Drawing.Point(63, 210);
+            this.OkBtn.Location = new System.Drawing.Point(75, 139);
             this.OkBtn.Name = "OkBtn";
             this.OkBtn.Size = new System.Drawing.Size(75, 23);
             this.OkBtn.TabIndex = 10;
@@ -121,20 +102,19 @@
             // 
             // makeOut
             // 
-            this.makeOut.Location = new System.Drawing.Point(421, 181);
+            this.makeOut.Location = new System.Drawing.Point(205, 262);
             this.makeOut.Multiline = true;
             this.makeOut.Name = "makeOut";
-            this.makeOut.Size = new System.Drawing.Size(332, 167);
+            this.makeOut.Size = new System.Drawing.Size(332, 86);
             this.makeOut.TabIndex = 13;
             this.makeOut.Text = "output";
             // 
             // make
             // 
             this.make.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.make.Controls.Add(this.groupBox3);
+            this.make.Controls.Add(this.dataTypesDGV);
             this.make.Controls.Add(this.descSubType);
             this.make.Controls.Add(this.descType);
-            this.make.Controls.Add(this.groupBox2);
             this.make.Controls.Add(this.subtypeCB);
             this.make.Controls.Add(this.typeCB);
             this.make.Controls.Add(this.ID);
@@ -145,20 +125,42 @@
             this.make.Controls.Add(this.IDTxb);
             this.make.Location = new System.Drawing.Point(12, 71);
             this.make.Name = "make";
-            this.make.Size = new System.Drawing.Size(759, 354);
+            this.make.Size = new System.Drawing.Size(874, 354);
             this.make.TabIndex = 14;
             this.make.TabStop = false;
             // 
-            // groupBox2
+            // dataTypesDGV
             // 
-            this.groupBox2.Controls.Add(this.dataTxb);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(334, 16);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 39);
-            this.groupBox2.TabIndex = 16;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.dataTypesDGV.AllowUserToAddRows = false;
+            this.dataTypesDGV.AllowUserToDeleteRows = false;
+            this.dataTypesDGV.AllowUserToResizeColumns = false;
+            this.dataTypesDGV.AllowUserToResizeRows = false;
+            this.dataTypesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataTypesDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataTypes,
+            this.value,
+            this.desc});
+            this.dataTypesDGV.Location = new System.Drawing.Point(536, 16);
+            this.dataTypesDGV.Name = "dataTypesDGV";
+            this.dataTypesDGV.Size = new System.Drawing.Size(332, 240);
+            this.dataTypesDGV.TabIndex = 19;
+            this.dataTypesDGV.Visible = false;
+            // 
+            // descSubType
+            // 
+            this.descSubType.AutoSize = true;
+            this.descSubType.Location = new System.Drawing.Point(202, 88);
+            this.descSubType.Name = "descSubType";
+            this.descSubType.Size = new System.Drawing.Size(0, 13);
+            this.descSubType.TabIndex = 18;
+            // 
+            // descType
+            // 
+            this.descType.AutoSize = true;
+            this.descType.Location = new System.Drawing.Point(202, 53);
+            this.descType.Name = "descType";
+            this.descType.Size = new System.Drawing.Size(0, 13);
+            this.descType.TabIndex = 17;
             // 
             // subtypeCB
             // 
@@ -219,7 +221,7 @@
             this.translate.Controls.Add(this.trasBtn);
             this.translate.Controls.Add(this.transOut);
             this.translate.Controls.Add(this.transIn);
-            this.translate.Location = new System.Drawing.Point(777, 105);
+            this.translate.Location = new System.Drawing.Point(892, 102);
             this.translate.Name = "translate";
             this.translate.Size = new System.Drawing.Size(505, 374);
             this.translate.TabIndex = 16;
@@ -254,55 +256,31 @@
             this.transIn.TabIndex = 0;
             this.transIn.Text = "input";
             // 
-            // descType
+            // desc
             // 
-            this.descType.AutoSize = true;
-            this.descType.Location = new System.Drawing.Point(202, 53);
-            this.descType.Name = "descType";
-            this.descType.Size = new System.Drawing.Size(0, 13);
-            this.descType.TabIndex = 17;
+            this.desc.HeaderText = "Description:";
+            this.desc.Name = "desc";
+            this.desc.ReadOnly = true;
+            this.desc.Width = 88;
             // 
-            // descSubType
+            // value
             // 
-            this.descSubType.AutoSize = true;
-            this.descSubType.Location = new System.Drawing.Point(202, 88);
-            this.descSubType.Name = "descSubType";
-            this.descSubType.Size = new System.Drawing.Size(0, 13);
-            this.descSubType.TabIndex = 18;
+            this.value.HeaderText = "value:";
+            this.value.Name = "value";
+            this.value.Width = 61;
             // 
-            // groupBox3
+            // dataTypes
             // 
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(334, 53);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 39);
-            this.groupBox3.TabIndex = 19;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
-            this.groupBox3.Visible = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(80, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(120, 20);
-            this.textBox1.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "data:";
+            this.dataTypes.HeaderText = "Item:";
+            this.dataTypes.Name = "dataTypes";
+            this.dataTypes.ReadOnly = true;
+            this.dataTypes.Width = 55;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(921, 450);
             this.Controls.Add(this.translate);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.make);
@@ -311,14 +289,11 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.make.ResumeLayout(false);
             this.make.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.translate.ResumeLayout(false);
             this.translate.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -327,8 +302,6 @@
         private System.Windows.Forms.Label ID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox dataTxb;
         private System.Windows.Forms.TextBox IDTxb;
         private System.Windows.Forms.Button OkBtn;
         private System.Windows.Forms.TextBox makeOut;
@@ -340,14 +313,14 @@
         private System.Windows.Forms.Button trasBtn;
         private System.Windows.Forms.TextBox transOut;
         private System.Windows.Forms.TextBox transIn;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox subtypeCB;
         private System.Windows.Forms.ComboBox typeCB;
         private System.Windows.Forms.Label descSubType;
         private System.Windows.Forms.Label descType;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dataTypesDGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataTypes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn desc;
     }
 }
 

@@ -23,7 +23,7 @@ namespace packet_maker
         }
 
         private TypeList options;
-        private int parNum = 0;
+
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
@@ -60,7 +60,19 @@ namespace packet_maker
             Array.Reverse(revLen);
             if (length != 0)
             {
-                string data = Convert.ToInt32(dataTxb.Text).ToString("X" + (length * 2).ToString());
+                string data = "";
+                for (int i = 0; i<dataTypesDGV.Rows.Count;i++)
+                {
+                    if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "int")
+                    {
+                        data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X8");
+                    }
+                    else
+                    {
+                        data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X2");
+                    }
+                    
+                }
                 string hexData = Regex.Replace(data, ".{2}", "$0 ");
                 string[] revData = hexData.Split(' ');
                 Array.Reverse(revData);
@@ -140,6 +152,7 @@ namespace packet_maker
             {
                 typeCB.Items.Add(t.name);
             }
+           
         }
 
         private void typeCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -152,13 +165,30 @@ namespace packet_maker
             descType.Text = "Descripion: " + options.typenum[typeCB.SelectedIndex].desc;
             descSubType.Text = "";
             subtypeCB.Text = "";
+            dataTypesDGV.Visible = false;
+            dataTypesDGV.Rows.Clear();
         }
 
         private void subtypeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             descSubType.Text = "Descripion: " + options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].desc;
+            if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas.Count() != 0)
+            {
+                dataTypesDGV.Rows.Clear();
+               // Console.WriteLine(dataTypesDGV.Rows[0].Cells[2].Value.ToString());
+                dataTypesDGV.Visible = true;
+                foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
+                {
+                    dataTypesDGV.Rows.Add(par.name,"",par.desc);
+                }
+                dataTypesDGV.AutoResizeColumns();
 
-            parNum = options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas.Count();
+            }
+            else
+            {
+                dataTypesDGV.Visible = false;
+
+            }
         }
     }
 }

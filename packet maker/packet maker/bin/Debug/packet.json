@@ -12,7 +12,8 @@
         },
        {
           "id": "35",
-          name: "get beacon intreval","desc":"get the beacon intreval time in seconds"
+          name: "get beacon intreval","desc":"get the beacon intreval time in seconds",
+		  inParams:[]
         },
        {
           "id": "36",

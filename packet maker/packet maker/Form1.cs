@@ -171,8 +171,8 @@ namespace packet_maker
             {
                 subtypeCB.Items.Add(sub.name);
             }
-            descType.Text = "Descripion: " + options.typenum[typeCB.SelectedIndex].desc;
-            descSubType.Text = "";
+            descType.Text = "Description: " + options.typenum[typeCB.SelectedIndex].desc;
+            descSubType.Text = "Description:";
             subtypeCB.Text = "";
             dataTypesDGV.Visible = false;
             dataTypesDGV.Rows.Clear();
@@ -180,7 +180,7 @@ namespace packet_maker
 
         private void subtypeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            descSubType.Text = "Descripion: " + options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].desc;
+            descSubType.Text = "Description: " + options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].desc;
             if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas.Count() != 0)
             {
                 dataTypesDGV.Rows.Clear();

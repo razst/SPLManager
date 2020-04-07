@@ -1,0 +1,41 @@
+{
+  types: [
+    {
+      "id": "0",
+      "name": "TRXVU",
+       "desc":"wow",
+      subtypes: [
+        {
+          "id": "0",
+          "name": "mute","desc":"mute the TRXVU",
+          inParams:[{"name":"seconds","desc":"number of seconds to mute the TRXVU","type":"int"}]	
+        },
+       {
+          "id": "1",
+          name: "get beacon intreval","desc":"get the beacon intreval time in seconds"
+        },
+       {
+          "id": "2",
+          name: "set beacon intreval",
+		  "desc":"set the beacon intreval time in seconds",	
+          inParams:[{"name":"seconds","desc":"number of seconds for beacon intreavl ","type":"int"}]	
+        }
+      ]
+    },
+
+    {
+      "id": "1",
+      "name": "EPS",
+       "desc":"idk",
+      subtypes: [
+        {
+          "id": "0",
+          "name": "restert","desc":"restart the OBC with the EPS",
+          inParams:[]	
+        }
+      ]
+    }
+
+
+  ]
+}

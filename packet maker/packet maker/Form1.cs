@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+
+
+
 namespace packet_maker
 {
     public partial class Form1 : Form
@@ -91,6 +96,22 @@ namespace packet_maker
             {
                 make.Visible = false;
                 translate.Visible = true;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //http://jsonviewer.stack.hu/
+            StreamReader re = new StreamReader(@"C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet.json");
+            JsonTextReader reader = new JsonTextReader(re);
+            JsonSerializer Serializer = new JsonSerializer();
+            object parsedData = Serializer.Deserialize(reader);
+            string jsonString = @parsedData.ToString();
+            var options = JsonConvert.DeserializeObject<TypeList>(jsonString);
+            
+            foreach (Type t in options)
+            {
+                typeCB.Items.Add(t.name);
             }
         }
     }

@@ -7,3 +7,15 @@ C:\Users\ילדי סגמן\Documents\יובל\מגמת מחשבים\packet maker
 C:\Users\ילדי סגמן\Documents\יובל\מגמת מחשבים\packet maker\packet maker\obj\Debug\packet maker.csproj.GenerateResource.cache
 C:\Users\ילדי סגמן\Documents\יובל\מגמת מחשבים\packet maker\packet maker\obj\Debug\packet maker.exe
 C:\Users\ילדי סגמן\Documents\יובל\מגמת מחשבים\packet maker\packet maker\obj\Debug\packet maker.pdb
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe.config
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.pdb
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Form1.resources
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Properties.Resources.resources
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.GenerateResource.cache
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
+C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb

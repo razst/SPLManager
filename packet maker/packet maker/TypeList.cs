@@ -19,19 +19,37 @@ namespace packet_maker
         public int id { get; set; }
         public string name { get; set; }
         public string desc { get; set; }
+        [JsonProperty("inParams")]
         public IList<Params> parmas { get; set; }
+
+
+        public IEnumerator<Params> GetEnumerator()
+        {
+            foreach (var type in parmas)
+                yield return type;
+        }
     }
     public class Type
     {
         public int id { get; set; }
         public string name { get; set; }
         public string desc { get; set; }
+        [JsonProperty("subtypes")]
         public IList<SubType> subTypes { get; set; }
+
+
+        public IEnumerator<SubType> GetEnumerator()
+        {
+            foreach (var type in subTypes)
+                yield return type;
+        }
     }
     public class TypeList
     {
         [JsonProperty("types")]
         public IList<Type> typenum { get; set; }
+
+
 
         public IEnumerator<Type> GetEnumerator()
         {

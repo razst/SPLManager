@@ -3,7 +3,7 @@
     {
       'id': '0',
       'name': 'TRXVU',
-       'desc':'wow',
+      'desc':'wow',
       'subtypes': [
         {
           'id': '0',
@@ -14,7 +14,8 @@
        {
           'id': '1',
           'name': 'get beacon intreval',
-		  'desc':'get the beacon intreval time in seconds'
+		  'desc':'get the beacon intreval time in seconds',
+		  'inParams':[]
         },
        {
           'id': '2',
@@ -32,7 +33,8 @@
       'subtypes': [
         {
           'id': '0',
-          'name': 'restert','desc':'restart the OBC with the EPS',
+          'name': 'restert',
+		  'desc':'restart the OBC with the EPS',
           'inParams':[]	
         }
       ]

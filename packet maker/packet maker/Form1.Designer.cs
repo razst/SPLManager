@@ -33,14 +33,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dataTxb = new System.Windows.Forms.TextBox();
-            this.subTypeTxb = new System.Windows.Forms.TextBox();
-            this.typeTxb = new System.Windows.Forms.TextBox();
             this.IDTxb = new System.Windows.Forms.TextBox();
             this.OkBtn = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lenTxb = new System.Windows.Forms.TextBox();
             this.makeOut = new System.Windows.Forms.TextBox();
             this.make = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.subtypeCB = new System.Windows.Forms.ComboBox();
+            this.typeCB = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.getRB = new System.Windows.Forms.RadioButton();
             this.createRB = new System.Windows.Forms.RadioButton();
@@ -48,12 +47,16 @@
             this.trasBtn = new System.Windows.Forms.Button();
             this.transOut = new System.Windows.Forms.TextBox();
             this.transIn = new System.Windows.Forms.TextBox();
-            this.typeCB = new System.Windows.Forms.ComboBox();
-            this.subtypeCB = new System.Windows.Forms.ComboBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.descType = new System.Windows.Forms.Label();
+            this.descSubType = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.make.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.translate.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // ID
@@ -86,7 +89,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 156);
+            this.label3.Location = new System.Drawing.Point(8, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 5;
@@ -94,30 +97,16 @@
             // 
             // dataTxb
             // 
-            this.dataTxb.Location = new System.Drawing.Point(63, 149);
+            this.dataTxb.Location = new System.Drawing.Point(80, 13);
             this.dataTxb.Name = "dataTxb";
-            this.dataTxb.Size = new System.Drawing.Size(100, 20);
+            this.dataTxb.Size = new System.Drawing.Size(120, 20);
             this.dataTxb.TabIndex = 6;
-            // 
-            // subTypeTxb
-            // 
-            this.subTypeTxb.Location = new System.Drawing.Point(63, 80);
-            this.subTypeTxb.Name = "subTypeTxb";
-            this.subTypeTxb.Size = new System.Drawing.Size(100, 20);
-            this.subTypeTxb.TabIndex = 7;
-            // 
-            // typeTxb
-            // 
-            this.typeTxb.Location = new System.Drawing.Point(63, 45);
-            this.typeTxb.Name = "typeTxb";
-            this.typeTxb.Size = new System.Drawing.Size(100, 20);
-            this.typeTxb.TabIndex = 8;
             // 
             // IDTxb
             // 
             this.IDTxb.Location = new System.Drawing.Point(63, 16);
             this.IDTxb.Name = "IDTxb";
-            this.IDTxb.Size = new System.Drawing.Size(100, 20);
+            this.IDTxb.Size = new System.Drawing.Size(121, 20);
             this.IDTxb.TabIndex = 9;
             // 
             // OkBtn
@@ -129,22 +118,6 @@
             this.OkBtn.Text = "generate";
             this.OkBtn.UseVisualStyleBackColor = true;
             this.OkBtn.Click += new System.EventHandler(this.OkBtn_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 123);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "length:";
-            // 
-            // lenTxb
-            // 
-            this.lenTxb.Location = new System.Drawing.Point(63, 115);
-            this.lenTxb.Name = "lenTxb";
-            this.lenTxb.Size = new System.Drawing.Size(100, 20);
-            this.lenTxb.TabIndex = 12;
             // 
             // makeOut
             // 
@@ -158,6 +131,9 @@
             // make
             // 
             this.make.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.make.Controls.Add(this.groupBox3);
+            this.make.Controls.Add(this.descSubType);
+            this.make.Controls.Add(this.descType);
             this.make.Controls.Add(this.groupBox2);
             this.make.Controls.Add(this.subtypeCB);
             this.make.Controls.Add(this.typeCB);
@@ -165,19 +141,43 @@
             this.make.Controls.Add(this.makeOut);
             this.make.Controls.Add(this.label1);
             this.make.Controls.Add(this.OkBtn);
-            this.make.Controls.Add(this.lenTxb);
             this.make.Controls.Add(this.label2);
-            this.make.Controls.Add(this.label4);
-            this.make.Controls.Add(this.label3);
-            this.make.Controls.Add(this.dataTxb);
             this.make.Controls.Add(this.IDTxb);
-            this.make.Controls.Add(this.subTypeTxb);
-            this.make.Controls.Add(this.typeTxb);
             this.make.Location = new System.Drawing.Point(12, 71);
             this.make.Name = "make";
             this.make.Size = new System.Drawing.Size(759, 354);
             this.make.TabIndex = 14;
             this.make.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.dataTxb);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Location = new System.Drawing.Point(334, 16);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 39);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            // 
+            // subtypeCB
+            // 
+            this.subtypeCB.FormattingEnabled = true;
+            this.subtypeCB.Location = new System.Drawing.Point(62, 85);
+            this.subtypeCB.Name = "subtypeCB";
+            this.subtypeCB.Size = new System.Drawing.Size(121, 21);
+            this.subtypeCB.TabIndex = 15;
+            this.subtypeCB.SelectedIndexChanged += new System.EventHandler(this.subtypeCB_SelectedIndexChanged);
+            // 
+            // typeCB
+            // 
+            this.typeCB.AllowDrop = true;
+            this.typeCB.FormattingEnabled = true;
+            this.typeCB.Location = new System.Drawing.Point(63, 50);
+            this.typeCB.Name = "typeCB";
+            this.typeCB.Size = new System.Drawing.Size(121, 21);
+            this.typeCB.TabIndex = 14;
+            this.typeCB.SelectedIndexChanged += new System.EventHandler(this.typeCB_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -254,30 +254,49 @@
             this.transIn.TabIndex = 0;
             this.transIn.Text = "input";
             // 
-            // typeCB
+            // descType
             // 
-            this.typeCB.FormattingEnabled = true;
-            this.typeCB.Location = new System.Drawing.Point(194, 45);
-            this.typeCB.Name = "typeCB";
-            this.typeCB.Size = new System.Drawing.Size(121, 21);
-            this.typeCB.TabIndex = 14;
+            this.descType.AutoSize = true;
+            this.descType.Location = new System.Drawing.Point(202, 53);
+            this.descType.Name = "descType";
+            this.descType.Size = new System.Drawing.Size(0, 13);
+            this.descType.TabIndex = 17;
             // 
-            // subtypeCB
+            // descSubType
             // 
-            this.subtypeCB.FormattingEnabled = true;
-            this.subtypeCB.Location = new System.Drawing.Point(194, 80);
-            this.subtypeCB.Name = "subtypeCB";
-            this.subtypeCB.Size = new System.Drawing.Size(121, 21);
-            this.subtypeCB.TabIndex = 15;
+            this.descSubType.AutoSize = true;
+            this.descSubType.Location = new System.Drawing.Point(202, 88);
+            this.descSubType.Name = "descSubType";
+            this.descSubType.Size = new System.Drawing.Size(0, 13);
+            this.descSubType.TabIndex = 18;
             // 
-            // groupBox2
+            // groupBox3
             // 
-            this.groupBox2.Location = new System.Drawing.Point(194, 149);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 39);
-            this.groupBox2.TabIndex = 16;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Location = new System.Drawing.Point(334, 53);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(200, 39);
+            this.groupBox3.TabIndex = 19;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "groupBox3";
+            this.groupBox3.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(80, 13);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(120, 20);
+            this.textBox1.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "data:";
             // 
             // Form1
             // 
@@ -292,10 +311,14 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.make.ResumeLayout(false);
             this.make.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.translate.ResumeLayout(false);
             this.translate.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -306,12 +329,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox dataTxb;
-        private System.Windows.Forms.TextBox subTypeTxb;
-        private System.Windows.Forms.TextBox typeTxb;
         private System.Windows.Forms.TextBox IDTxb;
         private System.Windows.Forms.Button OkBtn;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox lenTxb;
         private System.Windows.Forms.TextBox makeOut;
         private System.Windows.Forms.GroupBox make;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -324,6 +343,11 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox subtypeCB;
         private System.Windows.Forms.ComboBox typeCB;
+        private System.Windows.Forms.Label descSubType;
+        private System.Windows.Forms.Label descType;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label4;
     }
 }
 

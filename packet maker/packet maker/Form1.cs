@@ -22,30 +22,57 @@ namespace packet_maker
             InitializeComponent();
         }
 
+        private TypeList options;
+        private int parNum = 0;
+
         private void OkBtn_Click(object sender, EventArgs e)
         {
-            string type = Convert.ToInt32(typeTxb.Text).ToString("X2");
-            string subtype = Convert.ToInt32(subTypeTxb.Text).ToString("X2");
-            string len = Convert.ToInt32(lenTxb.Text).ToString("X8");
+            int length = 0;
+            foreach(Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
+            {
+                if(par.type == "int")
+                {
+                    length += 4;
+                }
+                if (par.type == "char")
+                {
+                    length++;
+                }
+            }
+
+
+
+            string type = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].id).ToString("X2");
+            string subtype = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id).ToString("X2");
+            string len = length.ToString("X8");
             string id = Convert.ToInt32(IDTxb.Text).ToString("X8");
-            string data = Convert.ToInt32(dataTxb.Text).ToString("X" + (int.Parse(lenTxb.Text) * 2).ToString());
-
-
-            string hexData = Regex.Replace(data, ".{2}", "$0 ");
+            
+            
             string hexID = Regex.Replace(id, ".{2}", "$0 ");
             string hexLen = Regex.Replace(len, ".{2}", "$0 ");
 
 
             string[] revLen = hexLen.Split(' ');
             string[] revID = hexID.Split(' ');
-            string[] revData = hexData.Split(' ');
 
 
-            Array.Reverse(revData);
             Array.Reverse(revID);
             Array.Reverse(revLen);
+            if (length != 0)
+            {
+                string data = Convert.ToInt32(dataTxb.Text).ToString("X" + (length * 2).ToString());
+                string hexData = Regex.Replace(data, ".{2}", "$0 ");
+                string[] revData = hexData.Split(' ');
+                Array.Reverse(revData);
+                makeOut.Text = String.Join(" ", revID) + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData);
+            }
+            else
+            {
+                makeOut.Text = String.Join(" ", revID) + " " + type + " " + subtype + String.Join(" ", revLen);
+            }
 
-            makeOut.Text = String.Join(" ", revID) + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData);
+
+
 
         }
 
@@ -107,12 +134,31 @@ namespace packet_maker
             JsonSerializer Serializer = new JsonSerializer();
             object parsedData = Serializer.Deserialize(reader);
             string jsonString = @parsedData.ToString();
-            var options = JsonConvert.DeserializeObject<TypeList>(jsonString);
-            
+            options = JsonConvert.DeserializeObject<TypeList>(jsonString);
+
             foreach (Type t in options)
             {
                 typeCB.Items.Add(t.name);
             }
+        }
+
+        private void typeCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            subtypeCB.Items.Clear();
+            foreach (SubType sub in options.typenum[typeCB.SelectedIndex])
+            {
+                subtypeCB.Items.Add(sub.name);
+            }
+            descType.Text = "Descripion: " + options.typenum[typeCB.SelectedIndex].desc;
+            descSubType.Text = "";
+            subtypeCB.Text = "";
+        }
+
+        private void subtypeCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            descSubType.Text = "Descripion: " + options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].desc;
+
+            parNum = options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas.Count();
         }
     }
 }

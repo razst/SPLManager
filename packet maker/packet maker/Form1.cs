@@ -28,9 +28,9 @@ namespace packet_maker
         private void OkBtn_Click(object sender, EventArgs e)
         {
             int length = 0;
-            foreach(Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
+            foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
             {
-                if(par.type == "int")
+                if (par.type == "int")
                 {
                     length += 4;
                 }
@@ -46,8 +46,8 @@ namespace packet_maker
             string subtype = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id).ToString("X2");
             string len = length.ToString("X8");
             string id = Convert.ToInt32(IDTxb.Text).ToString("X8");
-            
-            
+
+
             string hexID = Regex.Replace(id, ".{2}", "$0 ");
             string hexLen = Regex.Replace(len, ".{2}", "$0 ");
 
@@ -61,7 +61,7 @@ namespace packet_maker
             if (length != 0)
             {
                 string data = "";
-                for (int i = 0; i<dataTypesDGV.Rows.Count;i++)
+                for (int i = dataTypesDGV.Rows.Count - 1; i >= 0; i--)
                 {
                     if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "int")
                     {
@@ -71,7 +71,7 @@ namespace packet_maker
                     {
                         data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X2");
                     }
-                    
+
                 }
                 string hexData = Regex.Replace(data, ".{2}", "$0 ");
                 string[] revData = hexData.Split(' ');
@@ -111,30 +111,36 @@ namespace packet_maker
 
             int typeDex = options.typenum.FindIndex(item => item.id == typearr);
             int subtypeDex = options.typenum[typeDex].subTypes.FindIndex(item => item.id == subtypearr);
-            Console.WriteLine(typeDex);
-            Console.WriteLine(subtypeDex);
-            foreach (Params par in options.typenum[typeDex].subTypes[subtypeDex])
+            int j = 10;
+            List<int> DataArr = new List<int>();
+            foreach (Params par in options.typenum[typeDex].subTypes[subtypeDex].parmas)
             {
-
+                if (par.type == "int")
+                {
+                    DataArr.Add(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16));
+                    j += 4;
+                }
+                else if (par.type == "char")
+                {
+                    DataArr.Add(Convert.ToInt32(bitarr[j], 16));
+                    j++;
+                }
             }
 
 
-            string temp= null;
-            for (int i= bitarr.Length-1; i>=10; i--)
+
+            transOut.AppendText("ID: " + Idarr + Environment.NewLine);
+            transOut.AppendText("type: " + options.typenum[typeDex].name + Environment.NewLine);
+            transOut.AppendText("subtype: " + options.typenum[typeDex].subTypes[subtypeDex].name + Environment.NewLine);
+            transOut.AppendText("length: " + lenarr + Environment.NewLine+ Environment.NewLine);
+            if(DataArr.Count != 0)
             {
-                temp += bitarr[i];
+                transOut.AppendText("Data:" + Environment.NewLine);
+                for (int i = 0; i < DataArr.Count; i++)
+                {
+                    transOut.AppendText(options.typenum[typeDex].subTypes[subtypeDex].parmas[i].name + ": " + DataArr[i] + Environment.NewLine);
+                }
             }
-            temp = temp.Replace("\n", String.Empty);
-            temp = temp.Replace("\r", String.Empty);
-            temp = temp.Replace("\t", String.Empty);
-            int dataarr = Convert.ToInt32(temp, 16);
-
-
-            transOut.AppendText("ID: " +Idarr+ Environment.NewLine);
-            transOut.AppendText("type: "+typearr + Environment.NewLine);
-            transOut.AppendText("subtype: " + subtypearr + Environment.NewLine);
-            transOut.AppendText("length: " + lenarr + Environment.NewLine);
-            transOut.AppendText("data: " + dataarr + Environment.NewLine);
 
         }
 
@@ -161,7 +167,7 @@ namespace packet_maker
             {
                 typeCB.Items.Add(t.name);
             }
-           
+
         }
 
         private void typeCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -184,11 +190,11 @@ namespace packet_maker
             if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas.Count() != 0)
             {
                 dataTypesDGV.Rows.Clear();
-               // Console.WriteLine(dataTypesDGV.Rows[0].Cells[2].Value.ToString());
+                // Console.WriteLine(dataTypesDGV.Rows[0].Cells[2].Value.ToString());
                 dataTypesDGV.Visible = true;
                 foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
                 {
-                    dataTypesDGV.Rows.Add(par.name,"",par.desc);
+                    dataTypesDGV.Rows.Add(par.name, "", par.desc);
                 }
                 dataTypesDGV.AutoResizeColumns();
 

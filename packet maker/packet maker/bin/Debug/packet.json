@@ -25,7 +25,7 @@
           'id': '135',
           'name': 'set idel state',
 	      'desc':'set the TRXVU idel state',	
-          'inParams':[{'name':'state','desc':'00 (on) / 01 (off)','type':'char',values:["00","01"]},
+          'inParams':[{'name':'state','desc':'01 (on) / 00 (off)','type':'char',values:["00","01"]},
 		  {'name':'duration','desc':'idle duration time (max 10 minutes) apply only for state ON','type':'int'}]	
         },
 		{

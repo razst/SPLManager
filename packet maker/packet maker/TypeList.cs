@@ -13,6 +13,15 @@ namespace packet_maker
         public string name { get; set; }
         public string desc { get; set; }
         public string type { get; set; }
+        [JsonProperty("values")]
+        public List<string> values { get; set; }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            foreach (var type in values)
+                yield return type;
+        }
+
     }
     public class SubType
     {

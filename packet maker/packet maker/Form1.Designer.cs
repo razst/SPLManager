@@ -34,7 +34,6 @@
             this.IDTxb = new System.Windows.Forms.TextBox();
             this.OkBtn = new System.Windows.Forms.Button();
             this.makeOut = new System.Windows.Forms.TextBox();
-            this.make = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataTypesDGV = new System.Windows.Forms.DataGridView();
             this.dataTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,23 +43,24 @@
             this.descType = new System.Windows.Forms.Label();
             this.subtypeCB = new System.Windows.Forms.ComboBox();
             this.typeCB = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.getRB = new System.Windows.Forms.RadioButton();
-            this.createRB = new System.Windows.Forms.RadioButton();
-            this.translate = new System.Windows.Forms.GroupBox();
             this.trasBtn = new System.Windows.Forms.Button();
             this.transOut = new System.Windows.Forms.TextBox();
             this.transIn = new System.Windows.Forms.TextBox();
-            this.make.SuspendLayout();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupsCB = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.translate.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // ID
             // 
             this.ID.AutoSize = true;
-            this.ID.Location = new System.Drawing.Point(27, 15);
+            this.ID.Location = new System.Drawing.Point(191, 23);
             this.ID.Name = "ID";
             this.ID.Size = new System.Drawing.Size(21, 13);
             this.ID.TabIndex = 2;
@@ -69,7 +69,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(245, 16);
+            this.label1.Location = new System.Drawing.Point(336, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 3;
@@ -78,7 +78,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(484, 17);
+            this.label2.Location = new System.Drawing.Point(539, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 4;
@@ -86,14 +86,14 @@
             // 
             // IDTxb
             // 
-            this.IDTxb.Location = new System.Drawing.Point(54, 13);
+            this.IDTxb.Location = new System.Drawing.Point(218, 20);
             this.IDTxb.Name = "IDTxb";
-            this.IDTxb.Size = new System.Drawing.Size(121, 20);
+            this.IDTxb.Size = new System.Drawing.Size(84, 20);
             this.IDTxb.TabIndex = 0;
             // 
             // OkBtn
             // 
-            this.OkBtn.Location = new System.Drawing.Point(686, 311);
+            this.OkBtn.Location = new System.Drawing.Point(662, 363);
             this.OkBtn.Name = "OkBtn";
             this.OkBtn.Size = new System.Drawing.Size(75, 23);
             this.OkBtn.TabIndex = 10;
@@ -103,37 +103,16 @@
             // 
             // makeOut
             // 
-            this.makeOut.Location = new System.Drawing.Point(54, 354);
+            this.makeOut.Location = new System.Drawing.Point(54, 418);
             this.makeOut.Multiline = true;
             this.makeOut.Name = "makeOut";
             this.makeOut.Size = new System.Drawing.Size(707, 23);
             this.makeOut.TabIndex = 4;
             // 
-            // make
-            // 
-            this.make.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.make.Controls.Add(this.label3);
-            this.make.Controls.Add(this.dataTypesDGV);
-            this.make.Controls.Add(this.descSubType);
-            this.make.Controls.Add(this.descType);
-            this.make.Controls.Add(this.subtypeCB);
-            this.make.Controls.Add(this.typeCB);
-            this.make.Controls.Add(this.ID);
-            this.make.Controls.Add(this.makeOut);
-            this.make.Controls.Add(this.label1);
-            this.make.Controls.Add(this.OkBtn);
-            this.make.Controls.Add(this.label2);
-            this.make.Controls.Add(this.IDTxb);
-            this.make.Location = new System.Drawing.Point(12, 71);
-            this.make.Name = "make";
-            this.make.Size = new System.Drawing.Size(777, 398);
-            this.make.TabIndex = 14;
-            this.make.TabStop = false;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 359);
+            this.label3.Location = new System.Drawing.Point(6, 421);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 20;
@@ -150,7 +129,7 @@
             this.dataTypes,
             this.value,
             this.desc});
-            this.dataTypesDGV.Location = new System.Drawing.Point(54, 74);
+            this.dataTypesDGV.Location = new System.Drawing.Point(30, 126);
             this.dataTypesDGV.Name = "dataTypesDGV";
             this.dataTypesDGV.Size = new System.Drawing.Size(606, 260);
             this.dataTypesDGV.TabIndex = 3;
@@ -179,7 +158,7 @@
             // descSubType
             // 
             this.descSubType.AutoSize = true;
-            this.descSubType.Location = new System.Drawing.Point(470, 48);
+            this.descSubType.Location = new System.Drawing.Point(539, 65);
             this.descSubType.Name = "descSubType";
             this.descSubType.Size = new System.Drawing.Size(63, 13);
             this.descSubType.TabIndex = 18;
@@ -188,7 +167,7 @@
             // descType
             // 
             this.descType.AutoSize = true;
-            this.descType.Location = new System.Drawing.Point(216, 48);
+            this.descType.Location = new System.Drawing.Point(322, 65);
             this.descType.Name = "descType";
             this.descType.Size = new System.Drawing.Size(63, 13);
             this.descType.TabIndex = 17;
@@ -196,73 +175,28 @@
             // 
             // subtypeCB
             // 
+            this.subtypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.subtypeCB.FormattingEnabled = true;
-            this.subtypeCB.Location = new System.Drawing.Point(539, 13);
+            this.subtypeCB.Location = new System.Drawing.Point(594, 20);
             this.subtypeCB.Name = "subtypeCB";
-            this.subtypeCB.Size = new System.Drawing.Size(121, 21);
+            this.subtypeCB.Size = new System.Drawing.Size(143, 21);
             this.subtypeCB.TabIndex = 2;
             this.subtypeCB.SelectedIndexChanged += new System.EventHandler(this.subtypeCB_SelectedIndexChanged);
             // 
             // typeCB
             // 
             this.typeCB.AllowDrop = true;
+            this.typeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeCB.FormattingEnabled = true;
-            this.typeCB.Location = new System.Drawing.Point(285, 12);
+            this.typeCB.Location = new System.Drawing.Point(376, 20);
             this.typeCB.Name = "typeCB";
             this.typeCB.Size = new System.Drawing.Size(121, 21);
             this.typeCB.TabIndex = 1;
             this.typeCB.SelectedIndexChanged += new System.EventHandler(this.typeCB_SelectedIndexChanged);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.getRB);
-            this.groupBox1.Controls.Add(this.createRB);
-            this.groupBox1.Location = new System.Drawing.Point(12, 9);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(150, 46);
-            this.groupBox1.TabIndex = 15;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "mode:";
-            // 
-            // getRB
-            // 
-            this.getRB.AutoSize = true;
-            this.getRB.Location = new System.Drawing.Point(68, 20);
-            this.getRB.Name = "getRB";
-            this.getRB.Size = new System.Drawing.Size(65, 17);
-            this.getRB.TabIndex = 1;
-            this.getRB.Text = "translate";
-            this.getRB.UseVisualStyleBackColor = true;
-            this.getRB.CheckedChanged += new System.EventHandler(this.getRB_CheckedChanged);
-            // 
-            // createRB
-            // 
-            this.createRB.AutoSize = true;
-            this.createRB.Checked = true;
-            this.createRB.Location = new System.Drawing.Point(7, 20);
-            this.createRB.Name = "createRB";
-            this.createRB.Size = new System.Drawing.Size(55, 17);
-            this.createRB.TabIndex = 0;
-            this.createRB.TabStop = true;
-            this.createRB.Text = "create";
-            this.createRB.UseVisualStyleBackColor = true;
-            this.createRB.CheckedChanged += new System.EventHandler(this.createRB_CheckedChanged);
-            // 
-            // translate
-            // 
-            this.translate.Controls.Add(this.trasBtn);
-            this.translate.Controls.Add(this.transOut);
-            this.translate.Controls.Add(this.transIn);
-            this.translate.Location = new System.Drawing.Point(168, 45);
-            this.translate.Name = "translate";
-            this.translate.Size = new System.Drawing.Size(505, 374);
-            this.translate.TabIndex = 16;
-            this.translate.TabStop = false;
-            this.translate.Visible = false;
-            // 
             // trasBtn
             // 
-            this.trasBtn.Location = new System.Drawing.Point(210, 147);
+            this.trasBtn.Location = new System.Drawing.Point(315, 106);
             this.trasBtn.Name = "trasBtn";
             this.trasBtn.Size = new System.Drawing.Size(75, 23);
             this.trasBtn.TabIndex = 2;
@@ -272,7 +206,7 @@
             // 
             // transOut
             // 
-            this.transOut.Location = new System.Drawing.Point(136, 181);
+            this.transOut.Location = new System.Drawing.Point(244, 171);
             this.transOut.Multiline = true;
             this.transOut.Name = "transOut";
             this.transOut.Size = new System.Drawing.Size(259, 187);
@@ -281,31 +215,102 @@
             // 
             // transIn
             // 
-            this.transIn.Location = new System.Drawing.Point(136, 45);
+            this.transIn.Location = new System.Drawing.Point(81, 33);
             this.transIn.Multiline = true;
             this.transIn.Name = "transIn";
-            this.transIn.Size = new System.Drawing.Size(259, 64);
+            this.transIn.Size = new System.Drawing.Size(566, 22);
             this.transIn.TabIndex = 0;
             this.transIn.Text = "input";
+            // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(863, 487);
+            this.tabControl.TabIndex = 17;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.groupsCB);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.ID);
+            this.tabPage1.Controls.Add(this.dataTypesDGV);
+            this.tabPage1.Controls.Add(this.IDTxb);
+            this.tabPage1.Controls.Add(this.descSubType);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.descType);
+            this.tabPage1.Controls.Add(this.OkBtn);
+            this.tabPage1.Controls.Add(this.subtypeCB);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.typeCB);
+            this.tabPage1.Controls.Add(this.makeOut);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(855, 461);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "create";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.transOut);
+            this.tabPage2.Controls.Add(this.trasBtn);
+            this.tabPage2.Controls.Add(this.transIn);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(783, 461);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "traslate";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupsCB
+            // 
+            this.groupsCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.groupsCB.FormattingEnabled = true;
+            this.groupsCB.Items.AddRange(new object[] {
+            "Any",
+            "Ofakim",
+            "Yerucham",
+            "Kiryat Ata",
+            "Shaar HaNegev",
+            "Nazareth",
+            "Maale Adomin",
+            "Guvat Shmuel"});
+            this.groupsCB.Location = new System.Drawing.Point(70, 20);
+            this.groupsCB.Name = "groupsCB";
+            this.groupsCB.Size = new System.Drawing.Size(106, 21);
+            this.groupsCB.TabIndex = 21;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(21, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "satelite:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 511);
-            this.Controls.Add(this.translate);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.make);
+            this.ClientSize = new System.Drawing.Size(881, 511);
+            this.Controls.Add(this.tabControl);
             this.Name = "Form1";
             this.Text = "SPL Manager";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.make.ResumeLayout(false);
-            this.make.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.translate.ResumeLayout(false);
-            this.translate.PerformLayout();
+            this.tabControl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -317,11 +322,6 @@
         private System.Windows.Forms.TextBox IDTxb;
         private System.Windows.Forms.Button OkBtn;
         private System.Windows.Forms.TextBox makeOut;
-        private System.Windows.Forms.GroupBox make;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton getRB;
-        private System.Windows.Forms.RadioButton createRB;
-        private System.Windows.Forms.GroupBox translate;
         private System.Windows.Forms.Button trasBtn;
         private System.Windows.Forms.TextBox transOut;
         private System.Windows.Forms.TextBox transIn;
@@ -334,6 +334,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn desc;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ComboBox groupsCB;
+        private System.Windows.Forms.Label label4;
     }
 }
 

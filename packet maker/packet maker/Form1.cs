@@ -23,7 +23,18 @@ namespace packet_maker
         }
 
         private TypeList options;
-
+        private TypeList transOptions;
+        private string[] groups =
+        {
+            "Any",
+            "Ofakim",
+            "Yerucham",
+            "Kiryat Ata",
+            "Shaar HaNegev",
+            "Nazareth",
+            "Maale Adomin",
+            "Guvat Shmuel"
+        };
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
@@ -45,8 +56,8 @@ namespace packet_maker
             string type = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].id).ToString("X2");
             string subtype = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id).ToString("X2");
             string len = length.ToString("X8");
-            string id = Convert.ToInt32(IDTxb.Text).ToString("X8");
-
+            string id = Convert.ToInt32(IDTxb.Text).ToString("X6");
+            string satNum = groupsCB.SelectedIndex.ToString("X2");
 
             string hexID = Regex.Replace(id, ".{2}", "$0 ");
             string hexLen = Regex.Replace(len, ".{2}", "$0 ");
@@ -76,11 +87,11 @@ namespace packet_maker
                 string hexData = Regex.Replace(data, ".{2}", "$0 ");
                 string[] revData = hexData.Split(' ');
                 Array.Reverse(revData);
-                makeOut.Text = String.Join(" ", revID) + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData);
+                makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData);
             }
             else
             {
-                makeOut.Text = String.Join(" ", revID) + " " + type + " " + subtype + String.Join(" ", revLen);
+                makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen);
             }
 
 
@@ -88,15 +99,7 @@ namespace packet_maker
 
         }
 
-        private void createRB_CheckedChanged(object sender, EventArgs e)
-        {
-            if (createRB.Checked)
-            {
-                make.Visible = true;
-                translate.Visible = false;
-            }
 
-        }
 
         private void trasBtn_Click(object sender, EventArgs e)
         {
@@ -104,16 +107,17 @@ namespace packet_maker
             string[] bitarr = transIn.Text.Split(' ');
 
 
-            int Idarr = Convert.ToInt32(bitarr[3] + bitarr[2] + bitarr[1] + bitarr[0], 16);
+            int Idarr = Convert.ToInt32(bitarr[2] + bitarr[1] + bitarr[0], 16);
+          
             int typearr = Convert.ToInt32(bitarr[4], 16);
             int subtypearr = Convert.ToInt32(bitarr[5], 16);
             int lenarr = Convert.ToInt32(bitarr[9] + bitarr[8] + bitarr[7] + bitarr[6], 16);
 
-            int typeDex = options.typenum.FindIndex(item => item.id == typearr);
-            int subtypeDex = options.typenum[typeDex].subTypes.FindIndex(item => item.id == subtypearr);
+            int typeDex = transOptions.typenum.FindIndex(item => item.id == typearr);
+            int subtypeDex = transOptions.typenum[typeDex].subTypes.FindIndex(item => item.id == subtypearr);
             int j = 10;
             List<int> DataArr = new List<int>();
-            foreach (Params par in options.typenum[typeDex].subTypes[subtypeDex].parmas)
+            foreach (Params par in transOptions.typenum[typeDex].subTypes[subtypeDex].parmas)
             {
                 if (par.type == "int")
                 {
@@ -128,40 +132,38 @@ namespace packet_maker
             }
 
 
-
+            transOut.AppendText("Satlite: " + groups[Convert.ToInt32(bitarr[3])] +Environment.NewLine);
             transOut.AppendText("ID: " + Idarr + Environment.NewLine);
-            transOut.AppendText("type: " + options.typenum[typeDex].name + Environment.NewLine);
-            transOut.AppendText("subtype: " + options.typenum[typeDex].subTypes[subtypeDex].name + Environment.NewLine);
-            transOut.AppendText("length: " + lenarr + Environment.NewLine+ Environment.NewLine);
-            if(DataArr.Count != 0)
+            transOut.AppendText("type: " + transOptions.typenum[typeDex].name + Environment.NewLine);
+            transOut.AppendText("subtype: " + transOptions.typenum[typeDex].subTypes[subtypeDex].name + Environment.NewLine);
+            transOut.AppendText("length: " + lenarr + Environment.NewLine + Environment.NewLine);
+            if (DataArr.Count != 0)
             {
                 transOut.AppendText("Data:" + Environment.NewLine);
                 for (int i = 0; i < DataArr.Count; i++)
                 {
-                    transOut.AppendText(options.typenum[typeDex].subTypes[subtypeDex].parmas[i].name + ": " + DataArr[i] + Environment.NewLine);
+                    transOut.AppendText(transOptions.typenum[typeDex].subTypes[subtypeDex].parmas[i].name + ": " + DataArr[i] + Environment.NewLine);
                 }
             }
 
         }
 
-        private void getRB_CheckedChanged(object sender, EventArgs e)
-        {
-            if (getRB.Checked)
-            {
-                make.Visible = false;
-                translate.Visible = true;
-            }
-        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             //http://jsonviewer.stack.hu/
             StreamReader re = new StreamReader(@"packet.json");
+            StreamReader ree = new StreamReader(@"packet.json");
             JsonTextReader reader = new JsonTextReader(re);
+            JsonTextReader reeader = new JsonTextReader(ree);
             JsonSerializer Serializer = new JsonSerializer();
             object parsedData = Serializer.Deserialize(reader);
+            object parseedData = Serializer.Deserialize(reeader);
             string jsonString = @parsedData.ToString();
+            string jsonString2 = parseedData.ToString();
             options = JsonConvert.DeserializeObject<TypeList>(jsonString);
+            transOptions=JsonConvert.DeserializeObject<TypeList>(jsonString2);
 
             foreach (Type t in options)
             {
@@ -192,9 +194,30 @@ namespace packet_maker
                 dataTypesDGV.Rows.Clear();
                 // Console.WriteLine(dataTypesDGV.Rows[0].Cells[2].Value.ToString());
                 dataTypesDGV.Visible = true;
+                int i = 0;
                 foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
                 {
                     dataTypesDGV.Rows.Add(par.name, "", par.desc);
+                    if (par.values != null)
+                    {
+                        DataGridViewComboBoxCell c = new DataGridViewComboBoxCell();
+                        
+                        foreach (string item in par.values)
+                        {
+                            c.Items.Add(item);
+                        }
+                        dataTypesDGV.Rows[i].Cells[1] = c;
+                    }
+                    if (par.type == "date")
+                    {
+                        dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToShortDateString();
+                    }
+                    if (par.type == "datetime")
+                    {
+                        dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString();
+                    }
+                    i++;
+
                 }
                 dataTypesDGV.AutoResizeColumns();
 
@@ -205,5 +228,7 @@ namespace packet_maker
 
             }
         }
+
+
     }
 }

@@ -48,9 +48,9 @@
             this.transIn = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupsCB = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.groupsCB = new System.Windows.Forms.ComboBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -60,7 +60,7 @@
             // ID
             // 
             this.ID.AutoSize = true;
-            this.ID.Location = new System.Drawing.Point(191, 23);
+            this.ID.Location = new System.Drawing.Point(226, 28);
             this.ID.Name = "ID";
             this.ID.Size = new System.Drawing.Size(21, 13);
             this.ID.TabIndex = 2;
@@ -69,7 +69,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(336, 23);
+            this.label1.Location = new System.Drawing.Point(364, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 3;
@@ -78,7 +78,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(539, 23);
+            this.label2.Location = new System.Drawing.Point(594, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 4;
@@ -86,7 +86,7 @@
             // 
             // IDTxb
             // 
-            this.IDTxb.Location = new System.Drawing.Point(218, 20);
+            this.IDTxb.Location = new System.Drawing.Point(253, 21);
             this.IDTxb.Name = "IDTxb";
             this.IDTxb.Size = new System.Drawing.Size(84, 20);
             this.IDTxb.TabIndex = 0;
@@ -104,9 +104,8 @@
             // makeOut
             // 
             this.makeOut.Location = new System.Drawing.Point(54, 418);
-            this.makeOut.Multiline = true;
             this.makeOut.Name = "makeOut";
-            this.makeOut.Size = new System.Drawing.Size(707, 23);
+            this.makeOut.Size = new System.Drawing.Size(707, 20);
             this.makeOut.TabIndex = 4;
             // 
             // label3
@@ -158,7 +157,7 @@
             // descSubType
             // 
             this.descSubType.AutoSize = true;
-            this.descSubType.Location = new System.Drawing.Point(539, 65);
+            this.descSubType.Location = new System.Drawing.Point(594, 65);
             this.descSubType.Name = "descSubType";
             this.descSubType.Size = new System.Drawing.Size(63, 13);
             this.descSubType.TabIndex = 18;
@@ -167,7 +166,7 @@
             // descType
             // 
             this.descType.AutoSize = true;
-            this.descType.Location = new System.Drawing.Point(322, 65);
+            this.descType.Location = new System.Drawing.Point(401, 65);
             this.descType.Name = "descType";
             this.descType.Size = new System.Drawing.Size(63, 13);
             this.descType.TabIndex = 17;
@@ -177,7 +176,7 @@
             // 
             this.subtypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.subtypeCB.FormattingEnabled = true;
-            this.subtypeCB.Location = new System.Drawing.Point(594, 20);
+            this.subtypeCB.Location = new System.Drawing.Point(662, 19);
             this.subtypeCB.Name = "subtypeCB";
             this.subtypeCB.Size = new System.Drawing.Size(143, 21);
             this.subtypeCB.TabIndex = 2;
@@ -188,7 +187,7 @@
             this.typeCB.AllowDrop = true;
             this.typeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeCB.FormattingEnabled = true;
-            this.typeCB.Location = new System.Drawing.Point(376, 20);
+            this.typeCB.Location = new System.Drawing.Point(404, 21);
             this.typeCB.Name = "typeCB";
             this.typeCB.Size = new System.Drawing.Size(121, 21);
             this.typeCB.TabIndex = 1;
@@ -196,7 +195,7 @@
             // 
             // trasBtn
             // 
-            this.trasBtn.Location = new System.Drawing.Point(315, 106);
+            this.trasBtn.Location = new System.Drawing.Point(360, 105);
             this.trasBtn.Name = "trasBtn";
             this.trasBtn.Size = new System.Drawing.Size(75, 23);
             this.trasBtn.TabIndex = 2;
@@ -206,7 +205,7 @@
             // 
             // transOut
             // 
-            this.transOut.Location = new System.Drawing.Point(244, 171);
+            this.transOut.Location = new System.Drawing.Point(291, 170);
             this.transOut.Multiline = true;
             this.transOut.Name = "transOut";
             this.transOut.Size = new System.Drawing.Size(259, 187);
@@ -215,7 +214,7 @@
             // 
             // transIn
             // 
-            this.transIn.Location = new System.Drawing.Point(81, 33);
+            this.transIn.Location = new System.Drawing.Point(143, 33);
             this.transIn.Multiline = true;
             this.transIn.Name = "transIn";
             this.transIn.Size = new System.Drawing.Size(566, 22);
@@ -229,7 +228,7 @@
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(863, 487);
+            this.tabControl.Size = new System.Drawing.Size(956, 487);
             this.tabControl.TabIndex = 17;
             // 
             // tabPage1
@@ -251,10 +250,38 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(855, 461);
+            this.tabPage1.Size = new System.Drawing.Size(948, 461);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "create";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(21, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "satelite:";
+            // 
+            // groupsCB
+            // 
+            this.groupsCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.groupsCB.FormattingEnabled = true;
+            this.groupsCB.Items.AddRange(new object[] {
+            "Any",
+            "Ofakim (T1)",
+            "Yerucham (T2)",
+            "Kiryat Ata (T3)",
+            "Taybe (T4)",
+            "Shaar HaNegev (T5)",
+            "Nazareth (T6)",
+            "Maale Adomin (T7)",
+            "Guvat Shmuel (T8)"});
+            this.groupsCB.Location = new System.Drawing.Point(70, 20);
+            this.groupsCB.Name = "groupsCB";
+            this.groupsCB.Size = new System.Drawing.Size(150, 21);
+            this.groupsCB.TabIndex = 21;
             // 
             // tabPage2
             // 
@@ -264,43 +291,16 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(783, 461);
+            this.tabPage2.Size = new System.Drawing.Size(948, 461);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "traslate";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // groupsCB
-            // 
-            this.groupsCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.groupsCB.FormattingEnabled = true;
-            this.groupsCB.Items.AddRange(new object[] {
-            "Any",
-            "Ofakim",
-            "Yerucham",
-            "Kiryat Ata",
-            "Shaar HaNegev",
-            "Nazareth",
-            "Maale Adomin",
-            "Guvat Shmuel"});
-            this.groupsCB.Location = new System.Drawing.Point(70, 20);
-            this.groupsCB.Name = "groupsCB";
-            this.groupsCB.Size = new System.Drawing.Size(106, 21);
-            this.groupsCB.TabIndex = 21;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 13);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "satelite:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(881, 511);
+            this.ClientSize = new System.Drawing.Size(1018, 511);
             this.Controls.Add(this.tabControl);
             this.Name = "Form1";
             this.Text = "SPL Manager";

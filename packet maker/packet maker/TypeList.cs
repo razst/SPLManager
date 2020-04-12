@@ -13,6 +13,7 @@ namespace packet_maker
         public string name { get; set; }
         public string desc { get; set; }
         public string type { get; set; }
+
         [JsonProperty("values")]
         public List<string> values { get; set; }
 
@@ -28,6 +29,7 @@ namespace packet_maker
         public int id { get; set; }
         public string name { get; set; }
         public string desc { get; set; }
+
         [JsonProperty("inParams")]
         public List<Params> parmas { get; set; }
 

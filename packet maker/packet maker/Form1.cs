@@ -1,15 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
 
 
@@ -21,82 +16,100 @@ namespace packet_maker
         {
             InitializeComponent();
         }
-
+        private List<DataGridViewComboBoxCell> cList = new List<DataGridViewComboBoxCell>();
         private TypeList options;
         private TypeList transOptions;
         private string[] groups =
         {
             "Any",
-            "Ofakim",
-            "Yerucham",
-            "Kiryat Ata",
-            "Shaar HaNegev",
-            "Nazareth",
-            "Maale Adomin",
-            "Guvat Shmuel"
+            "Ofakim (T1)",
+            "Yerucham (T2)",
+            "Type (T3)",
+            "Kiryat Ata (T4)",
+            "Shaar HaNegev (T5)",
+            "Nazareth (T6)",
+            "Maale Adomin (T7)",
+            "Guvat Shmuel (T8)"
         };
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
-            int length = 0;
-            foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
+            try
             {
-                if (par.type == "int")
+                int length = 0;
+                foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
                 {
-                    length += 4;
-                }
-                if (par.type == "char")
-                {
-                    length++;
-                }
-            }
-
-
-
-            string type = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].id).ToString("X2");
-            string subtype = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id).ToString("X2");
-            string len = length.ToString("X8");
-            string id = Convert.ToInt32(IDTxb.Text).ToString("X6");
-            string satNum = groupsCB.SelectedIndex.ToString("X2");
-
-            string hexID = Regex.Replace(id, ".{2}", "$0 ");
-            string hexLen = Regex.Replace(len, ".{2}", "$0 ");
-
-
-            string[] revLen = hexLen.Split(' ');
-            string[] revID = hexID.Split(' ');
-
-
-            Array.Reverse(revID);
-            Array.Reverse(revLen);
-            if (length != 0)
-            {
-                string data = "";
-                for (int i = dataTypesDGV.Rows.Count - 1; i >= 0; i--)
-                {
-                    if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "int")
+                    if (par.type == "int")
                     {
-                        data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X8");
+                        length += 4;
                     }
-                    else
+                    if (par.type == "char")
                     {
-                        data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X2");
+                        length++;
                     }
-
                 }
-                string hexData = Regex.Replace(data, ".{2}", "$0 ");
-                string[] revData = hexData.Split(' ');
-                Array.Reverse(revData);
-                makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData);
+
+                DateTime dt = new DateTime();
+                long unix = 0;
+
+                string type = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].id).ToString("X2");
+                string subtype = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id).ToString("X2");
+                string len = length.ToString("X8");
+                string id = Convert.ToInt32(IDTxb.Text).ToString("X6");
+                string satNum = groupsCB.SelectedIndex.ToString("X2");
+
+
+                string hexID = Regex.Replace(id, ".{2}", "$0 ");
+                string hexLen = Regex.Replace(len, ".{2}", "$0 ");
+
+
+                string[] revLen = hexLen.Split(' ');
+                string[] revID = hexID.Split(' ');
+
+
+                Array.Reverse(revID);
+                Array.Reverse(revLen);
+                if (length != 0)
+                {
+                    string data = "";
+                    for (int i = dataTypesDGV.Rows.Count - 1; i >= 0; i--)
+                    {
+                        if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "int")
+                        {
+                            data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X8");
+                        }
+                        else if(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "char")
+                        {
+                            data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X2");
+                        }
+                        else if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "date")
+                        {
+                            dt = DateTime.ParseExact(dataTypesDGV.Rows[i].Cells[1].Value.ToString(),"dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                            unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+                            data += Convert.ToInt64(unix).ToString("X8");
+                        }
+                        else if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "datetime")
+                        {
+                            dt = DateTime.ParseExact(dataTypesDGV.Rows[i].Cells[1].Value.ToString(), "dd/MM/yyyy hh:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                            unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+                            data += Convert.ToInt64(unix).ToString("X8");
+                        }
+
+                    }
+                    string hexData = Regex.Replace(data, ".{2}", "$0 ");
+                    string[] revData = hexData.Split(' ');
+                    Array.Reverse(revData);
+                    makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData);
+                }
+                else
+                {
+                    makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen);
+                }
             }
-            else
+            catch
             {
-                makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen);
+                MessageBox.Show("not all field were filled", "error");
             }
-
-
-
-
         }
 
 
@@ -108,7 +121,7 @@ namespace packet_maker
 
 
             int Idarr = Convert.ToInt32(bitarr[2] + bitarr[1] + bitarr[0], 16);
-          
+
             int typearr = Convert.ToInt32(bitarr[4], 16);
             int subtypearr = Convert.ToInt32(bitarr[5], 16);
             int lenarr = Convert.ToInt32(bitarr[9] + bitarr[8] + bitarr[7] + bitarr[6], 16);
@@ -132,7 +145,7 @@ namespace packet_maker
             }
 
 
-            transOut.AppendText("Satlite: " + groups[Convert.ToInt32(bitarr[3])] +Environment.NewLine);
+            transOut.AppendText("Satlite: " + groups[Convert.ToInt32(bitarr[3])] + Environment.NewLine);
             transOut.AppendText("ID: " + Idarr + Environment.NewLine);
             transOut.AppendText("type: " + transOptions.typenum[typeDex].name + Environment.NewLine);
             transOut.AppendText("subtype: " + transOptions.typenum[typeDex].subTypes[subtypeDex].name + Environment.NewLine);
@@ -163,14 +176,15 @@ namespace packet_maker
             string jsonString = @parsedData.ToString();
             string jsonString2 = parseedData.ToString();
             options = JsonConvert.DeserializeObject<TypeList>(jsonString);
-            transOptions=JsonConvert.DeserializeObject<TypeList>(jsonString2);
+            transOptions = JsonConvert.DeserializeObject<TypeList>(jsonString2);
 
             foreach (Type t in options)
             {
                 typeCB.Items.Add(t.name);
             }
-
+            groupsCB.SelectedIndex = 0;
         }
+
 
         private void typeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -184,6 +198,7 @@ namespace packet_maker
             subtypeCB.Text = "";
             dataTypesDGV.Visible = false;
             dataTypesDGV.Rows.Clear();
+            subtypeCB.SelectedIndex = 0;
         }
 
         private void subtypeCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -192,29 +207,29 @@ namespace packet_maker
             if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas.Count() != 0)
             {
                 dataTypesDGV.Rows.Clear();
-                // Console.WriteLine(dataTypesDGV.Rows[0].Cells[2].Value.ToString());
                 dataTypesDGV.Visible = true;
                 int i = 0;
+                cList.Clear();
                 foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
                 {
                     dataTypesDGV.Rows.Add(par.name, "", par.desc);
                     if (par.values != null)
                     {
-                        DataGridViewComboBoxCell c = new DataGridViewComboBoxCell();
-                        
+                        cList.Add(new DataGridViewComboBoxCell());
                         foreach (string item in par.values)
                         {
-                            c.Items.Add(item);
+                            cList[i].Items.Add(item);
                         }
-                        dataTypesDGV.Rows[i].Cells[1] = c;
+                        dataTypesDGV.Rows[i].Cells[1] = cList[i];
+                        dataTypesDGV.Rows[i].Cells[1].Value = cList[i].Items[0];
                     }
                     if (par.type == "date")
                     {
-                        dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToShortDateString();
+                        dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString("dd/MM/yyyy");
                     }
                     if (par.type == "datetime")
                     {
-                        dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString();
+                        dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
                     }
                     i++;
 

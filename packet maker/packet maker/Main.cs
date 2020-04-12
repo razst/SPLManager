@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace packet_maker
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1()
+        public Main()
         {
             InitializeComponent();
         }
@@ -31,7 +31,8 @@ namespace packet_maker
             "Maale Adomin (T7)",
             "Guvat Shmuel (T8)"
         };
-
+        public static About frm2 = new About();
+        static public Main frm = null;
         private void OkBtn_Click(object sender, EventArgs e)
         {
             try
@@ -116,6 +117,20 @@ namespace packet_maker
 
         private void trasBtn_Click(object sender, EventArgs e)
         {
+            if(privHex.SelectedIndex != -1)
+            {
+                if (transIn.Text != privHex.Items[privHex.SelectedIndex].ToString())
+                {
+                    privHex.Items.Add(transIn.Text);
+                }
+            }
+            else
+            {
+                privHex.Items.Add(transIn.Text);
+                privHex.SelectedIndex = 0;
+            }
+
+
             transOut.Text = "";
             string[] bitarr = transIn.Text.Split(' ');
 
@@ -183,6 +198,7 @@ namespace packet_maker
                 typeCB.Items.Add(t.name);
             }
             groupsCB.SelectedIndex = 0;
+            frm = this;
         }
 
 
@@ -244,6 +260,16 @@ namespace packet_maker
             }
         }
 
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            transIn.Text = privHex.Items[privHex.SelectedIndex].ToString();
+            trasBtn.PerformClick();
+        }
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm.Hide();
+            frm2.ShowDialog();
+        }
     }
 }

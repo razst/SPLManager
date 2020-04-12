@@ -1,6 +1,6 @@
 ﻿namespace packet_maker
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -48,13 +48,21 @@
             this.transIn = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.privHex = new System.Windows.Forms.ListBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ID
@@ -195,7 +203,7 @@
             // 
             // trasBtn
             // 
-            this.trasBtn.Location = new System.Drawing.Point(360, 105);
+            this.trasBtn.Location = new System.Drawing.Point(6, 79);
             this.trasBtn.Name = "trasBtn";
             this.trasBtn.Size = new System.Drawing.Size(75, 23);
             this.trasBtn.TabIndex = 2;
@@ -205,7 +213,7 @@
             // 
             // transOut
             // 
-            this.transOut.Location = new System.Drawing.Point(291, 170);
+            this.transOut.Location = new System.Drawing.Point(6, 155);
             this.transOut.Multiline = true;
             this.transOut.Name = "transOut";
             this.transOut.Size = new System.Drawing.Size(259, 187);
@@ -214,7 +222,7 @@
             // 
             // transIn
             // 
-            this.transIn.Location = new System.Drawing.Point(143, 33);
+            this.transIn.Location = new System.Drawing.Point(6, 21);
             this.transIn.Multiline = true;
             this.transIn.Name = "transIn";
             this.transIn.Size = new System.Drawing.Size(566, 22);
@@ -225,7 +233,7 @@
             // 
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
-            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Location = new System.Drawing.Point(12, 22);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(956, 487);
@@ -233,6 +241,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.numericUpDown1);
+            this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.groupsCB);
             this.tabPage1.Controls.Add(this.label3);
@@ -254,6 +264,20 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "create";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(694, 113);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 24;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(704, 159);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 23;
             // 
             // label4
             // 
@@ -285,6 +309,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.privHex);
             this.tabPage2.Controls.Add(this.transOut);
             this.tabPage2.Controls.Add(this.trasBtn);
             this.tabPage2.Controls.Add(this.transIn);
@@ -296,22 +321,62 @@
             this.tabPage2.Text = "traslate";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // privHex
+            // 
+            this.privHex.FormattingEnabled = true;
+            this.privHex.Location = new System.Drawing.Point(632, 21);
+            this.privHex.Name = "privHex";
+            this.privHex.Size = new System.Drawing.Size(276, 394);
+            this.privHex.TabIndex = 3;
+            this.privHex.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1018, 24);
+            this.menuStrip1.TabIndex = 18;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
+            this.helpToolStripMenuItem.Text = "help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "about";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1018, 511);
             this.Controls.Add(this.tabControl);
-            this.Name = "Form1";
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "Main";
             this.Text = "SPL Manager";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -339,6 +404,12 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ComboBox groupsCB;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListBox privHex;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

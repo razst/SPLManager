@@ -164,25 +164,25 @@ namespace packet_maker
                         transOut.AppendText(transOptions.typenum[typeDex].subTypes[subtypeDex].parmas[i].name + ": " + DataArr[i] + Environment.NewLine);
                     }
                 }
-
-
-                if (privHex.SelectedIndex != -1)
-                {
-                    if (transIn.Text != privHex.Items[privHex.SelectedIndex].ToString())
-                    {
-                        privHex.Items.Add(transIn.Text);
-                    }
-                }
-                else
-                {
-                    privHex.Items.Add(transIn.Text);
-                    privHex.SelectedIndex = 0;
-                }
             }
 
             catch
             {
                 MessageBox.Show("manager was not able to translate this packet", "error");
+            }
+
+            if (privHex.SelectedIndex != -1)
+            {
+                if (transIn.Text != privHex.Items[privHex.SelectedIndex].ToString())
+                {
+                    privHex.Items.Add(transIn.Text);
+                    privHex.SelectedIndex = privHex.Items.Count - 1;
+                }
+            }
+            else
+            {
+                privHex.Items.Add(transIn.Text);
+                privHex.SelectedIndex = 0;
             }
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -278,5 +278,6 @@ namespace packet_maker
             frm.Hide();
             frm2.ShowDialog();
         }
+
     }
 }

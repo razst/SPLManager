@@ -220,9 +220,8 @@
             // transIn
             // 
             this.transIn.Location = new System.Drawing.Point(6, 21);
-            this.transIn.Multiline = true;
             this.transIn.Name = "transIn";
-            this.transIn.Size = new System.Drawing.Size(566, 22);
+            this.transIn.Size = new System.Drawing.Size(566, 20);
             this.transIn.TabIndex = 0;
             this.transIn.Text = "input";
             // 
@@ -255,7 +254,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(948, 461);
+            this.tabPage1.Size = new System.Drawing.Size(1027, 461);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "create";
             this.tabPage1.UseVisualStyleBackColor = true;

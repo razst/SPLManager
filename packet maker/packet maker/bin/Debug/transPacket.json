@@ -13,7 +13,7 @@
        {
           'id': '35',
           'name': 'get beacon intreval','desc':'get the beacon intreval time in seconds',
-		  'inParams':[]
+          'inParams':[{'name':'seconds','desc':'number of seconds for beacon intreaval ','type':'int'}]	
         },
        {
           'id': '36',

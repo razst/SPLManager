@@ -106,10 +106,13 @@ namespace packet_maker
                 {
                     makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen);
                 }
+                string txt = makeOut.Text;
+                txt = txt.Substring(1);
+                makeOut.Text = txt;
             }
             catch
             {
-                MessageBox.Show("not all field were filled", "error");
+                MessageBox.Show("invaled input", "error");
             }
         }
 
@@ -117,72 +120,76 @@ namespace packet_maker
 
         private void trasBtn_Click(object sender, EventArgs e)
         {
-            if(privHex.SelectedIndex != -1)
+            try
             {
-                if (transIn.Text != privHex.Items[privHex.SelectedIndex].ToString())
+
+                string[] bitarr = transIn.Text.Split(' ');
+
+
+                int Idarr = Convert.ToInt32(bitarr[2] + bitarr[1] + bitarr[0], 16);
+
+                int typearr = Convert.ToInt32(bitarr[4], 16);
+                int subtypearr = Convert.ToInt32(bitarr[5], 16);
+                int lenarr = Convert.ToInt32(bitarr[9] + bitarr[8] + bitarr[7] + bitarr[6], 16);
+
+                int typeDex = transOptions.typenum.FindIndex(item => item.id == typearr);
+                int subtypeDex = transOptions.typenum[typeDex].subTypes.FindIndex(item => item.id == subtypearr);
+                int j = 10;
+                List<int> DataArr = new List<int>();
+                foreach (Params par in transOptions.typenum[typeDex].subTypes[subtypeDex].parmas)
+                {
+                    if (par.type == "int")
+                    {
+                        DataArr.Add(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16));
+                        j += 4;
+                    }
+                    else if (par.type == "char")
+                    {
+                        DataArr.Add(Convert.ToInt32(bitarr[j], 16));
+                        j++;
+                    }
+                }
+
+                transOut.Text = "";
+                transOut.AppendText("Satlite: " + groups[Convert.ToInt32(bitarr[3])] + Environment.NewLine);
+                transOut.AppendText("ID: " + Idarr + Environment.NewLine);
+                transOut.AppendText("type: " + transOptions.typenum[typeDex].name + Environment.NewLine);
+                transOut.AppendText("subtype: " + transOptions.typenum[typeDex].subTypes[subtypeDex].name + Environment.NewLine);
+                transOut.AppendText("length: " + lenarr + Environment.NewLine + Environment.NewLine);
+                if (DataArr.Count != 0)
+                {
+                    transOut.AppendText("Data:" + Environment.NewLine);
+                    for (int i = 0; i < DataArr.Count; i++)
+                    {
+                        transOut.AppendText(transOptions.typenum[typeDex].subTypes[subtypeDex].parmas[i].name + ": " + DataArr[i] + Environment.NewLine);
+                    }
+                }
+
+
+                if (privHex.SelectedIndex != -1)
+                {
+                    if (transIn.Text != privHex.Items[privHex.SelectedIndex].ToString())
+                    {
+                        privHex.Items.Add(transIn.Text);
+                    }
+                }
+                else
                 {
                     privHex.Items.Add(transIn.Text);
+                    privHex.SelectedIndex = 0;
                 }
             }
-            else
+
+            catch
             {
-                privHex.Items.Add(transIn.Text);
-                privHex.SelectedIndex = 0;
+                MessageBox.Show("manager was not able to translate this packet", "error");
             }
-
-
-            transOut.Text = "";
-            string[] bitarr = transIn.Text.Split(' ');
-
-
-            int Idarr = Convert.ToInt32(bitarr[2] + bitarr[1] + bitarr[0], 16);
-
-            int typearr = Convert.ToInt32(bitarr[4], 16);
-            int subtypearr = Convert.ToInt32(bitarr[5], 16);
-            int lenarr = Convert.ToInt32(bitarr[9] + bitarr[8] + bitarr[7] + bitarr[6], 16);
-
-            int typeDex = transOptions.typenum.FindIndex(item => item.id == typearr);
-            int subtypeDex = transOptions.typenum[typeDex].subTypes.FindIndex(item => item.id == subtypearr);
-            int j = 10;
-            List<int> DataArr = new List<int>();
-            foreach (Params par in transOptions.typenum[typeDex].subTypes[subtypeDex].parmas)
-            {
-                if (par.type == "int")
-                {
-                    DataArr.Add(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16));
-                    j += 4;
-                }
-                else if (par.type == "char")
-                {
-                    DataArr.Add(Convert.ToInt32(bitarr[j], 16));
-                    j++;
-                }
-            }
-
-
-            transOut.AppendText("Satlite: " + groups[Convert.ToInt32(bitarr[3])] + Environment.NewLine);
-            transOut.AppendText("ID: " + Idarr + Environment.NewLine);
-            transOut.AppendText("type: " + transOptions.typenum[typeDex].name + Environment.NewLine);
-            transOut.AppendText("subtype: " + transOptions.typenum[typeDex].subTypes[subtypeDex].name + Environment.NewLine);
-            transOut.AppendText("length: " + lenarr + Environment.NewLine + Environment.NewLine);
-            if (DataArr.Count != 0)
-            {
-                transOut.AppendText("Data:" + Environment.NewLine);
-                for (int i = 0; i < DataArr.Count; i++)
-                {
-                    transOut.AppendText(transOptions.typenum[typeDex].subTypes[subtypeDex].parmas[i].name + ": " + DataArr[i] + Environment.NewLine);
-                }
-            }
-
         }
-
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //http://jsonviewer.stack.hu/
             StreamReader re = new StreamReader(@"packet.json");
-            StreamReader ree = new StreamReader(@"packet.json");
+            StreamReader ree = new StreamReader(@"transPacket.json");
             JsonTextReader reader = new JsonTextReader(re);
             JsonTextReader reeader = new JsonTextReader(ree);
             JsonSerializer Serializer = new JsonSerializer();

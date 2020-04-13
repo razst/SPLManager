@@ -17,12 +17,6 @@ namespace packet_maker
         [JsonProperty("values")]
         public List<string> values { get; set; }
 
-        public IEnumerator<string> GetEnumerator()
-        {
-            foreach (var type in values)
-                yield return type;
-        }
-
     }
     public class SubType
     {

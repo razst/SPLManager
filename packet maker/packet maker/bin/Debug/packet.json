@@ -72,9 +72,9 @@
               'desc': 'the type of the dump ',
               'type': 'char',
               values: [
-                "0",
-                "1",
-                "2"
+                {id:"0",name:"esp"},
+                {id:"1",name:"eso"},
+                {id:"2",name:"esn"}
               ]
             },
             {
@@ -99,9 +99,9 @@
               'desc': 'the type of the dump ',
               'type': 'char',
               values: [
-                "0",
-                "1",
-                "2"
+                {id:"0",name:"esp"},
+                {id:"1",name:"eso"},
+                {id:"2",name:"esn"}
               ]
             },
             {

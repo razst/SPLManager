@@ -8,15 +8,29 @@ using Newtonsoft.Json;
 
 namespace packet_maker
 {
+    public class vars
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+    }
     public class Params
     {
+        [JsonProperty("name")]
         public string name { get; set; }
+        [JsonProperty("desc")]
         public string desc { get; set; }
+        [JsonProperty("type")]
         public string type { get; set; }
 
         [JsonProperty("values")]
-        public List<string> values { get; set; }
+        public List<vars> values { get; set; }
 
+
+        public IEnumerator<vars> GetEnumerator()
+        {
+            foreach (var type in values)
+                yield return type;
+        }
     }
     public class SubType
     {

@@ -55,6 +55,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyBTN = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -237,6 +238,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.copyBTN);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.groupsCB);
             this.tabPage1.Controls.Add(this.label3);
@@ -335,6 +337,16 @@
             this.aboutToolStripMenuItem.Text = "about";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // copyBTN
+            // 
+            this.copyBTN.Location = new System.Drawing.Point(778, 416);
+            this.copyBTN.Name = "copyBTN";
+            this.copyBTN.Size = new System.Drawing.Size(54, 23);
+            this.copyBTN.TabIndex = 23;
+            this.copyBTN.Text = "copy";
+            this.copyBTN.UseVisualStyleBackColor = true;
+            this.copyBTN.Click += new System.EventHandler(this.copyBTN_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -387,6 +399,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button copyBTN;
     }
 }
 

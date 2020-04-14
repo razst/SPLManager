@@ -22,14 +22,14 @@ namespace packet_maker
         private string[] groups =
         {
             "Any",
-            "Ofakim (T1)",
-            "Yerucham (T2)",
-            "Type (T3)",
-            "Kiryat Ata (T4)",
-            "Shaar HaNegev (T5)",
-            "Nazareth (T6)",
-            "Maale Adomin (T7)",
-            "Guvat Shmuel (T8)"
+            "T1OFK (Ofakim)",
+            "T2YRC (Yerucham)",
+            "T3TYB (Taybe)",
+            "T4ATA (Kiryat Ata)",
+            "T5SNG (Shaar HaNegev)",
+            "T6NZR (Nazareth)",
+            "T7ADM (Maale Adomim)",
+            "T8GBS (Guvat Shmuel)"
         };
         public static About frm2 = new About();
         static public Main frm = null;
@@ -226,6 +226,10 @@ namespace packet_maker
             foreach (Type t in options)
             {
                 typeCB.Items.Add(t.name);
+            }
+            foreach (string s in groups)
+            {
+                groupsCB.Items.Add(s);
             }
             groupsCB.SelectedIndex = 2;
             frm = this;

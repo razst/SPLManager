@@ -58,6 +58,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -201,7 +202,7 @@
             // 
             // trasBtn
             // 
-            this.trasBtn.Location = new System.Drawing.Point(101, 85);
+            this.trasBtn.Location = new System.Drawing.Point(270, 80);
             this.trasBtn.Name = "trasBtn";
             this.trasBtn.Size = new System.Drawing.Size(75, 23);
             this.trasBtn.TabIndex = 2;
@@ -211,17 +212,17 @@
             // 
             // transOut
             // 
-            this.transOut.Location = new System.Drawing.Point(6, 155);
+            this.transOut.Location = new System.Drawing.Point(48, 151);
             this.transOut.Multiline = true;
             this.transOut.Name = "transOut";
-            this.transOut.Size = new System.Drawing.Size(259, 187);
+            this.transOut.Size = new System.Drawing.Size(224, 251);
             this.transOut.TabIndex = 1;
             // 
             // transIn
             // 
             this.transIn.Location = new System.Drawing.Point(48, 21);
             this.transIn.Name = "transIn";
-            this.transIn.Size = new System.Drawing.Size(217, 20);
+            this.transIn.Size = new System.Drawing.Size(550, 20);
             this.transIn.TabIndex = 0;
             // 
             // tabControl
@@ -283,16 +284,6 @@
             // 
             this.groupsCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.groupsCB.FormattingEnabled = true;
-            this.groupsCB.Items.AddRange(new object[] {
-            "Any",
-            "Ofakim (T1)",
-            "Yerucham (T2)",
-            "Kiryat Ata (T3)",
-            "Taybe (T4)",
-            "Shaar HaNegev (T5)",
-            "Nazareth (T6)",
-            "Maale Adomin (T7)",
-            "Guvat Shmuel (T8)"});
             this.groupsCB.Location = new System.Drawing.Point(70, 20);
             this.groupsCB.Name = "groupsCB";
             this.groupsCB.Size = new System.Drawing.Size(136, 21);
@@ -300,6 +291,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.privHex);
@@ -317,9 +309,9 @@
             // privHex
             // 
             this.privHex.FormattingEnabled = true;
-            this.privHex.Location = new System.Drawing.Point(322, 21);
+            this.privHex.Location = new System.Drawing.Point(347, 151);
             this.privHex.Name = "privHex";
-            this.privHex.Size = new System.Drawing.Size(276, 329);
+            this.privHex.Size = new System.Drawing.Size(251, 251);
             this.privHex.TabIndex = 3;
             this.privHex.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -360,11 +352,20 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 139);
+            this.label6.Location = new System.Drawing.Point(6, 167);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 13);
             this.label6.TabIndex = 5;
             this.label6.Text = "Output:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(299, 167);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(42, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "History:";
             // 
             // Main
             // 
@@ -421,6 +422,7 @@
         private System.Windows.Forms.Button copyBTN;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
     }
 }
 

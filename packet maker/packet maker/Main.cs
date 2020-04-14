@@ -227,7 +227,7 @@ namespace packet_maker
             {
                 typeCB.Items.Add(t.name);
             }
-            groupsCB.SelectedIndex = 0;
+            groupsCB.SelectedIndex = 2;
             frm = this;
         }
 

@@ -48,6 +48,7 @@
             this.transIn = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.copyBTN = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -55,7 +56,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyBTN = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -84,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(594, 27);
+            this.label2.Location = new System.Drawing.Point(559, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 4;
@@ -99,7 +101,7 @@
             // 
             // OkBtn
             // 
-            this.OkBtn.Location = new System.Drawing.Point(662, 363);
+            this.OkBtn.Location = new System.Drawing.Point(695, 338);
             this.OkBtn.Name = "OkBtn";
             this.OkBtn.Size = new System.Drawing.Size(75, 23);
             this.OkBtn.TabIndex = 10;
@@ -109,15 +111,15 @@
             // 
             // makeOut
             // 
-            this.makeOut.Location = new System.Drawing.Point(54, 418);
+            this.makeOut.Location = new System.Drawing.Point(70, 389);
             this.makeOut.Name = "makeOut";
-            this.makeOut.Size = new System.Drawing.Size(707, 20);
+            this.makeOut.Size = new System.Drawing.Size(604, 20);
             this.makeOut.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 421);
+            this.label3.Location = new System.Drawing.Point(22, 392);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 20;
@@ -134,9 +136,9 @@
             this.dataTypes,
             this.value,
             this.desc});
-            this.dataTypesDGV.Location = new System.Drawing.Point(30, 126);
+            this.dataTypesDGV.Location = new System.Drawing.Point(70, 137);
             this.dataTypesDGV.Name = "dataTypesDGV";
-            this.dataTypesDGV.Size = new System.Drawing.Size(606, 260);
+            this.dataTypesDGV.Size = new System.Drawing.Size(604, 224);
             this.dataTypesDGV.TabIndex = 3;
             this.dataTypesDGV.Visible = false;
             // 
@@ -162,19 +164,17 @@
             // 
             // descSubType
             // 
-            this.descSubType.AutoSize = true;
-            this.descSubType.Location = new System.Drawing.Point(594, 65);
+            this.descSubType.Location = new System.Drawing.Point(545, 66);
             this.descSubType.Name = "descSubType";
-            this.descSubType.Size = new System.Drawing.Size(63, 13);
+            this.descSubType.Size = new System.Drawing.Size(225, 68);
             this.descSubType.TabIndex = 18;
             this.descSubType.Text = "Description:";
             // 
             // descType
             // 
-            this.descType.AutoSize = true;
-            this.descType.Location = new System.Drawing.Point(401, 65);
+            this.descType.Location = new System.Drawing.Point(335, 65);
             this.descType.Name = "descType";
-            this.descType.Size = new System.Drawing.Size(63, 13);
+            this.descType.Size = new System.Drawing.Size(190, 69);
             this.descType.TabIndex = 17;
             this.descType.Text = "Description:";
             // 
@@ -182,7 +182,7 @@
             // 
             this.subtypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.subtypeCB.FormattingEnabled = true;
-            this.subtypeCB.Location = new System.Drawing.Point(662, 19);
+            this.subtypeCB.Location = new System.Drawing.Point(627, 20);
             this.subtypeCB.Name = "subtypeCB";
             this.subtypeCB.Size = new System.Drawing.Size(143, 21);
             this.subtypeCB.TabIndex = 2;
@@ -201,7 +201,7 @@
             // 
             // trasBtn
             // 
-            this.trasBtn.Location = new System.Drawing.Point(6, 79);
+            this.trasBtn.Location = new System.Drawing.Point(101, 85);
             this.trasBtn.Name = "trasBtn";
             this.trasBtn.Size = new System.Drawing.Size(75, 23);
             this.trasBtn.TabIndex = 2;
@@ -216,24 +216,23 @@
             this.transOut.Name = "transOut";
             this.transOut.Size = new System.Drawing.Size(259, 187);
             this.transOut.TabIndex = 1;
-            this.transOut.Text = "output";
             // 
             // transIn
             // 
-            this.transIn.Location = new System.Drawing.Point(6, 21);
+            this.transIn.Location = new System.Drawing.Point(48, 21);
             this.transIn.Name = "transIn";
-            this.transIn.Size = new System.Drawing.Size(566, 20);
+            this.transIn.Size = new System.Drawing.Size(217, 20);
             this.transIn.TabIndex = 0;
-            this.transIn.Text = "input";
             // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
-            this.tabControl.Location = new System.Drawing.Point(0, 27);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(0, 24);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1035, 487);
+            this.tabControl.Size = new System.Drawing.Size(799, 455);
             this.tabControl.TabIndex = 17;
             // 
             // tabPage1
@@ -256,10 +255,20 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1027, 461);
+            this.tabPage1.Size = new System.Drawing.Size(791, 429);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "create";
+            this.tabPage1.Text = "RX";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // copyBTN
+            // 
+            this.copyBTN.Location = new System.Drawing.Point(695, 386);
+            this.copyBTN.Name = "copyBTN";
+            this.copyBTN.Size = new System.Drawing.Size(54, 23);
+            this.copyBTN.TabIndex = 23;
+            this.copyBTN.Text = "copy";
+            this.copyBTN.UseVisualStyleBackColor = true;
+            this.copyBTN.Click += new System.EventHandler(this.copyBTN_Click);
             // 
             // label4
             // 
@@ -286,11 +295,13 @@
             "Guvat Shmuel (T8)"});
             this.groupsCB.Location = new System.Drawing.Point(70, 20);
             this.groupsCB.Name = "groupsCB";
-            this.groupsCB.Size = new System.Drawing.Size(150, 21);
+            this.groupsCB.Size = new System.Drawing.Size(136, 21);
             this.groupsCB.TabIndex = 21;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.privHex);
             this.tabPage2.Controls.Add(this.transOut);
             this.tabPage2.Controls.Add(this.trasBtn);
@@ -298,17 +309,17 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1027, 461);
+            this.tabPage2.Size = new System.Drawing.Size(791, 429);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "traslate";
+            this.tabPage2.Text = "TX";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // privHex
             // 
             this.privHex.FormattingEnabled = true;
-            this.privHex.Location = new System.Drawing.Point(632, 21);
+            this.privHex.Location = new System.Drawing.Point(322, 21);
             this.privHex.Name = "privHex";
-            this.privHex.Size = new System.Drawing.Size(276, 394);
+            this.privHex.Size = new System.Drawing.Size(276, 329);
             this.privHex.TabIndex = 3;
             this.privHex.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -318,7 +329,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1018, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(799, 24);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -327,31 +338,39 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
-            this.helpToolStripMenuItem.Text = "help";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
-            this.aboutToolStripMenuItem.Text = "about";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // copyBTN
+            // label5
             // 
-            this.copyBTN.Location = new System.Drawing.Point(778, 416);
-            this.copyBTN.Name = "copyBTN";
-            this.copyBTN.Size = new System.Drawing.Size(54, 23);
-            this.copyBTN.TabIndex = 23;
-            this.copyBTN.Text = "copy";
-            this.copyBTN.UseVisualStyleBackColor = true;
-            this.copyBTN.Click += new System.EventHandler(this.copyBTN_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(34, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Input:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 139);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Output:";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1018, 511);
+            this.ClientSize = new System.Drawing.Size(799, 479);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -400,6 +419,8 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button copyBTN;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
 

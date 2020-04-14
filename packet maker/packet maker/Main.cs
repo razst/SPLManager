@@ -125,8 +125,7 @@ namespace packet_maker
             {
                 MessageBox.Show("invaled input", "error");
             }
-        }
-
+        }        
 
 
         private void trasBtn_Click(object sender, EventArgs e)
@@ -171,6 +170,13 @@ namespace packet_maker
                         DataArr.Add(Convert.ToInt32(bitarr[j + 1] + bitarr[j], 16).ToString());
                         j += 2;
                     }
+                    else if (par.type == "date"||par.type == "datetime")
+                    {
+                        System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                        dtDateTime = dtDateTime.AddSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
+                        DataArr.Add(dtDateTime.ToString());
+                        j += 4;
+                    }
                 }
 
                 transOut.Text = "";
@@ -211,8 +217,8 @@ namespace packet_maker
         private void Form1_Load(object sender, EventArgs e)
         {
             //http://jsonviewer.stack.hu/
-            StreamReader re = new StreamReader(@"packet.json");
-            StreamReader ree = new StreamReader(@"transPacket.json");
+            StreamReader re = new StreamReader(@"rx.json");
+            StreamReader ree = new StreamReader(@"tx.json");
             JsonTextReader reader = new JsonTextReader(re);
             JsonTextReader reeader = new JsonTextReader(ree);
             JsonSerializer Serializer = new JsonSerializer();
@@ -309,6 +315,11 @@ namespace packet_maker
         private void copyBTN_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(makeOut.Text);
+        }
+
+        private void pasteBTN_Click(object sender, EventArgs e)
+        {
+            transIn.Text = Clipboard.GetText();
         }
     }
 }

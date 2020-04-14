@@ -97,5 +97,11 @@
   <ItemGroup>
     <None Include="Resources\madaim.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_tevel.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\balbash_logo.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,11 +22,6 @@ namespace packet_maker
             Main.frm.Show();
         }
 
-        private void Label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void About_Load(object sender, EventArgs e)
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;

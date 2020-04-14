@@ -29,6 +29,12 @@ namespace packet_maker
 
         private void About_Load(object sender, EventArgs e)
         {
+            Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            DateTime buildDate = new DateTime(2000, 1, 1)
+                                    .AddDays(version.Build).AddSeconds(version.Revision * 2);
+            //string displayableVersion = $"{version} ({buildDate})";
+            string displayableVersion = $"{version}";
+            lblVer.Text = displayableVersion;
 
         }
     }

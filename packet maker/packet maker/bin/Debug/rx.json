@@ -63,7 +63,7 @@
           ]
         },
         {
-          'id': '105',
+          'id': '112',
           'name': 'DUMP_TIME_RANGE',
           'desc': 'start the dump task',
           'inParams': [
@@ -73,8 +73,8 @@
               'type': 'char',
               values: [
                 {id:"0",name:"esp"},
-                {id:"1",name:"TRXVU"},
-                {id:"2",name:"esn"}
+                {id:"1",name:"eso"},
+                {id:"4",name:"WOD"}
               ]
             },
             {
@@ -86,11 +86,16 @@
               'name': 'end time',
               'desc': 'end time of dump ',
               'type': 'datetime'
+            },
+            {
+              'name': 'resulotion',
+              'desc': 'dump steps in seconds ',
+              'type': 'int'
             }
           ]
         },
         {
-          'id': '112',
+          'id': '105',
           'name': 'DUMP_DAYS',
           'desc': 'start the dump task',
           'inParams': [
@@ -101,7 +106,7 @@
               values: [
                 {id:"0",name:"esp"},
                 {id:"1",name:"eso"},
-                {id:"2",name:"esn"}
+                {id:"4",name:"WOD"}
               ]
             },
             {
@@ -113,6 +118,11 @@
               'name': 'end time',
               'desc': 'end date of dump ',
               'type': 'date'
+            },
+            {
+              'name': 'resulotion',
+              'desc': 'dump steps in seconds ',
+              'type': 'int'
             }
           ]
         },

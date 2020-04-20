@@ -33,3 +33,4 @@ C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCo
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache

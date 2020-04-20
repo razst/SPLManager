@@ -73,7 +73,7 @@
               'type': 'char',
               values: [
                 {id:"0",name:"esp"},
-                {id:"1",name:"eso"},
+                {id:"1",name:"TRXVU"},
                 {id:"2",name:"esn"}
               ]
             },

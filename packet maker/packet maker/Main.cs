@@ -44,9 +44,13 @@ namespace packet_maker
                     {
                         length += 4;
                     }
-                    if (par.type == "char")
+                    else if (par.type == "char")
                     {
                         length++;
+                    }
+                    else if(par.type == "short")
+                    {
+                        length += 2;
                     }
                 }
 
@@ -105,6 +109,10 @@ namespace packet_maker
                             dt = DateTime.ParseExact(dataTypesDGV.Rows[i].Cells[1].Value.ToString(), "dd/MM/yyyy hh:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                             unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
                             data += Convert.ToInt64(unix).ToString("X8");
+                        }
+                        else if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "short")
+                        {
+                            data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X4");
                         }
 
                     }
@@ -217,17 +225,17 @@ namespace packet_maker
         private void Form1_Load(object sender, EventArgs e)
         {
             //http://jsonviewer.stack.hu/
-            StreamReader re = new StreamReader(@"rx.json");
-            StreamReader ree = new StreamReader(@"tx.json");
-            JsonTextReader reader = new JsonTextReader(re);
-            JsonTextReader reeader = new JsonTextReader(ree);
+            StreamReader rx = new StreamReader(@"rx.json");
+            StreamReader tx = new StreamReader(@"tx.json");
+            JsonTextReader RXReader = new JsonTextReader(rx);
+            JsonTextReader TXReader = new JsonTextReader(tx);
             JsonSerializer Serializer = new JsonSerializer();
-            object parsedData = Serializer.Deserialize(reader);
-            object parseedData = Serializer.Deserialize(reeader);
-            string jsonString = @parsedData.ToString();
-            string jsonString2 = parseedData.ToString();
-            options = JsonConvert.DeserializeObject<TypeList>(jsonString);
-            transOptions = JsonConvert.DeserializeObject<TypeList>(jsonString2);
+            object parsedTX = Serializer.Deserialize(TXReader);
+            object parseedRX = Serializer.Deserialize(RXReader);
+            string jsonStringTX = parsedTX.ToString();
+            string jsonStringRX = parseedRX.ToString();
+            options = JsonConvert.DeserializeObject<TypeList>(jsonStringTX);
+            transOptions = JsonConvert.DeserializeObject<TypeList>(jsonStringRX);
 
             foreach (Type t in options)
             {

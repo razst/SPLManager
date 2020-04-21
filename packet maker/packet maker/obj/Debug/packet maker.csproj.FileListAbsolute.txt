@@ -34,3 +34,17 @@ C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyCo
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe.config
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Main.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Properties.Resources.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.GenerateResource.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCompileInputs.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb

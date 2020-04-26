@@ -52,6 +52,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pasteBTN = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -59,7 +60,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pasteBTN = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -203,7 +203,7 @@
             // 
             // trasBtn
             // 
-            this.trasBtn.Location = new System.Drawing.Point(270, 80);
+            this.trasBtn.Location = new System.Drawing.Point(270, 55);
             this.trasBtn.Name = "trasBtn";
             this.trasBtn.Size = new System.Drawing.Size(75, 23);
             this.trasBtn.TabIndex = 2;
@@ -213,10 +213,10 @@
             // 
             // transOut
             // 
-            this.transOut.Location = new System.Drawing.Point(48, 151);
+            this.transOut.Location = new System.Drawing.Point(48, 96);
             this.transOut.Multiline = true;
             this.transOut.Name = "transOut";
-            this.transOut.Size = new System.Drawing.Size(224, 251);
+            this.transOut.Size = new System.Drawing.Size(224, 306);
             this.transOut.TabIndex = 1;
             // 
             // transIn
@@ -308,10 +308,20 @@
             this.tabPage2.Text = "RX";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // pasteBTN
+            // 
+            this.pasteBTN.Location = new System.Drawing.Point(621, 17);
+            this.pasteBTN.Name = "pasteBTN";
+            this.pasteBTN.Size = new System.Drawing.Size(75, 23);
+            this.pasteBTN.TabIndex = 7;
+            this.pasteBTN.Text = "paste";
+            this.pasteBTN.UseVisualStyleBackColor = true;
+            this.pasteBTN.Click += new System.EventHandler(this.pasteBTN_Click);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(303, 154);
+            this.label7.Location = new System.Drawing.Point(303, 99);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 13);
             this.label7.TabIndex = 6;
@@ -320,7 +330,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 151);
+            this.label6.Location = new System.Drawing.Point(6, 98);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 13);
             this.label6.TabIndex = 5;
@@ -338,9 +348,9 @@
             // privHex
             // 
             this.privHex.FormattingEnabled = true;
-            this.privHex.Location = new System.Drawing.Point(347, 151);
+            this.privHex.Location = new System.Drawing.Point(347, 99);
             this.privHex.Name = "privHex";
-            this.privHex.Size = new System.Drawing.Size(401, 251);
+            this.privHex.Size = new System.Drawing.Size(401, 303);
             this.privHex.TabIndex = 3;
             this.privHex.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -368,16 +378,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // pasteBTN
-            // 
-            this.pasteBTN.Location = new System.Drawing.Point(621, 17);
-            this.pasteBTN.Name = "pasteBTN";
-            this.pasteBTN.Size = new System.Drawing.Size(75, 23);
-            this.pasteBTN.TabIndex = 7;
-            this.pasteBTN.Text = "paste";
-            this.pasteBTN.UseVisualStyleBackColor = true;
-            this.pasteBTN.Click += new System.EventHandler(this.pasteBTN_Click);
             // 
             // Main
             // 

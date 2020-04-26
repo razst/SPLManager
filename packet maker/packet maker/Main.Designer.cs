@@ -310,7 +310,7 @@
             // 
             // pasteBTN
             // 
-            this.pasteBTN.Location = new System.Drawing.Point(621, 17);
+            this.pasteBTN.Location = new System.Drawing.Point(604, 19);
             this.pasteBTN.Name = "pasteBTN";
             this.pasteBTN.Size = new System.Drawing.Size(75, 23);
             this.pasteBTN.TabIndex = 7;

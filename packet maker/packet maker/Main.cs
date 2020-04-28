@@ -138,6 +138,7 @@ namespace packet_maker
 
         private void trasBtn_Click(object sender, EventArgs e)
         {
+            bool success = false;
             try
             {
 
@@ -201,14 +202,16 @@ namespace packet_maker
                         transOut.AppendText(transOptions.typenum[typeDex].subTypes[subtypeDex].parmas[i].name + ": " + DataArr[i] + Environment.NewLine);
                     }
                 }
+                success = true;
             }
 
             catch
             {
                 MessageBox.Show("manager was not able to translate this packet", "error");
+                success = false;
             }
 
-            if (privHex.SelectedIndex != -1)
+            if (privHex.SelectedIndex != -1 && success)
             {
                 if (transIn.Text != privHex.Items[privHex.SelectedIndex].ToString())
                 {
@@ -216,7 +219,7 @@ namespace packet_maker
                     privHex.SelectedIndex = privHex.Items.Count - 1;
                 }
             }
-            else
+            else if(success)
             {
                 privHex.Items.Add(transIn.Text);
                 privHex.SelectedIndex = 0;

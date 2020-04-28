@@ -10,7 +10,9 @@ namespace packet_maker
 {
     public class vars
     {
+        [JsonProperty("id")]
         public string id { get; set; }
+        [JsonProperty("name")]
         public string name { get; set; }
     }
     public class Params
@@ -34,8 +36,11 @@ namespace packet_maker
     }
     public class SubType
     {
+        [JsonProperty("id")]
         public int id { get; set; }
+        [JsonProperty("name")]
         public string name { get; set; }
+        [JsonProperty("desc")]
         public string desc { get; set; }
 
         [JsonProperty("inParams")]
@@ -50,8 +55,11 @@ namespace packet_maker
     }
     public class Type
     {
+        [JsonProperty("id")]
         public int id { get; set; }
+        [JsonProperty("name")]
         public string name { get; set; }
+        [JsonProperty("desc")]
         public string desc { get; set; }
         [JsonProperty("subtypes")]
         public List<SubType> subTypes { get; set; }

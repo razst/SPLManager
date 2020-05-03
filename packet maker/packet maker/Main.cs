@@ -230,15 +230,12 @@ namespace packet_maker
             //http://jsonviewer.stack.hu/
             StreamReader rx = new StreamReader(@"rx.json");
             StreamReader tx = new StreamReader(@"tx.json");
-            JsonTextReader RXReader = new JsonTextReader(rx);
-            JsonTextReader TXReader = new JsonTextReader(tx);
+
             JsonSerializer Serializer = new JsonSerializer();
-            object parsedTX = Serializer.Deserialize(TXReader);
-            object parseedRX = Serializer.Deserialize(RXReader);
-            string jsonStringTX = parsedTX.ToString();
-            string jsonStringRX = parseedRX.ToString();
-            options = JsonConvert.DeserializeObject<TypeList>(jsonStringTX);
-            transOptions = JsonConvert.DeserializeObject<TypeList>(jsonStringRX);
+
+           options = (TypeList)Serializer.Deserialize(tx, typeof(TypeList));
+           transOptions = (TypeList)Serializer.Deserialize(rx, typeof(TypeList));
+
 
             foreach (Type t in options)
             {

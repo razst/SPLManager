@@ -71,7 +71,6 @@ namespace packet_maker
 
             DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document(id);
 
-
             await docRef.SetAsync(packet);
         }
 

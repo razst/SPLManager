@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Google.Cloud.Firestore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,9 +17,13 @@ namespace packet_maker
         {
             InitializeComponent();
         }
+        #region setup
         private List<DataGridViewComboBoxCell> cList = new List<DataGridViewComboBoxCell>();
         private TypeList options;
         private TypeList transOptions;
+        private bool success = false;
+        private Packet packet = new Packet();
+
         private string[] groups =
         {
             "Any",
@@ -33,8 +38,46 @@ namespace packet_maker
         };
         public static About frm2 = new About();
         static public Main frm = null;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //http://jsonviewer.stack.hu/
+            StreamReader rx = new StreamReader(@"rx.json");
+            StreamReader tx = new StreamReader(@"tx.json");
+
+            JsonSerializer Serializer = new JsonSerializer();
+
+            options = (TypeList)Serializer.Deserialize(tx, typeof(TypeList));
+            transOptions = (TypeList)Serializer.Deserialize(rx, typeof(TypeList));
+
+
+            foreach (Type t in options)
+            {
+                typeCB.Items.Add(t.name);
+            }
+            foreach (string s in groups)
+            {
+                groupsCB.Items.Add(s);
+            }
+            groupsCB.SelectedIndex = 2;
+            frm = this;
+        }
+
+        #endregion
+
+        private async void Upload_Packet(string COLLECTION_NAME, string id, string packetString)
+        {
+            packet.packetString = packetString;
+
+            DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document(id);
+
+
+            await docRef.SetAsync(packet);
+        }
+
         private void OkBtn_Click(object sender, EventArgs e)
         {
+            success = false;
             try
             {
                 int length = 0;
@@ -48,7 +91,7 @@ namespace packet_maker
                     {
                         length++;
                     }
-                    else if(par.type == "short")
+                    else if (par.type == "short")
                     {
                         length += 2;
                     }
@@ -76,7 +119,6 @@ namespace packet_maker
                 Array.Reverse(revLen);
                 if (length != 0)
                 {
-                    //DataGridViewComboBoxCell curCBcell = new DataGridViewComboBoxCell();
                     string data = "";
                     int CBi = cList.Count - 1;
                     for (int i = dataTypesDGV.Rows.Count - 1; i >= 0; i--)
@@ -128,24 +170,32 @@ namespace packet_maker
                 string txt = makeOut.Text;
                 txt = txt.Substring(1);
                 makeOut.Text = txt;
+                success = true;
             }
             catch
             {
                 MessageBox.Show("invaled input", "error");
+                success = false;
             }
-        }        
+
+            if (success)
+            {
+                Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
+            }
+        }
 
 
+        private int Idarr;
         private void trasBtn_Click(object sender, EventArgs e)
         {
-            bool success = false;
+            success = false;
             try
             {
 
                 string[] bitarr = transIn.Text.Split(' ');
 
 
-                int Idarr = Convert.ToInt32(bitarr[2] + bitarr[1] + bitarr[0], 16);
+                Idarr = Convert.ToInt32(bitarr[2] + bitarr[1] + bitarr[0], 16);
 
                 int typearr = Convert.ToInt32(bitarr[4], 16);
                 int subtypearr = Convert.ToInt32(bitarr[5], 16);
@@ -179,7 +229,7 @@ namespace packet_maker
                         DataArr.Add(Convert.ToInt32(bitarr[j + 1] + bitarr[j], 16).ToString());
                         j += 2;
                     }
-                    else if (par.type == "date"||par.type == "datetime")
+                    else if (par.type == "date" || par.type == "datetime")
                     {
                         System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
                         dtDateTime = dtDateTime.AddSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
@@ -210,46 +260,27 @@ namespace packet_maker
                 MessageBox.Show("manager was not able to translate this packet", "error");
                 success = false;
             }
-
-            if (privHex.SelectedIndex != -1 && success)
+            if (success)
             {
-                if (transIn.Text != privHex.Items[privHex.SelectedIndex].ToString())
+                Upload_Packet("rx packets", Idarr.ToString(), transIn.Text);
+                if (privHex.SelectedIndex != -1)
+                {
+                    if (transIn.Text != privHex.Items[privHex.SelectedIndex].ToString())
+                    {
+                        privHex.Items.Add(transIn.Text);
+                        privHex.SelectedIndex = privHex.Items.Count - 1;
+                    }
+                }
+                else
                 {
                     privHex.Items.Add(transIn.Text);
-                    privHex.SelectedIndex = privHex.Items.Count - 1;
+                    privHex.SelectedIndex = 0;
                 }
             }
-            else if(success)
-            {
-                privHex.Items.Add(transIn.Text);
-                privHex.SelectedIndex = 0;
-            }
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //http://jsonviewer.stack.hu/
-            StreamReader rx = new StreamReader(@"rx.json");
-            StreamReader tx = new StreamReader(@"tx.json");
 
-            JsonSerializer Serializer = new JsonSerializer();
-
-           options = (TypeList)Serializer.Deserialize(tx, typeof(TypeList));
-           transOptions = (TypeList)Serializer.Deserialize(rx, typeof(TypeList));
-
-
-            foreach (Type t in options)
-            {
-                typeCB.Items.Add(t.name);
-            }
-            foreach (string s in groups)
-            {
-                groupsCB.Items.Add(s);
-            }
-            groupsCB.SelectedIndex = 2;
-            frm = this;
         }
 
-
+        #region rest of code
         private void typeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             subtypeCB.Items.Clear();
@@ -329,5 +360,6 @@ namespace packet_maker
         {
             transIn.Text = Clipboard.GetText();
         }
+        #endregion
     }
 }

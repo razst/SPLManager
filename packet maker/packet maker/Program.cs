@@ -15,6 +15,7 @@ namespace packet_maker
     {
 
         static public FirestoreDb db;
+        static public System.DateTimeKind dtk;
 
 
 
@@ -30,8 +31,11 @@ namespace packet_maker
         static void Main()
         {
             System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\key\satelite packets-a1af32f2133c.json");
-            //db = FirestoreDb.Create("climatehistory-3ff7e");
             db = FirestoreDb.Create("satelite-packets");
+
+            dtk = System.DateTimeKind.Local;
+
+
 
 
             Application.EnableVisualStyles();

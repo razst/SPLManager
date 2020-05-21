@@ -232,7 +232,7 @@ namespace packet_maker
                     }
                     else if (par.type == "date" || par.type == "datetime")
                     {
-                        System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                        System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, Program.dtk);//chage for your time
                         dtDateTime = dtDateTime.AddSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
                         DataArr.Add(dtDateTime.ToString());
                         j += 4;
@@ -333,8 +333,7 @@ namespace packet_maker
                     }
                     if (par.type == "datetime")
                     {
-                        // dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-                        dataTypesDGV.Rows[i].Cells[1].Style.Format = "MM/dd/yyyy HH:mm:ss";
+                         dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
                     }
                     i++;
 
@@ -370,7 +369,8 @@ namespace packet_maker
         {
             transIn.Text = Clipboard.GetText();
         }
-        #endregion
+
+
 
         private void dataTypesDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -378,5 +378,8 @@ namespace packet_maker
             if (editingControl != null)
                 editingControl.DroppedDown = true;
         }
+        #endregion
+
+
     }
 }

@@ -323,7 +323,8 @@ namespace packet_maker
                     }
                     if (par.type == "datetime")
                     {
-                        dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+                        // dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+                        dataTypesDGV.Rows[i].Cells[1].Style.Format = "MM/dd/yyyy HH:mm:ss";
                     }
                     i++;
 
@@ -360,5 +361,12 @@ namespace packet_maker
             transIn.Text = Clipboard.GetText();
         }
         #endregion
+
+        private void dataTypesDGV_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var editingControl = this.dataTypesDGV.EditingControl as DataGridViewComboBoxEditingControl;
+            if (editingControl != null)
+                editingControl.DroppedDown = true;
+        }
     }
 }

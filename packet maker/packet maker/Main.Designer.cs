@@ -138,11 +138,13 @@
             this.dataTypes,
             this.value,
             this.desc});
+            this.dataTypesDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataTypesDGV.Location = new System.Drawing.Point(70, 137);
             this.dataTypesDGV.Name = "dataTypesDGV";
             this.dataTypesDGV.Size = new System.Drawing.Size(604, 224);
             this.dataTypesDGV.TabIndex = 3;
             this.dataTypesDGV.Visible = false;
+            this.dataTypesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTypesDGV_CellClick);
             // 
             // dataTypes
             // 

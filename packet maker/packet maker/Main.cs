@@ -59,6 +59,8 @@ namespace packet_maker
             {
                 groupsCB.Items.Add(s);
             }
+
+
             groupsCB.SelectedIndex = 2;
             frm = this;
         }
@@ -279,7 +281,15 @@ namespace packet_maker
 
         }
 
+
+
+
+
         #region rest of code
+
+
+
+
         private void typeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             subtypeCB.Items.Clear();

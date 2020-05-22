@@ -143,13 +143,13 @@ namespace packet_maker
                         }
                         else if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "date")
                         {
-                            dt = DateTime.ParseExact(dataTypesDGV.Rows[i].Cells[1].Value.ToString(), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                            dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
                             unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
                             data += Convert.ToInt64(unix).ToString("X8");
                         }
                         else if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "datetime")
                         {
-                            dt = DateTime.ParseExact(dataTypesDGV.Rows[i].Cells[1].Value.ToString(), "dd/MM/yyyy hh:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                            dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
                             unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
                             data += Convert.ToInt64(unix).ToString("X8");
                         }

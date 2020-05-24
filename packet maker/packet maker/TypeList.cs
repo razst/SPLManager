@@ -11,7 +11,7 @@ namespace packet_maker
     public class vars
     {
         [JsonProperty("id")]
-        public string id { get; set; }
+        public int id { get; set; }
         [JsonProperty("name")]
         public string name { get; set; }
     }

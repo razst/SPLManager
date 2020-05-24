@@ -185,72 +185,28 @@ namespace packet_maker
             }
         }
 
-
-        private int Idarr;
+        private int traID;
         private void trasBtn_Click(object sender, EventArgs e)
         {
             success = false;
             try
             {
 
-                string[] bitarr = transIn.Text.Split(' ');
-
-
-                Idarr = Convert.ToInt32(bitarr[2] + bitarr[1] + bitarr[0], 16);
-
-                int typearr = Convert.ToInt32(bitarr[4], 16);
-                int subtypearr = Convert.ToInt32(bitarr[5], 16);
-                int lenarr = Convert.ToInt32(bitarr[9] + bitarr[8] + bitarr[7] + bitarr[6], 16);
-
-                int typeDex = transOptions.typenum.FindIndex(item => item.id == typearr);
-                int subtypeDex = transOptions.typenum[typeDex].subTypes.FindIndex(item => item.id == subtypearr);
-                int j = 10;
-                List<string> DataArr = new List<string>();
-                foreach (Params par in transOptions.typenum[typeDex].subTypes[subtypeDex].parmas)
-                {
-                    if (par.type == "int")
-                    {
-                        DataArr.Add(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16).ToString());
-                        j += 4;
-                    }
-                    else if (par.type == "char")
-                    {
-                        if (par.values == null)
-                        {
-                            DataArr.Add(Convert.ToInt32(bitarr[j], 16).ToString());
-                        }
-                        else
-                        {
-                            DataArr.Add(par.values[par.values.FindIndex(item => item.id == Convert.ToInt32(bitarr[j], 16).ToString())].name);
-                        }
-                        j++;
-                    }
-                    else if (par.type == "short")
-                    {
-                        DataArr.Add(Convert.ToInt32(bitarr[j + 1] + bitarr[j], 16).ToString());
-                        j += 2;
-                    }
-                    else if (par.type == "date" || par.type == "datetime")
-                    {
-                        System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, Program.dtk);//chage for your time
-                        dtDateTime = dtDateTime.AddSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
-                        DataArr.Add(dtDateTime.ToString());
-                        j += 4;
-                    }
-                }
+                packetObject po = packetObject.create(options, transIn.Text);
+                traID = po.id;
 
                 transOut.Text = "";
-                transOut.AppendText("Satlite: " + groups[Convert.ToInt32(bitarr[3])] + Environment.NewLine);
-                transOut.AppendText("ID: " + Idarr + Environment.NewLine);
-                transOut.AppendText("type: " + transOptions.typenum[typeDex].name + Environment.NewLine);
-                transOut.AppendText("subtype: " + transOptions.typenum[typeDex].subTypes[subtypeDex].name + Environment.NewLine);
-                transOut.AppendText("length: " + lenarr + Environment.NewLine + Environment.NewLine);
-                if (DataArr.Count != 0)
+                transOut.AppendText("Satlite: " + po.sateliteGroup + Environment.NewLine);
+                transOut.AppendText("ID: " + po.id + Environment.NewLine);
+                transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
+                transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
+                transOut.AppendText("length: " + po.length + Environment.NewLine + Environment.NewLine);
+                if (po.data.Count != 0)
                 {
                     transOut.AppendText("Data:" + Environment.NewLine);
-                    for (int i = 0; i < DataArr.Count; i++)
+                    for (int i = 0; i < po.data.Count; i++)
                     {
-                        transOut.AppendText(transOptions.typenum[typeDex].subTypes[subtypeDex].parmas[i].name + ": " + DataArr[i] + Environment.NewLine);
+                        transOut.AppendText(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i] + Environment.NewLine);
                     }
                 }
                 success = true;
@@ -263,7 +219,7 @@ namespace packet_maker
             }
             if (success)
             {
-                Upload_Packet("rx packets", Idarr.ToString(), transIn.Text);
+                Upload_Packet("rx packets", traID.ToString(), transIn.Text);
                 if (privHex.SelectedIndex != -1)
                 {
                     if (transIn.Text != privHex.Items[privHex.SelectedIndex].ToString())
@@ -333,7 +289,7 @@ namespace packet_maker
                     }
                     if (par.type == "datetime")
                     {
-                         dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+                        dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
                     }
                     i++;
 

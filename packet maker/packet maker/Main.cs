@@ -192,7 +192,7 @@ namespace packet_maker
             try
             {
 
-                packetObject po = packetObject.create(options, transIn.Text);
+                packetObject po = packetObject.create(transOptions, transIn.Text);
                 traID = po.id;
 
                 transOut.Text = "";

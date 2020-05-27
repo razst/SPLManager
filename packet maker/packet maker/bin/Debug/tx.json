@@ -5,6 +5,18 @@
       "name": "TRXVU",
       "desc": "All TRXVU function calls",
       "subtypes": [
+	    {
+          "id": "88",
+          "name": "bittest",
+          "desc": "----",
+          "inParams": [
+		  {
+		  "name":"bits",
+		  "desc":"",
+		  "type":"bytes"
+		  }
+		  ]
+        },
         {
           "id": "194",
           "name": "Ping",

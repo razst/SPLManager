@@ -36,6 +36,9 @@
             this.makeOut = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataTypesDGV = new System.Windows.Forms.DataGridView();
+            this.dataTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descSubType = new System.Windows.Forms.Label();
             this.descType = new System.Windows.Forms.Label();
             this.subtypeCB = new System.Windows.Forms.ComboBox();
@@ -57,9 +60,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -145,6 +145,29 @@
             this.dataTypesDGV.TabIndex = 3;
             this.dataTypesDGV.Visible = false;
             this.dataTypesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTypesDGV_CellClick);
+            // 
+            // dataTypes
+            // 
+            this.dataTypes.HeaderText = "Item:";
+            this.dataTypes.Name = "dataTypes";
+            this.dataTypes.ReadOnly = true;
+            this.dataTypes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataTypes.Width = 187;
+            // 
+            // value
+            // 
+            this.value.HeaderText = "value:";
+            this.value.Name = "value";
+            this.value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.value.Width = 187;
+            // 
+            // desc
+            // 
+            this.desc.HeaderText = "Description:";
+            this.desc.Name = "desc";
+            this.desc.ReadOnly = true;
+            this.desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.desc.Width = 187;
             // 
             // descSubType
             // 
@@ -360,29 +383,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // dataTypes
-            // 
-            this.dataTypes.HeaderText = "Item:";
-            this.dataTypes.Name = "dataTypes";
-            this.dataTypes.ReadOnly = true;
-            this.dataTypes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataTypes.Width = 55;
-            // 
-            // value
-            // 
-            this.value.HeaderText = "value:";
-            this.value.Name = "value";
-            this.value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.value.Width = 61;
-            // 
-            // desc
-            // 
-            this.desc.HeaderText = "Description:";
-            this.desc.Name = "desc";
-            this.desc.ReadOnly = true;
-            this.desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.desc.Width = 88;
             // 
             // Main
             // 

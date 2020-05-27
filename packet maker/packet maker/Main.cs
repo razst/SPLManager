@@ -96,6 +96,10 @@ namespace packet_maker
                     {
                         length += 2;
                     }
+                    else if(par.type == "bytes")
+                    {
+                        length += (dataTypesDGV.Rows[0].Cells[1].Value.ToString().Length+1)/3;
+                    }
                 }
 
                 DateTime dt = new DateTime();
@@ -118,46 +122,49 @@ namespace packet_maker
 
                 Array.Reverse(revID);
                 Array.Reverse(revLen);
+
+
                 if (length != 0)
                 {
                     string data = "";
                     int CBi = cList.Count - 1;
                     for (int i = dataTypesDGV.Rows.Count - 1; i >= 0; i--)
                     {
-                        if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "int")
+                        switch (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type)
                         {
-                            data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X8");
-                        }
-                        else if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "char")
-                        {
-                            if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values == null)
-                            {
-                                data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X2");
-                            }
-                            else
-                            {
-                                data += Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values[cList[CBi].Items.IndexOf(dataTypesDGV.Rows[i].Cells[1].Value.ToString())].id).ToString("X2");
-                                CBi--;
-                            }
+                            case "int":
+                                data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X8");
+                                break;
+
+                            case "char":
+                                if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values == null)
+                                {
+                                    data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X2");
+                                }
+                                else
+                                {
+                                    data += Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values[cList[CBi].Items.IndexOf(dataTypesDGV.Rows[i].Cells[1].Value.ToString())].id).ToString("X2");
+                                    CBi--;
+                                }
+                                break;
+
+                            case "date":
+                            case "datetime":
+                                dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
+                                unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+                                data += Convert.ToInt64(unix).ToString("X8");
+                                break;
+
+                            case "short":
+                                data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X4");
+                                break;
+
+                            case "bytes":
+                                makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen)+" "+ dataTypesDGV.Rows[i].Cells[1].Value.ToString().ToUpper();
+                                makeOut.Text = makeOut.Text.ToString().Substring(1);
+                                return;
 
                         }
-                        else if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "date")
-                        {
-                            dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
-                            unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
-                            data += Convert.ToInt64(unix).ToString("X8");
-                        }
-                        else if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "datetime")
-                        {
-                            dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
-                            unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
-                            data += Convert.ToInt64(unix).ToString("X8");
-                        }
-                        else if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type == "short")
-                        {
-                            data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X4");
-                        }
-
                     }
                     string hexData = Regex.Replace(data, ".{2}", "$0 ");
                     string[] revData = hexData.Split(' ');
@@ -168,9 +175,8 @@ namespace packet_maker
                 {
                     makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen);
                 }
-                string txt = makeOut.Text;
-                txt = txt.Substring(1);
-                makeOut.Text = txt;
+
+                makeOut.Text = makeOut.Text.ToString().Substring(1);
                 success = true;
             }
             catch
@@ -192,7 +198,7 @@ namespace packet_maker
             try
             {
 
-                packetObject po = packetObject.create(transOptions, transIn.Text);
+                packetObject po = packetObject.create(options, transIn.Text);
                 traID = po.id;
 
                 transOut.Text = "";
@@ -269,10 +275,16 @@ namespace packet_maker
                 dataTypesDGV.Rows.Clear();
                 dataTypesDGV.Visible = true;
                 int i = 0;
+                bool bit = false;
                 cList.Clear();
                 foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
                 {
                     dataTypesDGV.Rows.Add(par.name, "", par.desc);
+                    if(par.type == "bytes")
+                    {
+                        bit = true;
+                        break;
+                    }
                     if (par.values != null)
                     {
                         cList.Add(new DataGridViewComboBoxCell());
@@ -295,6 +307,10 @@ namespace packet_maker
 
                 }
                 dataTypesDGV.AutoResizeColumns();
+                if (bit)
+                {
+                    this.dataTypesDGV.Columns[1].Width = 456;
+                }
 
             }
             else
@@ -334,8 +350,9 @@ namespace packet_maker
             if (editingControl != null)
                 editingControl.DroppedDown = true;
         }
+
+        
+
         #endregion
-
-
     }
 }

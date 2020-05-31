@@ -96,7 +96,7 @@
             {
               "name": "bitrate",
               "desc": "the bitrate we want to get (1200 - 00 | 2400 - 01 | 4800 - 02 | 9600 - 03)",
-              "type": "char?"
+              "type": "int"
             }
           ]
         },
@@ -108,7 +108,7 @@
             {
               "name": "uptime",
               "desc": "how much time the satellite is on",
-              "type": "int?"
+              "type": "int"
             }
           ]
         },
@@ -120,7 +120,7 @@
             {
               "name": "uptime",
               "desc": "how much time the satellite is on",
-              "type": "int?"
+              "type": "int"
             }
           ]
         },
@@ -171,6 +171,12 @@
           "id": "0",
           "name": "ACK_RECEIVE_COMM",
           "desc": "when receive any packet",
+          "inParams": []
+        },
+        {
+          "id": "1",
+          "name": "ACK_COMD_EXEC",
+          "desc": "when executed any packet / SPL command",
           "inParams": []
         },
         {
@@ -297,7 +303,14 @@
           "id": "146",
           "name": "ACK_DUMP_FINISHED",
           "desc": "when a dump has finished",
-          "inParams": []
+          "inParams": [
+            {
+              "name": "number of elements",
+              "desc": "the number of dump elements that were sent over RF",
+              "type": "int"
+            }
+		  
+		  ]
         },
         {
           "id": "147",
@@ -334,6 +347,16 @@
           "name": "ACK_PING",
           "desc": "*****",
           "inParams": []
+        },
+        {
+          "id": "192",
+          "name": "ACK_DELETE_TLM",
+          "desc": "after deleting TLM file(s)",
+          "inParams": [            {
+              "name": "deleted files",
+              "desc": "how many TLM files were actually deleted from SD",
+              "type": "int"
+            }]
         },
         {
           "id": "187",
@@ -419,7 +442,7 @@
             {
               "name": "sat_time",
               "desc": "satellite's clock current unix time",
-              "type": "int"
+              "type": "datetime"
             },
             {
               "name": "free_memory",
@@ -444,6 +467,38 @@
           ]
         }
       ]
+    },
+	
+	
+	
+    {
+      "id": "4",
+      "name": "Managment",
+      "desc": "All Managment Types",
+      "subtypes": [
+        {
+          "id": "221",
+          "name": "Update Sat time",
+          "desc": "Update Sat time",
+          "inParams": [
+            {
+              "name": "Current time",
+              "desc": "Current time after command exec",
+              "type": "datetime"
+            }
+          ]
+        }
+      ]
     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
   ]
 }

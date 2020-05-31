@@ -138,31 +138,36 @@
             this.dataTypes,
             this.value,
             this.desc});
+            this.dataTypesDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataTypesDGV.Location = new System.Drawing.Point(70, 137);
             this.dataTypesDGV.Name = "dataTypesDGV";
             this.dataTypesDGV.Size = new System.Drawing.Size(604, 224);
             this.dataTypesDGV.TabIndex = 3;
             this.dataTypesDGV.Visible = false;
+            this.dataTypesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTypesDGV_CellClick);
             // 
             // dataTypes
             // 
             this.dataTypes.HeaderText = "Item:";
             this.dataTypes.Name = "dataTypes";
             this.dataTypes.ReadOnly = true;
-            this.dataTypes.Width = 55;
+            this.dataTypes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataTypes.Width = 187;
             // 
             // value
             // 
             this.value.HeaderText = "value:";
             this.value.Name = "value";
-            this.value.Width = 61;
+            this.value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.value.Width = 187;
             // 
             // desc
             // 
             this.desc.HeaderText = "Description:";
             this.desc.Name = "desc";
             this.desc.ReadOnly = true;
-            this.desc.Width = 88;
+            this.desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.desc.Width = 187;
             // 
             // descSubType
             // 
@@ -418,9 +423,6 @@
         private System.Windows.Forms.Label descSubType;
         private System.Windows.Forms.Label descType;
         private System.Windows.Forms.DataGridView dataTypesDGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataTypes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn value;
-        private System.Windows.Forms.DataGridViewTextBoxColumn desc;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;
@@ -436,6 +438,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button pasteBTN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataTypes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn desc;
     }
 }
 

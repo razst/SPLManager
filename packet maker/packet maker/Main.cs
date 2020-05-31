@@ -84,21 +84,25 @@ namespace packet_maker
                 int length = 0;
                 foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
                 {
-                    if (par.type == "int" || par.type == "date" || par.type == "datetime")
+                    switch (par.type)
                     {
-                        length += 4;
-                    }
-                    else if (par.type == "char")
-                    {
-                        length++;
-                    }
-                    else if (par.type == "short")
-                    {
-                        length += 2;
-                    }
-                    else if(par.type == "bytes")
-                    {
-                        length += (dataTypesDGV.Rows[0].Cells[1].Value.ToString().Length+1)/3;
+                        case "int":
+                        case "date":
+                        case "datetime":
+                            length += 4;
+                            break;
+
+                        case "char":
+                            length++;
+                            break;
+
+                        case "short":
+                            length += 2;
+                            break;
+
+                        case "bytes":
+                            length += (dataTypesDGV.Rows[0].Cells[1].Value.ToString().Length + 1) / 3;
+                            break;
                     }
                 }
 

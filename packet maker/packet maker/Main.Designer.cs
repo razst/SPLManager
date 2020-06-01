@@ -221,6 +221,7 @@
             this.transOut.Location = new System.Drawing.Point(48, 96);
             this.transOut.Multiline = true;
             this.transOut.Name = "transOut";
+            this.transOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.transOut.Size = new System.Drawing.Size(224, 306);
             this.transOut.TabIndex = 1;
             // 
@@ -228,8 +229,10 @@
             // 
             this.transIn.Location = new System.Drawing.Point(48, 21);
             this.transIn.Name = "transIn";
+            this.transIn.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.transIn.Size = new System.Drawing.Size(550, 20);
             this.transIn.TabIndex = 0;
+            this.transIn.WordWrap = false;
             // 
             // tabControl
             // 
@@ -353,6 +356,7 @@
             // privHex
             // 
             this.privHex.FormattingEnabled = true;
+            this.privHex.HorizontalScrollbar = true;
             this.privHex.Location = new System.Drawing.Point(347, 99);
             this.privHex.Name = "privHex";
             this.privHex.Size = new System.Drawing.Size(401, 303);

@@ -13,7 +13,7 @@ namespace packet_maker
 
     static class Program
     {
-
+        static public bool uploadToDB = false;
         static public FirestoreDb db;
 
 

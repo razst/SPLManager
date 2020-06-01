@@ -69,11 +69,14 @@ namespace packet_maker
 
         private async void Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
-            packet.packetString = packetString;
+            if (Program.uploadToDB)
+            {
+                packet.packetString = packetString;
 
-            DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document(id);
+                DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document(id);
 
-            await docRef.SetAsync(packet);
+                await docRef.SetAsync(packet);
+            }
         }
 
         private void OkBtn_Click(object sender, EventArgs e)
@@ -196,14 +199,21 @@ namespace packet_maker
         }
 
         private int traID;
+        private string mess;
         private void trasBtn_Click(object sender, EventArgs e)
         {
             success = false;
             try
             {
+                mess = transIn.Text;
+                mess = mess.Replace(" ", String.Empty);
+                mess = Regex.Replace(mess, ".{2}", "$0 ");
 
-                packetObject po = packetObject.create(transOptions, transIn.Text);
+                packetObject po = packetObject.create(transOptions, mess);
                 traID = po.id;
+
+
+
 
                 transOut.Text = "";
                 transOut.AppendText("Satlite: " + po.sateliteGroup + Environment.NewLine);
@@ -232,15 +242,15 @@ namespace packet_maker
                 Upload_Packet("rx packets", traID.ToString(), transIn.Text);
                 if (privHex.SelectedIndex != -1)
                 {
-                    if (transIn.Text != privHex.Items[privHex.SelectedIndex].ToString())
+                    if (mess != privHex.Items[privHex.SelectedIndex].ToString())
                     {
-                        privHex.Items.Add(transIn.Text);
+                        privHex.Items.Add(mess);
                         privHex.SelectedIndex = privHex.Items.Count - 1;
                     }
                 }
                 else
                 {
-                    privHex.Items.Add(transIn.Text);
+                    privHex.Items.Add(mess);
                     privHex.SelectedIndex = 0;
                 }
             }

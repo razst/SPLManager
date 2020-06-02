@@ -69,7 +69,7 @@ namespace packet_maker
 
         private async void Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
-            if (Program.uploadToDB)
+            if (!Program.testMode)
             {
                 packet.packetString = packetString;
 
@@ -79,122 +79,165 @@ namespace packet_maker
             }
         }
 
-        private void OkBtn_Click(object sender, EventArgs e)
+        private void TX()
         {
-            success = false;
-            try
+            int length = 0;
+            foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
             {
-                int length = 0;
-                foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
+                switch (par.type)
                 {
-                    switch (par.type)
+                    case "int":
+                    case "date":
+                    case "datetime":
+                        length += 4;
+                        break;
+
+                    case "char":
+                        length++;
+                        break;
+
+                    case "short":
+                        length += 2;
+                        break;
+
+                    case "bytes":
+                        length += (dataTypesDGV.Rows[0].Cells[1].Value.ToString().Length + 1) / 3;
+                        break;
+                }
+            }
+
+            DateTime dt = new DateTime();
+            long unix = 0;
+
+            string type = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].id).ToString("X2");
+            string subtype = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id).ToString("X2");
+            string len = length.ToString("X8");
+            string id = Convert.ToInt32(IDTxb.Text).ToString("X6");
+            string satNum = groupsCB.SelectedIndex.ToString("X2");
+
+
+            string hexID = Regex.Replace(id, ".{2}", "$0 ");
+            string hexLen = Regex.Replace(len, ".{2}", "$0 ");
+
+
+            string[] revLen = hexLen.Split(' ');
+            string[] revID = hexID.Split(' ');
+
+
+            Array.Reverse(revID);
+            Array.Reverse(revLen);
+
+
+            if (length != 0)
+            {
+                string data = "";
+                int CBi = cList.Count - 1;
+                for (int i = dataTypesDGV.Rows.Count - 1; i >= 0; i--)
+                {
+                    switch (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type)
                     {
                         case "int":
-                        case "date":
-                        case "datetime":
-                            length += 4;
+                            data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X8");
                             break;
 
                         case "char":
-                            length++;
+                            if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values == null)
+                            {
+                                data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X2");
+                            }
+                            else
+                            {
+                                data += Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values[cList[CBi].Items.IndexOf(dataTypesDGV.Rows[i].Cells[1].Value.ToString())].id).ToString("X2");
+                                CBi--;
+                            }
+                            break;
+
+                        case "date":
+                        case "datetime":
+                            dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
+                            unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+                            data += Convert.ToInt64(unix).ToString("X8");
                             break;
 
                         case "short":
-                            length += 2;
+                            data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X4");
                             break;
 
                         case "bytes":
-                            length += (dataTypesDGV.Rows[0].Cells[1].Value.ToString().Length + 1) / 3;
-                            break;
+                            makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen) + " " + dataTypesDGV.Rows[i].Cells[1].Value.ToString().ToUpper();
+                            makeOut.Text = makeOut.Text.ToString().Substring(1);
+                            return;
+
                     }
                 }
-
-                DateTime dt = new DateTime();
-                long unix = 0;
-
-                string type = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].id).ToString("X2");
-                string subtype = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id).ToString("X2");
-                string len = length.ToString("X8");
-                string id = Convert.ToInt32(IDTxb.Text).ToString("X6");
-                string satNum = groupsCB.SelectedIndex.ToString("X2");
-
-
-                string hexID = Regex.Replace(id, ".{2}", "$0 ");
-                string hexLen = Regex.Replace(len, ".{2}", "$0 ");
-
-
-                string[] revLen = hexLen.Split(' ');
-                string[] revID = hexID.Split(' ');
-
-
-                Array.Reverse(revID);
-                Array.Reverse(revLen);
-
-
-                if (length != 0)
-                {
-                    string data = "";
-                    int CBi = cList.Count - 1;
-                    for (int i = dataTypesDGV.Rows.Count - 1; i >= 0; i--)
-                    {
-                        switch (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type)
-                        {
-                            case "int":
-                                data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X8");
-                                break;
-
-                            case "char":
-                                if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values == null)
-                                {
-                                    data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X2");
-                                }
-                                else
-                                {
-                                    data += Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values[cList[CBi].Items.IndexOf(dataTypesDGV.Rows[i].Cells[1].Value.ToString())].id).ToString("X2");
-                                    CBi--;
-                                }
-                                break;
-
-                            case "date":
-                            case "datetime":
-                                dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
-                                unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
-                                data += Convert.ToInt64(unix).ToString("X8");
-                                break;
-
-                            case "short":
-                                data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X4");
-                                break;
-
-                            case "bytes":
-                                makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen)+" "+ dataTypesDGV.Rows[i].Cells[1].Value.ToString().ToUpper();
-                                makeOut.Text = makeOut.Text.ToString().Substring(1);
-                                return;
-
-                        }
-                    }
-                    string hexData = Regex.Replace(data, ".{2}", "$0 ");
-                    string[] revData = hexData.Split(' ');
-                    Array.Reverse(revData);
-                    makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData);
-                }
-                else
-                {
-                    makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen);
-                }
-
-                makeOut.Text = makeOut.Text.ToString().Substring(1);
-                success = true;
+                string hexData = Regex.Replace(data, ".{2}", "$0 ");
+                string[] revData = hexData.Split(' ');
+                Array.Reverse(revData);
+                makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData);
             }
-            catch
+            else
             {
-                MessageBox.Show("invaled input", "error");
+                makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen);
+            }
+
+            makeOut.Text = makeOut.Text.ToString().Substring(1);
+        }
+        private void RX()
+        {
+            mess = transIn.Text;
+            mess = mess.Replace(" ", String.Empty);
+            mess = Regex.Replace(mess, ".{2}", "$0 ");
+
+            packetObject po = packetObject.create(transOptions, mess);
+            traID = po.id;
+
+
+
+
+            transOut.Text = "";
+            transOut.AppendText("Satlite: " + po.sateliteGroup + Environment.NewLine);
+            transOut.AppendText("ID: " + po.id + Environment.NewLine);
+            transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
+            transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
+            transOut.AppendText("length: " + po.length + Environment.NewLine + Environment.NewLine);
+            if (po.data.Count != 0)
+            {
+                transOut.AppendText("Data:" + Environment.NewLine);
+                for (int i = 0; i < po.data.Count; i++)
+                {
+                    transOut.AppendText(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i] + Environment.NewLine);
+                }
+            }
+        }
+
+
+
+        #region click events
+
+        private void OkBtn_Click(object sender, EventArgs e)
+        {
+            if (Program.testMode)
+            {
+                TX();
+            }
+            else
+            {
                 success = false;
-            }
+                try
+                {
+                    TX();
+                    success = true;
+                }
+                catch
+                {
+                    MessageBox.Show("invaled input", "error");
+                    success = false;
+                }
 
-            if (success)
-            {
-                Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
+                if (success)
+                {
+                    Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
+                }
             }
         }
 
@@ -203,40 +246,26 @@ namespace packet_maker
         private void trasBtn_Click(object sender, EventArgs e)
         {
             success = false;
-            try
+            if (Program.testMode)
             {
-                mess = transIn.Text;
-                mess = mess.Replace(" ", String.Empty);
-                mess = Regex.Replace(mess, ".{2}", "$0 ");
-
-                packetObject po = packetObject.create(transOptions, mess);
-                traID = po.id;
-
-
-
-
-                transOut.Text = "";
-                transOut.AppendText("Satlite: " + po.sateliteGroup + Environment.NewLine);
-                transOut.AppendText("ID: " + po.id + Environment.NewLine);
-                transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
-                transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
-                transOut.AppendText("length: " + po.length + Environment.NewLine + Environment.NewLine);
-                if (po.data.Count != 0)
-                {
-                    transOut.AppendText("Data:" + Environment.NewLine);
-                    for (int i = 0; i < po.data.Count; i++)
-                    {
-                        transOut.AppendText(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i] + Environment.NewLine);
-                    }
-                }
+                RX();
                 success = true;
             }
-
-            catch
+            else
             {
-                MessageBox.Show("manager was not able to translate this packet", "error");
-                success = false;
+                try
+                {
+                    RX();
+                    success = true;
+                }
+
+                catch
+                {
+                    MessageBox.Show("manager was not able to translate this packet", "error");
+                    success = false;
+                }
             }
+
             if (success)
             {
                 Upload_Packet("rx packets", traID.ToString(), transIn.Text);
@@ -257,7 +286,7 @@ namespace packet_maker
 
         }
 
-
+        #endregion
 
 
 
@@ -294,7 +323,7 @@ namespace packet_maker
                 foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
                 {
                     dataTypesDGV.Rows.Add(par.name, "", par.desc);
-                    if(par.type == "bytes")
+                    if (par.type == "bytes")
                     {
                         bit = true;
                         break;
@@ -324,6 +353,10 @@ namespace packet_maker
                 if (bit)
                 {
                     this.dataTypesDGV.Columns[1].Width = 456;
+                }
+                else
+                {
+                    this.dataTypesDGV.Columns[1].Width = 200;
                 }
 
             }
@@ -364,9 +397,7 @@ namespace packet_maker
             if (editingControl != null)
                 editingControl.DroppedDown = true;
         }
-
-        
-
         #endregion
+
     }
 }

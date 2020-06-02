@@ -73,7 +73,7 @@ namespace packet_maker
             {
                 packet.packetString = packetString;
 
-                DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document(id);
+                DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document();
 
                 await docRef.SetAsync(packet);
             }

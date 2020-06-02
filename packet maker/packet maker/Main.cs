@@ -69,7 +69,7 @@ namespace packet_maker
 
         private async void Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
-            if (!Program.testMode)
+            if (!Program.testMode && Program.UploadToDB)
             {
                 packet.packetString = packetString;
 

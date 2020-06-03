@@ -14,7 +14,7 @@ namespace packet_maker
     static class Program
     {
         static public bool testMode = false;
-        static public bool UploadToDB = false;
+        static public bool UploadToDB = true;
 
         static public FirestoreDb db;
 

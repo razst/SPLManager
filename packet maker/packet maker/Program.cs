@@ -14,7 +14,7 @@ namespace packet_maker
     static class Program
     {
         static public bool testMode = false;
-        static public bool UploadToDB = false;
+        static public bool UploadToDB = true;
 
         static public FirestoreDb db;
 
@@ -31,8 +31,12 @@ namespace packet_maker
 
         static void Main()
         {
-            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\key\satelite packets-a1af32f2133c.json");
-            db = FirestoreDb.Create("satelite-packets");
+            if (Program.UploadToDB)
+            {
+                System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\key\satelite packets-a1af32f2133c.json");
+                db = FirestoreDb.Create("satelite-packets");
+            }
+
 
 
 

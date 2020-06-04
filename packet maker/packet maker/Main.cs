@@ -69,7 +69,7 @@ namespace packet_maker
 
         private async void Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
-            if (!Program.testMode && Program.UploadToDB)
+            if (!Program.testMode || Program.UploadToDB)
             {
                 packet.packetString = packetString;
 
@@ -216,13 +216,14 @@ namespace packet_maker
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
+            success = false;
             if (Program.testMode)
             {
                 TX();
+                success = true;
             }
             else
             {
-                success = false;
                 try
                 {
                     TX();
@@ -233,11 +234,12 @@ namespace packet_maker
                     MessageBox.Show("invaled input", "error");
                     success = false;
                 }
+            }
 
-                if (success)
-                {
-                    Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
-                }
+
+            if (success)
+            {
+                Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
             }
         }
 

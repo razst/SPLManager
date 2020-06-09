@@ -1,0 +1,66 @@
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\grpc_csharp_ext.x86.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\grpc_csharp_ext.x64.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x86.so
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x64.so
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x86.dylib
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x64.dylib
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\packet maker.exe.config
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\packet maker.exe
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\packet maker.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Api.CommonProtos.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.Grpc.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.PlatformServices.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Core.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.PlatformServices.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.V1.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.LongRunning.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Protobuf.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Grpc.Auth.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.Api.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Newtonsoft.Json.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\System.Collections.Immutable.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\System.Interactive.Async.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\System.ValueTuple.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Api.CommonProtos.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Api.CommonProtos.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.Grpc.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.Grpc.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Core.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Core.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.V1.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.V1.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.LongRunning.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.LongRunning.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Protobuf.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Google.Protobuf.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Grpc.Auth.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Grpc.Auth.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.Api.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.Api.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Newtonsoft.Json.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\System.Collections.Immutable.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\System.Interactive.Async.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\System.ValueTuple.xml
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet_maker.About.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet_maker.Main.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet_maker.Properties.Resources.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.GenerateResource.cache
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.CoreCompileInputs.cache
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.CopyComplete
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet maker.exe
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet maker.pdb

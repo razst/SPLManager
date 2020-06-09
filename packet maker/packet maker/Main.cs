@@ -1,4 +1,7 @@
-﻿using Google.Cloud.Firestore;
+﻿//#define DB
+#if DB 
+using Google.Cloud.Firestore; 
+#endif
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,7 +20,7 @@ namespace packet_maker
         {
             InitializeComponent();
         }
-        #region setup
+#region setup
         private List<DataGridViewComboBoxCell> cList = new List<DataGridViewComboBoxCell>();
         private TypeList options;
         private TypeList transOptions;
@@ -66,9 +69,9 @@ namespace packet_maker
         }
 
         #endregion
-
         private async void Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
+#if DB
             if (!Program.testMode || Program.UploadToDB)
             {
                 packet.packetString = packetString;
@@ -77,8 +80,8 @@ namespace packet_maker
 
                 await docRef.SetAsync(packet);
             }
+#endif
         }
-
         private void TX()
         {
             int length = 0;
@@ -212,7 +215,7 @@ namespace packet_maker
 
 
 
-        #region click events
+#region click events
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
@@ -288,11 +291,11 @@ namespace packet_maker
 
         }
 
-        #endregion
+#endregion
 
 
 
-        #region rest of code
+#region rest of code
 
 
 
@@ -399,7 +402,7 @@ namespace packet_maker
             if (editingControl != null)
                 editingControl.DroppedDown = true;
         }
-        #endregion
+#endregion
 
     }
 }

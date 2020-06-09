@@ -74,6 +74,7 @@ namespace packet_maker
             int j = 10;
             foreach (Params par in jsonObject.typenum[typeDex].subTypes[subtypeDex].parmas)
             {
+                string temp = null;
                 switch (par.type)
                 {
                     case "int":
@@ -111,13 +112,23 @@ namespace packet_maker
                         data.Add(dtDateTime.ToString().Substring(0,10));
                         j += 4;
                         break;
+
                     case "bytes":
-                        string allBit = "";
-                        for(int i = 10; i < bitarr.Length; i++)
+                        temp = "";
+                        for(int i = j; i < bitarr.Length; i++)
                         {
-                            allBit += bitarr[i] + " ";
+                            temp += bitarr[i] + " ";
                         }
-                        data.Add(allBit);
+                        data.Add(temp);
+                        return;
+
+                    case "ascii":
+                        temp = "";
+                        for (int i=j;i<bitarr.Length;i++)
+                        {
+                            temp += Convert.ToChar(Convert.ToInt32(bitarr[i], 16));
+                        }
+                        data.Add(temp);
                         return;
                 }
             }

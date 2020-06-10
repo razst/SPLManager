@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -20,7 +21,7 @@ namespace packet_maker
         {
             InitializeComponent();
         }
-#region setup
+        #region setup
         private List<DataGridViewComboBoxCell> cList = new List<DataGridViewComboBoxCell>();
         private TypeList options;
         private TypeList transOptions;
@@ -69,19 +70,27 @@ namespace packet_maker
         }
 
         #endregion
+
+
         private async void Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
+            await Task.Run(() => {
+
 #if DB
-            if (!Program.testMode )
-            {
-                packet.packetString = packetString;
+                            if (!Program.testMode )
+                            {
+                                packet.packetString = packetString;
 
-                DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document();
+                                DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document();
 
-                await docRef.SetAsync(packet);
-            }
+                                docRef.SetAsync(packet);
+                            }
 #endif
+
+            });
+
         }
+
         private void TX()
         {
             int length = 0;
@@ -187,7 +196,7 @@ namespace packet_maker
         }
         private void RX()
         {
-            mess = transIn.Text;
+            mess = transIn.Text.Trim();
             mess = mess.Replace(" ", String.Empty);
             mess = Regex.Replace(mess, ".{2}", "$0 ");
 
@@ -215,7 +224,7 @@ namespace packet_maker
 
 
 
-#region click events
+        #region click events
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
@@ -291,11 +300,11 @@ namespace packet_maker
 
         }
 
-#endregion
+        #endregion
 
 
 
-#region rest of code
+        #region rest of code
 
 
 
@@ -402,7 +411,7 @@ namespace packet_maker
             if (editingControl != null)
                 editingControl.DroppedDown = true;
         }
-#endregion
+        #endregion
 
     }
 }

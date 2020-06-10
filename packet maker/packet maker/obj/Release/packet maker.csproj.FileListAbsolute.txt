@@ -64,3 +64,70 @@ C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.Core
 C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.CopyComplete
 C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet maker.exe
 C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet maker.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\grpc_csharp_ext.x86.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\grpc_csharp_ext.x64.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x86.so
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x64.so
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x86.dylib
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x64.dylib
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\packet maker.exe.config
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\packet maker.exe
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\packet maker.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Api.CommonProtos.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.Grpc.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.PlatformServices.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Core.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.PlatformServices.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.V1.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.LongRunning.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Protobuf.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Grpc.Auth.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.Api.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Newtonsoft.Json.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\System.Collections.Immutable.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\System.Interactive.Async.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\System.ValueTuple.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Api.CommonProtos.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Api.CommonProtos.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.Grpc.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.Grpc.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Core.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Core.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.V1.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.V1.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.LongRunning.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.LongRunning.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Protobuf.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Google.Protobuf.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Grpc.Auth.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Grpc.Auth.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.Api.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.Api.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Newtonsoft.Json.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\System.Collections.Immutable.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\System.Interactive.Async.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\System.ValueTuple.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet maker.csprojAssemblyReference.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet_maker.About.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet_maker.Main.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet_maker.Properties.Resources.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.GenerateResource.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.CoreCompileInputs.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.CopyComplete
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet maker.exe
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet maker.pdb

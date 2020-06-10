@@ -100,7 +100,7 @@ namespace packet_maker
                         break;
 
                     case "datetime":
-                        System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                        DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                         dtDateTime = dtDateTime.AddSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
                         data.Add(dtDateTime.ToString());
                         j += 4;
@@ -124,10 +124,15 @@ namespace packet_maker
 
                     case "ascii":
                         temp = "";
-                        for (int i=j;i<bitarr.Length;i++)
+                        List<char> letters = new List<char>();
+                        for (int i = j; i < bitarr.Length-1; i++)
                         {
-                            temp += Convert.ToChar(Convert.ToInt32(bitarr[i], 16));
+                            if (Convert.ToInt32(bitarr[i], 16) > 0 && Convert.ToInt32(bitarr[i], 16) < 128)
+                            {
+                                letters.Add(Convert.ToChar(Convert.ToInt32(bitarr[i], 16)));
+                            }
                         }
+                        temp = string.Join("", letters).ToString();
                         data.Add(temp);
                         return;
                 }

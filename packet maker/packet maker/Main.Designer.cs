@@ -145,7 +145,6 @@
             this.dataTypesDGV.TabIndex = 3;
             this.dataTypesDGV.Visible = false;
             this.dataTypesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTypesDGV_CellClick);
-//            this.dataTypesDGV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataTypesDGV_KeyDown);
             // 
             // dataTypes
             // 

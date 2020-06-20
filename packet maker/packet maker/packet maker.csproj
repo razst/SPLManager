@@ -111,18 +111,36 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="jsonFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="jsonFrm.Designer.cs">
+      <DependentUpon>jsonFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="jsonValSetFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="jsonValSetFrm.Designer.cs">
+      <DependentUpon>jsonValSetFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Packet.cs" />
+    <Compile Include="PacketClasses.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeList.cs" />
+    <Compile Include="jsonClasses.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="jsonFrm.resx">
+      <DependentUpon>jsonFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="jsonValSetFrm.resx">
+      <DependentUpon>jsonValSetFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

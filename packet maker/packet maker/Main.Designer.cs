@@ -44,7 +44,6 @@
             this.subtypeCB = new System.Windows.Forms.ComboBox();
             this.typeCB = new System.Windows.Forms.ComboBox();
             this.trasBtn = new System.Windows.Forms.Button();
-            this.transOut = new System.Windows.Forms.TextBox();
             this.transIn = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -52,14 +51,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.transOut = new System.Windows.Forms.ListBox();
             this.pasteBTN = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.privHex = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -100,6 +105,7 @@
             this.IDTxb.Name = "IDTxb";
             this.IDTxb.Size = new System.Drawing.Size(84, 20);
             this.IDTxb.TabIndex = 0;
+            this.IDTxb.Text = "100";
             // 
             // OkBtn
             // 
@@ -216,15 +222,6 @@
             this.trasBtn.UseVisualStyleBackColor = true;
             this.trasBtn.Click += new System.EventHandler(this.trasBtn_Click);
             // 
-            // transOut
-            // 
-            this.transOut.Location = new System.Drawing.Point(48, 96);
-            this.transOut.Multiline = true;
-            this.transOut.Name = "transOut";
-            this.transOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.transOut.Size = new System.Drawing.Size(224, 306);
-            this.transOut.TabIndex = 1;
-            // 
             // transIn
             // 
             this.transIn.Location = new System.Drawing.Point(48, 21);
@@ -300,12 +297,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.connectBtn);
+            this.tabPage2.Controls.Add(this.transOut);
             this.tabPage2.Controls.Add(this.pasteBTN);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.privHex);
-            this.tabPage2.Controls.Add(this.transOut);
             this.tabPage2.Controls.Add(this.trasBtn);
             this.tabPage2.Controls.Add(this.transIn);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -315,6 +313,15 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "RX";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // transOut
+            // 
+            this.transOut.FormattingEnabled = true;
+            this.transOut.HorizontalScrollbar = true;
+            this.transOut.Location = new System.Drawing.Point(54, 99);
+            this.transOut.Name = "transOut";
+            this.transOut.Size = new System.Drawing.Size(248, 303);
+            this.transOut.TabIndex = 8;
             // 
             // pasteBTN
             // 
@@ -329,7 +336,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(303, 99);
+            this.label7.Location = new System.Drawing.Point(320, 98);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 13);
             this.label7.TabIndex = 6;
@@ -357,7 +364,7 @@
             // 
             this.privHex.FormattingEnabled = true;
             this.privHex.HorizontalScrollbar = true;
-            this.privHex.Location = new System.Drawing.Point(347, 99);
+            this.privHex.Location = new System.Drawing.Point(368, 98);
             this.privHex.Name = "privHex";
             this.privHex.Size = new System.Drawing.Size(401, 303);
             this.privHex.TabIndex = 3;
@@ -366,12 +373,44 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(799, 24);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modifyToolStripMenuItem});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // modifyToolStripMenuItem
+            // 
+            this.modifyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tXToolStripMenuItem,
+            this.rXToolStripMenuItem});
+            this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.modifyToolStripMenuItem.Text = "modify";
+            // 
+            // tXToolStripMenuItem
+            // 
+            this.tXToolStripMenuItem.Name = "tXToolStripMenuItem";
+            this.tXToolStripMenuItem.Size = new System.Drawing.Size(88, 22);
+            this.tXToolStripMenuItem.Text = "TX";
+            this.tXToolStripMenuItem.Click += new System.EventHandler(this.tXToolStripMenuItem_Click);
+            // 
+            // rXToolStripMenuItem
+            // 
+            this.rXToolStripMenuItem.Name = "rXToolStripMenuItem";
+            this.rXToolStripMenuItem.Size = new System.Drawing.Size(88, 22);
+            this.rXToolStripMenuItem.Text = "RX";
+            this.rXToolStripMenuItem.Click += new System.EventHandler(this.rXToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -387,6 +426,16 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // connectBtn
+            // 
+            this.connectBtn.Location = new System.Drawing.Point(705, 18);
+            this.connectBtn.Name = "connectBtn";
+            this.connectBtn.Size = new System.Drawing.Size(75, 23);
+            this.connectBtn.TabIndex = 9;
+            this.connectBtn.Text = "connect";
+            this.connectBtn.UseVisualStyleBackColor = true;
+            this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
             // 
             // Main
             // 
@@ -420,7 +469,6 @@
         private System.Windows.Forms.Button OkBtn;
         private System.Windows.Forms.TextBox makeOut;
         private System.Windows.Forms.Button trasBtn;
-        private System.Windows.Forms.TextBox transOut;
         private System.Windows.Forms.TextBox transIn;
         private System.Windows.Forms.ComboBox subtypeCB;
         private System.Windows.Forms.ComboBox typeCB;
@@ -445,6 +493,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataTypes;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn desc;
+        private System.Windows.Forms.ListBox transOut;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modifyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tXToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rXToolStripMenuItem;
+        private System.Windows.Forms.Button connectBtn;
     }
 }
 

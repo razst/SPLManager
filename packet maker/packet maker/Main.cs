@@ -3,10 +3,13 @@
 using Google.Cloud.Firestore; 
 #endif
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -185,18 +188,17 @@ namespace packet_maker
                 string hexData = Regex.Replace(data, ".{2}", "$0 ");
                 string[] revData = hexData.Split(' ');
                 Array.Reverse(revData);
-                makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData);
+                makeOut.Text = (String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData)).Substring(1);
             }
             else
             {
-                makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen);
+                makeOut.Text = (String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen)).Substring(1);
             }
-
-            makeOut.Text = makeOut.Text.ToString().Substring(1);
+            //string t = (string)(JValue)"////";
         }
-        private void RX()
+        private void RX(string transMsg)
         {
-            mess = transIn.Text.Trim();
+            mess = transMsg.Trim();
             mess = mess.Replace(" ", String.Empty);
             mess = Regex.Replace(mess, ".{2}", "$0 ");
 
@@ -206,18 +208,21 @@ namespace packet_maker
 
 
 
-            transOut.Text = "";
-            transOut.AppendText("Satlite: " + po.sateliteGroup + Environment.NewLine);
-            transOut.AppendText("ID: " + po.id + Environment.NewLine);
-            transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
-            transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
-            transOut.AppendText("length: " + po.length + Environment.NewLine + Environment.NewLine);
+            transOut.Items.Clear();
+            transOut.Items.Add("Satlite: " + po.sateliteGroup);
+            transOut.Items.Add("ID: " + po.id);
+            transOut.Items.Add("type: " + po.getTypeName());
+            transOut.Items.Add("subtype: " + po.getSubTypeName());
+            transOut.Items.Add("length: " + po.length);
+            transOut.Items.Add("");
+            transOut.Items.Add("");
             if (po.data.Count != 0)
             {
-                transOut.AppendText("Data:" + Environment.NewLine);
+                transOut.Items.Add("Data:");
+                transOut.Items.Add("");
                 for (int i = 0; i < po.data.Count; i++)
                 {
-                    transOut.AppendText(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i] + Environment.NewLine);
+                    transOut.Items.Add(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i]);
                 }
             }
         }
@@ -226,7 +231,7 @@ namespace packet_maker
 
         #region click events
 
-        private void OkBtn_Click(object sender, EventArgs e)
+        private void OkBtn_click()
         {
             success = false;
             if (Program.testMode)
@@ -254,22 +259,19 @@ namespace packet_maker
                 Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
             }
         }
-
-        private int traID;
-        private string mess;
-        private void trasBtn_Click(object sender, EventArgs e)
+        private void trasBtn_click(string msg)
         {
             success = false;
             if (Program.testMode)
             {
-                RX();
+                RX(msg);
                 success = true;
             }
             else
             {
                 try
                 {
-                    RX();
+                    RX(msg);
                     success = true;
                 }
 
@@ -282,7 +284,7 @@ namespace packet_maker
 
             if (success)
             {
-                Upload_Packet("rx packets", traID.ToString(), transIn.Text);
+                Upload_Packet("rx packets", traID.ToString(), msg);
                 if (privHex.SelectedIndex != -1)
                 {
                     if (mess != privHex.Items[privHex.SelectedIndex].ToString())
@@ -299,6 +301,12 @@ namespace packet_maker
             }
 
         }
+
+        private void OkBtn_Click(object sender, EventArgs e) { OkBtn_click(); }
+
+        private int traID;
+        private string mess;
+        private void trasBtn_Click(object sender, EventArgs e) { trasBtn_click(transIn.Text); }
 
         #endregion
 
@@ -411,7 +419,126 @@ namespace packet_maker
             if (editingControl != null)
                 editingControl.DroppedDown = true;
         }
+
         #endregion
 
+
+        private void tXToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            jsonFrm frm = new jsonFrm
+            {
+                usedJson = options
+            };
+            frm.ShowDialog();
+        }
+
+        private void rXToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            jsonFrm frm = new jsonFrm
+            {
+                usedJson = transOptions
+            };
+            frm.ShowDialog();
+        }
+
+        private async void connectBtn_Click(object sender, EventArgs e)
+        {
+            connectBtn.Enabled = false;
+            await Task.Run(() => {
+
+                TcpListener server = null;
+                try
+                {
+                    // Set the TcpListener on port 13000.
+                    Int32 port = 61015;
+                    IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+
+                    // TcpListener server = new TcpListener(port);
+                    server = new TcpListener(localAddr, port);
+
+                    // Start listening for client requests.
+                    server.Start();
+
+                    // Buffer for reading data
+                    Byte[] bytes = new Byte[256];
+                    String data = null;
+
+                    // Enter the listening loop.
+                    while (true)
+                    {
+                        MessageBox.Show("Waiting for a connection... ");
+
+
+
+                        // Perform a blocking call to accept requests.
+                        // You could also use server.AcceptSocket() here.
+                        TcpClient client = server.AcceptTcpClient();
+                        MessageBox.Show("Connected!");
+
+                        data = null;
+
+                        // Get a stream object for reading and writing
+                        NetworkStream stream = client.GetStream();
+
+                        int i;
+
+                        // Loop to receive all the data sent by the client.
+                        while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                        {
+
+                            Console.WriteLine("");
+                            // Translate data bytes to a ASCII string.
+                            data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                            Msg msg1 = JsonConvert.DeserializeObject<Msg>(data);
+                            Console.WriteLine($"Received: {data}");
+
+
+                            Console.WriteLine("");
+                            switch (msg1.Type)
+                            {
+                                case "EndNode":
+                                    // Process the data sent by the client.
+                                    //data = data.ToUpper();
+                                    data = "{'Type': 'ClientId', 'Content': 4}";
+                                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+
+                                    // Send back a response.
+                                    stream.Write(msg, 0, msg.Length);
+                                    Console.WriteLine("Sent: {0}", data);
+                                    break;
+
+
+                                case "RawTelemetry":
+                                    byte[] bbb = (byte[])(JValue)msg1.Content;
+                                    string[] sArr = new string[bbb.Length];
+                                    for (int k = 0; k < bbb.Length; k++)
+                                    {
+                                        sArr[k] = bbb[k].ToString("X2");
+                                    }
+
+                                    string packetRecived = String.Join(" ", sArr);
+                                    Console.WriteLine(packetRecived);
+                                    Console.WriteLine("");
+                                    break;
+                            }
+                            Console.WriteLine("*******************");
+                        }
+
+                        // Shutdown and end connection
+                        client.Close();
+                    }
+                }
+                catch (SocketException ex)
+                {
+                    MessageBox.Show($"SocketException: {ex}");
+                }
+                finally
+                {
+                    // Stop listening for new clients.
+                    server.Stop();
+                }
+            });
+        }
     }
 }
+

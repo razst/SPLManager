@@ -221,3 +221,5 @@ C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources

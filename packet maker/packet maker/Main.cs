@@ -455,7 +455,7 @@ namespace packet_maker
 
                     // TcpListener server = new TcpListener(port);
                     server = new TcpListener(localAddr, port);
-
+                    Console.WriteLine("" + Environment.NewLine);
                     // Start listening for client requests.
                     server.Start();
 
@@ -466,14 +466,14 @@ namespace packet_maker
                     // Enter the listening loop.
                     while (true)
                     {
-                        MessageBox.Show("Waiting for a connection... ");
+                        Console.WriteLine("Waiting for a connection... ");
 
 
 
                         // Perform a blocking call to accept requests.
                         // You could also use server.AcceptSocket() here.
                         TcpClient client = server.AcceptTcpClient();
-                        MessageBox.Show("Connected!");
+                        Console.WriteLine("Connected!");
 
                         data = null;
 
@@ -499,7 +499,7 @@ namespace packet_maker
                                 case "EndNode":
                                     // Process the data sent by the client.
                                     //data = data.ToUpper();
-                                    data = "{'Type': 'ClientId', 'Content': 4}";
+                                    data = @"{'Type': 'ClientId', 'Content': 4}";
                                     byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
                                     // Send back a response.

@@ -223,3 +223,5 @@ C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.x
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.xml
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources

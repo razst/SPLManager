@@ -444,11 +444,14 @@ namespace packet_maker
         private async void connectBtn_Click(object sender, EventArgs e)
         {
             connectBtn.Enabled = false;
+            System.Diagnostics.Process.Start(@"C:\Users\pc\Desktop\GSC\GSC-EndNode\GSC-EndNode.exe");
             await Task.Run(() => {
-
+                TcpClient client = null;
                 TcpListener server = null;
                 try
                 {
+                    
+
                     // Set the TcpListener on port 13000.
                     Int32 port = 61015;
                     IPAddress localAddr = IPAddress.Parse("127.0.0.1");
@@ -472,7 +475,7 @@ namespace packet_maker
 
                         // Perform a blocking call to accept requests.
                         // You could also use server.AcceptSocket() here.
-                        TcpClient client = server.AcceptTcpClient();
+                       client = server.AcceptTcpClient();
                         Console.WriteLine("Connected!");
 
                         data = null;
@@ -483,6 +486,7 @@ namespace packet_maker
                         int i;
 
                         // Loop to receive all the data sent by the client.
+
                         while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                         {
 
@@ -519,25 +523,23 @@ namespace packet_maker
                                     string packetRecived = String.Join(" ", sArr);
                                     Console.WriteLine(packetRecived);
                                     Console.WriteLine("");
+                                    //RX(packetRecived);
                                     break;
                             }
                             Console.WriteLine("*******************");
                         }
 
-                        // Shutdown and end connection
-                        client.Close();
+
                     }
                 }
-                catch (SocketException ex)
+                catch
                 {
-                    MessageBox.Show($"SocketException: {ex}");
-                }
-                finally
-                {
-                    // Stop listening for new clients.
+                    // Shutdown and end connection
+                    client.Close();
                     server.Stop();
                 }
             });
+            connectBtn.Enabled = true;
         }
     }
 }

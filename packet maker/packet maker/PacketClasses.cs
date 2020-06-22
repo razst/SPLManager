@@ -24,7 +24,7 @@ namespace packet_maker
 
 
     [FirestoreData]
-    internal class ListPacket
+    internal class ListPacketItem
     {
         [FirestoreProperty]
 

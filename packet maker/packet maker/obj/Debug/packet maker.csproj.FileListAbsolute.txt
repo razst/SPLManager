@@ -225,3 +225,4 @@ C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\pack
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources

@@ -17,6 +17,10 @@ namespace packet_maker
             InitializeComponent();
         }
 
+        public int typeDex = 0;
+        public int subtypeDex = 0;
+        public string mode = null;
+
         public void SetObject(Type obj)
         {
             nameTxb.Text = obj.name;
@@ -37,6 +41,11 @@ namespace packet_maker
             label1.Visible = false;
             nameTxb.Text = obj.name;
             descTxb.Text = obj.desc;
+        }
+
+        private void OkBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

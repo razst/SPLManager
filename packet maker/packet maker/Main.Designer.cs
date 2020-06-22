@@ -51,6 +51,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.connectBtn = new System.Windows.Forms.Button();
             this.transOut = new System.Windows.Forms.ListBox();
             this.pasteBTN = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -64,7 +65,7 @@
             this.rXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.connectBtn = new System.Windows.Forms.Button();
+            this.viewPacketListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -314,6 +315,16 @@
             this.tabPage2.Text = "RX";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // connectBtn
+            // 
+            this.connectBtn.Location = new System.Drawing.Point(705, 18);
+            this.connectBtn.Name = "connectBtn";
+            this.connectBtn.Size = new System.Drawing.Size(75, 23);
+            this.connectBtn.TabIndex = 9;
+            this.connectBtn.Text = "connect";
+            this.connectBtn.UseVisualStyleBackColor = true;
+            this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
+            // 
             // transOut
             // 
             this.transOut.FormattingEnabled = true;
@@ -384,7 +395,8 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.modifyToolStripMenuItem});
+            this.modifyToolStripMenuItem,
+            this.viewPacketListToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -395,7 +407,7 @@
             this.tXToolStripMenuItem,
             this.rXToolStripMenuItem});
             this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
-            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.modifyToolStripMenuItem.Text = "modify";
             // 
             // tXToolStripMenuItem
@@ -427,15 +439,12 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // connectBtn
+            // viewPacketListToolStripMenuItem
             // 
-            this.connectBtn.Location = new System.Drawing.Point(705, 18);
-            this.connectBtn.Name = "connectBtn";
-            this.connectBtn.Size = new System.Drawing.Size(75, 23);
-            this.connectBtn.TabIndex = 9;
-            this.connectBtn.Text = "connect";
-            this.connectBtn.UseVisualStyleBackColor = true;
-            this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
+            this.viewPacketListToolStripMenuItem.Name = "viewPacketListToolStripMenuItem";
+            this.viewPacketListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewPacketListToolStripMenuItem.Text = "view packet list";
+            this.viewPacketListToolStripMenuItem.Click += new System.EventHandler(this.viewPacketListToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -499,6 +508,7 @@
         private System.Windows.Forms.ToolStripMenuItem tXToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rXToolStripMenuItem;
         private System.Windows.Forms.Button connectBtn;
+        private System.Windows.Forms.ToolStripMenuItem viewPacketListToolStripMenuItem;
     }
 }
 

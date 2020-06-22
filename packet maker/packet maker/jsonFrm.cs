@@ -18,6 +18,7 @@ namespace packet_maker
         }
 
         public TypeList usedJson = new TypeList();
+        public string mode = null;
         public static jsonFrm curJsonFrm = null;
 
         private void typeLibx_SelectedIndexChanged(object sender, EventArgs e)
@@ -54,23 +55,49 @@ namespace packet_maker
 
         private void typeLibx_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            jsonValSetFrm frm = new jsonValSetFrm();
+            jsonValSetFrm frm = new jsonValSetFrm
+            {
+                typeDex = typeLibx.SelectedIndex,
+                subtypeDex = subtypeLibx.SelectedIndex
+            };
             frm.SetObject(usedJson.typenum[typeLibx.SelectedIndex]);
             frm.ShowDialog();
         }
 
         private void subtypeLibx_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            jsonValSetFrm frm = new jsonValSetFrm();
+            jsonValSetFrm frm = new jsonValSetFrm
+            {
+                typeDex = typeLibx.SelectedIndex,
+                subtypeDex = subtypeLibx.SelectedIndex
+            };
             frm.SetObject(usedJson.typenum[typeLibx.SelectedIndex].subTypes[subtypeLibx.SelectedIndex]);
             frm.ShowDialog();
         }
 
         private void paramsLisbx_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            jsonValSetFrm frm = new jsonValSetFrm();
+            jsonValSetFrm frm = new jsonValSetFrm
+            {
+                typeDex = typeLibx.SelectedIndex,
+                subtypeDex = subtypeLibx.SelectedIndex
+            };
             frm.SetObject(usedJson.typenum[typeLibx.SelectedIndex].subTypes[subtypeLibx.SelectedIndex].parmas[paramsLisbx.SelectedIndex]);
             frm.ShowDialog();
+        }
+
+        private void jsonFrm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            switch (mode)
+            {
+                case "TX":
+                    Main.frm.options = usedJson;
+                    break;
+
+                case "RX":
+                    Main.frm.transOptions = usedJson;
+                    break;
+            }
         }
     }
 }

@@ -63,9 +63,9 @@
             this.modifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewPacketListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewPacketListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -76,43 +76,48 @@
             // ID
             // 
             this.ID.AutoSize = true;
-            this.ID.Location = new System.Drawing.Point(226, 28);
+            this.ID.Location = new System.Drawing.Point(339, 43);
+            this.ID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ID.Name = "ID";
-            this.ID.Size = new System.Drawing.Size(21, 13);
+            this.ID.Size = new System.Drawing.Size(30, 20);
             this.ID.TabIndex = 2;
             this.ID.Text = "ID:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(364, 27);
+            this.label1.Location = new System.Drawing.Point(546, 42);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.Size = new System.Drawing.Size(47, 20);
             this.label1.TabIndex = 3;
             this.label1.Text = "Type:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(559, 28);
+            this.label2.Location = new System.Drawing.Point(838, 43);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.Size = new System.Drawing.Size(72, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Subtype:";
             // 
             // IDTxb
             // 
-            this.IDTxb.Location = new System.Drawing.Point(253, 21);
+            this.IDTxb.Location = new System.Drawing.Point(380, 32);
+            this.IDTxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.IDTxb.Name = "IDTxb";
-            this.IDTxb.Size = new System.Drawing.Size(84, 20);
+            this.IDTxb.Size = new System.Drawing.Size(124, 26);
             this.IDTxb.TabIndex = 0;
             this.IDTxb.Text = "100";
             // 
             // OkBtn
             // 
-            this.OkBtn.Location = new System.Drawing.Point(695, 338);
+            this.OkBtn.Location = new System.Drawing.Point(1042, 520);
+            this.OkBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.OkBtn.Name = "OkBtn";
-            this.OkBtn.Size = new System.Drawing.Size(75, 23);
+            this.OkBtn.Size = new System.Drawing.Size(112, 35);
             this.OkBtn.TabIndex = 10;
             this.OkBtn.Text = "generate";
             this.OkBtn.UseVisualStyleBackColor = true;
@@ -120,17 +125,19 @@
             // 
             // makeOut
             // 
-            this.makeOut.Location = new System.Drawing.Point(70, 389);
+            this.makeOut.Location = new System.Drawing.Point(105, 598);
+            this.makeOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.makeOut.Name = "makeOut";
-            this.makeOut.Size = new System.Drawing.Size(604, 20);
+            this.makeOut.Size = new System.Drawing.Size(904, 26);
             this.makeOut.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 392);
+            this.label3.Location = new System.Drawing.Point(33, 603);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 13);
+            this.label3.Size = new System.Drawing.Size(62, 20);
             this.label3.TabIndex = 20;
             this.label3.Text = "Output:";
             // 
@@ -146,9 +153,11 @@
             this.value,
             this.desc});
             this.dataTypesDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataTypesDGV.Location = new System.Drawing.Point(70, 137);
+            this.dataTypesDGV.Location = new System.Drawing.Point(105, 211);
+            this.dataTypesDGV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataTypesDGV.Name = "dataTypesDGV";
-            this.dataTypesDGV.Size = new System.Drawing.Size(604, 224);
+            this.dataTypesDGV.RowHeadersWidth = 62;
+            this.dataTypesDGV.Size = new System.Drawing.Size(906, 345);
             this.dataTypesDGV.TabIndex = 3;
             this.dataTypesDGV.Visible = false;
             this.dataTypesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTypesDGV_CellClick);
@@ -156,6 +165,7 @@
             // dataTypes
             // 
             this.dataTypes.HeaderText = "Item:";
+            this.dataTypes.MinimumWidth = 8;
             this.dataTypes.Name = "dataTypes";
             this.dataTypes.ReadOnly = true;
             this.dataTypes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -164,6 +174,7 @@
             // value
             // 
             this.value.HeaderText = "value:";
+            this.value.MinimumWidth = 8;
             this.value.Name = "value";
             this.value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.value.Width = 187;
@@ -171,6 +182,7 @@
             // desc
             // 
             this.desc.HeaderText = "Description:";
+            this.desc.MinimumWidth = 8;
             this.desc.Name = "desc";
             this.desc.ReadOnly = true;
             this.desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -178,17 +190,19 @@
             // 
             // descSubType
             // 
-            this.descSubType.Location = new System.Drawing.Point(545, 66);
+            this.descSubType.Location = new System.Drawing.Point(818, 102);
+            this.descSubType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.descSubType.Name = "descSubType";
-            this.descSubType.Size = new System.Drawing.Size(225, 68);
+            this.descSubType.Size = new System.Drawing.Size(338, 105);
             this.descSubType.TabIndex = 18;
             this.descSubType.Text = "Description:";
             // 
             // descType
             // 
-            this.descType.Location = new System.Drawing.Point(335, 65);
+            this.descType.Location = new System.Drawing.Point(502, 100);
+            this.descType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.descType.Name = "descType";
-            this.descType.Size = new System.Drawing.Size(190, 69);
+            this.descType.Size = new System.Drawing.Size(285, 106);
             this.descType.TabIndex = 17;
             this.descType.Text = "Description:";
             // 
@@ -196,9 +210,10 @@
             // 
             this.subtypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.subtypeCB.FormattingEnabled = true;
-            this.subtypeCB.Location = new System.Drawing.Point(627, 20);
+            this.subtypeCB.Location = new System.Drawing.Point(940, 31);
+            this.subtypeCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.subtypeCB.Name = "subtypeCB";
-            this.subtypeCB.Size = new System.Drawing.Size(143, 21);
+            this.subtypeCB.Size = new System.Drawing.Size(212, 28);
             this.subtypeCB.TabIndex = 2;
             this.subtypeCB.SelectedIndexChanged += new System.EventHandler(this.subtypeCB_SelectedIndexChanged);
             // 
@@ -207,17 +222,19 @@
             this.typeCB.AllowDrop = true;
             this.typeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeCB.FormattingEnabled = true;
-            this.typeCB.Location = new System.Drawing.Point(404, 21);
+            this.typeCB.Location = new System.Drawing.Point(606, 32);
+            this.typeCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.typeCB.Name = "typeCB";
-            this.typeCB.Size = new System.Drawing.Size(121, 21);
+            this.typeCB.Size = new System.Drawing.Size(180, 28);
             this.typeCB.TabIndex = 1;
             this.typeCB.SelectedIndexChanged += new System.EventHandler(this.typeCB_SelectedIndexChanged);
             // 
             // trasBtn
             // 
-            this.trasBtn.Location = new System.Drawing.Point(270, 55);
+            this.trasBtn.Location = new System.Drawing.Point(405, 85);
+            this.trasBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.trasBtn.Name = "trasBtn";
-            this.trasBtn.Size = new System.Drawing.Size(75, 23);
+            this.trasBtn.Size = new System.Drawing.Size(112, 35);
             this.trasBtn.TabIndex = 2;
             this.trasBtn.Text = "translate";
             this.trasBtn.UseVisualStyleBackColor = true;
@@ -225,10 +242,11 @@
             // 
             // transIn
             // 
-            this.transIn.Location = new System.Drawing.Point(48, 21);
+            this.transIn.Location = new System.Drawing.Point(72, 32);
+            this.transIn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.transIn.Name = "transIn";
             this.transIn.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.transIn.Size = new System.Drawing.Size(550, 20);
+            this.transIn.Size = new System.Drawing.Size(823, 26);
             this.transIn.TabIndex = 0;
             this.transIn.WordWrap = false;
             // 
@@ -237,10 +255,11 @@
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 24);
+            this.tabControl.Location = new System.Drawing.Point(0, 35);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(799, 455);
+            this.tabControl.Size = new System.Drawing.Size(1198, 702);
             this.tabControl.TabIndex = 17;
             // 
             // tabPage1
@@ -260,19 +279,21 @@
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.typeCB);
             this.tabPage1.Controls.Add(this.makeOut);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(791, 429);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Size = new System.Drawing.Size(1190, 669);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TX";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // copyBTN
             // 
-            this.copyBTN.Location = new System.Drawing.Point(695, 386);
+            this.copyBTN.Location = new System.Drawing.Point(1042, 594);
+            this.copyBTN.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.copyBTN.Name = "copyBTN";
-            this.copyBTN.Size = new System.Drawing.Size(54, 23);
+            this.copyBTN.Size = new System.Drawing.Size(81, 35);
             this.copyBTN.TabIndex = 23;
             this.copyBTN.Text = "copy";
             this.copyBTN.UseVisualStyleBackColor = true;
@@ -281,9 +302,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 27);
+            this.label4.Location = new System.Drawing.Point(32, 42);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.Size = new System.Drawing.Size(64, 20);
             this.label4.TabIndex = 22;
             this.label4.Text = "satelite:";
             // 
@@ -291,9 +313,10 @@
             // 
             this.groupsCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.groupsCB.FormattingEnabled = true;
-            this.groupsCB.Location = new System.Drawing.Point(70, 20);
+            this.groupsCB.Location = new System.Drawing.Point(105, 31);
+            this.groupsCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupsCB.Name = "groupsCB";
-            this.groupsCB.Size = new System.Drawing.Size(136, 21);
+            this.groupsCB.Size = new System.Drawing.Size(202, 28);
             this.groupsCB.TabIndex = 21;
             // 
             // tabPage2
@@ -307,19 +330,21 @@
             this.tabPage2.Controls.Add(this.privHex);
             this.tabPage2.Controls.Add(this.trasBtn);
             this.tabPage2.Controls.Add(this.transIn);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(791, 429);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Size = new System.Drawing.Size(1190, 667);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "RX";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // connectBtn
             // 
-            this.connectBtn.Location = new System.Drawing.Point(705, 18);
+            this.connectBtn.Location = new System.Drawing.Point(1058, 28);
+            this.connectBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.connectBtn.Name = "connectBtn";
-            this.connectBtn.Size = new System.Drawing.Size(75, 23);
+            this.connectBtn.Size = new System.Drawing.Size(112, 35);
             this.connectBtn.TabIndex = 9;
             this.connectBtn.Text = "connect";
             this.connectBtn.UseVisualStyleBackColor = true;
@@ -329,16 +354,19 @@
             // 
             this.transOut.FormattingEnabled = true;
             this.transOut.HorizontalScrollbar = true;
-            this.transOut.Location = new System.Drawing.Point(54, 99);
+            this.transOut.ItemHeight = 20;
+            this.transOut.Location = new System.Drawing.Point(81, 152);
+            this.transOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.transOut.Name = "transOut";
-            this.transOut.Size = new System.Drawing.Size(248, 303);
+            this.transOut.Size = new System.Drawing.Size(370, 464);
             this.transOut.TabIndex = 8;
             // 
             // pasteBTN
             // 
-            this.pasteBTN.Location = new System.Drawing.Point(604, 19);
+            this.pasteBTN.Location = new System.Drawing.Point(906, 29);
+            this.pasteBTN.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pasteBTN.Name = "pasteBTN";
-            this.pasteBTN.Size = new System.Drawing.Size(75, 23);
+            this.pasteBTN.Size = new System.Drawing.Size(112, 35);
             this.pasteBTN.TabIndex = 7;
             this.pasteBTN.Text = "paste";
             this.pasteBTN.UseVisualStyleBackColor = true;
@@ -347,27 +375,30 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(320, 98);
+            this.label7.Location = new System.Drawing.Point(480, 151);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 13);
+            this.label7.Size = new System.Drawing.Size(62, 20);
             this.label7.TabIndex = 6;
             this.label7.Text = "History:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 98);
+            this.label6.Location = new System.Drawing.Point(9, 151);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.Size = new System.Drawing.Size(62, 20);
             this.label6.TabIndex = 5;
             this.label6.Text = "Output:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 24);
+            this.label5.Location = new System.Drawing.Point(12, 37);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 13);
+            this.label5.Size = new System.Drawing.Size(50, 20);
             this.label5.TabIndex = 4;
             this.label5.Text = "Input:";
             // 
@@ -375,20 +406,24 @@
             // 
             this.privHex.FormattingEnabled = true;
             this.privHex.HorizontalScrollbar = true;
-            this.privHex.Location = new System.Drawing.Point(368, 98);
+            this.privHex.ItemHeight = 20;
+            this.privHex.Location = new System.Drawing.Point(552, 151);
+            this.privHex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.privHex.Name = "privHex";
-            this.privHex.Size = new System.Drawing.Size(401, 303);
+            this.privHex.Size = new System.Drawing.Size(600, 464);
             this.privHex.TabIndex = 3;
             this.privHex.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(799, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1198, 35);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -398,7 +433,7 @@
             this.modifyToolStripMenuItem,
             this.viewPacketListToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(92, 29);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // modifyToolStripMenuItem
@@ -407,55 +442,56 @@
             this.tXToolStripMenuItem,
             this.rXToolStripMenuItem});
             this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
-            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(233, 34);
             this.modifyToolStripMenuItem.Text = "modify";
             // 
             // tXToolStripMenuItem
             // 
             this.tXToolStripMenuItem.Name = "tXToolStripMenuItem";
-            this.tXToolStripMenuItem.Size = new System.Drawing.Size(88, 22);
+            this.tXToolStripMenuItem.Size = new System.Drawing.Size(136, 34);
             this.tXToolStripMenuItem.Text = "TX";
             this.tXToolStripMenuItem.Click += new System.EventHandler(this.tXToolStripMenuItem_Click);
             // 
             // rXToolStripMenuItem
             // 
             this.rXToolStripMenuItem.Name = "rXToolStripMenuItem";
-            this.rXToolStripMenuItem.Size = new System.Drawing.Size(88, 22);
+            this.rXToolStripMenuItem.Size = new System.Drawing.Size(136, 34);
             this.rXToolStripMenuItem.Text = "RX";
             this.rXToolStripMenuItem.Click += new System.EventHandler(this.rXToolStripMenuItem_Click);
+            // 
+            // viewPacketListToolStripMenuItem
+            // 
+            this.viewPacketListToolStripMenuItem.Name = "viewPacketListToolStripMenuItem";
+            this.viewPacketListToolStripMenuItem.Size = new System.Drawing.Size(233, 34);
+            this.viewPacketListToolStripMenuItem.Text = "view packet list";
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(164, 34);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // viewPacketListToolStripMenuItem
-            // 
-            this.viewPacketListToolStripMenuItem.Name = "viewPacketListToolStripMenuItem";
-            this.viewPacketListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.viewPacketListToolStripMenuItem.Text = "view packet list";
-            this.viewPacketListToolStripMenuItem.Click += new System.EventHandler(this.viewPacketListToolStripMenuItem_Click);
-            // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 479);
+            this.ClientSize = new System.Drawing.Size(1198, 737);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Main";
             this.Text = "SPL Manager";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).EndInit();
             this.tabControl.ResumeLayout(false);

@@ -226,3 +226,11 @@ C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\pack
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml

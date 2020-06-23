@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -392,7 +393,6 @@ namespace packet_maker
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             transIn.Text = privHex.Items[privHex.SelectedIndex].ToString();
-            trasBtn.PerformClick();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -441,105 +441,143 @@ namespace packet_maker
             frm.ShowDialog();
         }
 
-        private async void connectBtn_Click(object sender, EventArgs e)
+        public delegate void delegateCall(String txt);
+        private Thread childThread = null;
+
+        private void connectBtn_Click(object sender, EventArgs e)
         {
             connectBtn.Enabled = false;
             System.Diagnostics.Process.Start(@"C:\Users\pc\Desktop\GSC\GSC-EndNode\GSC-EndNode.exe");
-            await Task.Run(() => {
-                TcpClient client = null;
-                TcpListener server = null;
-                try
+            if (childThread == null)
+            {
+                ThreadStart childref = new ThreadStart(Server_Thread);
+                childThread = new Thread(childref);
+                childThread.Start();
+            }
+        }
+       private TcpClient client = null;
+       private TcpListener server = null;
+        public void Server_Thread()
+        {
+
+            try
+            {
+                // Set the TcpListener on port 13000.
+                Int32 port = 61015;
+                IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+
+                // TcpListener server = new TcpListener(port);
+                server = new TcpListener(localAddr, port);
+                Console.WriteLine("" + Environment.NewLine);
+                // Start listening for client requests.
+                server.Start();
+
+                // Buffer for reading data
+                Byte[] bytes = new Byte[256];
+                String data = null;
+
+                // Enter the listening loop.
+                while (true)
                 {
-                    
+                    Console.WriteLine("Waiting for a connection... ");
 
-                    // Set the TcpListener on port 13000.
-                    Int32 port = 61015;
-                    IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+                    // Perform a blocking call to accept requests.
+                    // You could also use server.AcceptSocket() here.
+                    client = server.AcceptTcpClient();
+                    Console.WriteLine("Connected!");
 
-                    // TcpListener server = new TcpListener(port);
-                    server = new TcpListener(localAddr, port);
-                    Console.WriteLine("" + Environment.NewLine);
-                    // Start listening for client requests.
-                    server.Start();
+                    data = null;
 
-                    // Buffer for reading data
-                    Byte[] bytes = new Byte[256];
-                    String data = null;
+                    // Get a stream object for reading and writing
+                    NetworkStream stream = client.GetStream();
 
-                    // Enter the listening loop.
-                    while (true)
+                    int i;
+
+                    // Loop to receive all the data sent by the client.
+
+                    while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
-                        Console.WriteLine("Waiting for a connection... ");
+
+                        Console.WriteLine("");
+                        // Translate data bytes to a ASCII string.
+                        data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                        Msg msg1 = JsonConvert.DeserializeObject<Msg>(data);
+                        Console.WriteLine($"Received: {data}");
 
 
-
-                        // Perform a blocking call to accept requests.
-                        // You could also use server.AcceptSocket() here.
-                       client = server.AcceptTcpClient();
-                        Console.WriteLine("Connected!");
-
-                        data = null;
-
-                        // Get a stream object for reading and writing
-                        NetworkStream stream = client.GetStream();
-
-                        int i;
-
-                        // Loop to receive all the data sent by the client.
-
-                        while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                        Console.WriteLine("");
+                        switch (msg1.Type)
                         {
+                            case "EndNode":
+                                // Process the data sent by the client.
+                                //data = data.ToUpper();
+                                data = @"{'Type': 'ClientId', 'Content': 4}";
+                                byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
-                            Console.WriteLine("");
-                            // Translate data bytes to a ASCII string.
-                            data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                            Msg msg1 = JsonConvert.DeserializeObject<Msg>(data);
-                            Console.WriteLine($"Received: {data}");
-
-
-                            Console.WriteLine("");
-                            switch (msg1.Type)
-                            {
-                                case "EndNode":
-                                    // Process the data sent by the client.
-                                    //data = data.ToUpper();
-                                    data = @"{'Type': 'ClientId', 'Content': 4}";
-                                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
-
-                                    // Send back a response.
-                                    stream.Write(msg, 0, msg.Length);
-                                    Console.WriteLine("Sent: {0}", data);
-                                    break;
+                                // Send back a response.
+                                stream.Write(msg, 0, msg.Length);
+                                Console.WriteLine("Sent: {0}", data);
+                                break;
 
 
-                                case "RawTelemetry":
-                                    byte[] bbb = (byte[])(JValue)msg1.Content;
-                                    string[] sArr = new string[bbb.Length];
-                                    for (int k = 0; k < bbb.Length; k++)
-                                    {
-                                        sArr[k] = bbb[k].ToString("X2");
-                                    }
+                            case "RawTelemetry":
+                                byte[] bbb = (byte[])(JValue)msg1.Content;
+                                string[] sArr = new string[bbb.Length];
+                                for (int k = 0; k < bbb.Length; k++)
+                                {
+                                    sArr[k] = bbb[k].ToString("X2");
+                                }
 
-                                    string packetRecived = String.Join(" ", sArr);
-                                    Console.WriteLine(packetRecived);
-                                    Console.WriteLine("");
-                                    //RX(packetRecived);
-                                    break;
-                            }
-                            Console.WriteLine("*******************");
+                                string packetRecived = String.Join(" ", sArr);
+                                delegateCall delegateCall = new delegateCall(trasBtn_click);
+                                this.BeginInvoke(delegateCall, packetRecived);
+                                break;
                         }
-
-
+                        Console.WriteLine("*******************");
                     }
+
+
                 }
-                catch
+            }
+            catch
+            {
+                // Shutdown and end connection
+                client.Close();
+                server.Stop();
+            }
+            delegateCall Call = new delegateCall(Kill_Server_Thread);
+            this.BeginInvoke(Call, "");
+
+        }
+
+        private void Kill_Server_Thread(string h)
+        {
+            if (childThread != null)
+            {
+                childThread.Abort();
+                childThread = null;
+            }
+            connectBtn.Enabled = true;
+        }
+
+
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Kill_Server_Thread("");
+                if (client != null && server != null)
                 {
-                    // Shutdown and end connection
                     client.Close();
                     server.Stop();
                 }
-            });
-            connectBtn.Enabled = true;
+            }
+            catch
+            {
+
+            }
+
         }
     }
 }

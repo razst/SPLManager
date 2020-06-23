@@ -91,11 +91,11 @@ namespace packet_maker
             switch (mode)
             {
                 case "TX":
-                    Main.frm.options = usedJson;
+                  //  Main.frm.options = usedJson;
                     break;
 
                 case "RX":
-                    Main.frm.transOptions = usedJson;
+                  //  Main.frm.transOptions = usedJson;
                     break;
             }
         }

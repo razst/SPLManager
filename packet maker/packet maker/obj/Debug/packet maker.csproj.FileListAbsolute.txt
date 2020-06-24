@@ -234,3 +234,10 @@ C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml

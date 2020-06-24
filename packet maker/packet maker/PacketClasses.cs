@@ -16,8 +16,10 @@ namespace packet_maker
     internal class Packet
     {
         [FirestoreProperty]
-
         public string packetString { get; set; }
+
+        [FirestoreProperty]
+        public DateTime time { get; set; }
 
     }
 
@@ -152,8 +154,10 @@ namespace packet_maker
 
         static public packetObject create(TypeList json, string packetString)
         {
-            packetObject createdPacket = new packetObject();
-            createdPacket.jsonObject = json;
+            packetObject createdPacket = new packetObject
+            {
+                jsonObject = json
+            };
             createdPacket.ConvertFromString(packetString);
             return createdPacket;
         }
@@ -172,21 +176,22 @@ namespace packet_maker
             return HexId + " "+HexGru+" "+HexType+" "+HexSubType+" "+HexLen;
         }
 
-        public string getTypeName()
+        static public bool TestIfPacket(string packetString, TypeList rxObject)
         {
-            return jsonObject.typenum[typeDex].name;
+            try
+            {
+                packetObject temp = create(rxObject, packetString);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-        public string getSubTypeName()
-        {
-            return jsonObject.typenum[typeDex].subTypes[subtypeDex].name;
-        }
-        public int getTypeDex()
-        {
-            return typeDex;
-        }
-        public int getSubTypeDex()
-        {
-            return subtypeDex;
-        }
+
+        public string getTypeName() => jsonObject.typenum[typeDex].name;
+        public string getSubTypeName() => jsonObject.typenum[typeDex].subTypes[subtypeDex].name;
+        public int getTypeDex() => typeDex;
+        public int getSubTypeDex() => subtypeDex;
     }
 }

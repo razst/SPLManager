@@ -1,4 +1,4 @@
-﻿//#define DB
+﻿#define DB
 #if DB 
 using Google.Cloud.Firestore; 
 #endif
@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -31,6 +32,7 @@ namespace packet_maker
         private TypeList transOptions;
         private bool success = false;
         private Packet packet = new Packet();
+        public List<string> rawRxPacHisList = new List<string>();
 
         private string[] groups =
         {
@@ -68,7 +70,6 @@ namespace packet_maker
                 groupsCB.Items.Add(s);
             }
 
-
             groupsCB.SelectedIndex = 2;
             frm = this;
         }
@@ -79,20 +80,18 @@ namespace packet_maker
         private async void Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
             await Task.Run(() => {
-
 #if DB
-                            if (!Program.testMode )
-                            {
-                                packet.packetString = packetString;
+                if (!Program.testMode )
+                {
+                    packet.packetString = packetString;
+                    packet.time = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
 
-                                DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document();
+                    DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document();
 
-                                docRef.SetAsync(packet);
-                            }
+                    docRef.SetAsync(packet);
+                }
 #endif
-
             });
-
         }
 
         private void TX()
@@ -195,15 +194,17 @@ namespace packet_maker
             {
                 makeOut.Text = (String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen)).Substring(1);
             }
-            //string t = (string)(JValue)"////";
         }
+
+
+        private packetObject po = new packetObject();
         private void RX(string transMsg)
         {
             mess = transMsg.Trim();
             mess = mess.Replace(" ", String.Empty);
             mess = Regex.Replace(mess, ".{2}", "$0 ");
 
-            packetObject po = packetObject.create(transOptions, mess);
+            po = packetObject.create(transOptions, mess);
             traID = po.id;
 
 
@@ -262,6 +263,7 @@ namespace packet_maker
         }
         private void trasBtn_click(string msg)
         {
+            /*
             success = false;
             if (Program.testMode)
             {
@@ -282,32 +284,42 @@ namespace packet_maker
                     success = false;
                 }
             }
-
-            if (success)
+            */
+            if (packetObject.TestIfPacket(msg.Trim(),transOptions))
             {
-                Upload_Packet("rx packets", traID.ToString(), msg);
+                mess = msg.Trim();
+                Upload_Packet("rx packets", traID.ToString(), mess);
+                po = packetObject.create(transOptions,msg.Trim());
                 if (privHex.SelectedIndex != -1)
                 {
-                    if (mess != privHex.Items[privHex.SelectedIndex].ToString())
+                    if (mess != rawRxPacHisList[privHex.SelectedIndex].ToString())
                     {
-                        privHex.Items.Add(mess);
-                        privHex.SelectedIndex = privHex.Items.Count - 1;
+                        rawRxPacHisList.Add(mess);
+                        privHex.Items.Add($"[{DateTime.Now.ToLongDateString()} {DateTime.Now.ToLongTimeString()}]  packet kind: {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
                     }
+
+                    if (privHex.Items.Count - 2 == privHex.SelectedIndex)
+                        privHex.SelectedIndex = privHex.Items.Count - 1;
                 }
                 else
                 {
-                    privHex.Items.Add(mess);
+                    rawRxPacHisList.Add(mess);
+                    privHex.Items.Add($"[{DateTime.Now.ToLongDateString()} {DateTime.Now.ToLongTimeString()}]  packet kind: {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
                     privHex.SelectedIndex = 0;
                 }
+            }
+            else
+            {
+                MessageBox.Show("manager was not able to translate this packet", "error");
             }
 
         }
 
-        private void OkBtn_Click(object sender, EventArgs e) { OkBtn_click(); }
+        private void OkBtn_Click(object sender, EventArgs e) => OkBtn_click();
 
         private int traID;
-        private string mess;
-        private void trasBtn_Click(object sender, EventArgs e) { trasBtn_click(transIn.Text); }
+        private string mess = "";
+        private void trasBtn_Click(object sender, EventArgs e) => trasBtn_click(transIn.Text);
 
         #endregion
 
@@ -390,10 +402,6 @@ namespace packet_maker
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            transIn.Text = privHex.Items[privHex.SelectedIndex].ToString();
-        }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -401,26 +409,20 @@ namespace packet_maker
             frm2.ShowDialog();
         }
 
-        private void copyBTN_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(makeOut.Text);
-        }
+        private void copyBTN_Click(object sender, EventArgs e) => Clipboard.SetText(makeOut.Text);
 
-        private void pasteBTN_Click(object sender, EventArgs e)
-        {
-            transIn.Text = Clipboard.GetText();
-        }
+
+        private void pasteBTN_Click(object sender, EventArgs e) => transIn.Text = Clipboard.GetText();
+
 
 
 
         private void dataTypesDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var editingControl = this.dataTypesDGV.EditingControl as DataGridViewComboBoxEditingControl;
-            if (editingControl != null)
+            if (dataTypesDGV.EditingControl is DataGridViewComboBoxEditingControl editingControl)
                 editingControl.DroppedDown = true;
         }
 
-        #endregion
 
 
         private void tXToolStripMenuItem_Click(object sender, EventArgs e)
@@ -441,13 +443,31 @@ namespace packet_maker
             frm.ShowDialog();
         }
 
+        private void privHex_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            transIn.Text = rawRxPacHisList[privHex.SelectedIndex];
+            RX(rawRxPacHisList[privHex.SelectedIndex]);
+        }
+
+        #endregion
+
+
+
+
+
+        #region Server
         public delegate void delegateCall(String txt);
         private Thread childThread = null;
 
         private void connectBtn_Click(object sender, EventArgs e)
         {
             connectBtn.Enabled = false;
-            System.Diagnostics.Process.Start(@"C:\Users\pc\Desktop\GSC\GSC-EndNode\GSC-EndNode.exe");
+            try
+            {
+                System.Diagnostics.Process.Start(@"C:\Users\pc\Desktop\GSC\GSC-EndNode\GSC-EndNode.exe");
+            }
+            catch { }
+
             if (childThread == null)
             {
                 ThreadStart childref = new ThreadStart(Server_Thread);
@@ -510,7 +530,6 @@ namespace packet_maker
                         {
                             case "EndNode":
                                 // Process the data sent by the client.
-                                //data = data.ToUpper();
                                 data = @"{'Type': 'ClientId', 'Content': 4}";
                                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
@@ -579,6 +598,34 @@ namespace packet_maker
             }
 
         }
+
+
+
+
+        #endregion
+
+
+        /* image and byte[]
+        public byte[] ImageToBytes(Image image)
+        {
+
+            using (MemoryStream m = new MemoryStream())
+            {
+                image.Save(m, image.RawFormat);
+                byte[] imageBytes = m.ToArray();
+                return imageBytes;
+            }
+
+        }
+
+
+        public Image bytesToImage(byte[] imageBytes)
+        {
+            MemoryStream ms = new MemoryStream(imageBytes);
+            Image image = Image.FromStream(ms, true, true);
+            return image;
+        }
+        */
     }
 }
 

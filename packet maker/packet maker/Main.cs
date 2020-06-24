@@ -1,4 +1,4 @@
-﻿#define DB
+﻿//#define DB
 #if DB 
 using Google.Cloud.Firestore; 
 #endif
@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,6 +34,9 @@ namespace packet_maker
         private bool success = false;
         private Packet packet = new Packet();
         public List<string> rawRxPacHisList = new List<string>();
+
+        private TcpClient client = null;
+        private TcpListener server = null;
 
         private string[] groups =
         {
@@ -194,6 +198,13 @@ namespace packet_maker
             {
                 makeOut.Text = (String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen)).Substring(1);
             }
+            byte[] j = { 1, 0, 0, 2, 0, 194, 0, 0, 0, 0 };
+            cmd command = new cmd { Type = "rawTelecommand", Content = j };
+            var toSend = JObject.FromObject(command);
+            byte[] dataToSend = Encoding.Default.GetBytes(toSend.ToString());
+
+            if (server != null && client != null)
+                client.GetStream().Write(dataToSend, 0, dataToSend.Length);
         }
 
 
@@ -295,7 +306,7 @@ namespace packet_maker
                     if (mess != rawRxPacHisList[privHex.SelectedIndex].ToString())
                     {
                         rawRxPacHisList.Add(mess);
-                        privHex.Items.Add($"[{DateTime.Now.ToLongDateString()} {DateTime.Now.ToLongTimeString()}]  packet kind: {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+                        privHex.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
                     }
 
                     if (privHex.Items.Count - 2 == privHex.SelectedIndex)
@@ -304,7 +315,7 @@ namespace packet_maker
                 else
                 {
                     rawRxPacHisList.Add(mess);
-                    privHex.Items.Add($"[{DateTime.Now.ToLongDateString()} {DateTime.Now.ToLongTimeString()}]  packet kind: {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+                    privHex.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
                     privHex.SelectedIndex = 0;
                 }
             }
@@ -475,8 +486,7 @@ namespace packet_maker
                 childThread.Start();
             }
         }
-       private TcpClient client = null;
-       private TcpListener server = null;
+
         public void Server_Thread()
         {
 
@@ -577,6 +587,13 @@ namespace packet_maker
                 childThread = null;
             }
             connectBtn.Enabled = true;
+            if (client != null && server != null)
+            {
+                client.Close();
+                server.Stop();
+            }
+            client = null;
+            server = null;
         }
 
 
@@ -586,11 +603,6 @@ namespace packet_maker
             try
             {
                 Kill_Server_Thread("");
-                if (client != null && server != null)
-                {
-                    client.Close();
-                    server.Stop();
-                }
             }
             catch
             {

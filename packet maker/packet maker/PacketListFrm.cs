@@ -21,6 +21,7 @@ namespace packet_maker
         private DataTable dt = new DataTable();
         private async void PacketListFrm_Load(object sender, EventArgs e)
         {
+#if DB
             dt.Columns.Add("Packet",typeof(string));
             dt.Columns.Add("Description:", typeof(string));
 
@@ -35,17 +36,24 @@ namespace packet_maker
             }
 
             storedPacketsDGV.DataSource = dt;
+#endif
         }
 
         private async void addBtn_Click(object sender, EventArgs e)
         {
+#if DB
             DocumentReference docRef = Program.db.Collection("stored packets").Document();
-            ListPacketItem lpi = new ListPacketItem { 
-            packetString = pacStringTxb.Text,
-            Description = descTxb.Text            
+            ListPacketItem lpi = new ListPacketItem
+            {
+                packetString = pacStringTxb.Text,
+                Description = descTxb.Text
             };
 
             await docRef.SetAsync(lpi);
+#endif
         }
+
     }
+
+
 }

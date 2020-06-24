@@ -9,13 +9,7 @@ using Newtonsoft.Json;
 namespace packet_maker
 {
 
-    class Msg
-    {
-        [JsonProperty("Type")]
-        public string Type { get; set; }
-        [JsonProperty("Content")]
-        public string Content { get; set; }
-    }
+
 
 
     #region rx/tx

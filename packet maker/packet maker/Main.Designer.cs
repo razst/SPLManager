@@ -47,6 +47,7 @@
             this.transIn = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.sendPacketBtn = new System.Windows.Forms.Button();
             this.copyBTN = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
@@ -66,12 +67,21 @@
             this.viewPacketListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sendPacketBtn = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.imgTypeCB = new System.Windows.Forms.ComboBox();
+            this.sendImgReqBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ID
@@ -241,6 +251,7 @@
             // 
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage3);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 24);
             this.tabControl.Name = "tabControl";
@@ -273,6 +284,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TX";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // sendPacketBtn
+            // 
+            this.sendPacketBtn.Location = new System.Drawing.Point(740, 386);
+            this.sendPacketBtn.Name = "sendPacketBtn";
+            this.sendPacketBtn.Size = new System.Drawing.Size(39, 23);
+            this.sendPacketBtn.TabIndex = 24;
+            this.sendPacketBtn.Text = "send";
+            this.sendPacketBtn.UseVisualStyleBackColor = true;
+            this.sendPacketBtn.Click += new System.EventHandler(this.sendPacketBtn_Click);
             // 
             // copyBTN
             // 
@@ -453,15 +474,87 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // sendPacketBtn
+            // tabPage3
             // 
-            this.sendPacketBtn.Location = new System.Drawing.Point(740, 386);
-            this.sendPacketBtn.Name = "sendPacketBtn";
-            this.sendPacketBtn.Size = new System.Drawing.Size(39, 23);
-            this.sendPacketBtn.TabIndex = 24;
-            this.sendPacketBtn.Text = "send";
-            this.sendPacketBtn.UseVisualStyleBackColor = true;
-            this.sendPacketBtn.Click += new System.EventHandler(this.sendPacketBtn_Click);
+            this.tabPage3.Controls.Add(this.panel1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(791, 429);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "images";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 14);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Image info request:";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.sendImgReqBtn);
+            this.panel1.Controls.Add(this.imgTypeCB);
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Location = new System.Drawing.Point(8, 28);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(586, 42);
+            this.panel1.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(106, 14);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(50, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Image ID";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(267, 14);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Image type";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(161, 11);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // imgTypeCB
+            // 
+            this.imgTypeCB.AllowDrop = true;
+            this.imgTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.imgTypeCB.FormattingEnabled = true;
+            this.imgTypeCB.Items.AddRange(new object[] {
+            "XL",
+            "LL",
+            "SS",
+            "HIT MAP"});
+            this.imgTypeCB.Location = new System.Drawing.Point(332, 10);
+            this.imgTypeCB.Name = "imgTypeCB";
+            this.imgTypeCB.Size = new System.Drawing.Size(121, 21);
+            this.imgTypeCB.TabIndex = 5;
+            // 
+            // sendImgReqBtn
+            // 
+            this.sendImgReqBtn.Location = new System.Drawing.Point(489, 8);
+            this.sendImgReqBtn.Name = "sendImgReqBtn";
+            this.sendImgReqBtn.Size = new System.Drawing.Size(75, 23);
+            this.sendImgReqBtn.TabIndex = 6;
+            this.sendImgReqBtn.Text = "send";
+            this.sendImgReqBtn.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -483,6 +576,9 @@
             this.tabPage2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -528,6 +624,14 @@
         private System.Windows.Forms.Button connectBtn;
         private System.Windows.Forms.ToolStripMenuItem viewPacketListToolStripMenuItem;
         private System.Windows.Forms.Button sendPacketBtn;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button sendImgReqBtn;
+        private System.Windows.Forms.ComboBox imgTypeCB;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
     }
 }
 

@@ -220,12 +220,9 @@ namespace packet_maker
             transOut.Items.Add("type: " + po.getTypeName());
             transOut.Items.Add("subtype: " + po.getSubTypeName());
             transOut.Items.Add("length: " + po.length);
-            transOut.Items.Add("");
-            transOut.Items.Add("");
             if (po.data.Count != 0)
             {
-                transOut.Items.Add("Data:");
-                transOut.Items.Add("");
+                transOut.Items.Add("*******************************");
                 for (int i = 0; i < po.data.Count; i++)
                 {
                     transOut.Items.Add(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i]);
@@ -265,42 +262,19 @@ namespace packet_maker
                 Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
             }
         }
-        private void trasBtn_click(string msg)
+        public void trasBtn_click(string msg)
         {
-            /*
-            success = false;
-            if (Program.testMode)
+            mess = msg.Trim();
+            if (packetObject.TestIfPacket(mess, transOptions))
             {
-                RX(msg);
-                success = true;
-            }
-            else
-            {
-                try
-                {
-                    RX(msg);
-                    success = true;
-                }
-
-                catch
-                {
-                    MessageBox.Show("manager was not able to translate this packet", "error");
-                    success = false;
-                }
-            }
-            */
-            if (packetObject.TestIfPacket(msg.Trim(),transOptions))
-            {
-                mess = msg.Trim();
                 Upload_Packet("rx packets", traID.ToString(), mess);
-                po = packetObject.create(transOptions,msg.Trim());
+                po = packetObject.create(transOptions, msg.Trim());
                 if (privHex.SelectedIndex != -1)
                 {
-                    if (mess != rawRxPacHisList[privHex.SelectedIndex].ToString())
-                    {
-                        rawRxPacHisList.Add(mess);
-                        privHex.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
-                    }
+
+                    rawRxPacHisList.Add(mess);
+                    privHex.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+
 
                     if (privHex.Items.Count - 2 == privHex.SelectedIndex)
                         privHex.SelectedIndex = privHex.Items.Count - 1;
@@ -460,12 +434,14 @@ namespace packet_maker
 
 
         #region Server
-        public delegate void delegateCall(String txt);
-        private Thread childThread = null;
-
+      //  private delegate void delegateCall(String txt);
+      //  private Thread childThread = null;
+        private readonly RadioServer RadioServer = new RadioServer();
         private void connectBtn_Click(object sender, EventArgs e)
         {
+            RadioServer.Start();
             connectBtn.Enabled = false;
+            /*
             try
             {
                 System.Diagnostics.Process.Start(@"C:\Users\pc\Desktop\GSC\GSC-EndNode\GSC-EndNode.exe");
@@ -478,8 +454,9 @@ namespace packet_maker
                 childThread = new Thread(childref);
                 childThread.Start();
             }
+            */
         }
-
+        /*
         public void Server_Thread()
         {
 
@@ -557,8 +534,6 @@ namespace packet_maker
                         }
                         Console.WriteLine("*******************");
                     }
-
-
                 }
             }
             catch
@@ -590,7 +565,7 @@ namespace packet_maker
             connectBtn.Enabled = true;
         }
 
-        public  byte[] ConvertHexToBytes(string str)
+        public byte[] ConvertHexToBytes(string str)
         {
             string[] bytesAsStrings = str.Split(' ');
             byte[] toReturn = new byte[bytesAsStrings.Length];
@@ -605,61 +580,45 @@ namespace packet_maker
             }
             return toReturn;
         }
-    
+        */
 
-    private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
-                Kill_Server_Thread("");
+                RadioServer.Stop();
             }
             catch
             {
 
             }
-
         }
 
-        private async void sendPacketBtn_Click(object sender, EventArgs e)
+        private  void sendPacketBtn_Click(object sender, EventArgs e)
         {
+            RadioServer.Send(makeOut.Text.Trim());
+            /*
             await Task.Run(() => {
-                byte[] j = ConvertHexToBytes(makeOut.Text.Trim());
-                cmd command = new cmd { Type = "RawTelecommand", Content = j };
-                var toSend = JObject.FromObject(command);
-                byte[] dataToSend = Encoding.Default.GetBytes(toSend.ToString());
-
                 if (server != null && client != null)
+                {
+                    byte[] j = ConvertHexToBytes(makeOut.Text.Trim());
+                    cmd command = new cmd { Type = "RawTelecommand", Content = j };
+                    var toSend = JObject.FromObject(command);
+                    byte[] dataToSend = Encoding.Default.GetBytes(toSend.ToString());
                     client.GetStream().Write(dataToSend, 0, dataToSend.Length);
+                }
+                else
+                {
+                    MessageBox.Show("server is not online", "error");
+                }
             });
+            */
         }
 
 
 
 
         #endregion
-
-
-        /* image and byte[]
-        public byte[] ImageToBytes(Image image)
-        {
-
-            using (MemoryStream m = new MemoryStream())
-            {
-                image.Save(m, image.RawFormat);
-                byte[] imageBytes = m.ToArray();
-                return imageBytes;
-            }
-
-        }
-
-
-        public Image bytesToImage(byte[] imageBytes)
-        {
-            MemoryStream ms = new MemoryStream(imageBytes);
-            Image image = Image.FromStream(ms, true, true);
-            return image;
-        }
-        */
     }
 }
 

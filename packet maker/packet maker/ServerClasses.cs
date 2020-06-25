@@ -37,6 +37,7 @@ namespace packet_maker
 
         public void Start()
         {
+            Main.frm.connectBtn.Enabled = false;
             try
             {
                 System.Diagnostics.Process.Start(@"C:\Users\pc\Desktop\GSC\GSC-EndNode\GSC-EndNode.exe");
@@ -188,6 +189,7 @@ namespace packet_maker
             client = null;
             server = null;
             childThread = null;
+            Main.frm.connectBtn.Enabled = true;
         }
 
 

@@ -45,13 +45,13 @@
             this.typeCB = new System.Windows.Forms.ComboBox();
             this.trasBtn = new System.Windows.Forms.Button();
             this.transIn = new System.Windows.Forms.TextBox();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.TabControl = new System.Windows.Forms.TabControl();
+            this.TxTab = new System.Windows.Forms.TabPage();
             this.sendPacketBtn = new System.Windows.Forms.Button();
             this.copyBTN = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.RxTab = new System.Windows.Forms.TabPage();
             this.connectBtn = new System.Windows.Forms.Button();
             this.transOut = new System.Windows.Forms.ListBox();
             this.pasteBTN = new System.Windows.Forms.Button();
@@ -59,6 +59,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.privHex = new System.Windows.Forms.ListBox();
+            this.ImageTab = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.sendImgReqBtn = new System.Windows.Forms.Button();
+            this.imgTypeCB = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,21 +75,13 @@
             this.viewPacketListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.imgTypeCB = new System.Windows.Forms.ComboBox();
-            this.sendImgReqBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
-            this.tabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.TabControl.SuspendLayout();
+            this.TxTab.SuspendLayout();
+            this.RxTab.SuspendLayout();
+            this.ImageTab.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ID
@@ -247,43 +247,43 @@
             this.transIn.TabIndex = 0;
             this.transIn.WordWrap = false;
             // 
-            // tabControl
+            // TabControl
             // 
-            this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.Controls.Add(this.tabPage2);
-            this.tabControl.Controls.Add(this.tabPage3);
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 24);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(799, 455);
-            this.tabControl.TabIndex = 17;
+            this.TabControl.Controls.Add(this.TxTab);
+            this.TabControl.Controls.Add(this.RxTab);
+            this.TabControl.Controls.Add(this.ImageTab);
+            this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabControl.Location = new System.Drawing.Point(0, 24);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(799, 455);
+            this.TabControl.TabIndex = 17;
             // 
-            // tabPage1
+            // TxTab
             // 
-            this.tabPage1.Controls.Add(this.sendPacketBtn);
-            this.tabPage1.Controls.Add(this.copyBTN);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.groupsCB);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.ID);
-            this.tabPage1.Controls.Add(this.dataTypesDGV);
-            this.tabPage1.Controls.Add(this.IDTxb);
-            this.tabPage1.Controls.Add(this.descSubType);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.descType);
-            this.tabPage1.Controls.Add(this.OkBtn);
-            this.tabPage1.Controls.Add(this.subtypeCB);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.typeCB);
-            this.tabPage1.Controls.Add(this.makeOut);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(791, 429);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "TX";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.TxTab.Controls.Add(this.sendPacketBtn);
+            this.TxTab.Controls.Add(this.copyBTN);
+            this.TxTab.Controls.Add(this.label4);
+            this.TxTab.Controls.Add(this.groupsCB);
+            this.TxTab.Controls.Add(this.label3);
+            this.TxTab.Controls.Add(this.ID);
+            this.TxTab.Controls.Add(this.dataTypesDGV);
+            this.TxTab.Controls.Add(this.IDTxb);
+            this.TxTab.Controls.Add(this.descSubType);
+            this.TxTab.Controls.Add(this.label2);
+            this.TxTab.Controls.Add(this.descType);
+            this.TxTab.Controls.Add(this.OkBtn);
+            this.TxTab.Controls.Add(this.subtypeCB);
+            this.TxTab.Controls.Add(this.label1);
+            this.TxTab.Controls.Add(this.typeCB);
+            this.TxTab.Controls.Add(this.makeOut);
+            this.TxTab.Location = new System.Drawing.Point(4, 22);
+            this.TxTab.Name = "TxTab";
+            this.TxTab.Padding = new System.Windows.Forms.Padding(3);
+            this.TxTab.Size = new System.Drawing.Size(791, 429);
+            this.TxTab.TabIndex = 0;
+            this.TxTab.Text = "TX";
+            this.TxTab.UseVisualStyleBackColor = true;
             // 
             // sendPacketBtn
             // 
@@ -323,24 +323,24 @@
             this.groupsCB.Size = new System.Drawing.Size(136, 21);
             this.groupsCB.TabIndex = 21;
             // 
-            // tabPage2
+            // RxTab
             // 
-            this.tabPage2.Controls.Add(this.connectBtn);
-            this.tabPage2.Controls.Add(this.transOut);
-            this.tabPage2.Controls.Add(this.pasteBTN);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.privHex);
-            this.tabPage2.Controls.Add(this.trasBtn);
-            this.tabPage2.Controls.Add(this.transIn);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(791, 429);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "RX";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.RxTab.Controls.Add(this.connectBtn);
+            this.RxTab.Controls.Add(this.transOut);
+            this.RxTab.Controls.Add(this.pasteBTN);
+            this.RxTab.Controls.Add(this.label7);
+            this.RxTab.Controls.Add(this.label6);
+            this.RxTab.Controls.Add(this.label5);
+            this.RxTab.Controls.Add(this.privHex);
+            this.RxTab.Controls.Add(this.trasBtn);
+            this.RxTab.Controls.Add(this.transIn);
+            this.RxTab.Location = new System.Drawing.Point(4, 22);
+            this.RxTab.Name = "RxTab";
+            this.RxTab.Padding = new System.Windows.Forms.Padding(3);
+            this.RxTab.Size = new System.Drawing.Size(791, 429);
+            this.RxTab.TabIndex = 1;
+            this.RxTab.Text = "RX";
+            this.RxTab.UseVisualStyleBackColor = true;
             // 
             // connectBtn
             // 
@@ -408,6 +408,88 @@
             this.privHex.TabIndex = 3;
             this.privHex.SelectedIndexChanged += new System.EventHandler(this.privHex_SelectedIndexChanged);
             // 
+            // ImageTab
+            // 
+            this.ImageTab.Controls.Add(this.panel1);
+            this.ImageTab.Location = new System.Drawing.Point(4, 22);
+            this.ImageTab.Name = "ImageTab";
+            this.ImageTab.Size = new System.Drawing.Size(791, 429);
+            this.ImageTab.TabIndex = 2;
+            this.ImageTab.Text = "images";
+            this.ImageTab.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.sendImgReqBtn);
+            this.panel1.Controls.Add(this.imgTypeCB);
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Location = new System.Drawing.Point(8, 28);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(586, 42);
+            this.panel1.TabIndex = 1;
+            // 
+            // sendImgReqBtn
+            // 
+            this.sendImgReqBtn.Location = new System.Drawing.Point(489, 8);
+            this.sendImgReqBtn.Name = "sendImgReqBtn";
+            this.sendImgReqBtn.Size = new System.Drawing.Size(75, 23);
+            this.sendImgReqBtn.TabIndex = 6;
+            this.sendImgReqBtn.Text = "send";
+            this.sendImgReqBtn.UseVisualStyleBackColor = true;
+            // 
+            // imgTypeCB
+            // 
+            this.imgTypeCB.AllowDrop = true;
+            this.imgTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.imgTypeCB.FormattingEnabled = true;
+            this.imgTypeCB.Items.AddRange(new object[] {
+            "XL",
+            "LL",
+            "SS",
+            "HIT MAP"});
+            this.imgTypeCB.Location = new System.Drawing.Point(332, 10);
+            this.imgTypeCB.Name = "imgTypeCB";
+            this.imgTypeCB.Size = new System.Drawing.Size(121, 21);
+            this.imgTypeCB.TabIndex = 5;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(161, 11);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(267, 14);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Image type";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(106, 14);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(50, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Image ID";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 14);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Image info request:";
+            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -474,94 +556,12 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.panel1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(791, 429);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "images";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 14);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 13);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Image info request:";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.sendImgReqBtn);
-            this.panel1.Controls.Add(this.imgTypeCB);
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Location = new System.Drawing.Point(8, 28);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(586, 42);
-            this.panel1.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(106, 14);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(50, 13);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Image ID";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(267, 14);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Image type";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(161, 11);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
-            // 
-            // imgTypeCB
-            // 
-            this.imgTypeCB.AllowDrop = true;
-            this.imgTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.imgTypeCB.FormattingEnabled = true;
-            this.imgTypeCB.Items.AddRange(new object[] {
-            "XL",
-            "LL",
-            "SS",
-            "HIT MAP"});
-            this.imgTypeCB.Location = new System.Drawing.Point(332, 10);
-            this.imgTypeCB.Name = "imgTypeCB";
-            this.imgTypeCB.Size = new System.Drawing.Size(121, 21);
-            this.imgTypeCB.TabIndex = 5;
-            // 
-            // sendImgReqBtn
-            // 
-            this.sendImgReqBtn.Location = new System.Drawing.Point(489, 8);
-            this.sendImgReqBtn.Name = "sendImgReqBtn";
-            this.sendImgReqBtn.Size = new System.Drawing.Size(75, 23);
-            this.sendImgReqBtn.TabIndex = 6;
-            this.sendImgReqBtn.Text = "send";
-            this.sendImgReqBtn.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 479);
-            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.TabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
@@ -569,16 +569,16 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).EndInit();
-            this.tabControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
+            this.TabControl.ResumeLayout(false);
+            this.TxTab.ResumeLayout(false);
+            this.TxTab.PerformLayout();
+            this.RxTab.ResumeLayout(false);
+            this.RxTab.PerformLayout();
+            this.ImageTab.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -599,9 +599,9 @@
         private System.Windows.Forms.Label descType;
         private System.Windows.Forms.DataGridView dataTypesDGV;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabControl TabControl;
+        private System.Windows.Forms.TabPage TxTab;
+        private System.Windows.Forms.TabPage RxTab;
         private System.Windows.Forms.ComboBox groupsCB;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox privHex;
@@ -621,10 +621,10 @@
         private System.Windows.Forms.ToolStripMenuItem modifyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tXToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rXToolStripMenuItem;
-        private System.Windows.Forms.Button connectBtn;
+        public System.Windows.Forms.Button connectBtn;
         private System.Windows.Forms.ToolStripMenuItem viewPacketListToolStripMenuItem;
         private System.Windows.Forms.Button sendPacketBtn;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage ImageTab;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button sendImgReqBtn;
         private System.Windows.Forms.ComboBox imgTypeCB;

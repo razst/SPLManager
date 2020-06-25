@@ -66,6 +66,7 @@
             this.viewPacketListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sendPacketBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -249,6 +250,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.sendPacketBtn);
             this.tabPage1.Controls.Add(this.copyBTN);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.groupsCB);
@@ -274,7 +276,7 @@
             // 
             // copyBTN
             // 
-            this.copyBTN.Location = new System.Drawing.Point(695, 386);
+            this.copyBTN.Location = new System.Drawing.Point(680, 386);
             this.copyBTN.Name = "copyBTN";
             this.copyBTN.Size = new System.Drawing.Size(54, 23);
             this.copyBTN.TabIndex = 23;
@@ -451,6 +453,16 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // sendPacketBtn
+            // 
+            this.sendPacketBtn.Location = new System.Drawing.Point(740, 386);
+            this.sendPacketBtn.Name = "sendPacketBtn";
+            this.sendPacketBtn.Size = new System.Drawing.Size(39, 23);
+            this.sendPacketBtn.TabIndex = 24;
+            this.sendPacketBtn.Text = "send";
+            this.sendPacketBtn.UseVisualStyleBackColor = true;
+            this.sendPacketBtn.Click += new System.EventHandler(this.sendPacketBtn_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -515,6 +527,7 @@
         private System.Windows.Forms.ToolStripMenuItem rXToolStripMenuItem;
         private System.Windows.Forms.Button connectBtn;
         private System.Windows.Forms.ToolStripMenuItem viewPacketListToolStripMenuItem;
+        private System.Windows.Forms.Button sendPacketBtn;
     }
 }
 

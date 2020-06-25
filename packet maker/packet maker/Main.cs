@@ -198,13 +198,6 @@ namespace packet_maker
             {
                 makeOut.Text = (String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen)).Substring(1);
             }
-            byte[] j = { 1, 0, 0, 2, 0, 194, 0, 0, 0, 0 };
-            cmd command = new cmd { Type = "rawTelecommand", Content = j };
-            var toSend = JObject.FromObject(command);
-            byte[] dataToSend = Encoding.Default.GetBytes(toSend.ToString());
-
-            if (server != null && client != null)
-                client.GetStream().Write(dataToSend, 0, dataToSend.Length);
         }
 
 
@@ -570,35 +563,51 @@ namespace packet_maker
             }
             catch
             {
-                // Shutdown and end connection
-                client.Close();
-                server.Stop();
             }
             delegateCall Call = new delegateCall(Kill_Server_Thread);
             this.BeginInvoke(Call, "");
 
         }
 
+
+        // Shutdown and end connection
         private void Kill_Server_Thread(string h)
         {
             if (childThread != null)
             {
                 childThread.Abort();
-                childThread = null;
             }
-            connectBtn.Enabled = true;
             if (client != null && server != null)
             {
                 client.Close();
                 server.Stop();
             }
+
             client = null;
             server = null;
+            childThread = null;
+
+            connectBtn.Enabled = true;
         }
 
+        public  byte[] ConvertHexToBytes(string str)
+        {
+            string[] bytesAsStrings = str.Split(' ');
+            byte[] toReturn = new byte[bytesAsStrings.Length];
+            for (int idx = 0; idx < toReturn.Length; idx++)
+            {
+                bool isSuccessful = byte.TryParse(bytesAsStrings[idx], System.Globalization.NumberStyles.HexNumber, null, out byte b);
+                if (!isSuccessful)
+                {
+                    return null;
+                }
+                toReturn[idx] = b;
+            }
+            return toReturn;
+        }
+    
 
-
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+    private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
@@ -609,6 +618,19 @@ namespace packet_maker
 
             }
 
+        }
+
+        private async void sendPacketBtn_Click(object sender, EventArgs e)
+        {
+            await Task.Run(() => {
+                byte[] j = ConvertHexToBytes(makeOut.Text.Trim());
+                cmd command = new cmd { Type = "RawTelecommand", Content = j };
+                var toSend = JObject.FromObject(command);
+                byte[] dataToSend = Encoding.Default.GetBytes(toSend.ToString());
+
+                if (server != null && client != null)
+                    client.GetStream().Write(dataToSend, 0, dataToSend.Length);
+            });
         }
 
 

@@ -125,7 +125,7 @@ namespace packet_maker
 
             string type = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].id).ToString("X2");
             string subtype = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id).ToString("X2");
-            string len = length.ToString("X8");
+            string len = length.ToString("X4");
             string id = Convert.ToInt32(IDTxb.Text).ToString("X6");
             string satNum = groupsCB.SelectedIndex.ToString("X2");
 

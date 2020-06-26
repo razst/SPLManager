@@ -79,12 +79,12 @@ namespace packet_maker
 
             type = Convert.ToInt32(bitarr[4], 16);
             subtype = Convert.ToInt32(bitarr[5], 16);
-            length = Convert.ToInt32(bitarr[9] + bitarr[8] + bitarr[7] + bitarr[6], 16);
+            length = Convert.ToInt32(bitarr[7] + bitarr[6], 16);
             sateliteGroup = groups[Convert.ToInt32(bitarr[3])];
 
             typeDex = jsonObject.typenum.FindIndex(item => item.id == type);
             subtypeDex = jsonObject.typenum[typeDex].subTypes.FindIndex(item => item.id == subtype);
-            int j = 10;
+            int j = 8;
             foreach (Params par in jsonObject.typenum[typeDex].subTypes[subtypeDex].parmas)
             {
                 string temp = null;

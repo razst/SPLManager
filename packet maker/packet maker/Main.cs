@@ -1,7 +1,6 @@
 ﻿//#define DB
-#if DB 
+
 using Google.Cloud.Firestore; 
-#endif
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -81,8 +80,8 @@ namespace packet_maker
         private async void Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
             await Task.Run(() => {
-#if DB
-                if (!Program.testMode )
+
+                if (Program.settings.dataBaseEnabled)
                 {
                     packet.packetString = packetString;
                     packet.time = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
@@ -91,7 +90,6 @@ namespace packet_maker
 
                     docRef.SetAsync(packet);
                 }
-#endif
             });
         }
 
@@ -234,25 +232,16 @@ namespace packet_maker
         private void OkBtn_click()
         {
             success = false;
-            if (Program.testMode)
+            try
             {
                 TX();
                 success = true;
             }
-            else
+            catch
             {
-                try
-                {
-                    TX();
-                    success = true;
-                }
-                catch
-                {
-                    MessageBox.Show("invaled input", "error");
-                    success = false;
-                }
+                MessageBox.Show("invaled input", "error");
+                success = false;
             }
-
 
             if (success)
             {
@@ -300,14 +289,9 @@ namespace packet_maker
                     
                     privHex.SelectedIndex = 0;
                 }
-
-
-                // MessageBox.Show("manager was not able to translate this packet", "error");
             }
-
         }
 
-        private void OkBtn_Click(object sender, EventArgs e) => OkBtn_click();
 
         private int traID;
         private string mess = "";
@@ -401,7 +385,11 @@ namespace packet_maker
             frm2.ShowDialog();
         }
 
-        private void copyBTN_Click(object sender, EventArgs e) => Clipboard.SetText(makeOut.Text);
+        private void copyBTN_Click(object sender, EventArgs e) 
+        {
+            OkBtn_click();
+            Clipboard.SetText(makeOut.Text); 
+        }
 
 
         private void pasteBTN_Click(object sender, EventArgs e) => transIn.Text = Clipboard.GetText();
@@ -477,6 +465,7 @@ namespace packet_maker
 
         private void sendPacketBtn_Click(object sender, EventArgs e)
         {
+            OkBtn_click();
             RadioServer.Send(makeOut.Text.Trim());
             TabControl.SelectedTab = RxTab;
         }

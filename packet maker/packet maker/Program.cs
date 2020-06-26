@@ -1,14 +1,13 @@
-﻿//#define DB
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-#if DB 
+
 using Google.Cloud.Firestore; 
-#endif
+
 
 
 namespace packet_maker
@@ -17,11 +16,11 @@ namespace packet_maker
 
     static class Program
     {
-        static public bool testMode = false;
 
-#if DB
+
         static public FirestoreDb db;
-#endif
+        static public BasicSettings settings = new BasicSettings();
+
 
 
 
@@ -36,10 +35,18 @@ namespace packet_maker
 
         static void Main()
         {
-#if DB
-            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\key\satelite packets-a1af32f2133c.json");
-            db = FirestoreDb.Create("satelite-packets");
-#endif
+            StreamReader Tsettings = new StreamReader(@"settings.json");
+            JsonSerializer Serializer = new JsonSerializer();
+            settings = (BasicSettings)Serializer.Deserialize(Tsettings,typeof(BasicSettings));
+
+
+            if (Program.settings.dataBaseEnabled)
+            {
+                System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", settings.dataBaseKeyPath);
+                db = FirestoreDb.Create(settings.dataBaseName);
+            }
+
+
 
 
 

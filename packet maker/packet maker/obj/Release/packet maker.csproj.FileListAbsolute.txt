@@ -131,3 +131,13 @@ C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\pa
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.CopyComplete
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet maker.exe
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet maker.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Context.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Tasks.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Nito.Disposables.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Context.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Tasks.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Nito.Disposables.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Nito.Disposables.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet_maker.jsonFrm.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet_maker.jsonValSetFrm.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet_maker.PacketListFrm.resources

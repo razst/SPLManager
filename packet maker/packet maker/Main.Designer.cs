@@ -32,7 +32,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.IDTxb = new System.Windows.Forms.TextBox();
-            this.OkBtn = new System.Windows.Forms.Button();
             this.makeOut = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataTypesDGV = new System.Windows.Forms.DataGridView();
@@ -119,19 +118,9 @@
             this.IDTxb.TabIndex = 0;
             this.IDTxb.Text = "100";
             // 
-            // OkBtn
-            // 
-            this.OkBtn.Location = new System.Drawing.Point(695, 338);
-            this.OkBtn.Name = "OkBtn";
-            this.OkBtn.Size = new System.Drawing.Size(75, 23);
-            this.OkBtn.TabIndex = 10;
-            this.OkBtn.Text = "generate";
-            this.OkBtn.UseVisualStyleBackColor = true;
-            this.OkBtn.Click += new System.EventHandler(this.OkBtn_Click);
-            // 
             // makeOut
             // 
-            this.makeOut.Location = new System.Drawing.Point(70, 389);
+            this.makeOut.Location = new System.Drawing.Point(70, 367);
             this.makeOut.Name = "makeOut";
             this.makeOut.Size = new System.Drawing.Size(604, 20);
             this.makeOut.TabIndex = 4;
@@ -139,7 +128,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 392);
+            this.label3.Location = new System.Drawing.Point(22, 374);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 20;
@@ -272,7 +261,6 @@
             this.TxTab.Controls.Add(this.descSubType);
             this.TxTab.Controls.Add(this.label2);
             this.TxTab.Controls.Add(this.descType);
-            this.TxTab.Controls.Add(this.OkBtn);
             this.TxTab.Controls.Add(this.subtypeCB);
             this.TxTab.Controls.Add(this.label1);
             this.TxTab.Controls.Add(this.typeCB);
@@ -287,9 +275,9 @@
             // 
             // sendPacketBtn
             // 
-            this.sendPacketBtn.Location = new System.Drawing.Point(740, 386);
+            this.sendPacketBtn.Location = new System.Drawing.Point(367, 393);
             this.sendPacketBtn.Name = "sendPacketBtn";
-            this.sendPacketBtn.Size = new System.Drawing.Size(39, 23);
+            this.sendPacketBtn.Size = new System.Drawing.Size(51, 23);
             this.sendPacketBtn.TabIndex = 24;
             this.sendPacketBtn.Text = "send";
             this.sendPacketBtn.UseVisualStyleBackColor = true;
@@ -297,7 +285,7 @@
             // 
             // copyBTN
             // 
-            this.copyBTN.Location = new System.Drawing.Point(680, 386);
+            this.copyBTN.Location = new System.Drawing.Point(294, 393);
             this.copyBTN.Name = "copyBTN";
             this.copyBTN.Size = new System.Drawing.Size(54, 23);
             this.copyBTN.TabIndex = 23;
@@ -589,7 +577,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox IDTxb;
-        private System.Windows.Forms.Button OkBtn;
         private System.Windows.Forms.TextBox makeOut;
         private System.Windows.Forms.Button trasBtn;
         private System.Windows.Forms.TextBox transIn;

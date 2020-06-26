@@ -9,7 +9,28 @@ using Newtonsoft.Json;
 namespace packet_maker
 {
 
+    #region settings
 
+    public class BasicSettings
+    {
+        [JsonProperty("endNodePath")]
+        public string endNodePath { get; set; }
+
+
+        [JsonProperty("dataBaseEnabled")]
+        public bool dataBaseEnabled { get; set; }
+
+
+        [JsonProperty("dataBaseKeyPath")]
+        public string dataBaseKeyPath { get; set; }
+
+
+        [JsonProperty("dataBaseName")]
+        public string dataBaseName { get; set; }
+
+    }
+
+    #endregion
 
 
     #region rx/tx

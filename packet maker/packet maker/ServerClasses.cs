@@ -40,7 +40,7 @@ namespace packet_maker
             Main.frm.connectBtn.Enabled = false;
             try
             {
-                System.Diagnostics.Process.Start(@"C:\Users\pc\Desktop\GSC\GSC-EndNode\GSC-EndNode.exe");
+                System.Diagnostics.Process.Start(Program.settings.endNodePath);
             }
             catch { }
 

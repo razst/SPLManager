@@ -69,7 +69,7 @@ namespace packet_maker
             {
                 groupsCB.Items.Add(s);
             }
-
+            IDTxb.Text = Program.settings.packetCurrentId.ToString();
             groupsCB.SelectedIndex = 2;
             frm = this;
         }
@@ -246,6 +246,7 @@ namespace packet_maker
             if (success)
             {
                 Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
+                IDTxb.Text = (int.Parse(IDTxb.Text)+1).ToString();
             }
         }
         public void trasBtn_click(string msg)
@@ -453,6 +454,12 @@ namespace packet_maker
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Program.settings.packetCurrentId = int.Parse(IDTxb.Text);
+            using (StreamWriter file = File.CreateText(@"settings.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, Program.settings);
+            }
             try
             {
                 RadioServer.Stop();

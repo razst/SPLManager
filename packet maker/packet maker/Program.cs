@@ -35,9 +35,13 @@ namespace packet_maker
 
         static void Main()
         {
-            StreamReader Tsettings = new StreamReader(@"settings.json");
-            JsonSerializer Serializer = new JsonSerializer();
-            settings = (BasicSettings)Serializer.Deserialize(Tsettings,typeof(BasicSettings));
+           using(StreamReader Tsettings = new StreamReader(@"settings.json"))
+           {
+                JsonSerializer Serializer = new JsonSerializer();
+                settings = (BasicSettings)Serializer.Deserialize(Tsettings, typeof(BasicSettings));
+           }
+
+
 
 
             if (Program.settings.dataBaseEnabled)

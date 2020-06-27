@@ -28,6 +28,9 @@ namespace packet_maker
         [JsonProperty("dataBaseName")]
         public string dataBaseName { get; set; }
 
+        [JsonProperty("packetCurrentId")]
+        public int packetCurrentId { get; set; }
+
     }
 
     #endregion

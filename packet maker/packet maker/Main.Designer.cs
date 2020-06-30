@@ -62,7 +62,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.sendImgReqBtn = new System.Windows.Forms.Button();
             this.imgTypeCB = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.imgIdTxb = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -411,7 +411,7 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.sendImgReqBtn);
             this.panel1.Controls.Add(this.imgTypeCB);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.imgIdTxb);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
@@ -428,6 +428,7 @@
             this.sendImgReqBtn.TabIndex = 6;
             this.sendImgReqBtn.Text = "send";
             this.sendImgReqBtn.UseVisualStyleBackColor = true;
+            this.sendImgReqBtn.Click += new System.EventHandler(this.sendImgReqBtn_Click);
             // 
             // imgTypeCB
             // 
@@ -444,12 +445,12 @@
             this.imgTypeCB.Size = new System.Drawing.Size(121, 21);
             this.imgTypeCB.TabIndex = 5;
             // 
-            // textBox1
+            // imgIdTxb
             // 
-            this.textBox1.Location = new System.Drawing.Point(161, 11);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.imgIdTxb.Location = new System.Drawing.Point(161, 11);
+            this.imgIdTxb.Name = "imgIdTxb";
+            this.imgIdTxb.Size = new System.Drawing.Size(100, 20);
+            this.imgIdTxb.TabIndex = 3;
             // 
             // label10
             // 
@@ -615,7 +616,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button sendImgReqBtn;
         private System.Windows.Forms.ComboBox imgTypeCB;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox imgIdTxb;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;

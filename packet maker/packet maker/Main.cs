@@ -77,7 +77,7 @@ namespace packet_maker
         #endregion
 
 
-        private async void Upload_Packet(string COLLECTION_NAME, string id, string packetString)
+        private async Task Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
             await Task.Run(() => {
 
@@ -229,7 +229,7 @@ namespace packet_maker
 
         #region click events
 
-        private void OkBtn_click()
+        private async void OkBtn_click()
         {
             success = false;
             try
@@ -245,54 +245,43 @@ namespace packet_maker
 
             if (success)
             {
-                Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
+                await Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
                 IDTxb.Text = (int.Parse(IDTxb.Text)+1).ToString();
             }
         }
-        public void trasBtn_click(string msg)
+        public async void trasBtn_click(string msg)
         {
             mess = msg.Trim();
             if (packetObject.TestIfPacket(mess, transOptions))
             {
-                Upload_Packet("rx packets", traID.ToString(), mess);
+                await Upload_Packet("rx packets", traID.ToString(), mess);
                 po = packetObject.create(transOptions, msg.Trim());
-                if (privHex.SelectedIndex != -1)
-                {
-
-                    rawRxPacHisList.Add(mess);
-                    privHex.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
-
-
-                    if (privHex.Items.Count - 2 == privHex.SelectedIndex)
-                        privHex.SelectedIndex = privHex.Items.Count - 1;
-                }
-                else
-                {
-                    rawRxPacHisList.Add(mess);
-                    privHex.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
-                    privHex.SelectedIndex = 0;
-                }
+                rawRxPacHisList.Add(mess);
+                addItemToPrivHex($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
             }
             else
             {
-                if(privHex.SelectedIndex != -1)
-                {
-                    rawRxPacHisList.Add(mess);
-                    privHex.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   ERROR");
-
-                    if (privHex.Items.Count - 2 == privHex.SelectedIndex)
-                        privHex.SelectedIndex = privHex.Items.Count - 1;
-                }
-                else
-                {
-                    rawRxPacHisList.Add(mess);
-                    privHex.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   ERROR");
-                    
-                    privHex.SelectedIndex = 0;
-                }
+                rawRxPacHisList.Add(mess);
+                addItemToPrivHex("ERROR");
             }
         }
 
+        private void addItemToPrivHex(string diaplay)
+        {
+            if(privHex.SelectedIndex != -1)
+            {
+                privHex.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   {diaplay}");
+
+
+                if (privHex.Items.Count - 2 == privHex.SelectedIndex)
+                    privHex.SelectedIndex = privHex.Items.Count - 1;
+            }
+            else
+            {
+                privHex.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   {diaplay}");
+                privHex.SelectedIndex = 0;
+            }
+        }
 
         private int traID;
         private string mess = "";
@@ -470,10 +459,10 @@ namespace packet_maker
             }
         }
 
-        private void sendPacketBtn_Click(object sender, EventArgs e)
+        private async void sendPacketBtn_Click(object sender, EventArgs e)
         {
             OkBtn_click();
-            RadioServer.Send(makeOut.Text.Trim());
+            await RadioServer.Send(makeOut.Text.Trim());
             TabControl.SelectedTab = RxTab;
         }
 
@@ -481,6 +470,15 @@ namespace packet_maker
 
 
         #endregion
+
+        private async void sendImgReqBtn_Click(object sender, EventArgs e)
+        {
+            string Tid = Convert.ToInt32(imgIdTxb.Text).ToString("X6");
+            string[] TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Split(' ');
+            Array.Reverse(TidArr);
+            
+           await RadioServer.Send($"{String.Join(" ",TidArr)} 02 02 E1 01 00 {(imgTypeCB.SelectedIndex+1):X2}");
+        }
     }
 }
 

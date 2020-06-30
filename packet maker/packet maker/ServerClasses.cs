@@ -70,7 +70,8 @@ namespace packet_maker
 
 
         public void Stop() => Kill_Server_Thread("");
-        public  async void Send(string msg)
+
+        public async Task Send(string msg)
         {
             await Task.Run(() => {
                 if (server != null && client != null)

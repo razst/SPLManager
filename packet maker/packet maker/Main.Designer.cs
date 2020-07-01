@@ -74,6 +74,14 @@
             this.viewPacketListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.ImageDataDGV = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chunkNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.c4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
@@ -81,6 +89,8 @@
             this.ImageTab.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageDataDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // ID
@@ -182,9 +192,9 @@
             // 
             // descSubType
             // 
-            this.descSubType.Location = new System.Drawing.Point(545, 66);
+            this.descSubType.Location = new System.Drawing.Point(545, 65);
             this.descSubType.Name = "descSubType";
-            this.descSubType.Size = new System.Drawing.Size(225, 68);
+            this.descSubType.Size = new System.Drawing.Size(225, 57);
             this.descSubType.TabIndex = 18;
             this.descSubType.Text = "Description:";
             // 
@@ -398,6 +408,7 @@
             // 
             // ImageTab
             // 
+            this.ImageTab.Controls.Add(this.panel2);
             this.ImageTab.Controls.Add(this.panel1);
             this.ImageTab.Location = new System.Drawing.Point(4, 22);
             this.ImageTab.Name = "ImageTab";
@@ -415,7 +426,7 @@
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Location = new System.Drawing.Point(8, 28);
+            this.panel1.Location = new System.Drawing.Point(8, 17);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(586, 42);
             this.panel1.TabIndex = 1;
@@ -545,6 +556,79 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.ImageDataDGV);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Location = new System.Drawing.Point(8, 75);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(586, 196);
+            this.panel2.TabIndex = 2;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Images:";
+            // 
+            // ImageDataDGV
+            // 
+            this.ImageDataDGV.AllowUserToAddRows = false;
+            this.ImageDataDGV.AllowUserToDeleteRows = false;
+            this.ImageDataDGV.AllowUserToResizeColumns = false;
+            this.ImageDataDGV.AllowUserToResizeRows = false;
+            this.ImageDataDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ImageDataDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.chunkNum,
+            this.c4,
+            this.Column3});
+            this.ImageDataDGV.Location = new System.Drawing.Point(53, 9);
+            this.ImageDataDGV.MultiSelect = false;
+            this.ImageDataDGV.Name = "ImageDataDGV";
+            this.ImageDataDGV.ShowEditingIcon = false;
+            this.ImageDataDGV.Size = new System.Drawing.Size(511, 182);
+            this.ImageDataDGV.TabIndex = 1;
+            this.ImageDataDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ImageDataDGV_CellContentClick);
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "ID";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Type";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.ToolTipText = "the type of the image";
+            // 
+            // chunkNum
+            // 
+            this.chunkNum.HeaderText = "Total chunks";
+            this.chunkNum.Name = "chunkNum";
+            this.chunkNum.ReadOnly = true;
+            // 
+            // c4
+            // 
+            this.c4.FillWeight = 120F;
+            this.c4.HeaderText = "Chunks missing";
+            this.c4.Name = "c4";
+            this.c4.ReadOnly = true;
+            this.c4.Width = 120;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Action";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -568,6 +652,9 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageDataDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -620,6 +707,14 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DataGridView ImageDataDGV;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chunkNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn c4;
+        private System.Windows.Forms.DataGridViewButtonColumn Column3;
     }
 }
 

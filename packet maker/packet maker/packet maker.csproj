@@ -121,6 +121,7 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="IdDoc.cs" />
+    <Compile Include="ImageClasses.cs" />
     <Compile Include="jsonFrm.cs">
       <SubType>Form</SubType>
     </Compile>

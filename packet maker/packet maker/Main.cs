@@ -4,6 +4,7 @@ using Google.Cloud.Firestore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -46,10 +47,20 @@ namespace packet_maker
             "T7ADM (Maale Adomim)",
             "T8GBS (Guvat Shmuel)"
         };
+
+
+        private string[] imageTypes = 
+        {
+            "XL",
+            "LL",
+            "SS",
+            "HIT MAP"
+        };
+
         public static About frm2 = new About();
         static public Main frm = null;
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             //http://jsonviewer.stack.hu/
             StreamReader rx = new StreamReader(@"rx.json");
@@ -73,10 +84,19 @@ namespace packet_maker
             IDTxb.Text = Program.settings.pacCurId.ToString();
             groupsCB.SelectedIndex = 2;
             frm = this;
+
+            if (Program.settings.dataBaseEnabled)
+            {
+                var currentImgs = await GetImageInfos();
+
+                foreach(var img in currentImgs)
+                {
+                    ImageDataDGV.Rows.Add(img.splDocId,imageTypes[img.imageId - 1],img.TotalChunks,"chunks weren't reqeusted", "get all chunks");
+                }
+            }
         }
 
         #endregion
-
 
         private async Task Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
@@ -85,7 +105,7 @@ namespace packet_maker
                 if (Program.settings.dataBaseEnabled)
                 {
                     packet.packetString = packetString;
-                    packet.time = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+                    packet.time = DateTime.UtcNow;
 
                     DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document();
 
@@ -262,8 +282,16 @@ namespace packet_maker
             }
             else
             {
-                rawRxPacHisList.Add(mess);
-                addItemToPrivHex("ERROR");
+                string[] TArr = mess.Split(' ');
+                if (TArr[4] == "02" && (TArr[5] == "E1" || TArr[5] == "E2"))
+                {
+                    HandleNewImagePacket(TArr);
+                }
+                else
+                {
+                    rawRxPacHisList.Add(mess);
+                    addItemToPrivHex("ERROR");
+                }
             }
         }
 
@@ -474,6 +502,7 @@ namespace packet_maker
 
         #endregion
 
+        #region Images
         private async void sendImgReqBtn_Click(object sender, EventArgs e)
         {
             string Tid = Convert.ToInt32(imgIdTxb.Text).ToString("X6");
@@ -482,6 +511,76 @@ namespace packet_maker
             
            await RadioServer.Send($"{String.Join(" ",TidArr)} 02 02 E1 01 00 {(imgTypeCB.SelectedIndex+1):X2}");
         }
+
+        private async void HandleImageReqResult(string[] result)
+        {
+            int id = Convert.ToInt32(result[2] + result[1] + result[0], 16);
+            string type = imageTypes[Convert.ToInt32(result[8],16) - 1];
+            int totalChunks = Convert.ToInt32(result[11] + result[10] + result[9], 16);
+            ImageDataDGV.Rows.Add(id,type,totalChunks,"chunks weren't reqeusted","get all chunks");
+            ImageDataDGV.AutoResizeColumns();
+
+            if(Program.settings.dataBaseEnabled)
+                await Task.Run(()=> {
+                    imageInfo imageInfo = new imageInfo 
+                    { 
+                        imageId = Convert.ToInt32(result[8], 16),
+                        splDocId = id.ToString(),
+                        TotalChunks=totalChunks,
+                        when=DateTime.UtcNow
+                    };
+                    DocumentReference docRef = Program.db.Collection("imageInfo").Document(id.ToString());
+                    docRef.SetAsync(imageInfo);
+                });
+        }
+        
+        private void HandleNewImagePacket(string[] packet)
+        {
+            switch (packet[5])
+            {
+                case "E1":
+                    HandleImageReqResult(packet);
+                    break;
+
+                case "E2":
+                    break;
+            }
+        }
+
+        private async Task<List<imageInfo>> GetImageInfos()
+        {
+            var infoList = new List<imageInfo>();
+            Query capitalQuery = Program.db.Collection("imageInfo");
+            QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+
+            foreach(var docSnap in capitalQuerySnapshot.Documents)
+            {
+                infoList.Add(docSnap.ConvertTo<imageInfo>());
+            }
+            return infoList;
+        }
+
+        private async void ImageDataDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                //senderGrid.SelectedCells[0].Value.ToString();
+                switch (senderGrid.SelectedCells[0].Value.ToString())
+                {
+                    case "get all chunks":
+
+                        string Tid = Convert.ToInt32(senderGrid.Rows[senderGrid.SelectedCells[0].RowIndex].Cells[0].Value.ToString()).ToString("X6");
+                        string[] TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Split(' ');
+                        Array.Reverse(TidArr);
+
+                        await RadioServer.Send($"{String.Join(" ",TidArr)} 02 02 E2 00 00");
+                        break;
+                }
+            }
+        }
+        #endregion
     }
 }
 

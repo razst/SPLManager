@@ -29,6 +29,7 @@ namespace packet_maker
     class RadioServer
     {
         private delegate void delegateCall(String txt);
+        private Action actionCall;
         private Thread childThread = null;
         private TcpClient client = null;
         private TcpListener server = null;
@@ -69,7 +70,7 @@ namespace packet_maker
         }
 
 
-        public void Stop() => Kill_Server_Thread("");
+        public void Stop() => Kill_Server_Thread();
 
         public async Task Send(string msg)
         {
@@ -171,11 +172,11 @@ namespace packet_maker
             catch
             {
             }
-            delegateCall Call = new delegateCall(Kill_Server_Thread);
-            Main.frm.BeginInvoke(Call, "");
+            actionCall = Kill_Server_Thread;
+            Main.frm.BeginInvoke(actionCall);
         }
 
-        private void Kill_Server_Thread(string h)
+        private void Kill_Server_Thread()
         {
             if (childThread != null)
             {

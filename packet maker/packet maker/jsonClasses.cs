@@ -28,8 +28,7 @@ namespace packet_maker
         [JsonProperty("dataBaseName")]
         public string dataBaseName { get; set; }
 
-        [JsonProperty("packetCurrentId")]
-        public int packetCurrentId { get; set; }
+        public int pacCurId { get; set; }
 
     }
 

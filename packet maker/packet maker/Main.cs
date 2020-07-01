@@ -69,7 +69,8 @@ namespace packet_maker
             {
                 groupsCB.Items.Add(s);
             }
-            IDTxb.Text = Program.settings.packetCurrentId.ToString();
+
+            IDTxb.Text = Program.settings.pacCurId.ToString();
             groupsCB.SelectedIndex = 2;
             frm = this;
         }
@@ -441,14 +442,16 @@ namespace packet_maker
         private void connectBtn_Click(object sender, EventArgs e) => RadioServer.Start();
 
 
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Program.settings.packetCurrentId = int.Parse(IDTxb.Text);
-            using (StreamWriter file = File.CreateText(@"settings.json"))
+            if (Program.settings.dataBaseEnabled)
             {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, Program.settings);
+                IdDoc id = new IdDoc { id = int.Parse(IDTxb.Text) };
+                DocumentReference docRef = Program.db.Collection("local data").Document("packetCurId");
+                await docRef.SetAsync(id);
             }
+
+
             try
             {
                 RadioServer.Stop();

@@ -120,6 +120,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="IdDoc.cs" />
     <Compile Include="jsonFrm.cs">
       <SubType>Form</SubType>
     </Compile>

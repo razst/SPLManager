@@ -141,3 +141,80 @@ C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Ni
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet_maker.jsonFrm.resources
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet_maker.jsonValSetFrm.resources
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\packet_maker.PacketListFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\grpc_csharp_ext.x86.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\grpc_csharp_ext.x64.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x86.so
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x64.so
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x86.dylib
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\libgrpc_csharp_ext.x64.dylib
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\packet maker.exe.config
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\packet maker.exe
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\packet maker.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Api.CommonProtos.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.Grpc.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.PlatformServices.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Core.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.PlatformServices.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.V1.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.LongRunning.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Protobuf.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Grpc.Auth.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.Api.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Newtonsoft.Json.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Context.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Tasks.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Nito.Disposables.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\System.Collections.Immutable.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\System.Interactive.Async.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\System.ValueTuple.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Api.CommonProtos.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Api.CommonProtos.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.Grpc.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Api.Gax.Grpc.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Auth.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Core.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Apis.Core.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.V1.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Cloud.Firestore.V1.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.LongRunning.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.LongRunning.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Protobuf.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Google.Protobuf.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Grpc.Auth.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Grpc.Auth.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.Api.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Grpc.Core.Api.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Newtonsoft.Json.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Context.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Tasks.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Nito.Disposables.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\Nito.Disposables.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\System.Collections.Immutable.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\System.Interactive.Async.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Release\System.ValueTuple.xml
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet maker.csprojAssemblyReference.cache
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet_maker.About.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet_maker.jsonFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet_maker.jsonValSetFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet_maker.Main.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet_maker.PacketListFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet_maker.Properties.Resources.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.GenerateResource.cache
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.CoreCompileInputs.cache
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.CopyComplete
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet maker.exe
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet maker.pdb

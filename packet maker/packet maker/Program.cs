@@ -48,6 +48,10 @@ namespace packet_maker
             {
                 System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", settings.dataBaseKeyPath);
                 db = FirestoreDb.Create(settings.dataBaseName);
+
+                DocumentReference docRef = db.Collection("local data").Document("packetCurId");
+                DocumentSnapshot docSnap = docRef.GetSnapshotAsync().GetAwaiter().GetResult();
+                settings.pacCurId = (docSnap.ConvertTo<IdDoc>()).id;
             }
 
 

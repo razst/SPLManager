@@ -60,7 +60,7 @@ namespace packet_maker
         public static About frm2 = new About();
         static public Main frm = null;
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             //http://jsonviewer.stack.hu/
             StreamReader rx = new StreamReader(@"rx.json");
@@ -87,12 +87,7 @@ namespace packet_maker
 
             if (Program.settings.dataBaseEnabled)
             {
-                var currentImgs = await GetImageInfos();
-
-                foreach(var img in currentImgs)
-                {
-                    ImageDataDGV.Rows.Add(img.splDocId,imageTypes[img.imageId - 1],img.TotalChunks,"chunks weren't reqeusted", "get all chunks");
-                }
+                fillImgTable();
             }
         }
 
@@ -113,6 +108,9 @@ namespace packet_maker
                 }
             });
         }
+
+        #region TX/RX
+
 
         private void TX()
         {
@@ -247,6 +245,7 @@ namespace packet_maker
         }
 
 
+        #endregion
 
         #region click events
 
@@ -503,36 +502,47 @@ namespace packet_maker
         #endregion
 
         #region Images
+        private async Task<List<imagePropeties>> GetImageInfos()
+        {
+            var infoList = new List<imageInfo>();
+            var dataList = new List<imageData>();
+            var propList = new List<imagePropeties>();
+            Query capitalQuery = Program.db.Collection("imageInfo");
+            QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+
+            foreach (var docSnap in capitalQuerySnapshot.Documents)
+            {
+                // infoList.Add(docSnap.ConvertTo<imageInfo>());
+                propList.Add(new imagePropeties { Inf = docSnap.ConvertTo<imageInfo>(), chunks = new List<imageData>() });
+            }
+
+            capitalQuery = Program.db.Collection("imageData").OrderBy("when");
+            capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+
+            foreach (var docSnap in capitalQuerySnapshot.Documents)
+            {
+                var T = docSnap.ConvertTo<imageData>();
+
+                propList.First(item => item.Inf.splDocId == T.splId.ToString()).chunks.Add(T);                
+            }
+
+            foreach (var prop in propList)
+            {
+                prop.chunks = prop.chunks.OrderBy(o => o.chunkId).ToList();
+            }
+            return propList;
+        }
+
+
         private async void sendImgReqBtn_Click(object sender, EventArgs e)
         {
             string Tid = Convert.ToInt32(imgIdTxb.Text).ToString("X6");
             string[] TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Split(' ');
             Array.Reverse(TidArr);
             
-           await RadioServer.Send($"{String.Join(" ",TidArr)} 02 02 E1 01 00 {(imgTypeCB.SelectedIndex+1):X2}");
+           await RadioServer.Send($"{String.Join(" ",TidArr)} 02 02 E1 01 00 {(imgTypeCB.SelectedIndex+1):X2}".Trim());
         }
 
-        private async void HandleImageReqResult(string[] result)
-        {
-            int id = Convert.ToInt32(result[2] + result[1] + result[0], 16);
-            string type = imageTypes[Convert.ToInt32(result[8],16) - 1];
-            int totalChunks = Convert.ToInt32(result[11] + result[10] + result[9], 16);
-            ImageDataDGV.Rows.Add(id,type,totalChunks,"chunks weren't reqeusted","get all chunks");
-            ImageDataDGV.AutoResizeColumns();
-
-            if(Program.settings.dataBaseEnabled)
-                await Task.Run(()=> {
-                    imageInfo imageInfo = new imageInfo 
-                    { 
-                        imageId = Convert.ToInt32(result[8], 16),
-                        splDocId = id.ToString(),
-                        TotalChunks=totalChunks,
-                        when=DateTime.UtcNow
-                    };
-                    DocumentReference docRef = Program.db.Collection("imageInfo").Document(id.ToString());
-                    docRef.SetAsync(imageInfo);
-                });
-        }
         
         private void HandleNewImagePacket(string[] packet)
         {
@@ -543,22 +553,106 @@ namespace packet_maker
                     break;
 
                 case "E2":
+                    HandleNewChunk(packet);
                     break;
             }
         }
 
-        private async Task<List<imageInfo>> GetImageInfos()
-        {
-            var infoList = new List<imageInfo>();
-            Query capitalQuery = Program.db.Collection("imageInfo");
-            QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
 
-            foreach(var docSnap in capitalQuerySnapshot.Documents)
-            {
-                infoList.Add(docSnap.ConvertTo<imageInfo>());
-            }
-            return infoList;
+        private async void HandleImageReqResult(string[] result)
+        {
+            int id = Convert.ToInt32(result[2] + result[1] + result[0], 16);
+            string type = imageTypes[Convert.ToInt32(result[8], 16) - 1];
+            int totalChunks = Convert.ToInt32(result[11] + result[10] + result[9], 16);
+            ImageDataDGV.Rows.Add(id, type, totalChunks, "chunks weren't reqeusted", "get all chunks");
+            ImageDataDGV.AutoResizeColumns();
+
+            if (Program.settings.dataBaseEnabled)
+                await Task.Run(() => {
+                    imageInfo imageInfo = new imageInfo
+                    {
+                        imageId = Convert.ToInt32(result[8], 16),
+                        splDocId = id.ToString(),
+                        TotalChunks = totalChunks,
+                        when = DateTime.UtcNow
+                    };
+                    DocumentReference docRef = Program.db.Collection("imageInfo").Document(id.ToString());
+                    docRef.SetAsync(imageInfo);
+                });
         }
+
+        private List<int[]> allMissingChunk = new List<int[]>();
+        private async void fillImgTable()
+        {
+            var currentImgs = await GetImageInfos();
+            bool whereChunkReq = true;
+
+            foreach (var img in currentImgs)
+            {
+                List<int> missingChunksDex = new List<int>();
+                int chunkDex = 0;
+                if(img.chunks.Count != 0)
+                {
+                    for(int i = 0; i < img.Inf.TotalChunks;i++)
+                    {
+                        if(img.chunks[chunkDex].chunkId == i)
+                        {
+                            if(chunkDex < img.chunks.Count - 1)
+                            chunkDex++;
+                        }
+                        else
+                        {
+                            missingChunksDex.Add(i);
+                        }
+                    }
+                    allMissingChunk.Add(missingChunksDex.ToArray());
+                }
+                else
+                {
+                    whereChunkReq = false;
+                    allMissingChunk.Add(new int[img.Inf.TotalChunks]);
+                }
+                if(missingChunksDex.Count == 0 && whereChunkReq)
+                {
+                    ImageDataDGV.Rows.Add(img.Inf.splDocId, imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, "none", "show image");
+                }
+                else if (!whereChunkReq)
+                {
+                    ImageDataDGV.Rows.Add(img.Inf.splDocId, imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, "chunk weren't requsted", "get all chunks");
+                }
+                else
+                {
+                    ImageDataDGV.Rows.Add(img.Inf.splDocId, imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, missingChunksDex.Count, "get missing chunks");
+                }
+            }
+        }
+
+        private async void HandleNewChunk(string[] result)
+        {
+
+            if(Program.settings.dataBaseEnabled)
+                await Task.Run(() => 
+                {
+                    string temp = "";
+                    for(int i = 10; i < result.Length; i++)
+                    {
+                        temp += result[i] + " ";
+                    }
+
+
+                    DocumentReference docref = Program.db.Collection("imageData").Document();
+                    imageData thisChunk = new imageData 
+                    {
+                        chunkId = Convert.ToInt32(result[9] + result[8], 16),
+                        splId = Convert.ToInt32(result[2] + result[1] + result[0], 16),
+                        when = DateTime.UtcNow,
+                        chunkData = temp
+                    };
+
+                    docref.SetAsync(thisChunk);
+                });
+        }
+        
 
         private async void ImageDataDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -566,21 +660,55 @@ namespace packet_maker
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
+                string Tid;
+                string[] TidArr;
                 //senderGrid.SelectedCells[0].Value.ToString();
                 switch (senderGrid.SelectedCells[0].Value.ToString())
                 {
                     case "get all chunks":
 
-                        string Tid = Convert.ToInt32(senderGrid.Rows[senderGrid.SelectedCells[0].RowIndex].Cells[0].Value.ToString()).ToString("X6");
-                        string[] TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Split(' ');
+                        Tid = Convert.ToInt32(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).ToString("X6");
+                        TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Split(' ');
                         Array.Reverse(TidArr);
 
-                        await RadioServer.Send($"{String.Join(" ",TidArr)} 02 02 E2 00 00");
+                        await RadioServer.Send($"{String.Join(" ",TidArr)} 02 02 E2 00 00".Trim());
+                        break;
+
+                    case "get missing chunks":
+                        string Tlen = (allMissingChunk[e.RowIndex].Length * 2).ToString("X4");
+                        string[] TlenArr = Regex.Replace(Tlen, ".{2}", "$0 ").Split(' ');
+                        Array.Reverse(TlenArr);
+                        string data = null;
+
+
+                        foreach (int dex in allMissingChunk[e.RowIndex])
+                        {
+                            string TShort = dex.ToString("X4");
+                            string[] TshortArr = Regex.Replace(TShort, ".{2}", "$0 ").Split(' ');
+                            Array.Reverse(TshortArr);
+
+                            data += String.Join(" ", TshortArr);
+                        }
+                        Tid = Convert.ToInt32(senderGrid.Rows[senderGrid.SelectedCells[0].RowIndex].Cells[0].Value.ToString()).ToString("X6");
+                        TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Split(' ');
+                        Array.Reverse(TidArr);
+
+
+                        await RadioServer.Send($"{String.Join(" ", TidArr)} 02 02 E2{String.Join(" ",TlenArr)}{data}".Trim());
                         break;
                 }
             }
         }
+
+        private void refreshBtn_Click(object sender, EventArgs e) 
+        {
+            ImageDataDGV.Rows.Clear();
+            fillImgTable();
+        }
+
         #endregion
+
+
     }
 }
 

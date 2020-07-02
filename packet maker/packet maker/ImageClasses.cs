@@ -8,7 +8,7 @@ using Google.Cloud.Firestore;
 namespace packet_maker
 {
     [FirestoreData]
-    internal class imageInfo
+    public class imageInfo
     {
         [FirestoreDocumentId]
         public string splDocId { get; set; }
@@ -22,5 +22,30 @@ namespace packet_maker
         [FirestoreProperty]
         public DateTime when { get; set; }
 
+    }
+
+
+
+    [FirestoreData]
+    public class imageData
+    {
+        [FirestoreProperty]
+        public string chunkData { get; set; }
+
+        [FirestoreProperty]
+        public int chunkId { get; set; }
+
+        [FirestoreProperty]
+        public int splId { get; set; }
+    
+        [FirestoreProperty]
+        public DateTime when { get; set; }
+    }
+
+    public class imagePropeties
+    {
+        public imageInfo Inf { get; set; }
+
+        public List<imageData> chunks { get; set; }
     }
 }

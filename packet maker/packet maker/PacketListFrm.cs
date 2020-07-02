@@ -19,7 +19,7 @@ namespace packet_maker
         }
 
         private DataTable dt = new DataTable();
-        private async void PacketListFrm_Load(object sender, EventArgs e)
+        private void PacketListFrm_Load(object sender, EventArgs e)
         {
 #if DB
             dt.Columns.Add("Packet",typeof(string));
@@ -39,7 +39,7 @@ namespace packet_maker
 #endif
         }
 
-        private async void addBtn_Click(object sender, EventArgs e)
+        private  void addBtn_Click(object sender, EventArgs e)
         {
 #if DB
             DocumentReference docRef = Program.db.Collection("stored packets").Document();

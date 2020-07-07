@@ -539,8 +539,14 @@ namespace packet_maker
             foreach (var docSnap in capitalQuerySnapshot.Documents)
             {
                 var T = docSnap.ConvertTo<imageData>();
-
-                propList.First(item => item.Inf.splDocId == T.splId.ToString()).chunks.Add(T);                
+                try
+                {
+                    propList.First(item => item.Inf.splDocId == T.splId.ToString()).chunks.Add(T);
+                }
+                catch
+                {
+                    Console.WriteLine();
+                }
             }
 
             foreach (var prop in propList)
@@ -686,10 +692,10 @@ namespace packet_maker
                 {
                     case "get all chunks":
                         //Convert.ToInt32(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString())
-                       id = ConvertToHexBytes(getSplCurId(), 3);
+                       id = ConvertToHexBytes(int.Parse(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()), 3);
+                        string imgId = ConvertToHexBytes(int.Parse(senderGrid.Rows[e.RowIndex].Cells[1].Value.ToString()), 2);
 
-
-                        await RadioServer.Send($"{id} 02 02 E2 02 00 05 00".Trim());//TODO: change 05 00 to real imgId
+                        await RadioServer.Send($"{id} 02 02 E2 02 00 {imgId}".Trim());
                         break;
 
                     case "get missing chunks":
@@ -701,7 +707,7 @@ namespace packet_maker
                         {
                             data += ConvertToHexBytes(dex, 2);
                         }
-                        id = ConvertToHexBytes(getSplCurId(), 3);
+                        id = ConvertToHexBytes(int.Parse(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()), 3);
 
 
                         await RadioServer.Send($"{id} 02 02 E2 {len} {data}".Trim());

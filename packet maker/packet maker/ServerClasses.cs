@@ -28,8 +28,6 @@ namespace packet_maker
 
     class RadioServer
     {
-        private delegate void delegateCall(String txt);
-        private Action actionCall;
         private Thread childThread = null;
         private TcpClient client = null;
         private TcpListener server = null;
@@ -161,8 +159,8 @@ namespace packet_maker
                                 }
 
                                 string packetRecived = String.Join(" ", sArr);
-                                delegateCall delegateCall = new delegateCall(Main.frm.trasBtn_click);
-                                Main.frm.BeginInvoke(delegateCall, packetRecived);
+                                Action<string> clickCall = Main.frm.trasBtn_click;
+                                Main.frm.BeginInvoke(clickCall, packetRecived);
                                 break;
                         }
                         Console.WriteLine("*******************");
@@ -172,7 +170,7 @@ namespace packet_maker
             catch
             {
             }
-            actionCall = Kill_Server_Thread;
+            Action actionCall = Kill_Server_Thread;
             Main.frm.BeginInvoke(actionCall);
         }
 

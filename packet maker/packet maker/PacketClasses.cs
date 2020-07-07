@@ -75,7 +75,7 @@ namespace packet_maker
             string[] bitarr = packetString.Split(' ');
 
 
-            id = Convert.ToInt32(bitarr[2] + bitarr[1] + bitarr[0], 16);
+            id = Convert.ToInt32(bitarr[3] +bitarr[2] + bitarr[1] + bitarr[0], 16);
 
             type = Convert.ToInt32(bitarr[4], 16);
             subtype = Convert.ToInt32(bitarr[5], 16);

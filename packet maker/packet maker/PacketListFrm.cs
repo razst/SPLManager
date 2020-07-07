@@ -18,31 +18,26 @@ namespace packet_maker
             InitializeComponent();
         }
 
-        private DataTable dt = new DataTable();
-        private void PacketListFrm_Load(object sender, EventArgs e)
+        readonly RadioServer RadioServer = new RadioServer();
+
+        private List<ListPacketItem> items = new List<ListPacketItem>();
+        private async void PacketListFrm_Load(object sender, EventArgs e)
         {
-#if DB
-            dt.Columns.Add("Packet",typeof(string));
-            dt.Columns.Add("Description:", typeof(string));
-
             storedPacketsDGV.Rows.Clear();
-            Query capitalQuery = Program.db.Collection("stored packets");
-            QuerySnapshot QuerySnapshot = await capitalQuery.GetSnapshotAsync();
-            foreach (DocumentSnapshot documentSnapshot in QuerySnapshot.Documents)
+            if (Program.settings.dataBaseEnabled)
             {
-                ListPacketItem item = documentSnapshot.ConvertTo<ListPacketItem>();
-
-                dt.Rows.Add(item.packetString,item.Description);
+                items = await downloadList();
+                foreach (var item in items)
+                {
+                    storedPacketsDGV.Rows.Add(item.Description, "send");
+                }
+                storedPacketsDGV.AutoResizeColumns();
             }
-
-            storedPacketsDGV.DataSource = dt;
-#endif
         }
 
-        private  void addBtn_Click(object sender, EventArgs e)
+        private async void addBtn_Click(object sender, EventArgs e)
         {
-#if DB
-            DocumentReference docRef = Program.db.Collection("stored packets").Document();
+            DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "stored packets").Document();
             ListPacketItem lpi = new ListPacketItem
             {
                 packetString = pacStringTxb.Text,
@@ -50,9 +45,30 @@ namespace packet_maker
             };
 
             await docRef.SetAsync(lpi);
-#endif
         }
 
+        private async Task<List<ListPacketItem>> downloadList()
+        {
+            List<ListPacketItem> listPackets = new List<ListPacketItem>();
+            Query capitalQuery = Program.db.Collection("stored packets");
+            QuerySnapshot QuerySnapshot = await capitalQuery.GetSnapshotAsync();
+            foreach (DocumentSnapshot documentSnapshot in QuerySnapshot.Documents)
+            {
+                listPackets.Add(documentSnapshot.ConvertTo<ListPacketItem>());
+            }
+
+            return listPackets;
+        }
+
+        private async void storedPacketsDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+               await RadioServer.Send(items[e.RowIndex].packetString.Trim());
+            }
+        }
     }
 
 

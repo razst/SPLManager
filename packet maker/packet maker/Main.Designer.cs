@@ -59,13 +59,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.privHex = new System.Windows.Forms.ListBox();
             this.ImageTab = new System.Windows.Forms.TabPage();
+            this.refreshBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ImageDataDGV = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chunkNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.c4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label11 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.sendImgReqBtn = new System.Windows.Forms.Button();
@@ -82,7 +78,12 @@
             this.viewPacketListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshBtn = new System.Windows.Forms.Button();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chunkNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.c4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
@@ -125,6 +126,7 @@
             // 
             this.IDTxb.Location = new System.Drawing.Point(253, 21);
             this.IDTxb.Name = "IDTxb";
+            this.IDTxb.ReadOnly = true;
             this.IDTxb.Size = new System.Drawing.Size(84, 20);
             this.IDTxb.TabIndex = 0;
             this.IDTxb.Text = "100";
@@ -419,6 +421,16 @@
             this.ImageTab.Text = "images";
             this.ImageTab.UseVisualStyleBackColor = true;
             // 
+            // refreshBtn
+            // 
+            this.refreshBtn.Location = new System.Drawing.Point(663, 28);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(75, 23);
+            this.refreshBtn.TabIndex = 2;
+            this.refreshBtn.Text = "refresh";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -438,6 +450,7 @@
             this.ImageDataDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ImageDataDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
+            this.Column4,
             this.Column2,
             this.chunkNum,
             this.c4,
@@ -449,39 +462,6 @@
             this.ImageDataDGV.Size = new System.Drawing.Size(657, 253);
             this.ImageDataDGV.TabIndex = 1;
             this.ImageDataDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ImageDataDGV_CellContentClick);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "ID";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Type";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.ToolTipText = "the type of the image";
-            // 
-            // chunkNum
-            // 
-            this.chunkNum.HeaderText = "Total chunks";
-            this.chunkNum.Name = "chunkNum";
-            this.chunkNum.ReadOnly = true;
-            // 
-            // c4
-            // 
-            this.c4.FillWeight = 120F;
-            this.c4.HeaderText = "Chunks missing";
-            this.c4.Name = "c4";
-            this.c4.ReadOnly = true;
-            this.c4.Width = 120;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Action";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
             // 
             // label11
             // 
@@ -521,11 +501,6 @@
             this.imgTypeCB.AllowDrop = true;
             this.imgTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.imgTypeCB.FormattingEnabled = true;
-            this.imgTypeCB.Items.AddRange(new object[] {
-            "XL",
-            "LL",
-            "SS",
-            "HIT MAP"});
             this.imgTypeCB.Location = new System.Drawing.Point(332, 10);
             this.imgTypeCB.Name = "imgTypeCB";
             this.imgTypeCB.Size = new System.Drawing.Size(121, 21);
@@ -535,6 +510,7 @@
             // 
             this.imgIdTxb.Location = new System.Drawing.Point(161, 11);
             this.imgIdTxb.Name = "imgIdTxb";
+            this.imgIdTxb.ReadOnly = true;
             this.imgIdTxb.Size = new System.Drawing.Size(100, 20);
             this.imgIdTxb.TabIndex = 3;
             // 
@@ -615,6 +591,7 @@
             this.viewPacketListToolStripMenuItem.Name = "viewPacketListToolStripMenuItem";
             this.viewPacketListToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.viewPacketListToolStripMenuItem.Text = "view packet list";
+            this.viewPacketListToolStripMenuItem.Click += new System.EventHandler(this.viewPacketListToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -631,15 +608,43 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // refreshBtn
+            // Column1
             // 
-            this.refreshBtn.Location = new System.Drawing.Point(663, 28);
-            this.refreshBtn.Name = "refreshBtn";
-            this.refreshBtn.Size = new System.Drawing.Size(75, 23);
-            this.refreshBtn.TabIndex = 2;
-            this.refreshBtn.Text = "refresh";
-            this.refreshBtn.UseVisualStyleBackColor = true;
-            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            this.Column1.HeaderText = "Spl id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Image id";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Image type";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // chunkNum
+            // 
+            this.chunkNum.HeaderText = "Total chunks";
+            this.chunkNum.Name = "chunkNum";
+            this.chunkNum.ReadOnly = true;
+            // 
+            // c4
+            // 
+            this.c4.FillWeight = 120F;
+            this.c4.HeaderText = "Chunks missing";
+            this.c4.Name = "c4";
+            this.c4.ReadOnly = true;
+            this.c4.Width = 120;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Actions";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Main
             // 
@@ -722,12 +727,13 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView ImageDataDGV;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button refreshBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn chunkNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn c4;
         private System.Windows.Forms.DataGridViewButtonColumn Column3;
-        private System.Windows.Forms.Button refreshBtn;
     }
 }
 

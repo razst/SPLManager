@@ -14,10 +14,13 @@ namespace packet_maker
         public string splDocId { get; set; }
 
         [FirestoreProperty]
-        public int TotalChunks { get; set; }
+        public int imageId { get; set; }
 
         [FirestoreProperty]
-        public int imageId { get; set; }
+        public string imageType { get; set; }
+
+        [FirestoreProperty]
+        public int TotalChunks { get; set; }
 
         [FirestoreProperty]
         public DateTime when { get; set; }

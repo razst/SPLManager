@@ -51,10 +51,12 @@ namespace packet_maker
 
         private string[] imageTypes = 
         {
+            "XXL",
             "XL",
-            "LL",
-            "SS",
-            "HIT MAP"
+            "L",
+            "M",
+            "S",
+            "hitmap"
         };
 
         public static About frm2 = new About();
@@ -82,17 +84,41 @@ namespace packet_maker
             }
 
             IDTxb.Text = Program.settings.pacCurId.ToString();
+            imgIdTxb.Text = Program.settings.pacCurId.ToString();
             groupsCB.SelectedIndex = 2;
             frm = this;
-
+            if (!Program.settings.enableImage) 
+            {
+                TabControl.TabPages.Remove(ImageTab);
+            }
             if (Program.settings.dataBaseEnabled)
             {
                 fillImgTable();
+            }
+            foreach(string cell in imageTypes)
+            {
+                imgTypeCB.Items.Add(cell);
             }
         }
 
         #endregion
 
+        private int getSplCurId()
+        {
+            Program.settings.pacCurId += 1;
+            IDTxb.Text = Program.settings.pacCurId.ToString();
+            imgIdTxb.Text = Program.settings.pacCurId.ToString();
+            return Program.settings.pacCurId - 1;
+        }
+
+        private string ConvertToHexBytes(int value, int numberOfBytes)
+        {
+            string format = "X" + (numberOfBytes*2);
+            string Tid = value.ToString(format);
+            string[] TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Trim().Split(' ');
+            Array.Reverse(TidArr);
+            return String.Join(" ",TidArr).Trim();
+        }
         private async Task Upload_Packet(string COLLECTION_NAME, string id, string packetString)
         {
             await Task.Run(() => {
@@ -102,7 +128,7 @@ namespace packet_maker
                     packet.packetString = packetString;
                     packet.time = DateTime.UtcNow;
 
-                    DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document();
+                    DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + COLLECTION_NAME).Document();
 
                     docRef.SetAsync(packet);
                 }
@@ -142,23 +168,12 @@ namespace packet_maker
             DateTime dt = new DateTime();
             long unix = 0;
 
-            string type = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].id).ToString("X2");
-            string subtype = Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id).ToString("X2");
-            string len = length.ToString("X4");
-            string id = Convert.ToInt32(IDTxb.Text).ToString("X6");
-            string satNum = groupsCB.SelectedIndex.ToString("X2");
+            string type = ConvertToHexBytes(options.typenum[typeCB.SelectedIndex].id, 1);
+            string subtype = ConvertToHexBytes(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id,1);
+            string len = ConvertToHexBytes(length,2);
+            string id = ConvertToHexBytes(getSplCurId(),3);
+            string satNum = ConvertToHexBytes(groupsCB.SelectedIndex,1);
 
-
-            string hexID = Regex.Replace(id, ".{2}", "$0 ");
-            string hexLen = Regex.Replace(len, ".{2}", "$0 ");
-
-
-            string[] revLen = hexLen.Split(' ');
-            string[] revID = hexID.Split(' ');
-
-
-            Array.Reverse(revID);
-            Array.Reverse(revLen);
 
 
             if (length != 0)
@@ -197,20 +212,19 @@ namespace packet_maker
                             break;
 
                         case "bytes":
-                            makeOut.Text = String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen) + " " + dataTypesDGV.Rows[i].Cells[1].Value.ToString().ToUpper();
+                            makeOut.Text = id + " " + satNum + " " + type + " " + subtype + len + " " + dataTypesDGV.Rows[i].Cells[1].Value.ToString().ToUpper();
                             makeOut.Text = makeOut.Text.ToString().Substring(1);
                             return;
 
                     }
                 }
-                string hexData = Regex.Replace(data, ".{2}", "$0 ");
-                string[] revData = hexData.Split(' ');
+                string[] revData = Regex.Replace(data, ".{2}", "$0 ").Trim().Split(' ');
                 Array.Reverse(revData);
-                makeOut.Text = (String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen) + String.Join(" ", revData)).Substring(1);
+                makeOut.Text = id + " " + satNum + " " + type + " " + subtype +" "+ len+ " " + String.Join(" ", revData);
             }
             else
             {
-                makeOut.Text = (String.Join(" ", revID) + " " + satNum + " " + type + " " + subtype + String.Join(" ", revLen)).Substring(1);
+                makeOut.Text = (id + " " + satNum + " " + type + " " + subtype +" "+ len);
             }
         }
 
@@ -266,7 +280,6 @@ namespace packet_maker
             if (success)
             {
                 await Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
-                IDTxb.Text = (int.Parse(IDTxb.Text)+1).ToString();
             }
         }
         public async void trasBtn_click(string msg)
@@ -322,7 +335,11 @@ namespace packet_maker
         #region rest of code
 
 
-
+        private void viewPacketListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PacketListFrm frm = new PacketListFrm();
+            frm.ShowDialog();
+        }
 
         private void typeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -474,7 +491,7 @@ namespace packet_maker
             if (Program.settings.dataBaseEnabled)
             {
                 IdDoc id = new IdDoc { id = int.Parse(IDTxb.Text) };
-                DocumentReference docRef = Program.db.Collection("local data").Document("packetCurId");
+                DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix+"local data").Document("packetCurId");
                 await docRef.SetAsync(id);
             }
 
@@ -536,11 +553,9 @@ namespace packet_maker
 
         private async void sendImgReqBtn_Click(object sender, EventArgs e)
         {
-            string Tid = Convert.ToInt32(imgIdTxb.Text).ToString("X6");
-            string[] TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Split(' ');
-            Array.Reverse(TidArr);
+            string id = ConvertToHexBytes(getSplCurId(), 3);
             
-           await RadioServer.Send($"{String.Join(" ",TidArr)} 02 02 E1 01 00 {(imgTypeCB.SelectedIndex+1):X2}".Trim());
+           await RadioServer.Send($"{id} 02 02 E1 01 00 {ConvertToHexBytes(imgTypeCB.SelectedIndex+1,1)}".Trim());
         }
 
         
@@ -561,22 +576,24 @@ namespace packet_maker
 
         private async void HandleImageReqResult(string[] result)
         {
-            int id = Convert.ToInt32(result[2] + result[1] + result[0], 16);
-            string type = imageTypes[Convert.ToInt32(result[8], 16) - 1];
-            int totalChunks = Convert.ToInt32(result[11] + result[10] + result[9], 16);
-            ImageDataDGV.Rows.Add(id, type, totalChunks, "chunks weren't reqeusted", "get all chunks");
+            int SplId = Convert.ToInt32(result[2] + result[1] + result[0], 16);
+            string type = imageTypes[Convert.ToInt32(result[12], 16) - 1];
+            int totalChunks = Convert.ToInt32(result[11] + result[10], 16);
+            int imgId = Convert.ToInt32(result[9]+result[8], 16);
+            ImageDataDGV.Rows.Add(SplId,imgId ,type, totalChunks, "chunks weren't reqeusted", "get all chunks");
             ImageDataDGV.AutoResizeColumns();
 
             if (Program.settings.dataBaseEnabled)
                 await Task.Run(() => {
                     imageInfo imageInfo = new imageInfo
                     {
-                        imageId = Convert.ToInt32(result[8], 16),
-                        splDocId = id.ToString(),
+                        imageId = imgId,
+                        splDocId = SplId.ToString(),
                         TotalChunks = totalChunks,
-                        when = DateTime.UtcNow
+                        when = DateTime.UtcNow,
+                        imageType = type
                     };
-                    DocumentReference docRef = Program.db.Collection("imageInfo").Document(id.ToString());
+                    DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "imageInfo").Document(SplId.ToString());
                     docRef.SetAsync(imageInfo);
                 });
         }
@@ -589,6 +606,7 @@ namespace packet_maker
 
             foreach (var img in currentImgs)
             {
+                whereChunkReq = true;
                 List<int> missingChunksDex = new List<int>();
                 int chunkDex = 0;
                 if(img.chunks.Count != 0)
@@ -612,17 +630,18 @@ namespace packet_maker
                     whereChunkReq = false;
                     allMissingChunk.Add(new int[img.Inf.TotalChunks]);
                 }
+
                 if(missingChunksDex.Count == 0 && whereChunkReq)
                 {
-                    ImageDataDGV.Rows.Add(img.Inf.splDocId, imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, "none", "show image");
+                    ImageDataDGV.Rows.Add(img.Inf.splDocId,img.Inf.imageId ,imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, "none", "show image");
                 }
                 else if (!whereChunkReq)
                 {
-                    ImageDataDGV.Rows.Add(img.Inf.splDocId, imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, "chunk weren't requsted", "get all chunks");
+                    ImageDataDGV.Rows.Add(img.Inf.splDocId, img.Inf.imageId, imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, "chunk weren't requsted", "get all chunks");
                 }
                 else
                 {
-                    ImageDataDGV.Rows.Add(img.Inf.splDocId, imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, missingChunksDex.Count, "get missing chunks");
+                    ImageDataDGV.Rows.Add(img.Inf.splDocId, img.Inf.imageId , imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, missingChunksDex.Count, "get missing chunks");
                 }
             }
         }
@@ -640,7 +659,7 @@ namespace packet_maker
                     }
 
 
-                    DocumentReference docref = Program.db.Collection("imageData").Document();
+                    DocumentReference docref = Program.db.Collection(Program.settings.collectionPrefix + "imageData").Document();
                     imageData thisChunk = new imageData 
                     {
                         chunkId = Convert.ToInt32(result[9] + result[8], 16),
@@ -660,41 +679,32 @@ namespace packet_maker
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                string Tid;
-                string[] TidArr;
+                string len;
+                string id;
                 //senderGrid.SelectedCells[0].Value.ToString();
                 switch (senderGrid.SelectedCells[0].Value.ToString())
                 {
                     case "get all chunks":
+                        //Convert.ToInt32(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString())
+                       id = ConvertToHexBytes(getSplCurId(), 3);
 
-                        Tid = Convert.ToInt32(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).ToString("X6");
-                        TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Split(' ');
-                        Array.Reverse(TidArr);
 
-                        await RadioServer.Send($"{String.Join(" ",TidArr)} 02 02 E2 00 00".Trim());
+                        await RadioServer.Send($"{id} 02 02 E2 02 00 05 00".Trim());//TODO: change 05 00 to real imgId
                         break;
 
                     case "get missing chunks":
-                        string Tlen = (allMissingChunk[e.RowIndex].Length * 2).ToString("X4");
-                        string[] TlenArr = Regex.Replace(Tlen, ".{2}", "$0 ").Split(' ');
-                        Array.Reverse(TlenArr);
+                        len = ConvertToHexBytes(allMissingChunk[e.RowIndex].Length * 2, 2);
                         string data = null;
 
 
                         foreach (int dex in allMissingChunk[e.RowIndex])
                         {
-                            string TShort = dex.ToString("X4");
-                            string[] TshortArr = Regex.Replace(TShort, ".{2}", "$0 ").Split(' ');
-                            Array.Reverse(TshortArr);
-
-                            data += String.Join(" ", TshortArr);
+                            data += ConvertToHexBytes(dex, 2);
                         }
-                        Tid = Convert.ToInt32(senderGrid.Rows[senderGrid.SelectedCells[0].RowIndex].Cells[0].Value.ToString()).ToString("X6");
-                        TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Split(' ');
-                        Array.Reverse(TidArr);
+                        id = ConvertToHexBytes(getSplCurId(), 3);
 
 
-                        await RadioServer.Send($"{String.Join(" ", TidArr)} 02 02 E2{String.Join(" ",TlenArr)}{data}".Trim());
+                        await RadioServer.Send($"{id} 02 02 E2 {len} {data}".Trim());
                         break;
                 }
             }
@@ -705,6 +715,7 @@ namespace packet_maker
             ImageDataDGV.Rows.Clear();
             fillImgTable();
         }
+
 
         #endregion
 

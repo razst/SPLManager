@@ -30,6 +30,12 @@ namespace packet_maker
 
         public int pacCurId { get; set; }
 
+        [JsonProperty("enableImage")]
+        public bool enableImage { get; set; }
+
+        [JsonProperty("collectionPrefix")]
+        public string collectionPrefix { get; set; }
+
     }
 
     #endregion

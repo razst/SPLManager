@@ -73,20 +73,6 @@ namespace packet_maker
             options = (TypeList)Serializer.Deserialize(tx, typeof(TypeList));
             transOptions = (TypeList)Serializer.Deserialize(rx, typeof(TypeList));
 
-
-            foreach (Type t in options)
-            {
-                typeCB.Items.Add(t.name);
-            }
-            foreach (string s in groups)
-            {
-                groupsCB.Items.Add(s);
-            }
-
-            IDTxb.Text = Program.settings.pacCurId.ToString();
-            imgIdTxb.Text = Program.settings.pacCurId.ToString();
-            groupsCB.SelectedIndex = 2;
-            frm = this;
             if (!Program.settings.enableImage) 
             {
                 TabControl.TabPages.Remove(ImageTab);
@@ -95,10 +81,27 @@ namespace packet_maker
             {
                 fillImgTable();
             }
+
+
+            //filling comboboxes
             foreach(string cell in imageTypes)
             {
                 imgTypeCB.Items.Add(cell);
             }
+            foreach (Type t in options)
+            {
+                typeCB.Items.Add(t.name);
+            }
+            foreach (string s in groups)
+            {
+                groupsCB.Items.Add(s);
+            }
+            //
+
+            IDTxb.Text = Program.settings.pacCurId.ToString();
+            imgIdTxb.Text = Program.settings.pacCurId.ToString();
+            groupsCB.SelectedIndex = 2;
+            frm = this;
         }
 
         #endregion
@@ -230,13 +233,16 @@ namespace packet_maker
 
 
         private packetObject po = new packetObject();
-        private void RX(string transMsg)
+        private async void RX(string transMsg)
         {
             mess = transMsg.Trim();
             mess = mess.Replace(" ", String.Empty);
             mess = Regex.Replace(mess, ".{2}", "$0 ");
-
-            po = packetObject.create(transOptions, mess);
+            po = await Task.Run(() =>
+            {
+                return packetObject.create(transOptions, mess);
+            });
+            //po = packetObject.create(transOptions, mess);
             traID = po.id;
 
 
@@ -524,7 +530,7 @@ namespace packet_maker
             var infoList = new List<imageInfo>();
             var dataList = new List<imageData>();
             var propList = new List<imagePropeties>();
-            Query capitalQuery = Program.db.Collection("imageInfo");
+            Query capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "imageInfo");
             QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
 
             foreach (var docSnap in capitalQuerySnapshot.Documents)
@@ -533,7 +539,7 @@ namespace packet_maker
                 propList.Add(new imagePropeties { Inf = docSnap.ConvertTo<imageInfo>(), chunks = new List<imageData>() });
             }
 
-            capitalQuery = Program.db.Collection("imageData").OrderBy("when");
+            capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "imageData").OrderBy("when");
             capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
 
             foreach (var docSnap in capitalQuerySnapshot.Documents)
@@ -554,6 +560,56 @@ namespace packet_maker
                 prop.chunks = prop.chunks.OrderBy(o => o.chunkId).ToList();
             }
             return propList;
+        }
+
+        private List<int[]> allMissingChunk = new List<int[]>();
+        private async Task<List<string[]>> DownloadTable()
+        {
+            var result = new List<string[]>();
+            var currentImgs = await GetImageInfos();
+            bool whereChunkReq = true;
+
+            foreach (var img in currentImgs)
+            {
+                whereChunkReq = true;
+                List<int> missingChunksDex = new List<int>();
+                int chunkDex = 0;
+                if (img.chunks.Count != 0)
+                {
+                    for (int i = 0; i < img.Inf.TotalChunks; i++)
+                    {
+                        if (img.chunks[chunkDex].chunkId == i)
+                        {
+                            if (chunkDex < img.chunks.Count - 1)
+                                chunkDex++;
+                        }
+                        else
+                        {
+                            missingChunksDex.Add(i);
+                        }
+                    }
+                    allMissingChunk.Add(missingChunksDex.ToArray());
+                }
+                else
+                {
+                    whereChunkReq = false;
+                    allMissingChunk.Add(new int[img.Inf.TotalChunks]);
+                }
+
+                if (missingChunksDex.Count == 0 && whereChunkReq)
+                {
+                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), "none", "show image" });
+                }
+                else if (!whereChunkReq)
+                {
+                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), "chunk weren't requsted", "get all chunks" });
+                }
+                else
+                {
+                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), missingChunksDex.Count.ToString(), "get missing chunks" });
+                }
+            }
+            return result;
         }
 
 
@@ -604,51 +660,15 @@ namespace packet_maker
                 });
         }
 
-        private List<int[]> allMissingChunk = new List<int[]>();
         private async void fillImgTable()
         {
-            var currentImgs = await GetImageInfos();
-            bool whereChunkReq = true;
-
-            foreach (var img in currentImgs)
+            var table = await Task.Run(() => {
+                return DownloadTable();
+            });
+            
+            foreach(var row in table)
             {
-                whereChunkReq = true;
-                List<int> missingChunksDex = new List<int>();
-                int chunkDex = 0;
-                if(img.chunks.Count != 0)
-                {
-                    for(int i = 0; i < img.Inf.TotalChunks;i++)
-                    {
-                        if(img.chunks[chunkDex].chunkId == i)
-                        {
-                            if(chunkDex < img.chunks.Count - 1)
-                            chunkDex++;
-                        }
-                        else
-                        {
-                            missingChunksDex.Add(i);
-                        }
-                    }
-                    allMissingChunk.Add(missingChunksDex.ToArray());
-                }
-                else
-                {
-                    whereChunkReq = false;
-                    allMissingChunk.Add(new int[img.Inf.TotalChunks]);
-                }
-
-                if(missingChunksDex.Count == 0 && whereChunkReq)
-                {
-                    ImageDataDGV.Rows.Add(img.Inf.splDocId,img.Inf.imageId ,imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, "none", "show image");
-                }
-                else if (!whereChunkReq)
-                {
-                    ImageDataDGV.Rows.Add(img.Inf.splDocId, img.Inf.imageId, imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, "chunk weren't requsted", "get all chunks");
-                }
-                else
-                {
-                    ImageDataDGV.Rows.Add(img.Inf.splDocId, img.Inf.imageId , imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks, missingChunksDex.Count, "get missing chunks");
-                }
+                ImageDataDGV.Rows.Add(row);
             }
         }
 

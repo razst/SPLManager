@@ -36,6 +36,9 @@ namespace packet_maker
         [JsonProperty("collectionPrefix")]
         public string collectionPrefix { get; set; }
 
+        [JsonProperty("tcpPortNumber")]
+        public int tcpPortNumber { get; set; }
+
     }
 
     #endregion

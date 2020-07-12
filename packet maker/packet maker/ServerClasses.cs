@@ -141,7 +141,7 @@ namespace packet_maker
                         {
                             case "EndNode":
                                 // Process the data sent by the client.
-                                data = @"{'Type': 'ClientId', 'Content': 4}";
+                                data = $@"{{'Type': 'ClientId', 'Content': {@Program.settings.tcpPortNumber}}}";
                                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
                                 // Send back a response.

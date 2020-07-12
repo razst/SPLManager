@@ -26,7 +26,10 @@ namespace packet_maker
             storedPacketsDGV.Rows.Clear();
             if (Program.settings.dataBaseEnabled)
             {
-                items = await downloadList();
+                items = await Task.Run(()=> {
+                    return downloadList();
+                });
+
                 foreach (var item in items)
                 {
                     storedPacketsDGV.Rows.Add(item.Description, "send");
@@ -50,7 +53,7 @@ namespace packet_maker
         private async Task<List<ListPacketItem>> downloadList()
         {
             List<ListPacketItem> listPackets = new List<ListPacketItem>();
-            Query capitalQuery = Program.db.Collection("stored packets");
+            Query capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "stored packets");
             QuerySnapshot QuerySnapshot = await capitalQuery.GetSnapshotAsync();
             foreach (DocumentSnapshot documentSnapshot in QuerySnapshot.Documents)
             {

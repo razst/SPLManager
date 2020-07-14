@@ -241,3 +241,13 @@ C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources

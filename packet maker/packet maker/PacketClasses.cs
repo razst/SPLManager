@@ -67,11 +67,14 @@ namespace packet_maker
 
         public TypeList jsonObject { get; set; }
 
+        public string rawPacket { get; set; }
+
         private int typeDex;
         private int subtypeDex;
 
         private void ConvertFromString(string packetString)
         {
+            rawPacket = packetString;
             string[] bitarr = packetString.Split(' ');
 
 
@@ -193,5 +196,6 @@ namespace packet_maker
         public string getSubTypeName() => jsonObject.typenum[typeDex].subTypes[subtypeDex].name;
         public int getTypeDex() => typeDex;
         public int getSubTypeDex() => subtypeDex;
+       // public int getSatDex() => Array.FindIndex(groups, a => a == sateliteGroup);
     }
 }

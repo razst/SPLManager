@@ -225,7 +225,6 @@ C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\pack
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
@@ -251,3 +250,4 @@ C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources

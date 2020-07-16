@@ -79,7 +79,10 @@ namespace packet_maker
             }
             if (Program.settings.dataBaseEnabled)
             {
+                if(Program.settings.enableImage)
                 fillImgTable();
+
+                PoupolatePL();
             }
 
 
@@ -279,7 +282,7 @@ namespace packet_maker
             }
             catch
             {
-                MessageBox.Show("invaled input", "error");
+                MessageBox.Show("invaled input", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 success = false;
             }
 
@@ -339,13 +342,6 @@ namespace packet_maker
 
 
         #region rest of code
-
-
-        private void viewPacketListToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PacketListFrm frm = new PacketListFrm();
-            frm.ShowDialog();
-        }
 
         private void typeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -429,7 +425,9 @@ namespace packet_maker
         private void copyBTN_Click(object sender, EventArgs e) 
         {
             OkBtn_click();
-            Clipboard.SetText(makeOut.Text); 
+
+            if(makeOut.Text != null && makeOut.Text != "")
+            Clipboard.SetText(makeOut.Text.ToString());
         }
 
 
@@ -524,89 +522,66 @@ namespace packet_maker
 
         #endregion
 
+
+
+
+
         #region Images
         private async Task<List<imagePropeties>> GetImageInfos()
         {
-            var infoList = new List<imageInfo>();
-            var dataList = new List<imageData>();
             var propList = new List<imagePropeties>();
-            Query capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "imageInfo");
-            QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+            await Task.Run(async () => {
 
-            foreach (var docSnap in capitalQuerySnapshot.Documents)
-            {
-                // infoList.Add(docSnap.ConvertTo<imageInfo>());
-                propList.Add(new imagePropeties { Inf = docSnap.ConvertTo<imageInfo>(), chunks = new List<imageData>() });
-            }
+                Query capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "imageInfo");
+                QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
 
-            capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "imageData").OrderBy("when");
-            capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
-
-            foreach (var docSnap in capitalQuerySnapshot.Documents)
-            {
-                var T = docSnap.ConvertTo<imageData>();
-                try
+                foreach (var docSnap in capitalQuerySnapshot.Documents)
                 {
-                    propList.First(item => item.Inf.splDocId == T.splId.ToString()).chunks.Add(T);
+                    propList.Add(new imagePropeties { Inf = docSnap.ConvertTo<imageInfo>(), chunks = new List<imageData>() });
                 }
-                catch
-                {
-                    Console.WriteLine();
-                }
-            }
 
-            foreach (var prop in propList)
-            {
-                prop.chunks = prop.chunks.OrderBy(o => o.chunkId).ToList();
-            }
+            });
             return propList;
         }
 
-        private List<int[]> allMissingChunk = new List<int[]>();
+        private async Task<List<imageData>> GetImageDataOf(int splId)
+        {
+            List<imageData> imageDatas = new List<imageData>();
+
+            await Task.Run(async () => {
+
+                Query capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "imageData").WhereEqualTo("splId",splId);
+                QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+
+                foreach (var docSnap in capitalQuerySnapshot.Documents)
+                {
+                    imageDatas.Add(docSnap.ConvertTo<imageData>());
+                }
+
+            });
+
+            return imageDatas;
+        }
+
+
         private async Task<List<string[]>> DownloadTable()
         {
             var result = new List<string[]>();
             var currentImgs = await GetImageInfos();
-            bool whereChunkReq = true;
 
             foreach (var img in currentImgs)
             {
-                whereChunkReq = true;
-                List<int> missingChunksDex = new List<int>();
-                int chunkDex = 0;
-                if (img.chunks.Count != 0)
+                if (img.Inf.recivedChuncks == img.Inf.TotalChunks)
                 {
-                    for (int i = 0; i < img.Inf.TotalChunks; i++)
-                    {
-                        if (img.chunks[chunkDex].chunkId == i)
-                        {
-                            if (chunkDex < img.chunks.Count - 1)
-                                chunkDex++;
-                        }
-                        else
-                        {
-                            missingChunksDex.Add(i);
-                        }
-                    }
-                    allMissingChunk.Add(missingChunksDex.ToArray());
+                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), "none","show image","0" });
+                }
+                else if (img.Inf.recivedChuncks == -1)
+                {
+                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), "chunk weren't requsted","get all chunks","0" });
                 }
                 else
                 {
-                    whereChunkReq = false;
-                    allMissingChunk.Add(new int[img.Inf.TotalChunks]);
-                }
-
-                if (missingChunksDex.Count == 0 && whereChunkReq)
-                {
-                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), "none", "show image" });
-                }
-                else if (!whereChunkReq)
-                {
-                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), "chunk weren't requsted", "get all chunks" });
-                }
-                else
-                {
-                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), missingChunksDex.Count.ToString(), "get missing chunks" });
+                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), (img.Inf.TotalChunks - img.Inf.recivedChuncks).ToString(),"get missing chunks","0" });
                 }
             }
             return result;
@@ -653,7 +628,8 @@ namespace packet_maker
                         splDocId = SplId.ToString(),
                         TotalChunks = totalChunks,
                         when = DateTime.UtcNow,
-                        imageType = type
+                        imageType = type,
+                        recivedChuncks = -1
                     };
                     DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "imageInfo").Document(SplId.ToString());
                     docRef.SetAsync(imageInfo);
@@ -712,20 +688,40 @@ namespace packet_maker
                 {
                     case "get all chunks":
                         //Convert.ToInt32(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString())
-                       id = ConvertToHexBytes(int.Parse(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()), 3);
+                        id = ConvertToHexBytes(int.Parse(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()), 3);
                         string imgId = ConvertToHexBytes(int.Parse(senderGrid.Rows[e.RowIndex].Cells[1].Value.ToString()), 2);
 
                         await RadioServer.Send($"{id} 02 02 E2 02 00 {imgId}".Trim());
                         break;
 
-                    case "get missing chunks":
-                        len = ConvertToHexBytes(allMissingChunk[e.RowIndex].Length * 2, 2);
+                        case "get missing chunks":
+                        var chunks = await GetImageDataOf(int.Parse(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()));
+                        chunks = chunks.OrderBy(o => o.chunkId).ToList();
+                        Console.WriteLine(chunks.Count);
+                        List<int> missingChunksDex = new List<int>();
+
+                        int chunkDex = 0;
+                        for (int i = 1; i < int.Parse(senderGrid.Rows[e.RowIndex].Cells[3].Value.ToString())+1; i++)
+                        {
+                            if (chunks[chunkDex].chunkId == i)
+                            {
+                                if (chunkDex < chunks.Count - 1)
+                                    chunkDex++;
+                            }
+                            else
+                            {
+                                missingChunksDex.Add(i);
+                            }
+                        }
+
+                        len = ConvertToHexBytes(missingChunksDex.Count * 2, 2);
                         string data = null;
 
 
-                        foreach (int dex in allMissingChunk[e.RowIndex])
+
+                        foreach (int dex in missingChunksDex)
                         {
-                            data += ConvertToHexBytes(dex, 2);
+                            data += ConvertToHexBytes(dex, 2)+" ";
                         }
                         id = ConvertToHexBytes(int.Parse(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()), 3);
 
@@ -746,6 +742,224 @@ namespace packet_maker
         #endregion
 
 
+
+
+
+
+        #region playlist
+
+        private List<PLInfo> Playlists = new List<PLInfo>();
+
+        public async Task<List<PLInfo>> DowloadPL()
+        {
+            List<PLInfo> playLists = new List<PLInfo>();
+            Query capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo");
+            QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+
+            foreach(var doc in capitalQuerySnapshot)
+            {
+                playLists.Add(doc.ConvertTo<PLInfo>());
+            }
+            return playLists;
+        }
+
+        public async void PoupolatePL()
+        {
+            Playlists = await Task.Run(async () => {
+                return await DowloadPL();
+            });
+
+            foreach(var list in Playlists)
+            {
+                PlaylistCB.Items.Add(list.name);
+            }
+        }
+
+
+        private List<packetObject> commands = new List<packetObject>();
+        private void PlaylistCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PLitemsLibx.Items.Clear();
+            commands.Clear();
+            foreach(var item in Playlists[PlaylistCB.SelectedIndex].commands)
+            {
+                packetObject po = packetObject.create(options, item);
+                PLitemsLibx.Items.Add(po.getSubTypeName());
+                commands.Add(po);
+            }
+
+            sleepCmdTxb.Text = Playlists[PlaylistCB.SelectedIndex].sleepBetweenCommands.ToString();
+        }
+
+
+        private void PLitemsLibx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PLitemsLibx.SelectedIndex != -1)
+            {
+                groupsCB.SelectedItem = commands[PLitemsLibx.SelectedIndex].sateliteGroup;
+                typeCB.SelectedItem = commands[PLitemsLibx.SelectedIndex].getTypeName();
+                subtypeCB.SelectedItem = commands[PLitemsLibx.SelectedIndex].getSubTypeName();
+
+                int i = 0;
+                if(commands[PLitemsLibx.SelectedIndex].data.Count != 0)
+                foreach (DataGridViewRow item in dataTypesDGV.Rows)
+                {
+                    item.Cells[1].Value = commands[PLitemsLibx.SelectedIndex].data[i];
+                    i++;
+                }
+
+                OkBtn_click();
+            }
+        }
+
+
+        private void add2PLBtn_Click(object sender, EventArgs e)
+        {
+            packetObject po = packetObject.create(options, makeOut.Text.Trim());
+            PLitemsLibx.Items.Add(po.getSubTypeName());
+            commands.Add(po); 
+            Playlists[PlaylistCB.SelectedIndex].commands.Add(po.rawPacket);
+        }
+
+        private async void SaveListBtn_Click(object sender, EventArgs e)
+        {
+            if (Program.settings.dataBaseEnabled)
+            {
+                Playlists[PlaylistCB.SelectedIndex].sleepBetweenCommands = int.Parse(sleepCmdTxb.Text);
+
+                DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo").Document(PlaylistCB.SelectedItem.ToString());
+
+                await docRef.SetAsync(Playlists[PlaylistCB.SelectedIndex]);
+            }
+        }
+
+        private async void DelListBtn_Click(object sender, EventArgs e)
+        {
+            if(PlaylistCB.SelectedIndex != -1 && Program.settings.dataBaseEnabled)
+            if (MessageBox.Show("Are you sure?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo").Document(PlaylistCB.SelectedItem.ToString());
+
+                await docRef.DeleteAsync();
+
+                PlaylistCB.Items.RemoveAt(PlaylistCB.SelectedIndex);
+            }
+        }
+
+        private void NewListBtn_Click(object sender, EventArgs e)
+        {
+            NewPlaylistDialog playlistDialog = new NewPlaylistDialog();
+            playlistDialog.ShowDialog();
+        }
+
+
+        public async void newPLItem(string item)
+        {
+            PlaylistCB.SelectedIndex = -1;
+            PlaylistCB.Items.Add(item);
+            Playlists.Add(new PLInfo { commands = new List<string>(), name = item, sleepBetweenCommands = 0 });
+
+
+            DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo").Document(item);
+
+            await docRef.SetAsync(new PLInfo { commands = new List<string>(), name = item, sleepBetweenCommands = 0 });
+        }
+
+
+        private void DelLItemBtn_Click(object sender, EventArgs e)
+        {
+            if(PLitemsLibx.SelectedIndex != -1)
+            {
+                commands.RemoveAt(PLitemsLibx.SelectedIndex);
+                Playlists[PlaylistCB.SelectedIndex].commands.RemoveAt(PLitemsLibx.SelectedIndex);
+                PLitemsLibx.Items.RemoveAt(PLitemsLibx.SelectedIndex);
+            }
+        }
+
+        private void MoveupBtn_Click(object sender, EventArgs e)
+        {
+            if(PLitemsLibx.SelectedIndex != -1 && PLitemsLibx.SelectedIndex != 0)
+            {
+                commands.Swap(PLitemsLibx.SelectedIndex, PLitemsLibx.SelectedIndex - 1);
+                Playlists[PlaylistCB.SelectedIndex].commands.Swap(PLitemsLibx.SelectedIndex, PLitemsLibx.SelectedIndex - 1);
+
+                PLitemsLibx.Items.Swap(PLitemsLibx.SelectedIndex, PLitemsLibx.SelectedIndex - 1);
+                PLitemsLibx.SelectedIndex--;
+            }
+        }
+
+        private void MonedownBtn_Click(object sender, EventArgs e)
+        {
+            if (PLitemsLibx.SelectedIndex != -1 && PLitemsLibx.SelectedIndex != PLitemsLibx.Items.Count - 1)
+            {
+                commands.Swap(PLitemsLibx.SelectedIndex, PLitemsLibx.SelectedIndex + 1);
+                Playlists[PlaylistCB.SelectedIndex].commands.Swap(PLitemsLibx.SelectedIndex, PLitemsLibx.SelectedIndex + 1);
+
+                PLitemsLibx.Items.Swap(PLitemsLibx.SelectedIndex, PLitemsLibx.SelectedIndex + 1);
+                PLitemsLibx.SelectedIndex++;
+            }
+        }
+
+        private async void SendListBtn_Click(object sender, EventArgs e)
+        {
+            await Task.Run(async () =>
+            {
+                foreach (var packet in Playlists[PlaylistCB.SelectedIndex].commands)
+                {
+
+                    await RadioServer.Send(packet);
+                    Task.Delay(int.Parse(sleepCmdTxb.Text)).GetAwaiter().GetResult();
+                    Console.WriteLine();
+
+                }
+            });
+        }
+        #endregion
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static class ExtensionMethods
+    {
+        public static void Swap(this ListBox.ObjectCollection list, int index1, int index2)
+        {
+            object temp = list[index1];
+            list[index1] = list[index2];
+            list[index2] = temp;
+        }
+        public static void Swap<T>(this List<T> list, int index1, int index2)
+        {
+            T temp = list[index1];
+            list[index1] = list[index2];
+            list[index2] = temp;
+        }
     }
 }
 

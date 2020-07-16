@@ -23,6 +23,9 @@ namespace packet_maker
         public int TotalChunks { get; set; }
 
         [FirestoreProperty]
+        public int recivedChuncks { get; set; }
+
+        [FirestoreProperty]
         public DateTime when { get; set; }
 
     }

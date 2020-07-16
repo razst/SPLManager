@@ -83,14 +83,13 @@ namespace packet_maker
                 }
                 else
                 {
-                    MessageBox.Show("server is not online", "error");
+                    MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             });
         }
 
         private void Server_Thread()
         {
-
             try
             {
                 // Set the TcpListener on port 13000.
@@ -131,7 +130,7 @@ namespace packet_maker
 
                         Console.WriteLine("");
                         // Translate data bytes to a ASCII string.
-                        data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                        data = Encoding.ASCII.GetString(bytes, 0, i);
                         Msg msg1 = JsonConvert.DeserializeObject<Msg>(data);
                         Console.WriteLine($"Received: {data}");
 
@@ -142,7 +141,7 @@ namespace packet_maker
                             case "EndNode":
                                 // Process the data sent by the client.
                                 data = $@"{{'Type': 'ClientId', 'Content': {@Program.settings.tcpPortNumber}}}";
-                                byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+                                byte[] msg = Encoding.ASCII.GetBytes(data);
 
                                 // Send back a response.
                                 stream.Write(msg, 0, msg.Length);
@@ -167,11 +166,18 @@ namespace packet_maker
                     }
                 }
             }
-            catch
+            finally
             {
+                try
+                {
+                    Action actionCall = Kill_Server_Thread;
+                    Main.frm.BeginInvoke(actionCall);
+                }
+                finally
+                {
+
+                }
             }
-            Action actionCall = Kill_Server_Thread;
-            Main.frm.BeginInvoke(actionCall);
         }
 
         private void Kill_Server_Thread()
@@ -192,6 +198,6 @@ namespace packet_maker
             Main.frm.connectBtn.Enabled = true;
         }
 
-
+        public bool isOnline() => server != null && client != null;
     }
 }

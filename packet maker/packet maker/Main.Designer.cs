@@ -46,6 +46,22 @@
             this.transIn = new System.Windows.Forms.TextBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.TxTab = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.DelListBtn = new System.Windows.Forms.Button();
+            this.SaveListBtn = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.sleepCmdTxb = new System.Windows.Forms.TextBox();
+            this.DelLItemBtn = new System.Windows.Forms.Button();
+            this.NewListBtn = new System.Windows.Forms.Button();
+            this.MonedownBtn = new System.Windows.Forms.Button();
+            this.MoveupBtn = new System.Windows.Forms.Button();
+            this.SendListBtn = new System.Windows.Forms.Button();
+            this.PLitemsLibx = new System.Windows.Forms.ListBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.PlaylistCB = new System.Windows.Forms.ComboBox();
+            this.add2PLBtn = new System.Windows.Forms.Button();
             this.sendPacketBtn = new System.Windows.Forms.Button();
             this.copyBTN = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -68,6 +84,7 @@
             this.chunkNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.c4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label11 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.sendImgReqBtn = new System.Windows.Forms.Button();
@@ -81,35 +98,18 @@
             this.modifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewPacketListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.RxTab.SuspendLayout();
             this.ImageTab.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageDataDGV)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // ID
@@ -282,7 +282,7 @@
             // 
             this.TxTab.Controls.Add(this.label14);
             this.TxTab.Controls.Add(this.panel3);
-            this.TxTab.Controls.Add(this.button1);
+            this.TxTab.Controls.Add(this.add2PLBtn);
             this.TxTab.Controls.Add(this.sendPacketBtn);
             this.TxTab.Controls.Add(this.copyBTN);
             this.TxTab.Controls.Add(this.label4);
@@ -305,6 +305,173 @@
             this.TxTab.TabIndex = 0;
             this.TxTab.Text = "TX";
             this.TxTab.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(987, 61);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(51, 13);
+            this.label14.TabIndex = 32;
+            this.label14.Text = "Play Lists";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.DelListBtn);
+            this.panel3.Controls.Add(this.SaveListBtn);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Controls.Add(this.sleepCmdTxb);
+            this.panel3.Controls.Add(this.DelLItemBtn);
+            this.panel3.Controls.Add(this.NewListBtn);
+            this.panel3.Controls.Add(this.MonedownBtn);
+            this.panel3.Controls.Add(this.MoveupBtn);
+            this.panel3.Controls.Add(this.SendListBtn);
+            this.panel3.Controls.Add(this.PLitemsLibx);
+            this.panel3.Controls.Add(this.label13);
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Controls.Add(this.PlaylistCB);
+            this.panel3.Location = new System.Drawing.Point(855, 77);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(319, 295);
+            this.panel3.TabIndex = 32;
+            // 
+            // DelListBtn
+            // 
+            this.DelListBtn.Location = new System.Drawing.Point(197, 250);
+            this.DelListBtn.Name = "DelListBtn";
+            this.DelListBtn.Size = new System.Drawing.Size(75, 23);
+            this.DelListBtn.TabIndex = 39;
+            this.DelListBtn.Text = "delete";
+            this.DelListBtn.UseVisualStyleBackColor = true;
+            this.DelListBtn.Click += new System.EventHandler(this.DelListBtn_Click);
+            // 
+            // SaveListBtn
+            // 
+            this.SaveListBtn.Location = new System.Drawing.Point(107, 250);
+            this.SaveListBtn.Name = "SaveListBtn";
+            this.SaveListBtn.Size = new System.Drawing.Size(75, 23);
+            this.SaveListBtn.TabIndex = 38;
+            this.SaveListBtn.Text = "save";
+            this.SaveListBtn.UseVisualStyleBackColor = true;
+            this.SaveListBtn.Click += new System.EventHandler(this.SaveListBtn_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(11, 229);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(132, 13);
+            this.label15.TabIndex = 37;
+            this.label15.Text = "Sleep between commands";
+            // 
+            // sleepCmdTxb
+            // 
+            this.sleepCmdTxb.Location = new System.Drawing.Point(149, 225);
+            this.sleepCmdTxb.Name = "sleepCmdTxb";
+            this.sleepCmdTxb.Size = new System.Drawing.Size(113, 20);
+            this.sleepCmdTxb.TabIndex = 36;
+            // 
+            // DelLItemBtn
+            // 
+            this.DelLItemBtn.Location = new System.Drawing.Point(268, 184);
+            this.DelLItemBtn.Name = "DelLItemBtn";
+            this.DelLItemBtn.Size = new System.Drawing.Size(47, 23);
+            this.DelLItemBtn.TabIndex = 35;
+            this.DelLItemBtn.Text = "del";
+            this.DelLItemBtn.UseVisualStyleBackColor = true;
+            this.DelLItemBtn.Click += new System.EventHandler(this.DelLItemBtn_Click);
+            // 
+            // NewListBtn
+            // 
+            this.NewListBtn.Location = new System.Drawing.Point(269, 16);
+            this.NewListBtn.Name = "NewListBtn";
+            this.NewListBtn.Size = new System.Drawing.Size(47, 23);
+            this.NewListBtn.TabIndex = 34;
+            this.NewListBtn.Text = "new";
+            this.NewListBtn.UseVisualStyleBackColor = true;
+            this.NewListBtn.Click += new System.EventHandler(this.NewListBtn_Click);
+            // 
+            // MonedownBtn
+            // 
+            this.MonedownBtn.Location = new System.Drawing.Point(269, 155);
+            this.MonedownBtn.Name = "MonedownBtn";
+            this.MonedownBtn.Size = new System.Drawing.Size(47, 23);
+            this.MonedownBtn.TabIndex = 33;
+            this.MonedownBtn.Text = "down";
+            this.MonedownBtn.UseVisualStyleBackColor = true;
+            this.MonedownBtn.Click += new System.EventHandler(this.MonedownBtn_Click);
+            // 
+            // MoveupBtn
+            // 
+            this.MoveupBtn.Location = new System.Drawing.Point(269, 126);
+            this.MoveupBtn.Name = "MoveupBtn";
+            this.MoveupBtn.Size = new System.Drawing.Size(47, 23);
+            this.MoveupBtn.TabIndex = 32;
+            this.MoveupBtn.Text = "up";
+            this.MoveupBtn.UseVisualStyleBackColor = true;
+            this.MoveupBtn.Click += new System.EventHandler(this.MoveupBtn_Click);
+            // 
+            // SendListBtn
+            // 
+            this.SendListBtn.Location = new System.Drawing.Point(14, 250);
+            this.SendListBtn.Name = "SendListBtn";
+            this.SendListBtn.Size = new System.Drawing.Size(75, 23);
+            this.SendListBtn.TabIndex = 31;
+            this.SendListBtn.Text = "send auto";
+            this.SendListBtn.UseVisualStyleBackColor = true;
+            this.SendListBtn.Click += new System.EventHandler(this.SendListBtn_Click);
+            // 
+            // PLitemsLibx
+            // 
+            this.PLitemsLibx.FormattingEnabled = true;
+            this.PLitemsLibx.Items.AddRange(new object[] {
+            "Ping",
+            "Set Idel",
+            "Dump Days"});
+            this.PLitemsLibx.Location = new System.Drawing.Point(93, 85);
+            this.PLitemsLibx.Name = "PLitemsLibx";
+            this.PLitemsLibx.Size = new System.Drawing.Size(169, 134);
+            this.PLitemsLibx.TabIndex = 30;
+            this.PLitemsLibx.SelectedIndexChanged += new System.EventHandler(this.PLitemsLibx_SelectedIndexChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(11, 85);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(41, 13);
+            this.label13.TabIndex = 29;
+            this.label13.Text = "PL Info";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(11, 19);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(51, 13);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "PL Name";
+            // 
+            // PlaylistCB
+            // 
+            this.PlaylistCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PlaylistCB.FormattingEnabled = true;
+            this.PlaylistCB.Location = new System.Drawing.Point(93, 18);
+            this.PlaylistCB.Name = "PlaylistCB";
+            this.PlaylistCB.Size = new System.Drawing.Size(169, 21);
+            this.PlaylistCB.TabIndex = 26;
+            this.PlaylistCB.SelectedIndexChanged += new System.EventHandler(this.PlaylistCB_SelectedIndexChanged);
+            // 
+            // add2PLBtn
+            // 
+            this.add2PLBtn.Location = new System.Drawing.Point(436, 392);
+            this.add2PLBtn.Name = "add2PLBtn";
+            this.add2PLBtn.Size = new System.Drawing.Size(75, 23);
+            this.add2PLBtn.TabIndex = 25;
+            this.add2PLBtn.Text = "Add 2 PL";
+            this.add2PLBtn.UseVisualStyleBackColor = true;
+            this.add2PLBtn.Click += new System.EventHandler(this.add2PLBtn_Click);
             // 
             // sendPacketBtn
             // 
@@ -436,7 +603,7 @@
             this.ImageTab.Controls.Add(this.panel1);
             this.ImageTab.Location = new System.Drawing.Point(4, 22);
             this.ImageTab.Name = "ImageTab";
-            this.ImageTab.Size = new System.Drawing.Size(791, 429);
+            this.ImageTab.Size = new System.Drawing.Size(1182, 429);
             this.ImageTab.TabIndex = 2;
             this.ImageTab.Text = "images";
             this.ImageTab.UseVisualStyleBackColor = true;
@@ -474,7 +641,8 @@
             this.Column2,
             this.chunkNum,
             this.c4,
-            this.Column3});
+            this.Column3,
+            this.Column5});
             this.ImageDataDGV.Location = new System.Drawing.Point(53, 9);
             this.ImageDataDGV.MultiSelect = false;
             this.ImageDataDGV.Name = "ImageDataDGV";
@@ -520,6 +688,12 @@
             this.Column3.HeaderText = "Actions";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "progress";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             // 
             // label11
             // 
@@ -615,8 +789,7 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.modifyToolStripMenuItem,
-            this.viewPacketListToolStripMenuItem});
+            this.modifyToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 22);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -627,7 +800,7 @@
             this.tXToolStripMenuItem,
             this.rXToolStripMenuItem});
             this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
-            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.modifyToolStripMenuItem.Text = "modify";
             // 
             // tXToolStripMenuItem
@@ -644,13 +817,6 @@
             this.rXToolStripMenuItem.Text = "RX";
             this.rXToolStripMenuItem.Click += new System.EventHandler(this.rXToolStripMenuItem_Click);
             // 
-            // viewPacketListToolStripMenuItem
-            // 
-            this.viewPacketListToolStripMenuItem.Name = "viewPacketListToolStripMenuItem";
-            this.viewPacketListToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.viewPacketListToolStripMenuItem.Text = "view packet list";
-            this.viewPacketListToolStripMenuItem.Click += new System.EventHandler(this.viewPacketListToolStripMenuItem_Click);
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -665,161 +831,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(436, 392);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Add 2 PL";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(93, 18);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(169, 21);
-            this.comboBox1.TabIndex = 26;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(11, 19);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(51, 13);
-            this.label12.TabIndex = 28;
-            this.label12.Text = "PL Name";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(11, 85);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 13);
-            this.label13.TabIndex = 29;
-            this.label13.Text = "PL Info";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "Ping",
-            "Set Idel",
-            "Dump Days"});
-            this.listBox1.Location = new System.Drawing.Point(93, 85);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(169, 134);
-            this.listBox1.TabIndex = 30;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(14, 250);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 31;
-            this.button2.Text = "send auto";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.button8);
-            this.panel3.Controls.Add(this.button7);
-            this.panel3.Controls.Add(this.label15);
-            this.panel3.Controls.Add(this.textBox1);
-            this.panel3.Controls.Add(this.button6);
-            this.panel3.Controls.Add(this.button5);
-            this.panel3.Controls.Add(this.button4);
-            this.panel3.Controls.Add(this.button3);
-            this.panel3.Controls.Add(this.button2);
-            this.panel3.Controls.Add(this.listBox1);
-            this.panel3.Controls.Add(this.label13);
-            this.panel3.Controls.Add(this.label12);
-            this.panel3.Controls.Add(this.comboBox1);
-            this.panel3.Location = new System.Drawing.Point(724, 119);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(319, 295);
-            this.panel3.TabIndex = 32;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(852, 109);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(51, 13);
-            this.label14.TabIndex = 32;
-            this.label14.Text = "Play Lists";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(269, 126);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(47, 23);
-            this.button3.TabIndex = 32;
-            this.button3.Text = "up";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(269, 155);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(47, 23);
-            this.button4.TabIndex = 33;
-            this.button4.Text = "down";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(269, 16);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(47, 23);
-            this.button5.TabIndex = 34;
-            this.button5.Text = "new";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(268, 184);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(47, 23);
-            this.button6.TabIndex = 35;
-            this.button6.Text = "del";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(149, 225);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(113, 20);
-            this.textBox1.TabIndex = 36;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(11, 229);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(132, 13);
-            this.label15.TabIndex = 37;
-            this.label15.Text = "Sleep between commands";
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(107, 250);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 38;
-            this.button7.Text = "save";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(197, 250);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 39;
-            this.button8.Text = "delete";
-            this.button8.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -837,6 +848,8 @@
             this.TabControl.ResumeLayout(false);
             this.TxTab.ResumeLayout(false);
             this.TxTab.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.RxTab.ResumeLayout(false);
             this.RxTab.PerformLayout();
             this.ImageTab.ResumeLayout(false);
@@ -847,8 +860,6 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -891,7 +902,6 @@
         private System.Windows.Forms.ToolStripMenuItem tXToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rXToolStripMenuItem;
         public System.Windows.Forms.Button connectBtn;
-        private System.Windows.Forms.ToolStripMenuItem viewPacketListToolStripMenuItem;
         private System.Windows.Forms.Button sendPacketBtn;
         private System.Windows.Forms.TabPage ImageTab;
         private System.Windows.Forms.Panel panel1;
@@ -905,28 +915,29 @@
         private System.Windows.Forms.DataGridView ImageDataDGV;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button refreshBtn;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button DelListBtn;
+        private System.Windows.Forms.Button SaveListBtn;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox sleepCmdTxb;
+        private System.Windows.Forms.Button DelLItemBtn;
+        private System.Windows.Forms.Button NewListBtn;
+        private System.Windows.Forms.Button MonedownBtn;
+        private System.Windows.Forms.Button MoveupBtn;
+        private System.Windows.Forms.Button SendListBtn;
+        private System.Windows.Forms.ListBox PLitemsLibx;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox PlaylistCB;
+        private System.Windows.Forms.Button add2PLBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn chunkNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn c4;
         private System.Windows.Forms.DataGridViewButtonColumn Column3;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
     }
 }
 

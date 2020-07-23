@@ -27,7 +27,11 @@ namespace packet_maker
         {
             InitializeComponent();
         }
+
+
         #region setup
+
+
         private List<DataGridViewComboBoxCell> cList = new List<DataGridViewComboBoxCell>();
         private TypeList options;
         private TypeList transOptions;
@@ -48,6 +52,14 @@ namespace packet_maker
             "T8GBS (Guvat Shmuel)"
         };
 
+
+        enum Packet_Mode
+        {
+            satelite = 1,
+            database = 2,
+
+            none = 0
+        }
 
         private string[] imageTypes = 
         {
@@ -144,8 +156,10 @@ namespace packet_maker
         #region TX/RX
 
 
-        private void TX()
+
+        private void TX(int CurrId,Packet_Mode mode)
         {
+           
             int length = 0;
             foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
             {
@@ -166,7 +180,7 @@ namespace packet_maker
                         break;
 
                     case "bytes":
-                        length += (dataTypesDGV.Rows[0].Cells[1].Value.ToString().Length + 1) / 3;
+                        length += (dataTypesDGV.Rows[0].Cells[1].Value.ToString().Trim().Length + 1) / 3;
                         break;
                 }
             }
@@ -177,7 +191,7 @@ namespace packet_maker
             string type = ConvertToHexBytes(options.typenum[typeCB.SelectedIndex].id, 1);
             string subtype = ConvertToHexBytes(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id,1);
             string len = ConvertToHexBytes(length,2);
-            string id = ConvertToHexBytes(getSplCurId(),3);
+            string id = ConvertToHexBytes(CurrId,3);
             string satNum = ConvertToHexBytes(groupsCB.SelectedIndex,1);
 
 
@@ -208,9 +222,45 @@ namespace packet_maker
 
                         case "date":
                         case "datetime":
-                            dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
-                            unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
-                            data += Convert.ToInt64(unix).ToString("X8");
+                            if(mode != Packet_Mode.database)
+                            {
+                                if (dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(0, 3) != "now")
+                                {
+                                    dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
+                                    unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+                                }
+                                else if (dataTypesDGV.Rows[i].Cells[1].Value.ToString() == "now")
+                                {
+                                    dt = DateTime.Now;
+                                    unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+                                }
+                                else
+                                {
+                                    unix = ((DateTimeOffset)DateTime.Now).ToUnixTimeSeconds() - int.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(4));
+                                }
+
+                                data += Convert.ToInt64(unix).ToString("X8");
+                            }
+                            else
+                            {
+                                if (dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(0, 3) != "now")
+                                {
+                                    dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
+                                    unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+                                    data += Convert.ToInt64(unix).ToString("X8");
+                                }
+                                else if (dataTypesDGV.Rows[i].Cells[1].Value.ToString() == "now")
+                                {
+                                    data += "000000NN";
+                                }
+                                else
+                                {
+                                    string p = ConvertToHexBytes(int.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(4)),3).Replace(" ", String.Empty)+"NN";
+                                    //String h = int.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(4)).ToString("X6").Trim() + "NN";
+                                    data += p;
+                                }
+                            }
+
                             break;
 
                         case "short":
@@ -218,8 +268,7 @@ namespace packet_maker
                             break;
 
                         case "bytes":
-                            makeOut.Text = id + " " + satNum + " " + type + " " + subtype + len + " " + dataTypesDGV.Rows[i].Cells[1].Value.ToString().ToUpper();
-                            makeOut.Text = makeOut.Text.ToString().Substring(1);
+                            makeOut.Text = id + " " + satNum + " " + type + " " + subtype +" "+ len + " " + dataTypesDGV.Rows[i].Cells[1].Value.ToString().ToUpper();
                             return;
 
                     }
@@ -272,12 +321,12 @@ namespace packet_maker
 
         #region click events
 
-        private async void OkBtn_click()
+        private async void OkBtn_click(int id,Packet_Mode mode)
         {
             success = false;
             try
             {
-                TX();
+                TX(id,mode);
                 success = true;
             }
             catch
@@ -285,10 +334,12 @@ namespace packet_maker
                 MessageBox.Show("invaled input", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 success = false;
             }
-
-            if (success)
+            finally
             {
-                await Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
+                if (success && mode == Packet_Mode.satelite)
+                {
+                    await Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
+                }
             }
         }
         public async void trasBtn_click(string msg)
@@ -386,6 +437,7 @@ namespace packet_maker
                         dataTypesDGV.Rows[i].Cells[1] = cList[i];
                         dataTypesDGV.Rows[i].Cells[1].Value = cList[i].Items[0];
                     }
+
                     if (par.type == "date")
                     {
                         dataTypesDGV.Rows[i].Cells[1].Value = DateTime.Now.ToString("dd/MM/yyyy");
@@ -424,7 +476,7 @@ namespace packet_maker
 
         private void copyBTN_Click(object sender, EventArgs e) 
         {
-            OkBtn_click();
+            OkBtn_click(getSplCurId(),Packet_Mode.satelite);
 
             if(makeOut.Text != null && makeOut.Text != "")
             Clipboard.SetText(makeOut.Text.ToString());
@@ -512,7 +564,7 @@ namespace packet_maker
 
         private async void sendPacketBtn_Click(object sender, EventArgs e)
         {
-            OkBtn_click();
+            OkBtn_click(getSplCurId(),Packet_Mode.satelite);
             await RadioServer.Send(makeOut.Text.Trim());
             TabControl.SelectedTab = RxTab;
         }
@@ -796,29 +848,36 @@ namespace packet_maker
         {
             if (PLitemsLibx.SelectedIndex != -1)
             {
-                groupsCB.SelectedItem = commands[PLitemsLibx.SelectedIndex].sateliteGroup;
-                typeCB.SelectedItem = commands[PLitemsLibx.SelectedIndex].getTypeName();
-                subtypeCB.SelectedItem = commands[PLitemsLibx.SelectedIndex].getSubTypeName();
+                CastToDGV(commands[PLitemsLibx.SelectedIndex]);
 
-                int i = 0;
-                if(commands[PLitemsLibx.SelectedIndex].data.Count != 0)
-                foreach (DataGridViewRow item in dataTypesDGV.Rows)
-                {
-                    item.Cells[1].Value = commands[PLitemsLibx.SelectedIndex].data[i];
-                    i++;
-                }
-
-                OkBtn_click();
+                OkBtn_click(int.Parse(IDTxb.Text),Packet_Mode.none);
             }
         }
 
+        private void CastToDGV(packetObject packet)
+        {
+            groupsCB.SelectedItem = packet.sateliteGroup;
+            typeCB.SelectedItem = packet.getTypeName();
+            subtypeCB.SelectedItem = packet.getSubTypeName();
+
+            int i = 0;
+            if (packet.data.Count != 0)
+                foreach (DataGridViewRow item in dataTypesDGV.Rows)
+                {
+                    item.Cells[1].Value = packet.data[i];
+                    i++;
+                }
+        }
 
         private void add2PLBtn_Click(object sender, EventArgs e)
         {
+
+            OkBtn_click(getSplCurId(),Packet_Mode.database);
             packetObject po = packetObject.create(options, makeOut.Text.Trim());
             PLitemsLibx.Items.Add(po.getSubTypeName());
             commands.Add(po); 
             Playlists[PlaylistCB.SelectedIndex].commands.Add(po.rawPacket);
+            PLitemsLibx.SelectedIndex = PLitemsLibx.Items.Count - 1;
         }
 
         private async void SaveListBtn_Click(object sender, EventArgs e)
@@ -838,11 +897,14 @@ namespace packet_maker
             if(PlaylistCB.SelectedIndex != -1 && Program.settings.dataBaseEnabled)
             if (MessageBox.Show("Are you sure?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo").Document(PlaylistCB.SelectedItem.ToString());
+                    PLitemsLibx.Items.Clear();
+                    sleepCmdTxb.Text = "";
 
-                await docRef.DeleteAsync();
+                    DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo").Document(PlaylistCB.SelectedItem.ToString());
 
-                PlaylistCB.Items.RemoveAt(PlaylistCB.SelectedIndex);
+                    await docRef.DeleteAsync();
+
+                    PlaylistCB.Items.RemoveAt(PlaylistCB.SelectedIndex);
             }
         }
 
@@ -855,9 +917,10 @@ namespace packet_maker
 
         public async void newPLItem(string item)
         {
-            PlaylistCB.SelectedIndex = -1;
+            
             PlaylistCB.Items.Add(item);
             Playlists.Add(new PLInfo { commands = new List<string>(), name = item, sleepBetweenCommands = 0 });
+            PlaylistCB.SelectedIndex = PlaylistCB.Items.Count - 1;
 
 
             DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo").Document(item);
@@ -870,9 +933,16 @@ namespace packet_maker
         {
             if(PLitemsLibx.SelectedIndex != -1)
             {
+                int T = PLitemsLibx.SelectedIndex;
                 commands.RemoveAt(PLitemsLibx.SelectedIndex);
                 Playlists[PlaylistCB.SelectedIndex].commands.RemoveAt(PLitemsLibx.SelectedIndex);
                 PLitemsLibx.Items.RemoveAt(PLitemsLibx.SelectedIndex);
+
+                if (PLitemsLibx.Items.Count != 0) 
+                {
+                    if (T == PLitemsLibx.Items.Count) PLitemsLibx.SelectedIndex = T - 1;
+                    else PLitemsLibx.SelectedIndex = T;
+                }
             }
         }
 
@@ -900,19 +970,39 @@ namespace packet_maker
             }
         }
 
+        private string sendAutoWorker(int index)
+        {
+            PLitemsLibx.SelectedIndex = -1;
+            PLitemsLibx.SelectedIndex = index;
+            return makeOut.Text;
+        }
+
+
         private async void SendListBtn_Click(object sender, EventArgs e)
         {
-            await Task.Run(async () =>
+            if (RadioServer.isOnline())
             {
-                foreach (var packet in Playlists[PlaylistCB.SelectedIndex].commands)
+                var tem = Playlists[PlaylistCB.SelectedIndex].commands;
+
+                await Task.Run(async () =>
                 {
+                    int i = 0;
+                    Func<int, string> f = sendAutoWorker;
+                    foreach (var packet in tem)
+                    {
+                        string pac = (string)Invoke(f,i);
+                        await RadioServer.Send(pac);
+                        Task.Delay(int.Parse(sleepCmdTxb.Text)).GetAwaiter().GetResult();
+                        i++;
+                        
+                    }
+                });
+            }
+            else
+            {
+                MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-                    await RadioServer.Send(packet);
-                    Task.Delay(int.Parse(sleepCmdTxb.Text)).GetAwaiter().GetResult();
-                    Console.WriteLine();
-
-                }
-            });
         }
         #endregion
 

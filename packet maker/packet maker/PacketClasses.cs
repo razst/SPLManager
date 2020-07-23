@@ -116,16 +116,25 @@ namespace packet_maker
                         break;
 
                     case "datetime":
-                        DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                        dtDateTime = dtDateTime.AddSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
-                        data.Add(dtDateTime.ToString());
-                        j += 4;
-                        break;
-
                     case "date":
-                        System.DateTime dDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-                        dtDateTime = dDateTime.AddSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
-                        data.Add(dtDateTime.ToString().Substring(0,10));
+                        if(bitarr[j] != "NN")
+                        {
+                            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                            dtDateTime = dtDateTime.AddSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
+
+                            if (par.type == "datetime")
+                            {
+                                data.Add(dtDateTime.ToString());
+                            }
+                            else
+                            {
+                                data.Add(dtDateTime.ToString().Substring(0, 10));
+                            }
+                        }
+                        else
+                        {
+                            data.Add($"now-{Convert.ToInt32(bitarr[j + 1] + bitarr[j + 2] + bitarr[j + 3], 16)}");
+                        }
                         j += 4;
                         break;
 

@@ -425,10 +425,6 @@
             // PLitemsLibx
             // 
             this.PLitemsLibx.FormattingEnabled = true;
-            this.PLitemsLibx.Items.AddRange(new object[] {
-            "Ping",
-            "Set Idel",
-            "Dump Days"});
             this.PLitemsLibx.Location = new System.Drawing.Point(93, 85);
             this.PLitemsLibx.Name = "PLitemsLibx";
             this.PLitemsLibx.Size = new System.Drawing.Size(169, 134);

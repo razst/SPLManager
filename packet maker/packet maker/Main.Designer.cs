@@ -67,6 +67,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.RxTab = new System.Windows.Forms.TabPage();
+            this.clearRxBtn = new System.Windows.Forms.Button();
             this.connectBtn = new System.Windows.Forms.Button();
             this.transOut = new System.Windows.Forms.ListBox();
             this.pasteBTN = new System.Windows.Forms.Button();
@@ -100,7 +101,6 @@
             this.rXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearRxBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
@@ -134,7 +134,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(559, 28);
+            this.label2.Location = new System.Drawing.Point(571, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 4;
@@ -153,7 +153,7 @@
             // 
             this.makeOut.Location = new System.Drawing.Point(70, 367);
             this.makeOut.Name = "makeOut";
-            this.makeOut.Size = new System.Drawing.Size(604, 20);
+            this.makeOut.Size = new System.Drawing.Size(700, 20);
             this.makeOut.TabIndex = 4;
             // 
             // label3
@@ -180,7 +180,7 @@
             this.dataTypesDGV.Location = new System.Drawing.Point(70, 137);
             this.dataTypesDGV.Name = "dataTypesDGV";
             this.dataTypesDGV.RowHeadersWidth = 62;
-            this.dataTypesDGV.Size = new System.Drawing.Size(604, 224);
+            this.dataTypesDGV.Size = new System.Drawing.Size(700, 224);
             this.dataTypesDGV.TabIndex = 3;
             this.dataTypesDGV.Visible = false;
             this.dataTypesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTypesDGV_CellClick);
@@ -310,9 +310,10 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(987, 61);
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label14.Location = new System.Drawing.Point(958, 84);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(51, 13);
+            this.label14.Size = new System.Drawing.Size(68, 17);
             this.label14.TabIndex = 32;
             this.label14.Text = "Play Lists";
             // 
@@ -332,14 +333,14 @@
             this.panel3.Controls.Add(this.label13);
             this.panel3.Controls.Add(this.label12);
             this.panel3.Controls.Add(this.PlaylistCB);
-            this.panel3.Location = new System.Drawing.Point(855, 77);
+            this.panel3.Location = new System.Drawing.Point(826, 94);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(319, 295);
+            this.panel3.Size = new System.Drawing.Size(329, 295);
             this.panel3.TabIndex = 32;
             // 
             // DelListBtn
             // 
-            this.DelListBtn.Location = new System.Drawing.Point(197, 250);
+            this.DelListBtn.Location = new System.Drawing.Point(218, 260);
             this.DelListBtn.Name = "DelListBtn";
             this.DelListBtn.Size = new System.Drawing.Size(75, 23);
             this.DelListBtn.TabIndex = 39;
@@ -349,7 +350,7 @@
             // 
             // SaveListBtn
             // 
-            this.SaveListBtn.Location = new System.Drawing.Point(107, 250);
+            this.SaveListBtn.Location = new System.Drawing.Point(128, 260);
             this.SaveListBtn.Name = "SaveListBtn";
             this.SaveListBtn.Size = new System.Drawing.Size(75, 23);
             this.SaveListBtn.TabIndex = 38;
@@ -362,20 +363,21 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(11, 229);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(132, 13);
+            this.label15.Size = new System.Drawing.Size(160, 13);
             this.label15.TabIndex = 37;
-            this.label15.Text = "Sleep between commands";
+            this.label15.Text = "Sleep between commands (milis)";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // sleepCmdTxb
             // 
-            this.sleepCmdTxb.Location = new System.Drawing.Point(149, 225);
+            this.sleepCmdTxb.Location = new System.Drawing.Point(171, 225);
             this.sleepCmdTxb.Name = "sleepCmdTxb";
-            this.sleepCmdTxb.Size = new System.Drawing.Size(113, 20);
+            this.sleepCmdTxb.Size = new System.Drawing.Size(91, 20);
             this.sleepCmdTxb.TabIndex = 36;
             // 
             // DelLItemBtn
             // 
-            this.DelLItemBtn.Location = new System.Drawing.Point(268, 184);
+            this.DelLItemBtn.Location = new System.Drawing.Point(268, 162);
             this.DelLItemBtn.Name = "DelLItemBtn";
             this.DelLItemBtn.Size = new System.Drawing.Size(47, 23);
             this.DelLItemBtn.TabIndex = 35;
@@ -395,7 +397,7 @@
             // 
             // MonedownBtn
             // 
-            this.MonedownBtn.Location = new System.Drawing.Point(269, 155);
+            this.MonedownBtn.Location = new System.Drawing.Point(269, 133);
             this.MonedownBtn.Name = "MonedownBtn";
             this.MonedownBtn.Size = new System.Drawing.Size(47, 23);
             this.MonedownBtn.TabIndex = 33;
@@ -405,7 +407,7 @@
             // 
             // MoveupBtn
             // 
-            this.MoveupBtn.Location = new System.Drawing.Point(269, 126);
+            this.MoveupBtn.Location = new System.Drawing.Point(269, 104);
             this.MoveupBtn.Name = "MoveupBtn";
             this.MoveupBtn.Size = new System.Drawing.Size(47, 23);
             this.MoveupBtn.TabIndex = 32;
@@ -415,7 +417,7 @@
             // 
             // SendListBtn
             // 
-            this.SendListBtn.Location = new System.Drawing.Point(14, 250);
+            this.SendListBtn.Location = new System.Drawing.Point(35, 260);
             this.SendListBtn.Name = "SendListBtn";
             this.SendListBtn.Size = new System.Drawing.Size(75, 23);
             this.SendListBtn.TabIndex = 31;
@@ -426,16 +428,16 @@
             // PLitemsLibx
             // 
             this.PLitemsLibx.FormattingEnabled = true;
-            this.PLitemsLibx.Location = new System.Drawing.Point(93, 85);
+            this.PLitemsLibx.Location = new System.Drawing.Point(70, 59);
             this.PLitemsLibx.Name = "PLitemsLibx";
-            this.PLitemsLibx.Size = new System.Drawing.Size(169, 134);
+            this.PLitemsLibx.Size = new System.Drawing.Size(192, 160);
             this.PLitemsLibx.TabIndex = 30;
             this.PLitemsLibx.SelectedIndexChanged += new System.EventHandler(this.PLitemsLibx_SelectedIndexChanged);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(11, 85);
+            this.label13.Location = new System.Drawing.Point(21, 59);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(41, 13);
             this.label13.TabIndex = 29;
@@ -454,15 +456,15 @@
             // 
             this.PlaylistCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PlaylistCB.FormattingEnabled = true;
-            this.PlaylistCB.Location = new System.Drawing.Point(93, 18);
+            this.PlaylistCB.Location = new System.Drawing.Point(70, 18);
             this.PlaylistCB.Name = "PlaylistCB";
-            this.PlaylistCB.Size = new System.Drawing.Size(169, 21);
+            this.PlaylistCB.Size = new System.Drawing.Size(192, 21);
             this.PlaylistCB.TabIndex = 26;
             this.PlaylistCB.SelectedIndexChanged += new System.EventHandler(this.PlaylistCB_SelectedIndexChanged);
             // 
             // add2PLBtn
             // 
-            this.add2PLBtn.Location = new System.Drawing.Point(436, 392);
+            this.add2PLBtn.Location = new System.Drawing.Point(436, 393);
             this.add2PLBtn.Name = "add2PLBtn";
             this.add2PLBtn.Size = new System.Drawing.Size(75, 23);
             this.add2PLBtn.TabIndex = 25;
@@ -527,6 +529,16 @@
             this.RxTab.TabIndex = 1;
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
+            // 
+            // clearRxBtn
+            // 
+            this.clearRxBtn.Location = new System.Drawing.Point(523, 403);
+            this.clearRxBtn.Name = "clearRxBtn";
+            this.clearRxBtn.Size = new System.Drawing.Size(75, 23);
+            this.clearRxBtn.TabIndex = 10;
+            this.clearRxBtn.Text = "clear";
+            this.clearRxBtn.UseVisualStyleBackColor = true;
+            this.clearRxBtn.Click += new System.EventHandler(this.clearRxBtn_Click);
             // 
             // connectBtn
             // 
@@ -829,16 +841,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // clearRxBtn
-            // 
-            this.clearRxBtn.Location = new System.Drawing.Point(523, 403);
-            this.clearRxBtn.Name = "clearRxBtn";
-            this.clearRxBtn.Size = new System.Drawing.Size(75, 23);
-            this.clearRxBtn.TabIndex = 10;
-            this.clearRxBtn.Text = "clear";
-            this.clearRxBtn.UseVisualStyleBackColor = true;
-            this.clearRxBtn.Click += new System.EventHandler(this.clearRxBtn_Click);
             // 
             // Main
             // 

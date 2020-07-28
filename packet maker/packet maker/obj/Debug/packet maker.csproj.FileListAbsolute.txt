@@ -249,5 +249,5 @@ C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources

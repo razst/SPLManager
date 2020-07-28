@@ -355,15 +355,17 @@ namespace packet_maker
             else
             {
                 string[] TArr = mess.Split(' ');
+
+                if(TArr.Length >= 6)
                 if (TArr[4] == "02" && (TArr[5] == "E1" || TArr[5] == "E2"))
                 {
-                    HandleNewImagePacket(TArr);
+                        HandleNewImagePacket(TArr);
+                        return;
                 }
-                else
-                {
-                    rawRxPacHisList.Add(mess);
-                    addItemToPrivHex("ERROR");
-                }
+
+
+                rawRxPacHisList.Add(mess);
+                addItemToPrivHex("ERROR");
             }
         }
 
@@ -530,6 +532,15 @@ namespace packet_maker
 
         }
 
+
+
+        private void clearRxBtn_Click(object sender, EventArgs e)
+        {
+            privHex.Items.Clear();
+            transIn.Text = "";
+            transOut.Items.Clear();
+            rawRxPacHisList.Clear();
+        }
         #endregion
 
 
@@ -1005,8 +1016,6 @@ namespace packet_maker
 
         }
         #endregion
-
-
     }
 
 

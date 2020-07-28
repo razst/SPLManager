@@ -100,6 +100,7 @@
             this.rXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearRxBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
@@ -509,6 +510,7 @@
             // 
             // RxTab
             // 
+            this.RxTab.Controls.Add(this.clearRxBtn);
             this.RxTab.Controls.Add(this.connectBtn);
             this.RxTab.Controls.Add(this.transOut);
             this.RxTab.Controls.Add(this.pasteBTN);
@@ -828,6 +830,16 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // clearRxBtn
+            // 
+            this.clearRxBtn.Location = new System.Drawing.Point(523, 403);
+            this.clearRxBtn.Name = "clearRxBtn";
+            this.clearRxBtn.Size = new System.Drawing.Size(75, 23);
+            this.clearRxBtn.TabIndex = 10;
+            this.clearRxBtn.Text = "clear";
+            this.clearRxBtn.UseVisualStyleBackColor = true;
+            this.clearRxBtn.Click += new System.EventHandler(this.clearRxBtn_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -934,6 +946,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn c4;
         private System.Windows.Forms.DataGridViewButtonColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.Button clearRxBtn;
     }
 }
 

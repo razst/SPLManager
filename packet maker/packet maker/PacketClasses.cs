@@ -117,7 +117,7 @@ namespace packet_maker
 
                     case "datetime":
                     case "date":
-                        if(bitarr[j] != "NN")
+                        if(bitarr[j] != "NN" && bitarr[j] != "N+" && bitarr[j] != "N-")
                         {
                             DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                             dtDateTime = dtDateTime.AddSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
@@ -133,7 +133,14 @@ namespace packet_maker
                         }
                         else
                         {
-                            data.Add($"now-{Convert.ToInt32(bitarr[j + 1] + bitarr[j + 2] + bitarr[j + 3], 16)}");
+                            if(bitarr[j][1] != 'N')
+                            {
+                                data.Add($"now{bitarr[j][1]}{Convert.ToInt32(bitarr[j + 1] + bitarr[j + 2] + bitarr[j + 3], 16)}");
+                            }
+                            else
+                            {
+                                data.Add("now");
+                            }
                         }
                         j += 4;
                         break;

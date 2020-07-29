@@ -32,21 +32,15 @@ namespace packet_maker
         private TcpClient client = null;
         private TcpListener server = null;
 
-
+        public bool isOnline;
 
         public void Start()
         {
-            Main.frm.connectBtn.Enabled = false;
-            try
-            {
-                System.Diagnostics.Process.Start(Program.settings.endNodePath);
-            }
-            catch { }
-
             if (childThread == null)
             {
                 ThreadStart childref = new ThreadStart(Server_Thread);
                 childThread = new Thread(childref);
+                childThread.IsBackground = true;
                 childThread.Start();
             }
         }
@@ -115,7 +109,7 @@ namespace packet_maker
                     // You could also use server.AcceptSocket() here.
                     client = server.AcceptTcpClient();
                     Console.WriteLine("Connected!");
-
+                    isOnline = true;
                     data = null;
 
                     // Get a stream object for reading and writing
@@ -166,10 +160,15 @@ namespace packet_maker
                     }
                 }
             }
+            catch
+            {
+
+            }
             finally
             {
                 try
                 {
+                    isOnline = false;
                     Action actionCall = Kill_Server_Thread;
                     Main.frm.BeginInvoke(actionCall);
                 }
@@ -182,22 +181,29 @@ namespace packet_maker
 
         private void Kill_Server_Thread()
         {
-            if (childThread != null)
-            {
-                childThread.Abort();
-            }
-            if (client != null && server != null)
+            if (isOnline)
             {
                 client.Close();
                 server.Stop();
             }
 
+            if (childThread != null)
+            {
+                if (childThread.IsAlive)
+                {
+                    childThread.Interrupt();
+                    childThread.Join(0);
+                }
+            }
+
+
+
             client = null;
             server = null;
             childThread = null;
+            isOnline = false;
             Main.frm.connectBtn.Enabled = true;
         }
 
-        public bool isOnline() => server != null && client != null;
     }
 }

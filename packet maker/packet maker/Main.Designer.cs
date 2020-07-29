@@ -366,7 +366,6 @@
             this.label15.Size = new System.Drawing.Size(160, 13);
             this.label15.TabIndex = 37;
             this.label15.Text = "Sleep between commands (milis)";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // sleepCmdTxb
             // 
@@ -854,6 +853,7 @@
             this.Text = "SPL Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Shown += new System.EventHandler(this.Main_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).EndInit();
             this.TabControl.ResumeLayout(false);
             this.TxTab.ResumeLayout(false);

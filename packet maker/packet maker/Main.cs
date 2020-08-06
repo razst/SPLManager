@@ -115,7 +115,7 @@ namespace packet_maker
 
             IDTxb.Text = Program.settings.pacCurId.ToString();
             imgIdTxb.Text = Program.settings.pacCurId.ToString();
-            groupsCB.SelectedIndex = 2;
+            groupsCB.SelectedIndex = Program.settings.defultSatGroup;
             frm = this;
         }
 
@@ -306,18 +306,18 @@ namespace packet_maker
 
 
 
-            transOut.Items.Clear();
-            transOut.Items.Add("Satlite: " + po.sateliteGroup);
-            transOut.Items.Add("ID: " + po.id);
-            transOut.Items.Add("type: " + po.getTypeName());
-            transOut.Items.Add("subtype: " + po.getSubTypeName());
-            transOut.Items.Add("length: " + po.length);
+            transOut.Clear();
+            transOut.AppendText("Satlite: " + po.sateliteGroup+Environment.NewLine);
+            transOut.AppendText("ID: " + po.id + Environment.NewLine);
+            transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
+            transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
+            transOut.AppendText("length: " + po.length + Environment.NewLine);
             if (po.data.Count != 0)
             {
-                transOut.Items.Add("*******************************");
+                transOut.AppendText("*******************************" + Environment.NewLine);
                 for (int i = 0; i < po.data.Count; i++)
                 {
-                    transOut.Items.Add(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i]);
+                    transOut.AppendText(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i] + Environment.NewLine);
                 }
             }
         }
@@ -353,21 +353,24 @@ namespace packet_maker
             mess = msg.Trim();
             if (packetObject.TestIfPacket(mess, transOptions))
             {
-                await Upload_Packet("rx packets", traID.ToString(), mess);
                 po = packetObject.create(transOptions, msg.Trim());
                 rawRxPacHisList.Add(mess);
                 addItemToPrivHex($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+                await Upload_Packet("rx packets", traID.ToString(), mess);
             }
             else
             {
                 string[] TArr = mess.Split(' ');
 
-                if(TArr.Length >= 6)
-                if (TArr[4] == "02" && (TArr[5] == "E1" || TArr[5] == "E2"))
+                if (TArr.Length >= 6)
                 {
+                    if (TArr[4] == "02" && (TArr[5] == "E1" || TArr[5] == "E2"))
+                    {
                         HandleNewImagePacket(TArr);
                         return;
+                    }
                 }
+
 
 
                 rawRxPacHisList.Add(mess);
@@ -531,9 +534,9 @@ namespace packet_maker
             }
             else
             {
-                transOut.Items.Clear();
-                transOut.Items.Add("Manager was not able to translate this packet:");
-                transOut.Items.Add(rawRxPacHisList[privHex.SelectedIndex]);
+                transOut.Clear();
+                transOut.AppendText("Manager was not able to translate this packet:"+Environment.NewLine);
+                transOut.AppendText(rawRxPacHisList[privHex.SelectedIndex]+ Environment.NewLine);
             }
 
         }
@@ -544,7 +547,7 @@ namespace packet_maker
         {
             privHex.Items.Clear();
             transIn.Text = "";
-            transOut.Items.Clear();
+            transOut.Clear();
             rawRxPacHisList.Clear();
         }
         #endregion

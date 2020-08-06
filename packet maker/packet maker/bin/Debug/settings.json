@@ -5,5 +5,6 @@
 "dataBaseKeyPath":"C:/key/satelite packets-a1af32f2133c.json",
 "dataBaseName":"satelite-packets",
 "collectionPrefix":"",
-"tcpPortNumber": 4
+"tcpPortNumber": 4,
+"defultSatGroup": 2 
 }

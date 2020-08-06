@@ -67,6 +67,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.RxTab = new System.Windows.Forms.TabPage();
+            this.transOut = new System.Windows.Forms.TextBox();
             this.clearRxBtn = new System.Windows.Forms.Button();
             this.connectBtn = new System.Windows.Forms.Button();
             this.pasteBTN = new System.Windows.Forms.Button();
@@ -100,7 +101,6 @@
             this.rXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.transOut = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
@@ -529,6 +529,16 @@
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
             // 
+            // transOut
+            // 
+            this.transOut.Location = new System.Drawing.Point(48, 98);
+            this.transOut.Multiline = true;
+            this.transOut.Name = "transOut";
+            this.transOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.transOut.Size = new System.Drawing.Size(253, 303);
+            this.transOut.TabIndex = 11;
+            this.transOut.WordWrap = false;
+            // 
             // clearRxBtn
             // 
             this.clearRxBtn.Location = new System.Drawing.Point(523, 403);
@@ -831,16 +841,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // transOut
-            // 
-            this.transOut.Location = new System.Drawing.Point(48, 98);
-            this.transOut.Multiline = true;
-            this.transOut.Name = "transOut";
-            this.transOut.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.transOut.Size = new System.Drawing.Size(253, 303);
-            this.transOut.TabIndex = 11;
-            this.transOut.WordWrap = false;
             // 
             // Main
             // 

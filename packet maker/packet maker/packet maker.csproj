@@ -120,6 +120,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="IdDoc.cs" />
     <Compile Include="ImageClasses.cs" />
     <Compile Include="jsonFrm.cs">

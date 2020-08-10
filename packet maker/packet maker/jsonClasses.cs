@@ -39,6 +39,9 @@ namespace packet_maker
         [JsonProperty("tcpPortNumber")]
         public int tcpPortNumber { get; set; }
 
+        [JsonProperty("defultSatGroup")]
+        public int defultSatGroup { get; set; }
+
     }
 
     #endregion

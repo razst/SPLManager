@@ -1,6 +1,6 @@
 ﻿//#define DB
 
-using Google.Cloud.Firestore; 
+using Google.Cloud.Firestore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -115,10 +115,15 @@ namespace packet_maker
 
             IDTxb.Text = Program.settings.pacCurId.ToString();
             imgIdTxb.Text = Program.settings.pacCurId.ToString();
-            groupsCB.SelectedIndex = 2;
+            groupsCB.SelectedIndex = Program.settings.defultSatGroup;
             frm = this;
         }
 
+
+        private void Main_Shown(object sender, EventArgs e)
+        {
+            RadioServer.Start();
+        }
         #endregion
 
         private int getSplCurId()
@@ -202,20 +207,21 @@ namespace packet_maker
                 int CBi = cList.Count - 1;
                 for (int i = dataTypesDGV.Rows.Count - 1; i >= 0; i--)
                 {
+                    string curValue = dataTypesDGV.Rows[i].Cells[1].Value.ToString();
                     switch (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type)
                     {
                         case "int":
-                            data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X8");
+                            data += Convert.ToInt32(curValue).ToString("X8");
                             break;
 
                         case "char":
                             if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values == null)
                             {
-                                data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X2");
+                                data += Convert.ToInt32(curValue).ToString("X2");
                             }
                             else
                             {
-                                data += Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values[cList[CBi].Items.IndexOf(dataTypesDGV.Rows[i].Cells[1].Value.ToString())].id).ToString("X2");
+                                data += Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values[cList[CBi].Items.IndexOf(curValue)].id).ToString("X2");
                                 CBi--;
                             }
                             break;
@@ -224,9 +230,9 @@ namespace packet_maker
                         case "datetime":
                             if(mode != Packet_Mode.database)
                             {
-                                if (dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(0, 3) != "now")
+                                if (curValue.Substring(0, 3) != "now")
                                 {
-                                    dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
+                                    dt = DateTime.Parse(curValue);
                                     unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
                                 }
                                 else if (dataTypesDGV.Rows[i].Cells[1].Value.ToString() == "now")
@@ -236,26 +242,26 @@ namespace packet_maker
                                 }
                                 else
                                 {
-                                    unix = ((DateTimeOffset)DateTime.Now).ToUnixTimeSeconds() - int.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(4));
+                                    unix = curValue[3].ToString().Operator(int.Parse(((DateTimeOffset)DateTime.Now).ToUnixTimeSeconds().ToString()) , int.Parse(curValue.Substring(4)));
                                 }
 
                                 data += Convert.ToInt64(unix).ToString("X8");
                             }
                             else
                             {
-                                if (dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(0, 3) != "now")
+                                if (curValue.Substring(0, 3) != "now")
                                 {
-                                    dt = DateTime.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString());
+                                    dt = DateTime.Parse(curValue);
                                     unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
                                     data += Convert.ToInt64(unix).ToString("X8");
                                 }
-                                else if (dataTypesDGV.Rows[i].Cells[1].Value.ToString() == "now")
+                                else if (curValue == "now")
                                 {
                                     data += "000000NN";
                                 }
                                 else
                                 {
-                                    string p = ConvertToHexBytes(int.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(4)),3).Replace(" ", String.Empty)+"NN";
+                                    string p = ConvertToHexBytes(int.Parse(curValue.Substring(4)),3).Replace(" ", String.Empty)+"N"+curValue[3];
                                     //String h = int.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(4)).ToString("X6").Trim() + "NN";
                                     data += p;
                                 }
@@ -300,18 +306,18 @@ namespace packet_maker
 
 
 
-            transOut.Items.Clear();
-            transOut.Items.Add("Satlite: " + po.sateliteGroup);
-            transOut.Items.Add("ID: " + po.id);
-            transOut.Items.Add("type: " + po.getTypeName());
-            transOut.Items.Add("subtype: " + po.getSubTypeName());
-            transOut.Items.Add("length: " + po.length);
+            transOut.Clear();
+            transOut.AppendText("Satlite: " + po.sateliteGroup+Environment.NewLine);
+            transOut.AppendText("ID: " + po.id + Environment.NewLine);
+            transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
+            transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
+            transOut.AppendText("length: " + po.length + Environment.NewLine);
             if (po.data.Count != 0)
             {
-                transOut.Items.Add("*******************************");
+                transOut.AppendText("*******************************" + Environment.NewLine);
                 for (int i = 0; i < po.data.Count; i++)
                 {
-                    transOut.Items.Add(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i]);
+                    transOut.AppendText(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i] + Environment.NewLine);
                 }
             }
         }
@@ -347,21 +353,24 @@ namespace packet_maker
             mess = msg.Trim();
             if (packetObject.TestIfPacket(mess, transOptions))
             {
-                await Upload_Packet("rx packets", traID.ToString(), mess);
                 po = packetObject.create(transOptions, msg.Trim());
                 rawRxPacHisList.Add(mess);
                 addItemToPrivHex($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+                await Upload_Packet("rx packets", traID.ToString(), mess);
             }
             else
             {
                 string[] TArr = mess.Split(' ');
 
-                if(TArr.Length >= 6)
-                if (TArr[4] == "02" && (TArr[5] == "E1" || TArr[5] == "E2"))
+                if (TArr.Length >= 6)
                 {
+                    if (TArr[4] == "02" && (TArr[5] == "E1" || TArr[5] == "E2"))
+                    {
                         HandleNewImagePacket(TArr);
                         return;
+                    }
                 }
+
 
 
                 rawRxPacHisList.Add(mess);
@@ -525,9 +534,9 @@ namespace packet_maker
             }
             else
             {
-                transOut.Items.Clear();
-                transOut.Items.Add("Manager was not able to translate this packet:");
-                transOut.Items.Add(rawRxPacHisList[privHex.SelectedIndex]);
+                transOut.Clear();
+                transOut.AppendText("Manager was not able to translate this packet:"+Environment.NewLine);
+                transOut.AppendText(rawRxPacHisList[privHex.SelectedIndex]+ Environment.NewLine);
             }
 
         }
@@ -538,7 +547,7 @@ namespace packet_maker
         {
             privHex.Items.Clear();
             transIn.Text = "";
-            transOut.Items.Clear();
+            transOut.Clear();
             rawRxPacHisList.Clear();
         }
         #endregion
@@ -550,19 +559,20 @@ namespace packet_maker
         #region Server
 
         private readonly RadioServer RadioServer = new RadioServer();
-        private void connectBtn_Click(object sender, EventArgs e) => RadioServer.Start();
+        private void connectBtn_Click(object sender, EventArgs e) 
+        {
+            connectBtn.Enabled = false;
+            try
+            {
+                System.Diagnostics.Process.Start(Program.settings.endNodePath);
+            }
+            catch 
+            { connectBtn.Enabled = true; }
+        }
 
 
         private async void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Program.settings.dataBaseEnabled)
-            {
-                IdDoc id = new IdDoc { id = int.Parse(IDTxb.Text) };
-                DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix+"local data").Document("packetCurId");
-                await docRef.SetAsync(id);
-            }
-
-
             try
             {
                 RadioServer.Stop();
@@ -571,12 +581,20 @@ namespace packet_maker
             {
 
             }
+            if (Program.settings.dataBaseEnabled)
+            {
+                IdDoc id = new IdDoc { id = int.Parse(IDTxb.Text) };
+                DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix+"local data").Document("packetCurId");
+                await docRef.SetAsync(id);
+            }
         }
 
         private async void sendPacketBtn_Click(object sender, EventArgs e)
         {
             OkBtn_click(getSplCurId(),Packet_Mode.satelite);
             await RadioServer.Send(makeOut.Text.Trim());
+
+            if(RadioServer.isOnline)
             TabControl.SelectedTab = RxTab;
         }
 
@@ -991,7 +1009,7 @@ namespace packet_maker
 
         private async void SendListBtn_Click(object sender, EventArgs e)
         {
-            if (RadioServer.isOnline())
+            if (RadioServer.isOnline)
             {
                 var tem = Playlists[PlaylistCB.SelectedIndex].commands;
 
@@ -1017,53 +1035,7 @@ namespace packet_maker
         }
         #endregion
 
-        private void label15_Click(object sender, EventArgs e)
-        {
 
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static class ExtensionMethods
-    {
-        public static void Swap(this ListBox.ObjectCollection list, int index1, int index2)
-        {
-            object temp = list[index1];
-            list[index1] = list[index2];
-            list[index2] = temp;
-        }
-        public static void Swap<T>(this List<T> list, int index1, int index2)
-        {
-            T temp = list[index1];
-            list[index1] = list[index2];
-            list[index2] = temp;
-        }
     }
 }
 

@@ -67,9 +67,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.RxTab = new System.Windows.Forms.TabPage();
+            this.transOut = new System.Windows.Forms.TextBox();
             this.clearRxBtn = new System.Windows.Forms.Button();
             this.connectBtn = new System.Windows.Forms.Button();
-            this.transOut = new System.Windows.Forms.ListBox();
             this.pasteBTN = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -366,7 +366,6 @@
             this.label15.Size = new System.Drawing.Size(160, 13);
             this.label15.TabIndex = 37;
             this.label15.Text = "Sleep between commands (milis)";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // sleepCmdTxb
             // 
@@ -512,9 +511,9 @@
             // 
             // RxTab
             // 
+            this.RxTab.Controls.Add(this.transOut);
             this.RxTab.Controls.Add(this.clearRxBtn);
             this.RxTab.Controls.Add(this.connectBtn);
-            this.RxTab.Controls.Add(this.transOut);
             this.RxTab.Controls.Add(this.pasteBTN);
             this.RxTab.Controls.Add(this.label7);
             this.RxTab.Controls.Add(this.label6);
@@ -529,6 +528,16 @@
             this.RxTab.TabIndex = 1;
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
+            // 
+            // transOut
+            // 
+            this.transOut.Location = new System.Drawing.Point(48, 98);
+            this.transOut.Multiline = true;
+            this.transOut.Name = "transOut";
+            this.transOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.transOut.Size = new System.Drawing.Size(253, 303);
+            this.transOut.TabIndex = 11;
+            this.transOut.WordWrap = false;
             // 
             // clearRxBtn
             // 
@@ -549,15 +558,6 @@
             this.connectBtn.Text = "connect";
             this.connectBtn.UseVisualStyleBackColor = true;
             this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
-            // 
-            // transOut
-            // 
-            this.transOut.FormattingEnabled = true;
-            this.transOut.HorizontalScrollbar = true;
-            this.transOut.Location = new System.Drawing.Point(54, 99);
-            this.transOut.Name = "transOut";
-            this.transOut.Size = new System.Drawing.Size(248, 303);
-            this.transOut.TabIndex = 8;
             // 
             // pasteBTN
             // 
@@ -854,6 +854,7 @@
             this.Text = "SPL Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Shown += new System.EventHandler(this.Main_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).EndInit();
             this.TabControl.ResumeLayout(false);
             this.TxTab.ResumeLayout(false);
@@ -906,7 +907,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataTypes;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn desc;
-        private System.Windows.Forms.ListBox transOut;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modifyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tXToolStripMenuItem;
@@ -949,6 +949,7 @@
         private System.Windows.Forms.DataGridViewButtonColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Button clearRxBtn;
+        private System.Windows.Forms.TextBox transOut;
     }
 }
 

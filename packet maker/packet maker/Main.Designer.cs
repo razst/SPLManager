@@ -546,12 +546,11 @@
             // 
             this.TxPacLibx.FormattingEnabled = true;
             this.TxPacLibx.HorizontalScrollbar = true;
-            this.TxPacLibx.Items.AddRange(new object[] {
-            "01/01/2020 10:35:32 ID: 3637234 SubType: Ping"});
             this.TxPacLibx.Location = new System.Drawing.Point(48, 91);
             this.TxPacLibx.Name = "TxPacLibx";
             this.TxPacLibx.Size = new System.Drawing.Size(343, 303);
             this.TxPacLibx.TabIndex = 12;
+            this.TxPacLibx.SelectedIndexChanged += new System.EventHandler(this.TxPacLibx_SelectedIndexChanged);
             // 
             // transOut
             // 
@@ -565,7 +564,7 @@
             // 
             // clearRxBtn
             // 
-            this.clearRxBtn.Location = new System.Drawing.Point(914, 396);
+            this.clearRxBtn.Location = new System.Drawing.Point(533, 400);
             this.clearRxBtn.Name = "clearRxBtn";
             this.clearRxBtn.Size = new System.Drawing.Size(75, 23);
             this.clearRxBtn.TabIndex = 10;

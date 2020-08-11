@@ -21,6 +21,9 @@ namespace packet_maker
         [FirestoreProperty]
         public DateTime time { get; set; }
 
+        [FirestoreProperty]
+        public int group { get; set; }
+
     }
 
 

@@ -31,7 +31,6 @@ namespace packet_maker
 
         #region setup
 
-
         private List<DataGridViewComboBoxCell> cList = new List<DataGridViewComboBoxCell>();
         private TypeList options;
         private TypeList transOptions;
@@ -113,7 +112,6 @@ namespace packet_maker
             }
             //
 
-            IDTxb.Text = Program.settings.pacCurId.ToString();
             imgIdTxb.Text = Program.settings.pacCurId.ToString();
             groupsCB.SelectedIndex = Program.settings.defultSatGroup;
             frm = this;
@@ -126,12 +124,26 @@ namespace packet_maker
         }
         #endregion
 
-        private int getSplCurId()
+        private async Task<int> getSplCurIdAsync(int groupDex)
         {
-            Program.settings.pacCurId += 1;
-            IDTxb.Text = Program.settings.pacCurId.ToString();
-            imgIdTxb.Text = Program.settings.pacCurId.ToString();
-            return Program.settings.pacCurId - 1;
+            if (Program.settings.dataBaseEnabled)
+            {
+                DocumentReference docRef = Program.db.Collection("local data").Document("SAT" + groupDex);
+                DocumentSnapshot docSnap = await docRef.GetSnapshotAsync();
+                Program.settings.pacCurId = docSnap.ConvertTo<IdDoc>().CommandId;
+
+                Program.settings.pacCurId += 1;
+
+                IdDoc dd = new IdDoc { CommandId = Program.settings.pacCurId };
+                await docRef.SetAsync(dd);
+            }
+            else
+            {
+               Program.settings.pacCurId = 20;
+            }
+
+
+            return Program.settings.pacCurId;
         }
 
         private string ConvertToHexBytes(int value, int numberOfBytes)
@@ -317,7 +329,7 @@ namespace packet_maker
                 transOut.AppendText("*******************************" + Environment.NewLine);
                 for (int i = 0; i < po.data.Count; i++)
                 {
-                    transOut.AppendText(po.jsonObject.typenum[po.getTypeDex()].subTypes[po.getSubTypeDex()].parmas[i].name + ": " + po.data[i] + Environment.NewLine);
+                    transOut.AppendText(po.dataNames[i] + ": " + po.data[i] + Environment.NewLine);
                 }
             }
         }
@@ -344,7 +356,7 @@ namespace packet_maker
             {
                 if (success && mode == Packet_Mode.satelite)
                 {
-                    await Upload_Packet("tx packets", IDTxb.Text, makeOut.Text);
+                    await Upload_Packet("tx packets", Program.settings.pacCurId.ToString(), makeOut.Text);
                 }
             }
         }
@@ -485,9 +497,9 @@ namespace packet_maker
             frm2.ShowDialog();
         }
 
-        private void copyBTN_Click(object sender, EventArgs e) 
+        private async void copyBTN_Click(object sender, EventArgs e) 
         {
-            OkBtn_click(getSplCurId(),Packet_Mode.satelite);
+            OkBtn_click(await getSplCurIdAsync(groupsCB.SelectedIndex),Packet_Mode.satelite);
 
             if(makeOut.Text != null && makeOut.Text != "")
             Clipboard.SetText(makeOut.Text.ToString());
@@ -571,7 +583,7 @@ namespace packet_maker
         }
 
 
-        private async void Main_FormClosing(object sender, FormClosingEventArgs e)
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
@@ -581,17 +593,11 @@ namespace packet_maker
             {
 
             }
-            if (Program.settings.dataBaseEnabled)
-            {
-                IdDoc id = new IdDoc { id = int.Parse(IDTxb.Text) };
-                DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix+"local data").Document("packetCurId");
-                await docRef.SetAsync(id);
-            }
         }
 
         private async void sendPacketBtn_Click(object sender, EventArgs e)
         {
-            OkBtn_click(getSplCurId(),Packet_Mode.satelite);
+            OkBtn_click(await getSplCurIdAsync(groupsCB.SelectedIndex), Packet_Mode.satelite);
             await RadioServer.Send(makeOut.Text.Trim());
 
             if(RadioServer.isOnline)
@@ -671,7 +677,7 @@ namespace packet_maker
 
         private async void sendImgReqBtn_Click(object sender, EventArgs e)
         {
-            string id = ConvertToHexBytes(getSplCurId(), 3);
+            string id = ConvertToHexBytes(await getSplCurIdAsync(groupsCB.SelectedIndex), 3);
             
            await RadioServer.Send($"{id} 02 02 E1 01 00 {ConvertToHexBytes(imgTypeCB.SelectedIndex+1,1)}".Trim());
         }
@@ -879,13 +885,12 @@ namespace packet_maker
             {
                 CastToDGV(commands[PLitemsLibx.SelectedIndex]);
 
-                OkBtn_click(int.Parse(IDTxb.Text),Packet_Mode.none);
+                OkBtn_click(Program.settings.pacCurId,Packet_Mode.none);
             }
         }
 
         private void CastToDGV(packetObject packet)
         {
-            groupsCB.SelectedItem = packet.sateliteGroup;
             typeCB.SelectedItem = packet.getTypeName();
             subtypeCB.SelectedItem = packet.getSubTypeName();
 
@@ -901,7 +906,7 @@ namespace packet_maker
         private void add2PLBtn_Click(object sender, EventArgs e)
         {
 
-            OkBtn_click(getSplCurId(),Packet_Mode.database);
+            OkBtn_click(256,Packet_Mode.database);
             packetObject po = packetObject.create(options, makeOut.Text.Trim());
             PLitemsLibx.Items.Add(po.getSubTypeName());
             commands.Add(po); 
@@ -999,11 +1004,11 @@ namespace packet_maker
             }
         }
 
-        private string sendAutoWorker(int index)
+        private async void sendAutoWorker(int index)
         {
+            await getSplCurIdAsync(groupsCB.SelectedIndex);
             PLitemsLibx.SelectedIndex = -1;
             PLitemsLibx.SelectedIndex = index;
-            return makeOut.Text;
         }
 
 
@@ -1013,19 +1018,15 @@ namespace packet_maker
             {
                 var tem = Playlists[PlaylistCB.SelectedIndex].commands;
 
-                await Task.Run(async () =>
+                int i = 0;
+                Action<int> f = sendAutoWorker;
+                foreach (var packet in tem)
                 {
-                    int i = 0;
-                    Func<int, string> f = sendAutoWorker;
-                    foreach (var packet in tem)
-                    {
-                        string pac = (string)Invoke(f,i);
-                        await RadioServer.Send(pac);
-                        Task.Delay(int.Parse(sleepCmdTxb.Text)).GetAwaiter().GetResult();
-                        i++;
+                    string pac = (string)Invoke(f,i);
+                    await Task.Delay(int.Parse(sleepCmdTxb.Text));
+                    i++;
                         
-                    }
-                });
+                }
             }
             else
             {

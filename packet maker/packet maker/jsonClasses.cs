@@ -67,6 +67,8 @@ namespace packet_maker
         [JsonProperty("values")]
         public List<vars> values { get; set; }
 
+        [JsonProperty("subParams")]
+        public List<string> subParams { get; set; }
 
         public IEnumerator<vars> GetEnumerator()
         {

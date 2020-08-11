@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ID = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.IDTxb = new System.Windows.Forms.TextBox();
             this.makeOut = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataTypesDGV = new System.Windows.Forms.DataGridView();
@@ -67,6 +65,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.RxTab = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.RxGroupsCB = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.TxPacLibx = new System.Windows.Forms.ListBox();
             this.transOut = new System.Windows.Forms.TextBox();
             this.clearRxBtn = new System.Windows.Forms.Button();
             this.connectBtn = new System.Windows.Forms.Button();
@@ -101,10 +103,6 @@
             this.rXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label16 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
@@ -117,19 +115,10 @@
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ID
-            // 
-            this.ID.AutoSize = true;
-            this.ID.Location = new System.Drawing.Point(226, 28);
-            this.ID.Name = "ID";
-            this.ID.Size = new System.Drawing.Size(21, 13);
-            this.ID.TabIndex = 2;
-            this.ID.Text = "ID:";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(364, 27);
+            this.label1.Location = new System.Drawing.Point(228, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 3;
@@ -138,20 +127,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(571, 28);
+            this.label2.Location = new System.Drawing.Point(433, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Subtype:";
-            // 
-            // IDTxb
-            // 
-            this.IDTxb.Location = new System.Drawing.Point(253, 21);
-            this.IDTxb.Name = "IDTxb";
-            this.IDTxb.ReadOnly = true;
-            this.IDTxb.Size = new System.Drawing.Size(84, 20);
-            this.IDTxb.TabIndex = 0;
-            this.IDTxb.Text = "100";
             // 
             // makeOut
             // 
@@ -217,7 +197,7 @@
             // 
             // descSubType
             // 
-            this.descSubType.Location = new System.Drawing.Point(545, 65);
+            this.descSubType.Location = new System.Drawing.Point(433, 65);
             this.descSubType.Name = "descSubType";
             this.descSubType.Size = new System.Drawing.Size(225, 57);
             this.descSubType.TabIndex = 18;
@@ -225,7 +205,7 @@
             // 
             // descType
             // 
-            this.descType.Location = new System.Drawing.Point(335, 65);
+            this.descType.Location = new System.Drawing.Point(228, 65);
             this.descType.Name = "descType";
             this.descType.Size = new System.Drawing.Size(190, 69);
             this.descType.TabIndex = 17;
@@ -235,7 +215,7 @@
             // 
             this.subtypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.subtypeCB.FormattingEnabled = true;
-            this.subtypeCB.Location = new System.Drawing.Point(627, 20);
+            this.subtypeCB.Location = new System.Drawing.Point(501, 19);
             this.subtypeCB.Name = "subtypeCB";
             this.subtypeCB.Size = new System.Drawing.Size(143, 21);
             this.subtypeCB.TabIndex = 2;
@@ -246,7 +226,7 @@
             this.typeCB.AllowDrop = true;
             this.typeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeCB.FormattingEnabled = true;
-            this.typeCB.Location = new System.Drawing.Point(404, 21);
+            this.typeCB.Location = new System.Drawing.Point(268, 20);
             this.typeCB.Name = "typeCB";
             this.typeCB.Size = new System.Drawing.Size(121, 21);
             this.typeCB.TabIndex = 1;
@@ -293,9 +273,7 @@
             this.TxTab.Controls.Add(this.label4);
             this.TxTab.Controls.Add(this.groupsCB);
             this.TxTab.Controls.Add(this.label3);
-            this.TxTab.Controls.Add(this.ID);
             this.TxTab.Controls.Add(this.dataTypesDGV);
-            this.TxTab.Controls.Add(this.IDTxb);
             this.TxTab.Controls.Add(this.descSubType);
             this.TxTab.Controls.Add(this.label2);
             this.TxTab.Controls.Add(this.descType);
@@ -498,7 +476,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 27);
+            this.label4.Location = new System.Drawing.Point(21, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 22;
@@ -516,9 +494,9 @@
             // RxTab
             // 
             this.RxTab.Controls.Add(this.label17);
-            this.RxTab.Controls.Add(this.comboBox1);
+            this.RxTab.Controls.Add(this.RxGroupsCB);
             this.RxTab.Controls.Add(this.label16);
-            this.RxTab.Controls.Add(this.listBox1);
+            this.RxTab.Controls.Add(this.TxPacLibx);
             this.RxTab.Controls.Add(this.transOut);
             this.RxTab.Controls.Add(this.clearRxBtn);
             this.RxTab.Controls.Add(this.connectBtn);
@@ -537,6 +515,43 @@
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(390, 62);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(43, 13);
+            this.label17.TabIndex = 24;
+            this.label17.Text = "satelite:";
+            // 
+            // RxGroupsCB
+            // 
+            this.RxGroupsCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RxGroupsCB.FormattingEnabled = true;
+            this.RxGroupsCB.Location = new System.Drawing.Point(439, 55);
+            this.RxGroupsCB.Name = "RxGroupsCB";
+            this.RxGroupsCB.Size = new System.Drawing.Size(136, 21);
+            this.RxGroupsCB.TabIndex = 23;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(0, 91);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(32, 13);
+            this.label16.TabIndex = 13;
+            this.label16.Text = "Sent:";
+            // 
+            // TxPacLibx
+            // 
+            this.TxPacLibx.FormattingEnabled = true;
+            this.TxPacLibx.HorizontalScrollbar = true;
+            this.TxPacLibx.Location = new System.Drawing.Point(48, 91);
+            this.TxPacLibx.Name = "TxPacLibx";
+            this.TxPacLibx.Size = new System.Drawing.Size(343, 303);
+            this.TxPacLibx.TabIndex = 12;
+            this.TxPacLibx.SelectedIndexChanged += new System.EventHandler(this.TxPacLibx_SelectedIndexChanged);
+            // 
             // transOut
             // 
             this.transOut.Location = new System.Drawing.Point(754, 91);
@@ -549,7 +564,7 @@
             // 
             // clearRxBtn
             // 
-            this.clearRxBtn.Location = new System.Drawing.Point(914, 396);
+            this.clearRxBtn.Location = new System.Drawing.Point(533, 400);
             this.clearRxBtn.Name = "clearRxBtn";
             this.clearRxBtn.Size = new System.Drawing.Size(75, 23);
             this.clearRxBtn.TabIndex = 10;
@@ -850,44 +865,6 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(0, 91);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(32, 13);
-            this.label16.TabIndex = 13;
-            this.label16.Text = "Sent:";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.HorizontalScrollbar = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "01/01/2020 10:35:32 ID: 3637234 SubType: Ping"});
-            this.listBox1.Location = new System.Drawing.Point(48, 91);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(343, 303);
-            this.listBox1.TabIndex = 12;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(390, 62);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(43, 13);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "satelite:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(439, 55);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(136, 21);
-            this.comboBox1.TabIndex = 23;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -923,10 +900,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label ID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox IDTxb;
         private System.Windows.Forms.TextBox makeOut;
         private System.Windows.Forms.Button trasBtn;
         private System.Windows.Forms.TextBox transIn;
@@ -997,9 +972,9 @@
         private System.Windows.Forms.Button clearRxBtn;
         private System.Windows.Forms.TextBox transOut;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox RxGroupsCB;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox TxPacLibx;
     }
 }
 

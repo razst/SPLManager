@@ -41,29 +41,11 @@ namespace packet_maker
                 settings = (BasicSettings)Serializer.Deserialize(Tsettings, typeof(BasicSettings));
            }
 
-
-
-
             if (settings.dataBaseEnabled)
             {
                 System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", settings.dataBaseKeyPath);
                 db = FirestoreDb.Create(settings.dataBaseName);
-
-                DocumentReference docRef = db.Collection(settings.collectionPrefix + "local data").Document("packetCurId");
-                DocumentSnapshot docSnap = docRef.GetSnapshotAsync().GetAwaiter().GetResult();
-                settings.pacCurId = (docSnap.ConvertTo<IdDoc>()).id;
             }
-            else
-            {
-                settings.pacCurId = 20;
-            }
-
-
-
-
-
-
-
 
 
             Application.EnableVisualStyles();

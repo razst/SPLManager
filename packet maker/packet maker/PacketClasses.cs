@@ -21,6 +21,9 @@ namespace packet_maker
         [FirestoreProperty]
         public DateTime time { get; set; }
 
+        [FirestoreProperty]
+        public int group { get; set; }
+
     }
 
 
@@ -64,6 +67,7 @@ namespace packet_maker
         public int length { get; set; }
 
         public List<string> data = new List<string>();
+        public List<string> dataNames = new List<string>();
 
         public TypeList jsonObject { get; set; }
 
@@ -95,6 +99,7 @@ namespace packet_maker
                 {
                     case "int":
                         data.Add(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16).ToString());
+                        dataNames.Add(par.name);
                         j += 4;
                         break;
 
@@ -107,11 +112,13 @@ namespace packet_maker
                         {
                             data.Add(par.values[par.values.FindIndex(item => item.id == Convert.ToInt32(bitarr[j], 16))].name);
                         }
+                        dataNames.Add(par.name);
                         j++;
                         break;
 
                     case "short":
                         data.Add(Convert.ToInt32(bitarr[j + 1] + bitarr[j], 16).ToString());
+                        dataNames.Add(par.name);
                         j += 2;
                         break;
 
@@ -142,6 +149,8 @@ namespace packet_maker
                                 data.Add("now");
                             }
                         }
+
+                        dataNames.Add(par.name);
                         j += 4;
                         break;
 
@@ -152,6 +161,7 @@ namespace packet_maker
                             temp += bitarr[i] + " ";
                         }
                         data.Add(temp);
+                        dataNames.Add(par.name);
                         return;
 
                     case "ascii":
@@ -166,7 +176,25 @@ namespace packet_maker
                         }
                         temp = string.Join("", letters).ToString();
                         data.Add(temp);
+                        dataNames.Add(par.name);
                         return;
+
+                    case "bitwise":
+                        temp = "";
+                        int numOfBytes = par.subParams.Count/8;
+                        for(int i = j; i < j+numOfBytes; i++)
+                        {
+                            temp += bitarr[i];
+                        }
+                        temp = String.Join(String.Empty, temp.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+                        
+                        for(int i = 0; i < temp.Length; i++)
+                        {
+                            data.Add(temp[i].ToString());
+                            dataNames.Add(par.subParams[i]);
+                        }
+                        j += numOfBytes;
+                        break;
                 }
             }
         }

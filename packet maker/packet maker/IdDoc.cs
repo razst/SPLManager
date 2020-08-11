@@ -11,6 +11,6 @@ namespace packet_maker
     internal class IdDoc
     {
         [FirestoreProperty]
-        public int id { get; set; }
+        public int CommandId { get; set; }
     }
 }

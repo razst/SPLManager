@@ -28,18 +28,7 @@ namespace packet_maker
 
 
 
-    [FirestoreData]
-    internal class ListPacketItem
-    {
-        [FirestoreProperty]
-
-        public string packetString { get; set; }
-
-        [FirestoreProperty]
-
-        public string Description { get; set; }
-    }
-
+  
 
     public class packetObject
     {

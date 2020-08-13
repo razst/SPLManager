@@ -103,6 +103,14 @@
             this.rXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
@@ -113,6 +121,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ImageDataDGV)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -493,6 +502,9 @@
             // 
             // RxTab
             // 
+            this.RxTab.Controls.Add(this.panel4);
+            this.RxTab.Controls.Add(this.button2);
+            this.RxTab.Controls.Add(this.button1);
             this.RxTab.Controls.Add(this.label17);
             this.RxTab.Controls.Add(this.RxGroupsCB);
             this.RxTab.Controls.Add(this.label16);
@@ -548,7 +560,7 @@
             this.TxPacLibx.HorizontalScrollbar = true;
             this.TxPacLibx.Location = new System.Drawing.Point(48, 91);
             this.TxPacLibx.Name = "TxPacLibx";
-            this.TxPacLibx.Size = new System.Drawing.Size(343, 303);
+            this.TxPacLibx.Size = new System.Drawing.Size(336, 303);
             this.TxPacLibx.TabIndex = 12;
             this.TxPacLibx.SelectedIndexChanged += new System.EventHandler(this.TxPacLibx_SelectedIndexChanged);
             // 
@@ -865,6 +877,79 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(390, 191);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(60, 23);
+            this.button1.TabIndex = 25;
+            this.button1.Text = ">>>";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(390, 235);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(60, 23);
+            this.button2.TabIndex = 26;
+            this.button2.Text = "<<<";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(109, 34);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(101, 23);
+            this.button3.TabIndex = 27;
+            this.button3.Text = "Load from DB";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(49, 8);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(100, 20);
+            this.dateTimePicker1.TabIndex = 28;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(174, 8);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(100, 20);
+            this.dateTimePicker2.TabIndex = 29;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(13, 10);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(30, 13);
+            this.label18.TabIndex = 30;
+            this.label18.Text = "from:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(155, 11);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(19, 13);
+            this.label19.TabIndex = 31;
+            this.label19.Text = "to:";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.label19);
+            this.panel4.Controls.Add(this.label18);
+            this.panel4.Controls.Add(this.dateTimePicker2);
+            this.panel4.Controls.Add(this.dateTimePicker1);
+            this.panel4.Controls.Add(this.button3);
+            this.panel4.Location = new System.Drawing.Point(817, 13);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(296, 65);
+            this.panel4.TabIndex = 32;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -894,6 +979,8 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -975,6 +1062,14 @@
         private System.Windows.Forms.ComboBox RxGroupsCB;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ListBox TxPacLibx;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

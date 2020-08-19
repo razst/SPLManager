@@ -36,8 +36,8 @@ namespace packet_maker
         private TypeList transOptions;
         private bool success = false;
         private Packet packet = new Packet();
-        public List<string> rawRxPacHisList = new List<string>();
-        public List<string> rawTxPacHisList = new List<string>();
+        public List<packetObject> rawRxPacHisList = new List<packetObject>();
+        public List<packetObject> rawTxPacHisList = new List<packetObject>();
 
         private string[] groups =
         {
@@ -110,13 +110,12 @@ namespace packet_maker
             foreach (string s in groups)
             {
                 groupsCB.Items.Add(s);
-            }
-            foreach (string s in groups)
-            {
                 RxGroupsCB.Items.Add(s);
             }
             //
 
+            minExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
+            maxExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
             imgIdTxb.Text = Program.settings.pacCurId.ToString();
             groupsCB.SelectedIndex = Program.settings.defultSatGroup;
             RxGroupsCB.SelectedIndex = Program.settings.defultSatGroup;
@@ -161,7 +160,7 @@ namespace packet_maker
             Array.Reverse(TidArr);
             return String.Join(" ",TidArr).Trim();
         }
-        private async Task Upload_Packet(string COLLECTION_NAME, string id, string packetString)
+        private async Task Upload_Packet(string COLLECTION_NAME,string packetString)
         {
             await Task.Run(() => {
 
@@ -169,7 +168,7 @@ namespace packet_maker
                 {
                     packet.packetString = packetString;
                     packet.time = DateTime.UtcNow;
-                    packet.group = int.Parse(packetString[10].ToString());
+                    packet.satId = int.Parse(packetString[10].ToString());
 
                     DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + COLLECTION_NAME).Document();
 
@@ -330,22 +329,11 @@ namespace packet_maker
 
 
         private packetObject po = new packetObject();
-        private async void RX(string transMsg,TypeList rtxJson)
+
+        private void RX(packetObject po)
         {
-            mess = transMsg.Trim();
-            mess = mess.Replace(" ", String.Empty);
-            mess = Regex.Replace(mess, ".{2}", "$0 ");
-            po = await Task.Run(() =>
-            {
-                return packetObject.create(rtxJson, mess);
-            });
-            traID = po.id;
-
-
-
-
             transOut.Clear();
-            transOut.AppendText("Satlite: " + po.sateliteGroup+Environment.NewLine);
+            transOut.AppendText("Satlite: " + po.sateliteGroup + Environment.NewLine);
             transOut.AppendText("ID: " + po.id + Environment.NewLine);
             transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
             transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
@@ -359,7 +347,6 @@ namespace packet_maker
                 }
             }
         }
-
 
         #endregion
 
@@ -382,7 +369,7 @@ namespace packet_maker
             {
                 if (success && mode == Packet_Mode.satelite)
                 {
-                    await Upload_Packet("tx packets", Program.settings.pacCurId.ToString(), makeOut.Text);
+                    await Upload_Packet("tx packets", makeOut.Text);
                 }
             }
         }
@@ -394,11 +381,11 @@ namespace packet_maker
                 po = packetObject.create(transOptions, msg.Trim());
                 if(po.sateliteGroup == RxGroupsCB.SelectedItem.ToString() || RxGroupsCB.SelectedIndex == 0)
                 {
-                    rawRxPacHisList.Add(mess);
+                    rawRxPacHisList.Add(po);
                     addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}",privHex);
                 }
                 
-                await Upload_Packet("rx packets", traID.ToString(), mess);
+                await Upload_Packet("rx packets", mess);
             }
             else
             {
@@ -415,13 +402,12 @@ namespace packet_maker
 
 
 
-                rawRxPacHisList.Add(mess);
+                rawRxPacHisList.Add(new packetObject {rawPacket = mess});
                 addItemToListbox("ERROR",privHex);
             }
         }
 
 
-        private int traID;
         private string mess = "";
         private void trasBtn_Click(object sender, EventArgs e) => trasBtn_click(transIn.Text);
 
@@ -526,6 +512,29 @@ namespace packet_maker
         private void pasteBTN_Click(object sender, EventArgs e) => transIn.Text = Clipboard.GetText();
 
 
+        private void tx2rxBtn_Click(object sender, EventArgs e)
+        {
+            if (TxPacLibx.SelectedIndex != -1)
+            {
+                int dex = rawRxPacHisList.FindIndex(x => x.id == rawTxPacHisList[TxPacLibx.SelectedIndex].id);
+                if (dex != -1)
+                {
+                    privHex.SelectedIndex = dex;
+                }
+            }
+        }
+
+        private void rx2txBtn_Click(object sender, EventArgs e)
+        {
+            if(privHex.SelectedIndex != -1)
+            {
+                int dex = rawTxPacHisList.FindIndex(x => x.id == rawRxPacHisList[privHex.SelectedIndex].id);
+                if (dex != -1)
+                {
+                    TxPacLibx.SelectedIndex = dex;
+                }
+            }
+        }
 
 
         private void dataTypesDGV_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -559,7 +568,7 @@ namespace packet_maker
         {
             privHex.Items.Clear();
             TxPacLibx.Items.Clear();
-            transIn.Text = "";
+            transIn.Clear();
             transOut.Clear();
             rawRxPacHisList.Clear();
             rawTxPacHisList.Clear();
@@ -571,22 +580,22 @@ namespace packet_maker
         {
             if (privHex.SelectedItem.ToString().Substring(24) != "ERROR") 
             {
-                transIn.Text = rawRxPacHisList[privHex.SelectedIndex];
-                RX(rawRxPacHisList[privHex.SelectedIndex],transOptions);
+                transIn.Text = rawRxPacHisList[privHex.SelectedIndex].rawPacket;
+                RX(rawRxPacHisList[privHex.SelectedIndex]);
             }
             else
             {
                 transOut.Clear();
                 transOut.AppendText("Manager was not able to translate this packet:"+Environment.NewLine);
-                transOut.AppendText(rawRxPacHisList[privHex.SelectedIndex]+ Environment.NewLine);
+                transOut.AppendText(rawRxPacHisList[privHex.SelectedIndex].rawPacket+ Environment.NewLine);
             }
 
         }
 
         private void TxPacLibx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            transIn.Text = rawTxPacHisList[TxPacLibx.SelectedIndex];
-            RX(transIn.Text,options);
+            transIn.Text = rawTxPacHisList[TxPacLibx.SelectedIndex].rawPacket;
+            RX(rawTxPacHisList[TxPacLibx.SelectedIndex]);
         }
         #endregion
 
@@ -625,15 +634,21 @@ namespace packet_maker
 
         private async void sendPacketBtn_Click(object sender, EventArgs e)
         {
-            OkBtn_click(await getSplCurIdAsync(groupsCB.SelectedIndex), Packet_Mode.satelite);
-
-            po = packetObject.create(options, makeOut.Text.Trim());
-            rawTxPacHisList.Add(makeOut.Text.Trim());
-            addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}", TxPacLibx);
-
-            await RadioServer.Send(makeOut.Text.Trim());
             if (RadioServer.isOnline)
-            TabControl.SelectedTab = RxTab;
+            {
+                OkBtn_click(await getSplCurIdAsync(groupsCB.SelectedIndex), Packet_Mode.satelite);
+
+                po = packetObject.create(options, makeOut.Text.Trim());
+                rawTxPacHisList.Add(po);
+                addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}", TxPacLibx);
+
+                await RadioServer.Send(makeOut.Text.Trim());
+                TabControl.SelectedTab = RxTab;
+            }
+            else
+            {
+                MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
@@ -1066,7 +1081,7 @@ namespace packet_maker
                     await Task.Delay(int.Parse(sleepCmdTxb.Text));
 
                     po = packetObject.create(options, makeOut.Text.Trim());
-                    rawTxPacHisList.Add(makeOut.Text.Trim());
+                    rawTxPacHisList.Add(po);
                     addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}", TxPacLibx);
                     i++;
                         
@@ -1079,6 +1094,154 @@ namespace packet_maker
 
         }
 
+
+        #endregion
+
+        private async void loadDbBtn_Click(object sender, EventArgs e)
+        {
+            clearRxBtn.PerformClick();
+
+            //define query
+            Query capitalQuery;
+            if (RxGroupsCB.SelectedIndex == 0)
+            {
+                capitalQuery = Program.db.Collection("rx packets")
+                .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
+                .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
+                .OrderBy("time");
+            }
+            else
+            {
+                capitalQuery = Program.db.Collection("rx packets")
+                .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
+                .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
+                .WhereEqualTo("satId", RxGroupsCB.SelectedIndex)
+                .OrderBy("time");
+            }
+            //
+
+            QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+
+            foreach (var doc in capitalQuerySnapshot)
+            {
+                var pk = doc.ConvertTo<Packet>();
+                po = await Task.Run(() =>
+                {
+                    return packetObject.create(transOptions, pk.packetString);
+                });
+                
+                rawRxPacHisList.Add(po);
+                privHex.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+            }
+        }
+
+
+        #region export
+
+        SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+
+        private void CreateCSV(List<List<string>> table,string fileName)
+        {
+            using (StreamWriter writer = new StreamWriter(new FileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.Write)))
+            {
+                writer.WriteLine("sep=,");
+                foreach(var line in table)
+                {
+                    writer.WriteLine(String.Join(", ", line));
+                }
+            }
+        }
+
+        private void toAFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.Filter = "excel|*.csv";
+            saveFileDialog.Title = "Export history to a File";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                int j = 0;
+                List<List<string>> T = new List<List<string>> { new List<string> { "Date", "Id", "SatGroup", "Type", "Subtype", "Lenght", "Raw packet", "Data" } };
+                foreach (var packet in rawRxPacHisList)
+                {
+                    string dataStr = "";
+                    for (int i = 0; i < packet.dataNames.Count; i++)
+                    {
+                        dataStr += $"{packet.dataNames[i]}: {packet.data[i]}. ";
+                    }
+                    T.Add(new List<string> { privHex.Items[j].ToString().Split('[', ']')[1], packet.id.ToString(), packet.sateliteGroup, packet.getTypeName(), packet.getSubTypeName(), packet.length.ToString(), packet.rawPacket, dataStr });
+
+
+                    j++;
+                }
+
+                CreateCSV(T, saveFileDialog.FileName);
+            }
+        }
+
+        private void toAFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.Filter = "|";
+            saveFileDialog.Title = "Export history to a Folder";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                List<FilePacket> type_subtype = new List<FilePacket>();
+
+                //sorting packets to files
+                int j = 0;
+                foreach(var packet in rawRxPacHisList)
+                {
+                    int match = type_subtype.FindIndex(x => x.packetPrefix == $"{packet.getTypeName()}_{packet.getSubTypeName()}");
+                    string timeStr = privHex.Items[j].ToString().Split('[', ']')[1];
+                    if (match != -1)
+                    {
+                        type_subtype[match].packets.Add(new PacketWithTime { packet = packet,time = timeStr});
+                    }
+                    else
+                    {
+                        var colStr = new List<string> { "Date", "Id", "SatGroup", "Type", "Subtype", "Lenght", "Raw data" };
+                        colStr.AddRange(packet.dataNames);
+
+                        type_subtype.Add(new FilePacket 
+                        { 
+                            packetPrefix = $"{packet.getTypeName()}_{packet.getSubTypeName()}" ,
+                            packets = new List<PacketWithTime> { new PacketWithTime {packet = packet, time=timeStr } },
+                            firstColumn = colStr
+                        });
+                    }
+
+                    j++;
+                }
+                //
+
+
+                //creating all files
+                foreach(var file in type_subtype)
+                {
+                    List<List<string>> fileTble = new List<List<string>> { file.firstColumn };
+                    foreach(var pac in file.packets)
+                    {
+                        List<string> tm = new List<string>
+                        {
+                            pac.time,
+                            pac.packet.id.ToString(),
+                            pac.packet.sateliteGroup,
+                            pac.packet.getTypeName(),
+                            pac.packet.getSubTypeName(),
+                            pac.packet.length.ToString(),
+                            pac.packet.rawPacket
+                        };
+                        tm.AddRange(pac.packet.data);
+
+                        fileTble.Add(tm);
+                    }
+
+                    CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.packetPrefix}.csv");
+                }
+            }
+        }
         #endregion
 
 

@@ -22,13 +22,26 @@ namespace packet_maker
         public DateTime time { get; set; }
 
         [FirestoreProperty]
-        public int group { get; set; }
+        public int satId { get; set; }
 
     }
 
 
+    public class FilePacket
+    {
+        public string packetPrefix { get; set; }
 
+        public List<PacketWithTime> packets { get; set; }
+
+        public List<string> firstColumn { get; set; }
+    }
   
+    public class PacketWithTime
+    {
+        public packetObject packet { get; set; }
+
+        public string time { get; set; }
+    }
 
     public class packetObject
     {

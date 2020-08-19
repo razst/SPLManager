@@ -65,6 +65,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.RxTab = new System.Windows.Forms.TabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.maxExportDateDtp = new System.Windows.Forms.DateTimePicker();
+            this.minExportDateDtp = new System.Windows.Forms.DateTimePicker();
+            this.loadDbBtn = new System.Windows.Forms.Button();
+            this.rx2txBtn = new System.Windows.Forms.Button();
+            this.tx2rxBtn = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.RxGroupsCB = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -103,25 +111,20 @@
             this.rXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toAFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
             this.panel3.SuspendLayout();
             this.RxTab.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.ImageTab.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageDataDGV)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -503,8 +506,8 @@
             // RxTab
             // 
             this.RxTab.Controls.Add(this.panel4);
-            this.RxTab.Controls.Add(this.button2);
-            this.RxTab.Controls.Add(this.button1);
+            this.RxTab.Controls.Add(this.rx2txBtn);
+            this.RxTab.Controls.Add(this.tx2rxBtn);
             this.RxTab.Controls.Add(this.label17);
             this.RxTab.Controls.Add(this.RxGroupsCB);
             this.RxTab.Controls.Add(this.label16);
@@ -526,6 +529,82 @@
             this.RxTab.TabIndex = 1;
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.label19);
+            this.panel4.Controls.Add(this.label18);
+            this.panel4.Controls.Add(this.maxExportDateDtp);
+            this.panel4.Controls.Add(this.minExportDateDtp);
+            this.panel4.Controls.Add(this.loadDbBtn);
+            this.panel4.Location = new System.Drawing.Point(817, 13);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(357, 65);
+            this.panel4.TabIndex = 32;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(183, 10);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(19, 13);
+            this.label19.TabIndex = 31;
+            this.label19.Text = "to:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(13, 10);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(30, 13);
+            this.label18.TabIndex = 30;
+            this.label18.Text = "from:";
+            // 
+            // maxExportDateDtp
+            // 
+            this.maxExportDateDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.maxExportDateDtp.Location = new System.Drawing.Point(208, 8);
+            this.maxExportDateDtp.Name = "maxExportDateDtp";
+            this.maxExportDateDtp.Size = new System.Drawing.Size(128, 20);
+            this.maxExportDateDtp.TabIndex = 29;
+            // 
+            // minExportDateDtp
+            // 
+            this.minExportDateDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.minExportDateDtp.Location = new System.Drawing.Point(49, 8);
+            this.minExportDateDtp.Name = "minExportDateDtp";
+            this.minExportDateDtp.Size = new System.Drawing.Size(128, 20);
+            this.minExportDateDtp.TabIndex = 28;
+            // 
+            // loadDbBtn
+            // 
+            this.loadDbBtn.Location = new System.Drawing.Point(109, 34);
+            this.loadDbBtn.Name = "loadDbBtn";
+            this.loadDbBtn.Size = new System.Drawing.Size(101, 23);
+            this.loadDbBtn.TabIndex = 27;
+            this.loadDbBtn.Text = "Load from DB";
+            this.loadDbBtn.UseVisualStyleBackColor = true;
+            this.loadDbBtn.Click += new System.EventHandler(this.loadDbBtn_Click);
+            // 
+            // rx2txBtn
+            // 
+            this.rx2txBtn.Location = new System.Drawing.Point(390, 235);
+            this.rx2txBtn.Name = "rx2txBtn";
+            this.rx2txBtn.Size = new System.Drawing.Size(60, 23);
+            this.rx2txBtn.TabIndex = 26;
+            this.rx2txBtn.Text = "<<<";
+            this.rx2txBtn.UseVisualStyleBackColor = true;
+            this.rx2txBtn.Click += new System.EventHandler(this.rx2txBtn_Click);
+            // 
+            // tx2rxBtn
+            // 
+            this.tx2rxBtn.Location = new System.Drawing.Point(390, 191);
+            this.tx2rxBtn.Name = "tx2rxBtn";
+            this.tx2rxBtn.Size = new System.Drawing.Size(60, 23);
+            this.tx2rxBtn.TabIndex = 25;
+            this.tx2rxBtn.Text = ">>>";
+            this.tx2rxBtn.UseVisualStyleBackColor = true;
+            this.tx2rxBtn.Click += new System.EventHandler(this.tx2rxBtn_Click);
             // 
             // label17
             // 
@@ -823,7 +902,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.exportToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
@@ -845,7 +925,7 @@
             this.tXToolStripMenuItem,
             this.rXToolStripMenuItem});
             this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
-            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.modifyToolStripMenuItem.Text = "modify";
             // 
             // tXToolStripMenuItem
@@ -873,82 +953,32 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // button1
+            // exportToolStripMenuItem
             // 
-            this.button1.Location = new System.Drawing.Point(390, 191);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = ">>>";
-            this.button1.UseVisualStyleBackColor = true;
+            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toAFileToolStripMenuItem,
+            this.toAFolderToolStripMenuItem});
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(53, 22);
+            this.exportToolStripMenuItem.Text = "Export";
             // 
-            // button2
+            // toAFileToolStripMenuItem
             // 
-            this.button2.Location = new System.Drawing.Point(390, 235);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(60, 23);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "<<<";
-            this.button2.UseVisualStyleBackColor = true;
+            this.toAFileToolStripMenuItem.Name = "toAFileToolStripMenuItem";
+            this.toAFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.toAFileToolStripMenuItem.Text = "to a file";
+            this.toAFileToolStripMenuItem.Click += new System.EventHandler(this.toAFileToolStripMenuItem_Click);
             // 
-            // button3
+            // toAFolderToolStripMenuItem
             // 
-            this.button3.Location = new System.Drawing.Point(109, 34);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(101, 23);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "Load from DB";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(49, 8);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker1.TabIndex = 28;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(174, 8);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker2.TabIndex = 29;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(13, 10);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(30, 13);
-            this.label18.TabIndex = 30;
-            this.label18.Text = "from:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(155, 11);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(19, 13);
-            this.label19.TabIndex = 31;
-            this.label19.Text = "to:";
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.label19);
-            this.panel4.Controls.Add(this.label18);
-            this.panel4.Controls.Add(this.dateTimePicker2);
-            this.panel4.Controls.Add(this.dateTimePicker1);
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Location = new System.Drawing.Point(817, 13);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(296, 65);
-            this.panel4.TabIndex = 32;
+            this.toAFolderToolStripMenuItem.Name = "toAFolderToolStripMenuItem";
+            this.toAFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.toAFolderToolStripMenuItem.Text = "to a folder";
+            this.toAFolderToolStripMenuItem.Click += new System.EventHandler(this.toAFolderToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -971,6 +1001,8 @@
             this.panel3.PerformLayout();
             this.RxTab.ResumeLayout(false);
             this.RxTab.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ImageTab.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -979,8 +1011,6 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1065,11 +1095,14 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DateTimePicker maxExportDateDtp;
+        private System.Windows.Forms.DateTimePicker minExportDateDtp;
+        private System.Windows.Forms.Button loadDbBtn;
+        private System.Windows.Forms.Button rx2txBtn;
+        private System.Windows.Forms.Button tx2rxBtn;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toAFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toAFolderToolStripMenuItem;
     }
 }
 

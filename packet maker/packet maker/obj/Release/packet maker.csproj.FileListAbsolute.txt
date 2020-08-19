@@ -218,3 +218,14 @@ C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.Cor
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet maker.csproj.CopyComplete
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet maker.exe
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Release\packet maker.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Context.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Tasks.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Nito.Disposables.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Context.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Nito.AsyncEx.Tasks.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Nito.Disposables.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Release\Nito.Disposables.xml
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet maker.csprojAssemblyReference.cache
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet_maker.jsonFrm.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet_maker.jsonValSetFrm.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Release\packet_maker.NewPlaylistDialog.resources

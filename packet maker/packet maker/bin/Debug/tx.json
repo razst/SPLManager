@@ -87,6 +87,12 @@
           ]
         },
         {
+          "id": "37",
+          "name": "Transmit beacon",
+          "desc": "Transmit beacon ignoring all tx allow checks",
+          "inParams": []
+        },
+        {
           "id": "21",
           "name": "Set baud rate",
           "desc": "set the bitrate of the trxvu",
@@ -263,12 +269,20 @@
               "type": "char",
               "values": [
                 {
-                  "id": "10",
-                  "name": "eps_eng_mb"
+                  "id": "0",
+                  "name": "EPS"
                 },
                 {
                   "id": "1",
                   "name": "TX"
+                },
+                {
+                  "id": "2",
+                  "name": "ANT"
+                },
+                {
+                  "id": "3",
+                  "name": "Solar Panel"
                 },
                 {
                   "id": "4",
@@ -312,12 +326,20 @@
               "type": "char",
               "values": [
                 {
-                  "id": "10",
-                  "name": "eps_eng_mb"
+                  "id": "0",
+                  "name": "EPS"
                 },
                 {
                   "id": "1",
                   "name": "TX"
+                },
+                {
+                  "id": "2",
+                  "name": "ANT"
+                },
+                {
+                  "id": "3",
+                  "name": "Solar Panel"
                 },
                 {
                   "id": "4",
@@ -421,7 +443,14 @@
               "type": "short"
             }
           ]
-        }
+        },
+        {
+          "id": "4",
+          "name": "Rest EPS WDT",
+          "desc": "Resets the watchdog timer keeping the system from performing a reset",
+          "inParams": []
+        },
+		
       ]
     },
     {
@@ -439,12 +468,16 @@
               "type": "char",
               "values": [
                 {
-                  "id": "10",
-                  "name": "eps_eng_mb"
+                  "id": "0",
+                  "name": "EPS"
                 },
                 {
                   "id": "1",
                   "name": "TX"
+                },
+                {
+                  "id": "2",
+                  "name": "ANT"
                 },
                 {
                   "id": "4",
@@ -470,6 +503,70 @@
               "desc": "end date of dump - not including this date",
               "type": "date"
             }
+          ]
+        },
+        {
+          "id": "171",
+          "name": "Delete all files on SD, excluding about.jpg",
+          "desc": "Delete all files on SD",
+          "inParams": []
+        },
+        {
+          "id": "204",
+          "name": "Set TLM period time",
+          "desc": "Set TLM interval period time",
+          "inParams": [
+            {
+              "name": "tlm_type",
+              "desc": "the type of the telematry to update ",
+              "type": "char",
+              "values": [
+                {
+                  "id": "0",
+                  "name": "EPS"
+                },
+                {
+                  "id": "1",
+                  "name": "TX"
+                },
+                {
+                  "id": "2",
+                  "name": "ANT"
+                },
+                {
+                  "id": "3",
+                  "name": "Solar Panel"
+                },
+                {
+                  "id": "4",
+                  "name": "WOD"
+                }
+              ]
+            },
+
+			{
+              "name": "TLM interval",
+              "desc": "number of seconds between every TLM save",
+              "type": "int"
+            }            
+          ]
+        },
+		
+
+        {
+          "id": "205",
+          "name": "Get TLM period times",
+          "desc": "Get all TLM period times",
+          "inParams": []
+        },
+
+
+        {
+          "id": "187",
+          "name": "Get Last FS Error",
+          "desc": "Get last file system error",
+          "inParams": [
+            
           ]
         }
       ]
@@ -518,6 +615,18 @@
           ]
         },
         {
+          "id": "224",
+          "name": "FRAM Write",
+          "desc": "Write value to FRAM and transmit it back",
+          "inParams": [
+            {
+              "name": "Byte data",
+              "desc": "addr(int)+data",
+              "type": "bytes"
+            }
+          ]
+        },
+        {
           "id": "225",
           "name": "FRAM Read",
           "desc": "Read FRAM value and transmit it",
@@ -527,6 +636,21 @@
               "desc": "addr(int)+size of data to read(int)",
               "type": "bytes"
             }
+          ]
+        },
+        {
+          "id": "227",
+          "name": "Get Sat Uptime",
+          "desc": "Get Sat Uptime",
+          "inParams": [
+          ]
+        },
+        {
+          "id": "226",
+          "name": "FRAM Resart",
+          "desc": "restart the FRAM",
+          "inParams": [
+            
           ]
         },
         {

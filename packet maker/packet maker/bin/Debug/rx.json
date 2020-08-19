@@ -62,32 +62,32 @@
             {
               "name": "Solar panel 1 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "Solar panel 2 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "Solar panel 3 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "Solar panel 4 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "Solar panel 5 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "Solar panel 6 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "sat_time",
@@ -110,6 +110,11 @@
               "type": "int"
             },
             {
+              "name": "sat_uptime",
+              "desc": "satellite's up time in seconds",
+              "type": "int"
+            },
+            {
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",
               "type": "int"
@@ -124,21 +129,22 @@
             {
               "name": "seconds",
               "desc": "number of seconds for beacon interval ",
-              "type": "bitwise",
-			  "subParams": [
-				"one",
-				"two",
-				"three",
-				"4",
-				"5",
-				"six",
-				"7",
-				"8"
-			  ]
-			  
+              "type": "int"
             }
           ]
         },
+        {
+          "id": "36",
+          "name": "Set beacon interval",
+          "desc": "set the beacon interval time in seconds",
+          "inParams": [
+            {
+              "name": "seconds",
+              "desc": "number of seconds for beacon interval ",
+              "type": "int"
+            }
+          ]
+        },		
         {
           "id": "19",
           "name": "get baud rate",
@@ -420,7 +426,14 @@
           "id": "255",
           "name": "ACK_ERROR_MSG",
           "desc": "when error has occurred",
-          "inParams": []
+          "inParams": [
+           {
+              "name": "error number",
+              "desc": "TODO",
+              "type": "int"
+            }
+		  
+		  ]
         }
       ]
     },
@@ -430,9 +443,9 @@
       "desc": "All DUMP Types",
       "subtypes": [
         {
-          "id": "10",
-          "name": "tlm_eps_eng_mb",
-          "desc": "EPS eng data",
+          "id": "0",
+          "name": "tlm_eps",
+          "desc": "EPS data",
           "inParams": [
             {
               "name": "timestamp",
@@ -785,20 +798,6 @@
 			
 			
 			
-            {
-              "name": "cc3-curr_out_mppt",
-              "desc": "Data on conditioning chain in raw form",
-              "type": "short"
-            },
-			
-            {
-              "name": "cc3222-curr_out_mppt",
-              "desc": "Data on conditioning chain in raw form",
-              "type": "short"
-            },
-			
-			
-			
 
 
 
@@ -865,6 +864,46 @@
               "type": "short"
             },
             {
+              "name": "MCU Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Battery Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 1 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 2 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 3 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 4 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 5 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 6 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
               "name": "sat_time",
               "desc": "satellite's clock current unix time",
               "type": "datetime"
@@ -885,6 +924,11 @@
               "type": "int"
             },
             {
+              "name": "sat_uptime",
+              "desc": "satellite's up time in seconds",
+              "type": "int"
+            },			
+            {
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",
               "type": "int"
@@ -893,10 +937,11 @@
         },
 		
 		
-		{
+		
+        {
           "id": "13",
-          "name": "TX",
-          "desc": "TX - TODO",
+          "name": "LOG",
+          "desc": "LOG DATA",
           "inParams": [
             {
               "name": "timestamp",
@@ -904,14 +949,89 @@
               "type": "datetime"
             },
             {
-              "name": "Message",
-              "desc": "na",
+              "name": "error number",
+              "desc": "error number",
+              "type": "int"
+            },
+            {
+              "name": "message",
+              "desc": "message",
               "type": "ascii"
             }
           ]
         },
 		
-		
+        {
+          "id": "3",
+          "name": "Solar Panels",
+          "desc": "Solar Panels TLM DATA",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "Solar panel 1 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 2 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 3 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 4 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 5 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 6 Temperature",
+              "desc": "",
+              "type": "int"
+            }
+          ]
+        },
+
+        {
+          "id": "2",
+          "name": "ANT",
+          "desc": "ANT DATA",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "ants_temperature",
+              "desc": "ants_temperature",
+              "type": "short"
+            },
+            {
+              "name": "ants_deployment",
+              "desc": "ants_deployment",
+              "type": "short"
+            },
+            {
+              "name": "ants_uptime",
+              "desc": "ants_uptime",
+              "type": "int"
+            }
+          ]
+        },
+
 		
         {
           "id": "1",
@@ -924,12 +1044,54 @@
               "type": "datetime"
             },
             {
-              "name": "vbat",
+              "name": "tx_reflpwr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "tx_fwrdpwr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "bus_volt",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vutotal_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vutx_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vurx_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vupa_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "pa_temp",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "board_temp",
               "desc": "battery voltage",
               "type": "short"
             }
           ]
         },
+		
+		
         {
           "id": "6",
           "name": "RX",
@@ -941,74 +1103,108 @@
               "type": "datetime"
             },
             {
-              "name": "vbat",
+              "name": "rx_doppler",
               "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "volt_5v",
-              "desc": "5v bus voltage",
+              "name": "rx_rssi",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "volt_3v3",
-              "desc": "3v3 bus voltage",
+              "name": "bus_volt",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "charging_power",
-              "desc": "the current charging power",
+              "name": "vutotal_curr",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "consumed_power",
-              "desc": "the satellite consumed power",
+              "name": "vutx_curr",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "electric_current",
-              "desc": "the battery's up-to-date electric current",
+              "name": "vurx_curr",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "current_3v3",
-              "desc": "3.3 volt bus up-to-date battery",
+              "name": "vupa_curr",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "current_5v",
-              "desc": "5 volt bus up-to-date battery",
+              "name": "pa_temp",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "sat_time",
-              "desc": "satellite's clock current unix time",
-              "type": "datetime"
-            },
-            {
-              "name": "free_memory",
-              "desc": "the satellite's Sd's free bytes",
-              "type": "int"
-            },
-            {
-              "name": "corrupt_bytes",
-              "desc": "the memory's corrupted bytes",
-              "type": "int"
-            },
-            {
-              "name": "number_of_resets",
-              "desc": "number of resets the satellite has gone through",
-              "type": "int"
-            },
-            {
-              "name": "number_of_cmd_resets",
-              "desc": "number of resets the satellite has gone through",
-              "type": "int"
+              "name": "board_temp",
+              "desc": "battery voltage",
+              "type": "short"
             }
           ]
         }
       ]
     },
+	
+    {
+      "id": "2",
+      "name": "Telemetry",
+      "subtypes": [
+        {
+          "id": "205",
+          "name": "Get TLM period times",
+          "desc": "Get all TLM period times",
+          "inParams": [
+            {
+              "name": "EPS interval",
+              "desc": "",
+              "type": "int"
+            },            
+            {
+              "name": "TRXVU interval",
+              "desc": "",
+              "type": "int"
+            },            
+            {
+              "name": "Ant interval",
+              "desc": "",
+              "type": "int"
+            },            
+            {
+              "name": "Solar Panel interval",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "WOD Panel interval",
+              "desc": "",
+              "type": "int"
+            }	
+		  
+		  ]
+        },
+        {
+          "id": "187",
+          "name": "Get Last FS Error",
+          "desc": "Get last file system error",
+          "inParams": [
+            {
+              "name": "Last Error",
+              "desc": "",
+              "type": "int"
+            }            
+          ]
+        }
+      ]
+    },	
+	
+	
     {
       "id": "1",
       "name": "EPS",
@@ -1068,7 +1264,13 @@
           "name": "Set heater values",
           "desc": "set min & max heater values",
           "inParams": []
-        }
+        },
+        {
+          "id": "4",
+          "name": "Rest EPS WDT",
+          "desc": "Resets the watchdog timer keeping the system from performing a reset",
+          "inParams": []
+        },		
       ]
     },
     {
@@ -1087,7 +1289,44 @@
               "type": "datetime"
             }
           ]
-        }
+        },
+        {
+          "id": "225",
+          "name": "FRAM Read",
+          "desc": "Read FRAM value and transmit it",
+          "inParams": [
+            {
+              "name": "Byte data",
+              "desc": "data to read",
+              "type": "bytes"
+            }
+          ]
+        },		
+        {
+          "id": "224",
+          "name": "FRAM Wtite",
+          "desc": "Write FRAM value and transmit it",
+          "inParams": [
+            {
+              "name": "Byte data",
+              "desc": "data to read",
+              "type": "bytes"
+            }
+          ]
+        },		
+        {
+          "id": "227",
+          "name": "Get Sat Uptime",
+          "desc": "Get Sat Uptime in seconds",
+          "inParams": [
+            {
+              "name": "Uptime",
+              "desc": "",
+              "type": "int"
+            }
+          ]
+        },
+		
       ]
     }
   ]

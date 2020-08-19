@@ -1124,14 +1124,22 @@ namespace packet_maker
 
             foreach (var doc in capitalQuerySnapshot)
             {
-                var pk = doc.ConvertTo<Packet>();
-                po = await Task.Run(() =>
+                try
                 {
-                    return packetObject.create(transOptions, pk.packetString);
-                });
-                
-                rawRxPacHisList.Add(po);
-                privHex.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+                    var pk = doc.ConvertTo<Packet>();
+                    po = await Task.Run(() =>
+                    {
+                        return packetObject.create(transOptions, pk.packetString);
+                    });
+
+                    rawRxPacHisList.Add(po);
+                    privHex.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+
+                }
+                catch
+                {
+                    privHex.Items.Add("ERROR");
+                }
             }
         }
 

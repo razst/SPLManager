@@ -203,12 +203,19 @@ namespace packet_maker
 
         static public packetObject create(TypeList json, string packetString)
         {
-            packetObject createdPacket = new packetObject
+            try
             {
-                jsonObject = json
-            };
-            createdPacket.ConvertFromString(packetString);
-            return createdPacket;
+                packetObject createdPacket = new packetObject
+                {
+                    jsonObject = json
+                };
+                createdPacket.ConvertFromString(packetString);
+                return createdPacket;
+            }
+            catch
+            {
+                return new packetObject { rawPacket = packetString ,type = -1};
+            }
         }
 
         public string castToString()
@@ -223,19 +230,6 @@ namespace packet_maker
                 
             }
             return HexId + " "+HexGru+" "+HexType+" "+HexSubType+" "+HexLen;
-        }
-
-        static public bool TestIfPacket(string packetString, TypeList rxObject)
-        {
-            try
-            {
-                packetObject temp = create(rxObject, packetString);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         public string getTypeName() => jsonObject.typenum[typeDex].name;

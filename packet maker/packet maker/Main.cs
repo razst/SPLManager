@@ -35,7 +35,7 @@ namespace packet_maker
         private TypeList options;
         private TypeList transOptions;
         private bool success = false;
-        private Packet packet = new Packet();
+        private Packet DBPacket = new Packet();
         public List<packetObject> rawRxPacHisList = new List<packetObject>();
         public List<packetObject> rawTxPacHisList = new List<packetObject>();
 
@@ -160,19 +160,23 @@ namespace packet_maker
             Array.Reverse(TidArr);
             return String.Join(" ",TidArr).Trim();
         }
-        private async Task Upload_Packet(string COLLECTION_NAME,string packetString)
+        private async Task Upload_Packet(string COLLECTION_NAME,packetObject ogPacket)
         {
             await Task.Run(() => {
 
                 if (Program.settings.dataBaseEnabled)
                 {
-                    packet.packetString = packetString;
-                    packet.time = DateTime.UtcNow;
-                    packet.satId = int.Parse(packetString[10].ToString());
+                    DBPacket.packetString = ogPacket.rawPacket;
+                    DBPacket.time = DateTime.UtcNow;
+
+                    if(ogPacket.type != -1)
+                    {
+                        DBPacket.satId = int.Parse(ogPacket.rawPacket[10].ToString());
+                    }
 
                     DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + COLLECTION_NAME).Document();
 
-                    docRef.SetAsync(packet);
+                    docRef.SetAsync(DBPacket);
                 }
             });
         }
@@ -332,19 +336,28 @@ namespace packet_maker
 
         private void RX(packetObject po)
         {
+            transIn.Text = po.rawPacket;
             transOut.Clear();
-            transOut.AppendText("Satlite: " + po.sateliteGroup + Environment.NewLine);
-            transOut.AppendText("ID: " + po.id + Environment.NewLine);
-            transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
-            transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
-            transOut.AppendText("length: " + po.length + Environment.NewLine);
-            if (po.data.Count != 0)
+            if (po.type != -1)
             {
-                transOut.AppendText("*******************************" + Environment.NewLine);
-                for (int i = 0; i < po.data.Count; i++)
+                transOut.AppendText("Satlite: " + po.sateliteGroup + Environment.NewLine);
+                transOut.AppendText("ID: " + po.id + Environment.NewLine);
+                transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
+                transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
+                transOut.AppendText("length: " + po.length + Environment.NewLine);
+                if (po.data.Count != 0)
                 {
-                    transOut.AppendText(po.dataNames[i] + ": " + po.data[i] + Environment.NewLine);
+                    transOut.AppendText("*******************************" + Environment.NewLine);
+                    for (int i = 0; i < po.data.Count; i++)
+                    {
+                        transOut.AppendText(po.dataNames[i] + ": " + po.data[i] + Environment.NewLine);
+                    }
                 }
+            }
+            else
+            {
+                transOut.AppendText("manager was not able to translate this packet:"+Environment.NewLine);
+                transOut.AppendText(po.rawPacket + Environment.NewLine);
             }
         }
 
@@ -369,26 +382,26 @@ namespace packet_maker
             {
                 if (success && mode == Packet_Mode.satelite)
                 {
-                    await Upload_Packet("tx packets", makeOut.Text);
+                    await Upload_Packet("tx packets", new packetObject {rawPacket = makeOut.Text});
                 }
             }
         }
         public async void trasBtn_click(string msg)
         {
             mess = msg.Trim();
-            if (packetObject.TestIfPacket(mess, transOptions))
+            po = packetObject.create(transOptions, mess);
+            if (po.type != -1)
             {
-                po = packetObject.create(transOptions, msg.Trim());
                 if(po.sateliteGroup == RxGroupsCB.SelectedItem.ToString() || RxGroupsCB.SelectedIndex == 0)
                 {
                     rawRxPacHisList.Add(po);
                     addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}",privHex);
                 }
                 
-                await Upload_Packet("rx packets", mess);
             }
             else
             {
+                //image
                 string[] TArr = mess.Split(' ');
 
                 if (TArr.Length >= 6)
@@ -396,15 +409,16 @@ namespace packet_maker
                     if (TArr[4] == "02" && (TArr[5] == "E1" || TArr[5] == "E2"))
                     {
                         HandleNewImagePacket(TArr);
-                        return;
+                        return; //dont continue to error
                     }
                 }
 
 
-
-                rawRxPacHisList.Add(new packetObject {rawPacket = mess});
+                //error
+                rawRxPacHisList.Add(po);
                 addItemToListbox("ERROR",privHex);
             }
+            await Upload_Packet("rx packets", po);
         }
 
 
@@ -578,23 +592,11 @@ namespace packet_maker
         #region listbox
         private void privHex_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (privHex.SelectedItem.ToString().Substring(24) != "ERROR") 
-            {
-                transIn.Text = rawRxPacHisList[privHex.SelectedIndex].rawPacket;
-                RX(rawRxPacHisList[privHex.SelectedIndex]);
-            }
-            else
-            {
-                transOut.Clear();
-                transOut.AppendText("Manager was not able to translate this packet:"+Environment.NewLine);
-                transOut.AppendText(rawRxPacHisList[privHex.SelectedIndex].rawPacket+ Environment.NewLine);
-            }
-
+            RX(rawRxPacHisList[privHex.SelectedIndex]);
         }
 
         private void TxPacLibx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            transIn.Text = rawTxPacHisList[TxPacLibx.SelectedIndex].rawPacket;
             RX(rawTxPacHisList[TxPacLibx.SelectedIndex]);
         }
         #endregion
@@ -1099,32 +1101,33 @@ namespace packet_maker
 
         private async void loadDbBtn_Click(object sender, EventArgs e)
         {
-            clearRxBtn.PerformClick();
-
-            //define query
-            Query capitalQuery;
-            if (RxGroupsCB.SelectedIndex == 0)
+            try
             {
-                capitalQuery = Program.db.Collection("rx packets")
-                .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
-                .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
-                .OrderBy("time");
-            }
-            else
-            {
-                capitalQuery = Program.db.Collection("rx packets")
-                .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
-                .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
-                .WhereEqualTo("satId", RxGroupsCB.SelectedIndex)
-                .OrderBy("time");
-            }
-            //
+                Application.UseWaitCursor = true;
+                clearRxBtn.PerformClick();
 
-            QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+                //define query
+                Query capitalQuery;
+                if (RxGroupsCB.SelectedIndex == 0)
+                {
+                    capitalQuery = Program.db.Collection("rx packets")
+                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
+                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
+                    .OrderBy("time");
+                }
+                else
+                {
+                    capitalQuery = Program.db.Collection("rx packets")
+                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
+                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
+                    .WhereEqualTo("satId", RxGroupsCB.SelectedIndex)
+                    .OrderBy("time");
+                }
+                //
 
-            foreach (var doc in capitalQuerySnapshot)
-            {
-                try
+                QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+
+                foreach (var doc in capitalQuerySnapshot)
                 {
                     var pk = doc.ConvertTo<Packet>();
                     po = await Task.Run(() =>
@@ -1133,14 +1136,22 @@ namespace packet_maker
                     });
 
                     rawRxPacHisList.Add(po);
-                    privHex.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
 
-                }
-                catch
-                {
-                    privHex.Items.Add("ERROR");
+                    if(po.type != -1)
+                    {
+                        privHex.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+                    }
+                    else
+                    {
+                        privHex.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   ERROR");
+                    }
                 }
             }
+            finally
+            {
+                Application.UseWaitCursor = false;
+            }
+
         }
 
 
@@ -1174,12 +1185,19 @@ namespace packet_maker
                 List<List<string>> T = new List<List<string>> { new List<string> { "Date", "Id", "SatGroup", "Type", "Subtype", "Lenght", "Raw packet", "Data" } };
                 foreach (var packet in rawRxPacHisList)
                 {
-                    string dataStr = "";
-                    for (int i = 0; i < packet.dataNames.Count; i++)
+                    if(packet.type != -1)
                     {
-                        dataStr += $"{packet.dataNames[i]}: {packet.data[i]}. ";
+                        string dataStr = "";
+                        for (int i = 0; i < packet.dataNames.Count; i++)
+                        {
+                            dataStr += $"{packet.dataNames[i]}: {packet.data[i]}. ";
+                        }
+                        T.Add(new List<string> { privHex.Items[j].ToString().Split('[', ']')[1], packet.id.ToString(), packet.sateliteGroup, packet.getTypeName(), packet.getSubTypeName(), packet.length.ToString(), packet.rawPacket, dataStr });
                     }
-                    T.Add(new List<string> { privHex.Items[j].ToString().Split('[', ']')[1], packet.id.ToString(), packet.sateliteGroup, packet.getTypeName(), packet.getSubTypeName(), packet.length.ToString(), packet.rawPacket, dataStr });
+                    else
+                    {
+                        T.Add(new List<string> { privHex.Items[j].ToString().Split('[', ']')[1], "-1", "-", "ERROR", "-", "-", packet.rawPacket, "manager was not able to translate this packet" });
+                    }
 
 
                     j++;
@@ -1196,29 +1214,39 @@ namespace packet_maker
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 List<FilePacket> type_subtype = new List<FilePacket>();
+                List<List<string>> errorTable = new List<List<string>> { new List<string> {"Date","Packet" } };
 
                 //sorting packets to files
                 int j = 0;
                 foreach(var packet in rawRxPacHisList)
                 {
-                    int match = type_subtype.FindIndex(x => x.packetPrefix == $"{packet.getTypeName()}_{packet.getSubTypeName()}");
                     string timeStr = privHex.Items[j].ToString().Split('[', ']')[1];
-                    if (match != -1)
+
+                    if(packet.type != -1)
                     {
-                        type_subtype[match].packets.Add(new PacketWithTime { packet = packet,time = timeStr});
+                        int match = type_subtype.FindIndex(x => x.packetPrefix == $"{packet.getTypeName()}_{packet.getSubTypeName()}");
+                        if (match != -1)
+                        {
+                            type_subtype[match].packets.Add(new PacketWithTime { packet = packet,time = timeStr});
+                        }
+                        else
+                        {
+                            var colStr = new List<string> { "Date", "Id", "SatGroup", "Type", "Subtype", "Lenght", "Raw data" };
+                            colStr.AddRange(packet.dataNames);
+
+                            type_subtype.Add(new FilePacket 
+                            { 
+                                packetPrefix = $"{packet.getTypeName()}_{packet.getSubTypeName()}" ,
+                                packets = new List<PacketWithTime> { new PacketWithTime {packet = packet, time=timeStr } },
+                                firstColumn = colStr
+                            });
+                        }
                     }
                     else
                     {
-                        var colStr = new List<string> { "Date", "Id", "SatGroup", "Type", "Subtype", "Lenght", "Raw data" };
-                        colStr.AddRange(packet.dataNames);
-
-                        type_subtype.Add(new FilePacket 
-                        { 
-                            packetPrefix = $"{packet.getTypeName()}_{packet.getSubTypeName()}" ,
-                            packets = new List<PacketWithTime> { new PacketWithTime {packet = packet, time=timeStr } },
-                            firstColumn = colStr
-                        });
+                        errorTable.Add(new List<string> { timeStr, packet.rawPacket });
                     }
+
 
                     j++;
                 }
@@ -1247,6 +1275,14 @@ namespace packet_maker
                     }
 
                     CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.packetPrefix}.csv");
+                }
+                //
+
+
+                //creating errors file
+                if (errorTable.Count > 1)
+                {
+                    CreateCSV(errorTable, $"{saveFileDialog.FileName}_Errors.csv");
                 }
             }
         }

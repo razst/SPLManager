@@ -128,16 +128,14 @@ namespace packet_maker
                     case "date":
                         if(bitarr[j] != "NN" && bitarr[j] != "N+" && bitarr[j] != "N-")
                         {
-                            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                            dtDateTime = dtDateTime.AddSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
-
+                            DateTimeOffset dtDateTime = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
                             if (par.type == "datetime")
                             {
-                                data.Add(dtDateTime.ToString());
+                                data.Add(dtDateTime.ToString("yyyy/MM/dd HH:mm:ss"));
                             }
                             else
                             {
-                                data.Add(dtDateTime.ToString().Substring(0, 10));
+                                data.Add(dtDateTime.ToString("yyyy/MM/dd"));
                             }
                         }
                         else

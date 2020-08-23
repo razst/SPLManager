@@ -185,7 +185,7 @@ namespace packet_maker
         {
             if (list.SelectedIndex != -1)
             {
-                list.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   {diaplay}");
+                list.Items.Add($"[{DateTime.Now}]   {diaplay}");
 
 
                 if (list.Items.Count - 2 == privHex.SelectedIndex)
@@ -193,7 +193,7 @@ namespace packet_maker
             }
             else
             {
-                list.Items.Add($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}]   {diaplay}");
+                list.Items.Add($"[{DateTime.Now}]   {diaplay}");
                 list.SelectedIndex = 0;
             }
         }
@@ -1103,11 +1103,13 @@ namespace packet_maker
         {
             try
             {
-                Application.UseWaitCursor = true;
+                UseWaitCursor = true;
                 clearRxBtn.PerformClick();
-
-                //define query
                 Query capitalQuery;
+
+
+                #region rxHistory
+                //define query
                 if (RxGroupsCB.SelectedIndex == 0)
                 {
                     capitalQuery = Program.db.Collection("rx packets")
@@ -1146,10 +1148,59 @@ namespace packet_maker
                         privHex.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   ERROR");
                     }
                 }
+                #endregion
+
+                #region TxHistory
+
+                //define query
+                if (RxGroupsCB.SelectedIndex == 0)
+                {
+                    capitalQuery = Program.db.Collection("tx packets")
+                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
+                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
+                    .OrderBy("time");
+                }
+                else
+                {
+                    capitalQuery = Program.db.Collection("tx packets")
+                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
+                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
+                    .WhereEqualTo("satId", RxGroupsCB.SelectedIndex)
+                    .OrderBy("time");
+                }
+                //
+
+                QuerySnapshot TxSnapshots = await capitalQuery.GetSnapshotAsync();
+
+                foreach (var doc in TxSnapshots)
+                {
+                    var pk = doc.ConvertTo<Packet>();
+                    po = await Task.Run(() =>
+                    {
+                        return packetObject.create(options, pk.packetString);
+                    });
+
+                    rawTxPacHisList.Add(po);
+
+                    if (po.type != -1)
+                    {
+                        TxPacLibx.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+                    }
+                    else
+                    {
+                        TxPacLibx.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   ERROR");
+                    }
+                }
+
+                #endregion
+
+
+
+                UseWaitCursor = false;
             }
             finally
             {
-                Application.UseWaitCursor = false;
+                UseWaitCursor = false;
             }
 
         }
@@ -1202,8 +1253,16 @@ namespace packet_maker
 
                     j++;
                 }
-
-                CreateCSV(T, saveFileDialog.FileName);
+                try
+                {
+                    Application.UseWaitCursor = true;
+                    CreateCSV(T, saveFileDialog.FileName);
+                    Application.UseWaitCursor = false;
+                }
+                finally
+                {
+                    Application.UseWaitCursor = false;
+                }
             }
         }
 
@@ -1252,38 +1311,48 @@ namespace packet_maker
                 }
                 //
 
-
-                //creating all files
-                foreach(var file in type_subtype)
+                try
                 {
-                    List<List<string>> fileTble = new List<List<string>> { file.firstColumn };
-                    foreach(var pac in file.packets)
+                    Application.UseWaitCursor = true;
+                    //creating all files
+                    foreach(var file in type_subtype)
                     {
-                        List<string> tm = new List<string>
+                        List<List<string>> fileTble = new List<List<string>> { file.firstColumn };
+                        foreach(var pac in file.packets)
                         {
-                            pac.time,
-                            pac.packet.id.ToString(),
-                            pac.packet.sateliteGroup,
-                            pac.packet.getTypeName(),
-                            pac.packet.getSubTypeName(),
-                            pac.packet.length.ToString(),
-                            pac.packet.rawPacket
-                        };
-                        tm.AddRange(pac.packet.data);
+                            List<string> tm = new List<string>
+                            {
+                                pac.time,
+                                pac.packet.id.ToString(),
+                                pac.packet.sateliteGroup,
+                                pac.packet.getTypeName(),
+                                pac.packet.getSubTypeName(),
+                                pac.packet.length.ToString(),
+                                pac.packet.rawPacket
+                            };
+                            tm.AddRange(pac.packet.data);
 
-                        fileTble.Add(tm);
+                            fileTble.Add(tm);
+                        }
+
+                        CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.packetPrefix}.csv");
+                    }
+                    //
+
+
+                    //creating errors file
+                    if (errorTable.Count > 1)
+                    {
+                        CreateCSV(errorTable, $"{saveFileDialog.FileName}_Errors.csv");
                     }
 
-                    CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.packetPrefix}.csv");
+                    Application.UseWaitCursor = false;
                 }
-                //
-
-
-                //creating errors file
-                if (errorTable.Count > 1)
+                finally
                 {
-                    CreateCSV(errorTable, $"{saveFileDialog.FileName}_Errors.csv");
+                    Application.UseWaitCursor = false;
                 }
+
             }
         }
         #endregion

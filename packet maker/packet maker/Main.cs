@@ -16,13 +16,14 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
+using Microsoft.Office.Interop;
 
 namespace packet_maker
 {
     public partial class Main : Form
     {
+
+
         public Main()
         {
             InitializeComponent();
@@ -1213,6 +1214,52 @@ namespace packet_maker
 
         private void CreateCSV(List<List<string>> table,string fileName)
         {
+
+            Microsoft.Office.Interop.Excel.Application oXL;
+            Microsoft.Office.Interop.Excel._Workbook oWB;
+            Microsoft.Office.Interop.Excel._Worksheet oSheet;
+
+
+            //Start Excel and get Application object.
+            oXL = new Microsoft.Office.Interop.Excel.Application
+            {
+                Visible = false,
+                UserControl = false
+            };
+
+            object m = System.Type.Missing;
+
+            //Get a new workbook.
+            oWB = oXL.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+            oSheet.DisplayRightToLeft = false;
+
+            for(int i = 0; i < table.Count; i++)
+            {
+                for(int j = 0; j < table[i].Count; j++)
+                {
+                    oSheet.Cells[i+1, j+1] = table[i][j];
+                }
+            }
+
+            oSheet.Columns.AutoFit();
+
+            oWB.SaveAs(
+                fileName, 
+                Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault,
+                m,
+                m,
+                m, 
+                m, 
+                Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+                m, m, m, m , m);
+
+
+            oWB.Close();
+            oXL.Quit();
+
+
+            /*
             using (StreamWriter writer = new StreamWriter(new FileStream(
                     fileName,
                     FileMode.Create,
@@ -1224,11 +1271,12 @@ namespace packet_maker
                     writer.WriteLine(String.Join(", ", line));
                 }
             }
+            */
         }
 
         private void toAFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialog.Filter = "excel|*.csv";
+            saveFileDialog.Filter = "excel|*.xlsx";
             saveFileDialog.Title = "Export history to a File";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -1335,7 +1383,7 @@ namespace packet_maker
                             fileTble.Add(tm);
                         }
 
-                        CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.packetPrefix}.csv");
+                        CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.packetPrefix}.xlsx");
                     }
                     //
 
@@ -1343,7 +1391,7 @@ namespace packet_maker
                     //creating errors file
                     if (errorTable.Count > 1)
                     {
-                        CreateCSV(errorTable, $"{saveFileDialog.FileName}_Errors.csv");
+                        CreateCSV(errorTable, $"{saveFileDialog.FileName}_Errors.xlsx");
                     }
 
                     Application.UseWaitCursor = false;

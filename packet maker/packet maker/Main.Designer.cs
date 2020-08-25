@@ -114,6 +114,8 @@
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toAFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
@@ -532,6 +534,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label20);
+            this.panel4.Controls.Add(this.comboBox1);
             this.panel4.Controls.Add(this.label19);
             this.panel4.Controls.Add(this.label18);
             this.panel4.Controls.Add(this.maxExportDateDtp);
@@ -578,7 +582,7 @@
             // 
             // loadDbBtn
             // 
-            this.loadDbBtn.Location = new System.Drawing.Point(109, 34);
+            this.loadDbBtn.Location = new System.Drawing.Point(218, 34);
             this.loadDbBtn.Name = "loadDbBtn";
             this.loadDbBtn.Size = new System.Drawing.Size(101, 23);
             this.loadDbBtn.TabIndex = 27;
@@ -925,7 +929,7 @@
             this.tXToolStripMenuItem,
             this.rXToolStripMenuItem});
             this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
-            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.modifyToolStripMenuItem.Text = "modify";
             // 
             // tXToolStripMenuItem
@@ -953,7 +957,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -969,16 +973,38 @@
             // toAFileToolStripMenuItem
             // 
             this.toAFileToolStripMenuItem.Name = "toAFileToolStripMenuItem";
-            this.toAFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.toAFileToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.toAFileToolStripMenuItem.Text = "to a file";
             this.toAFileToolStripMenuItem.Click += new System.EventHandler(this.toAFileToolStripMenuItem_Click);
             // 
             // toAFolderToolStripMenuItem
             // 
             this.toAFolderToolStripMenuItem.Name = "toAFolderToolStripMenuItem";
-            this.toAFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.toAFolderToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.toAFolderToolStripMenuItem.Text = "to a folder";
             this.toAFolderToolStripMenuItem.Click += new System.EventHandler(this.toAFolderToolStripMenuItem_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "100",
+            "500",
+            "1000",
+            "No Limit"});
+            this.comboBox1.Location = new System.Drawing.Point(49, 36);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(128, 21);
+            this.comboBox1.TabIndex = 32;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(12, 39);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(31, 13);
+            this.label20.TabIndex = 33;
+            this.label20.Text = "Limit:";
             // 
             // Main
             // 
@@ -1103,6 +1129,8 @@
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toAFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toAFolderToolStripMenuItem;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

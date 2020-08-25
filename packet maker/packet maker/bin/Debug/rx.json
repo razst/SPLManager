@@ -1,4 +1,10 @@
 {
+
+"calibrations": [
+{"ID":"1","name":"Temperature","a":"4","b":"-5"},
+{"ID":"2","name":"Voltage","a":"0.001","b":"0"}
+]
+
   "types": [
     {
       "id": "0",
@@ -12,17 +18,20 @@
             {
               "name": "vbat",
               "desc": "battery voltage",
-              "type": "short"
+              "type": "short",
+			  "calibration":"2"
             },
             {
               "name": "volt_5v",
               "desc": "5v bus voltage",
-              "type": "short"
+              "type": "short",
+			  "calibration":"2"
             },
             {
               "name": "volt_3v3",
               "desc": "3v3 bus voltage",
-              "type": "short"
+              "type": "short",
+			  "calibration":"2"
             },
             {
               "name": "charging_power",

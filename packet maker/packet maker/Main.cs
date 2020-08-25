@@ -276,16 +276,16 @@ namespace packet_maker
                                 if (curValue.Substring(0, 3) != "now")
                                 {
                                     dt = DateTime.Parse(curValue);
-                                    unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+                                    unix = (Int32)(dt.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                                 }
                                 else if (dataTypesDGV.Rows[i].Cells[1].Value.ToString() == "now")
                                 {
                                     dt = DateTime.Now;
-                                    unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+                                    unix = ((DateTimeOffset)dt).ToLocalTime().ToUnixTimeSeconds();
                                 }
                                 else
                                 {
-                                    unix = curValue[3].ToString().Operator(int.Parse(((DateTimeOffset)DateTime.Now).ToUnixTimeSeconds().ToString()) , int.Parse(curValue.Substring(4)));
+                                    unix = curValue[3].ToString().Operator(int.Parse(((DateTimeOffset)DateTime.Now).ToLocalTime().ToUnixTimeSeconds().ToString()) , int.Parse(curValue.Substring(4)));
                                 }
 
                                 data += Convert.ToInt64(unix).ToString("X8");
@@ -295,7 +295,7 @@ namespace packet_maker
                                 if (curValue.Substring(0, 3) != "now")
                                 {
                                     dt = DateTime.Parse(curValue);
-                                    unix = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+                                    unix = ((DateTimeOffset)dt).ToLocalTime().ToUnixTimeSeconds();
                                     data += Convert.ToInt64(unix).ToString("X8");
                                 }
                                 else if (curValue == "now")
@@ -1196,8 +1196,6 @@ namespace packet_maker
                 #endregion
 
 
-
-                UseWaitCursor = false;
             }
             finally
             {
@@ -1305,7 +1303,6 @@ namespace packet_maker
                 {
                     Application.UseWaitCursor = true;
                     CreateCSV(T, saveFileDialog.FileName);
-                    Application.UseWaitCursor = false;
                 }
                 finally
                 {
@@ -1393,8 +1390,6 @@ namespace packet_maker
                     {
                         CreateCSV(errorTable, $"{saveFileDialog.FileName}_Errors.xlsx");
                     }
-
-                    Application.UseWaitCursor = false;
                 }
                 finally
                 {

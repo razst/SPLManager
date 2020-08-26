@@ -42,6 +42,9 @@ namespace packet_maker
         [JsonProperty("defultSatGroup")]
         public int defultSatGroup { get; set; }
 
+        [JsonProperty("enableExcel")]
+        public bool enableExcel { get; set; }
+
     }
 
     #endregion
@@ -59,8 +62,10 @@ namespace packet_maker
     {
         [JsonProperty("name")]
         public string name { get; set; }
+
         [JsonProperty("desc")]
         public string desc { get; set; }
+
         [JsonProperty("type")]
         public string type { get; set; }
 
@@ -70,11 +75,8 @@ namespace packet_maker
         [JsonProperty("subParams")]
         public List<string> subParams { get; set; }
 
-        public IEnumerator<vars> GetEnumerator()
-        {
-            foreach (var type in values)
-                yield return type;
-        }
+        [JsonProperty("calibration")]
+        public int calibration { get; set; }
     }
     public class SubType
     {
@@ -118,7 +120,8 @@ namespace packet_maker
         [JsonProperty("types")]
         public List<Type> typenum { get; set; }
 
-
+        [JsonProperty("calibrations")]
+        public List<Calibration> calibrations { get; set; }
 
         public IEnumerator<Type> GetEnumerator()
         {
@@ -126,6 +129,21 @@ namespace packet_maker
                 yield return type;
         }
 
+    }
+
+    public class Calibration
+    {
+        [JsonProperty("ID")]
+        public int ID { get; set; }
+
+        [JsonProperty("name")]
+        public string name { get; set; }
+
+        [JsonProperty("a")]
+        public float muliplayer { get; set; }
+
+        [JsonProperty("b")]
+        public float constent { get; set; }
     }
 
     #endregion

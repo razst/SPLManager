@@ -3,9 +3,9 @@
 "calibrations": [
 {"ID":"1","name":"Temperature","a":"4","b":"-5"},
 {"ID":"2","name":"Voltage","a":"0.001","b":"0"}
-]
+],
 
-  "types": [
+	"types": [
     {
       "id": "0",
       "name": "TRXVU",

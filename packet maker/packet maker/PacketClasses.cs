@@ -100,7 +100,7 @@ namespace packet_maker
                 switch (par.type)
                 {
                     case "int":
-                        data.Add(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16).ToString());
+                        data.Add(Calibrate(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16), par.calibration));
                         dataNames.Add(par.name);
                         j += 4;
                         break;
@@ -108,7 +108,7 @@ namespace packet_maker
                     case "char":
                         if (par.values == null)
                         {
-                            data.Add(Convert.ToInt32(bitarr[j], 16).ToString());
+                            data.Add(Calibrate(Convert.ToInt32(bitarr[j], 16), par.calibration));
                         }
                         else
                         {
@@ -119,7 +119,7 @@ namespace packet_maker
                         break;
 
                     case "short":
-                        data.Add(Convert.ToInt32(bitarr[j + 1] + bitarr[j], 16).ToString());
+                        data.Add(Calibrate(Convert.ToInt32(bitarr[j + 1] + bitarr[j], 16), par.calibration));
                         dataNames.Add(par.name);
                         j += 2;
                         break;
@@ -197,6 +197,16 @@ namespace packet_maker
                         break;
                 }
             }
+        }
+
+        private string Calibrate(int input, int paramId)
+        {
+            if(paramId != 0)
+            {
+                Calibration calibration =  jsonObject.calibrations.Find(x => x.ID == paramId);
+                return (calibration.muliplayer * input + calibration.constent).ToString();
+            }
+            return input.ToString();
         }
 
         static public packetObject create(TypeList json, string packetString)

@@ -6,5 +6,6 @@
 "dataBaseName":"satelite-packets",
 "collectionPrefix":"",
 "tcpPortNumber": 4,
-"defultSatGroup": 2 
+"defultSatGroup": 2,
+"enableExcel": false 
 }

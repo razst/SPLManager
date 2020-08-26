@@ -67,7 +67,7 @@ namespace packet_maker
         public async Task Send(string msg)
         {
             await Task.Run(() => {
-                if (server != null && client != null)
+                if (isOnline)
                 {
                     byte[] j = ConvertHexToBytes(msg);
                     cmd command = new cmd { Type = "RawTelecommand", Content = j };

@@ -66,6 +66,8 @@
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.RxTab = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
+            this.DBLimitCB = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.maxExportDateDtp = new System.Windows.Forms.DateTimePicker();
@@ -114,8 +116,7 @@
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toAFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
+            this.resendTxBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
@@ -507,6 +508,7 @@
             // 
             // RxTab
             // 
+            this.RxTab.Controls.Add(this.resendTxBtn);
             this.RxTab.Controls.Add(this.panel4);
             this.RxTab.Controls.Add(this.rx2txBtn);
             this.RxTab.Controls.Add(this.tx2rxBtn);
@@ -535,7 +537,7 @@
             // panel4
             // 
             this.panel4.Controls.Add(this.label20);
-            this.panel4.Controls.Add(this.comboBox1);
+            this.panel4.Controls.Add(this.DBLimitCB);
             this.panel4.Controls.Add(this.label19);
             this.panel4.Controls.Add(this.label18);
             this.panel4.Controls.Add(this.maxExportDateDtp);
@@ -545,6 +547,29 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(357, 65);
             this.panel4.TabIndex = 32;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(12, 39);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(31, 13);
+            this.label20.TabIndex = 33;
+            this.label20.Text = "Limit:";
+            // 
+            // DBLimitCB
+            // 
+            this.DBLimitCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DBLimitCB.FormattingEnabled = true;
+            this.DBLimitCB.Items.AddRange(new object[] {
+            "100",
+            "500",
+            "1000",
+            "No Limit"});
+            this.DBLimitCB.Location = new System.Drawing.Point(49, 36);
+            this.DBLimitCB.Name = "DBLimitCB";
+            this.DBLimitCB.Size = new System.Drawing.Size(128, 21);
+            this.DBLimitCB.TabIndex = 32;
             // 
             // label19
             // 
@@ -984,27 +1009,15 @@
             this.toAFolderToolStripMenuItem.Text = "to a folder";
             this.toAFolderToolStripMenuItem.Click += new System.EventHandler(this.toAFolderToolStripMenuItem_Click);
             // 
-            // comboBox1
+            // resendTxBtn
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "100",
-            "500",
-            "1000",
-            "No Limit"});
-            this.comboBox1.Location = new System.Drawing.Point(49, 36);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(128, 21);
-            this.comboBox1.TabIndex = 32;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(12, 39);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(31, 13);
-            this.label20.TabIndex = 33;
-            this.label20.Text = "Limit:";
+            this.resendTxBtn.Location = new System.Drawing.Point(168, 398);
+            this.resendTxBtn.Name = "resendTxBtn";
+            this.resendTxBtn.Size = new System.Drawing.Size(75, 23);
+            this.resendTxBtn.TabIndex = 33;
+            this.resendTxBtn.Text = "Resend";
+            this.resendTxBtn.UseVisualStyleBackColor = true;
+            this.resendTxBtn.Click += new System.EventHandler(this.resendTxBtn_Click);
             // 
             // Main
             // 
@@ -1130,7 +1143,8 @@
         private System.Windows.Forms.ToolStripMenuItem toAFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toAFolderToolStripMenuItem;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox DBLimitCB;
+        private System.Windows.Forms.Button resendTxBtn;
     }
 }
 

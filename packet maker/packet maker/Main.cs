@@ -120,6 +120,7 @@ namespace packet_maker
             imgIdTxb.Text = Program.settings.pacCurId.ToString();
             groupsCB.SelectedIndex = Program.settings.defultSatGroup;
             RxGroupsCB.SelectedIndex = Program.settings.defultSatGroup;
+            DBLimitCB.SelectedItem = "100";
             frm = this;
         }
 
@@ -276,16 +277,16 @@ namespace packet_maker
                                 if (curValue.Substring(0, 3) != "now")
                                 {
                                     dt = DateTime.Parse(curValue);
-                                    unix = (Int32)(dt.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                                    unix = (int)(dt.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                                 }
                                 else if (dataTypesDGV.Rows[i].Cells[1].Value.ToString() == "now")
                                 {
                                     dt = DateTime.Now;
-                                    unix = ((DateTimeOffset)dt).ToLocalTime().ToUnixTimeSeconds();
+                                    unix = (int)(dt.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                                 }
                                 else
                                 {
-                                    unix = curValue[3].ToString().Operator(int.Parse(((DateTimeOffset)DateTime.Now).ToLocalTime().ToUnixTimeSeconds().ToString()) , int.Parse(curValue.Substring(4)));
+                                    unix = curValue[3].ToString().Operator((int)(DateTime.Now.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, int.Parse(curValue.Substring(4)));
                                 }
 
                                 data += Convert.ToInt64(unix).ToString("X8");
@@ -295,7 +296,7 @@ namespace packet_maker
                                 if (curValue.Substring(0, 3) != "now")
                                 {
                                     dt = DateTime.Parse(curValue);
-                                    unix = ((DateTimeOffset)dt).ToLocalTime().ToUnixTimeSeconds();
+                                    unix = (int)(dt.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                                     data += Convert.ToInt64(unix).ToString("X8");
                                 }
                                 else if (curValue == "now")
@@ -558,6 +559,12 @@ namespace packet_maker
                 editingControl.DroppedDown = true;
         }
 
+
+        private async void resendTxBtn_Click(object sender, EventArgs e)
+        {
+            string id = ConvertToHexBytes(await getSplCurIdAsync(RxGroupsCB.SelectedIndex),3);
+            await RadioServer.Send($"{id} 0{groupsCB.SelectedIndex}{rawTxPacHisList[TxPacLibx.SelectedIndex].rawPacket.Substring(11)}"); //0-9 only
+        }
 
 
         private void tXToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1106,31 +1113,49 @@ namespace packet_maker
             {
                 UseWaitCursor = true;
                 clearRxBtn.PerformClick();
-                Query capitalQuery;
 
 
                 #region rxHistory
+
+                Query finalRxQry;
+
+
+                Query mainRxQry = Program.db.Collection("rx packets")
+                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
+                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
+                    .OrderBy("time");
+
                 //define query
                 if (RxGroupsCB.SelectedIndex == 0)
                 {
-                    capitalQuery = Program.db.Collection("rx packets")
-                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
-                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
-                    .OrderBy("time");
+                    if(DBLimitCB.SelectedItem.ToString() != "No Limit")
+                    {
+                        finalRxQry = mainRxQry
+                            .Limit(int.Parse(DBLimitCB.SelectedItem.ToString()));
+                    }
+                    else
+                    {
+                        finalRxQry = mainRxQry;
+                    }
                 }
                 else
                 {
-                    capitalQuery = Program.db.Collection("rx packets")
-                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
-                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
-                    .WhereEqualTo("satId", RxGroupsCB.SelectedIndex)
-                    .OrderBy("time");
+                    if (DBLimitCB.SelectedItem.ToString() != "No Limit")
+                    {
+                        finalRxQry = mainRxQry
+                            .WhereEqualTo("satId", RxGroupsCB.SelectedIndex)
+                            .Limit(int.Parse(DBLimitCB.SelectedItem.ToString()));
+                    }
+                    else
+                    {
+                        finalRxQry = mainRxQry.WhereEqualTo("satId", RxGroupsCB.SelectedIndex);
+                    }
                 }
                 //
 
-                QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+                QuerySnapshot RxSnapshot = await finalRxQry.GetSnapshotAsync();
 
-                foreach (var doc in capitalQuerySnapshot)
+                foreach (var doc in RxSnapshot)
                 {
                     var pk = doc.ConvertTo<Packet>();
                     po = await Task.Run(() =>
@@ -1153,25 +1178,40 @@ namespace packet_maker
 
                 #region TxHistory
 
+                Query finalTxQry;
+                Query mainTxQry = Program.db.Collection("tx packets")
+                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
+                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
+                    .OrderBy("time");
                 //define query
                 if (RxGroupsCB.SelectedIndex == 0)
                 {
-                    capitalQuery = Program.db.Collection("tx packets")
-                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
-                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
-                    .OrderBy("time");
+                    if (DBLimitCB.SelectedItem.ToString() != "No Limit")
+                    {
+                        finalTxQry = mainTxQry
+                            .Limit(int.Parse(DBLimitCB.SelectedItem.ToString()));
+                    }
+                    else
+                    {
+                        finalTxQry = mainTxQry;
+                    }
                 }
                 else
                 {
-                    capitalQuery = Program.db.Collection("tx packets")
-                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
-                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
-                    .WhereEqualTo("satId", RxGroupsCB.SelectedIndex)
-                    .OrderBy("time");
+                    if (DBLimitCB.SelectedItem.ToString() != "No Limit")
+                    {
+                        finalTxQry = mainTxQry
+                            .WhereEqualTo("satId", RxGroupsCB.SelectedIndex)
+                            .Limit(int.Parse(DBLimitCB.SelectedItem.ToString()));
+                    }
+                    else
+                    {
+                        finalTxQry = mainTxQry.WhereEqualTo("satId", RxGroupsCB.SelectedIndex);
+                    }
                 }
                 //
 
-                QuerySnapshot TxSnapshots = await capitalQuery.GetSnapshotAsync();
+                QuerySnapshot TxSnapshots = await finalTxQry.GetSnapshotAsync();
 
                 foreach (var doc in TxSnapshots)
                 {
@@ -1195,7 +1235,7 @@ namespace packet_maker
 
                 #endregion
 
-
+                MessageBox.Show($"{RxSnapshot.Count} RX packet were recived. {Environment.NewLine}{TxSnapshots.Count} TX packet were recived.", "Query finished", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             finally
             {
@@ -1212,69 +1252,82 @@ namespace packet_maker
 
         private void CreateCSV(List<List<string>> table,string fileName)
         {
-
-            Microsoft.Office.Interop.Excel.Application oXL;
-            Microsoft.Office.Interop.Excel._Workbook oWB;
-            Microsoft.Office.Interop.Excel._Worksheet oSheet;
-
-
-            //Start Excel and get Application object.
-            oXL = new Microsoft.Office.Interop.Excel.Application
+            if (Program.settings.enableExcel)
             {
-                Visible = false,
-                UserControl = false
-            };
+                Microsoft.Office.Interop.Excel.Application oXL;
+                Microsoft.Office.Interop.Excel._Workbook oWB;
+                Microsoft.Office.Interop.Excel._Worksheet oSheet;
 
-            object m = System.Type.Missing;
 
-            //Get a new workbook.
-            oWB = oXL.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
-            oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
-            oSheet.DisplayRightToLeft = false;
-
-            for(int i = 0; i < table.Count; i++)
-            {
-                for(int j = 0; j < table[i].Count; j++)
+                //Start Excel and get Application object.
+                oXL = new Microsoft.Office.Interop.Excel.Application
                 {
-                    oSheet.Cells[i+1, j+1] = table[i][j];
+                    Visible = false,
+                    UserControl = false
+                };
+
+                object m = System.Type.Missing;
+
+                //Get a new workbook.
+                oWB = oXL.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+                oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+                oSheet.DisplayRightToLeft = false;
+
+                for(int i = 0; i < table.Count; i++)
+                {
+                    for(int j = 0; j < table[i].Count; j++)
+                    {
+                        oSheet.Cells[i+1, j+1] = table[i][j];
+                    }
                 }
+
+                oSheet.Columns.AutoFit();
+
+                oWB.SaveAs(
+                    fileName, 
+                    Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault,
+                    m,
+                    m,
+                    m, 
+                    m, 
+                    Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+                    m, m, m, m , m);
+
+
+                oWB.Close();
+                oXL.Quit();
             }
-
-            oSheet.Columns.AutoFit();
-
-            oWB.SaveAs(
-                fileName, 
-                Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault,
-                m,
-                m,
-                m, 
-                m, 
-                Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
-                m, m, m, m , m);
-
-
-            oWB.Close();
-            oXL.Quit();
-
-
-            /*
-            using (StreamWriter writer = new StreamWriter(new FileStream(
+            else
+            {
+                using (StreamWriter writer = new StreamWriter(new FileStream(
                     fileName,
                     FileMode.Create,
                     FileAccess.Write)))
-            {
-                writer.WriteLine("sep=,");
-                foreach(var line in table)
                 {
-                    writer.WriteLine(String.Join(", ", line));
+                    writer.WriteLine("sep=,");
+                    foreach(var line in table)
+                    {
+                        writer.WriteLine(String.Join(", ", line));
+                    }
                 }
             }
+
+
+            /*
+
             */
         }
 
         private void toAFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialog.Filter = "excel|*.xlsx";
+            if (Program.settings.enableExcel)
+            {
+                saveFileDialog.Filter = "excel|*.xlsx";
+            }
+            else
+            {
+                saveFileDialog.Filter = "excel|*.csv";
+            }
             saveFileDialog.Title = "Export history to a File";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -1380,7 +1433,14 @@ namespace packet_maker
                             fileTble.Add(tm);
                         }
 
-                        CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.packetPrefix}.xlsx");
+                        if (Program.settings.enableExcel)
+                        {
+                            CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.packetPrefix}.xlsx");
+                        }
+                        else
+                        {
+                            CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.packetPrefix}.csv");
+                        }
                     }
                     //
 
@@ -1388,7 +1448,14 @@ namespace packet_maker
                     //creating errors file
                     if (errorTable.Count > 1)
                     {
-                        CreateCSV(errorTable, $"{saveFileDialog.FileName}_Errors.xlsx");
+                        if (Program.settings.enableExcel)
+                        {
+                            CreateCSV(errorTable, $"{saveFileDialog.FileName}_Errors.xlsx");
+                        }
+                        else
+                        {
+                            CreateCSV(errorTable, $"{saveFileDialog.FileName}_Errors.csv");
+                        }
                     }
                 }
                 finally
@@ -1398,9 +1465,8 @@ namespace packet_maker
 
             }
         }
+
         #endregion
-
-
     }
 }
 

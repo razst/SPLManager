@@ -1,11 +1,10 @@
 {
+	"calibrations": [
+		{"ID":"1","name":"Temperature","a":"0.0009765625","b":"0"},
+		{"ID":"2","name":"Voltage","a":"0","b":"0"}
+	],
 
-"calibrations": [
-{"ID":"1","name":"Temperature","a":"4","b":"-5"},
-{"ID":"2","name":"Voltage","a":"0.001","b":"0"}
-],
-
-	"types": [
+  "types": [
     {
       "id": "0",
       "name": "TRXVU",
@@ -18,20 +17,17 @@
             {
               "name": "vbat",
               "desc": "battery voltage",
-              "type": "short",
-			  "calibration":"2"
+              "type": "short"
             },
             {
               "name": "volt_5v",
               "desc": "5v bus voltage",
-              "type": "short",
-			  "calibration":"2"
+              "type": "short"
             },
             {
               "name": "volt_3v3",
               "desc": "3v3 bus voltage",
-              "type": "short",
-			  "calibration":"2"
+              "type": "short"
             },
             {
               "name": "charging_power",
@@ -68,37 +64,43 @@
               "desc": "",
               "type": "short"
             },
-            {
+           {
               "name": "Solar panel 1 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 2 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 3 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 4 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 5 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 6 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
-            {
+             {
               "name": "sat_time",
               "desc": "satellite's clock current unix time",
               "type": "datetime"
@@ -123,6 +125,47 @@
               "desc": "satellite's up time in seconds",
               "type": "int"
             },
+            {
+              "name": "ADC channel 0 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 1 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 2 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 3 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 4 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 5 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 6 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 7 (mV)",
+              "desc": "na",
+              "type": "int"
+            },			
+			
             {
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",
@@ -482,12 +525,7 @@
               "type": "char"
             },
             {
-              "name": "reply_header-cmderr",
-              "desc": "TODO",
-              "type": "char"
-            },
-            {
-              "name": "reply_header-stat",
+              "name": "reply_header-cmderr+stat",
               "desc": "TODO",
               "type": "char"
             },
@@ -885,32 +923,38 @@
             {
               "name": "Solar panel 1 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 2 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 3 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 4 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 5 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 6 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "sat_time",
@@ -937,6 +981,47 @@
               "desc": "satellite's up time in seconds",
               "type": "int"
             },			
+            {
+              "name": "ADC channel 0 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 1 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 2 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 3 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 4 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 5 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 6 (mV)",
+              "desc": "na",
+              "type": "int"
+            },
+            {
+              "name": "ADC channel 7 (mV)",
+              "desc": "na",
+              "type": "int"
+            },			
+			
             {
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",

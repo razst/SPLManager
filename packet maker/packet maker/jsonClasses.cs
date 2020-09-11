@@ -33,9 +33,6 @@ namespace packet_maker
         [JsonProperty("enableImage")]
         public bool enableImage { get; set; }
 
-        [JsonProperty("collectionPrefix")]
-        public string collectionPrefix { get; set; }
-
         [JsonProperty("tcpPortNumber")]
         public int tcpPortNumber { get; set; }
 

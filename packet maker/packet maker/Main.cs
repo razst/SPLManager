@@ -36,7 +36,6 @@ namespace packet_maker
         private TypeList options;
         private TypeList transOptions;
         private bool success = false;
-        private Packet DBPacket = new Packet();
         public List<packetObject> rawRxPacHisList = new List<packetObject>();
         public List<packetObject> rawTxPacHisList = new List<packetObject>();
 
@@ -138,11 +137,11 @@ namespace packet_maker
             {
                 DocumentReference docRef = Program.db.Collection("local data").Document("SAT" + groupDex);
                 DocumentSnapshot docSnap = await docRef.GetSnapshotAsync();
-                Program.settings.pacCurId = docSnap.ConvertTo<IdDoc>().CommandId;
+                Program.settings.pacCurId = int.Parse(docSnap.ConvertTo<Dictionary<string, object>>().First().Value.ToString());
 
                 Program.settings.pacCurId += 1;
 
-                IdDoc dd = new IdDoc { CommandId = Program.settings.pacCurId };
+                Dictionary<string,object> dd = new Dictionary<string, object> { { "CommandId", Program.settings.pacCurId } };
                 await docRef.SetAsync(dd);
             }
             else
@@ -168,17 +167,33 @@ namespace packet_maker
 
                 if (Program.settings.dataBaseEnabled)
                 {
-                    DBPacket.packetString = ogPacket.rawPacket;
-                    DBPacket.time = DateTime.UtcNow;
+                    Dictionary<string, object> DBPacket = new Dictionary<string, object>
+                    {
+                        {"packetString",ogPacket.rawPacket },
+                        {"time",DateTime.Now.ToUniversalTime() }
+                    };
+                    
 
                     if(ogPacket.type != -1)
                     {
-                        DBPacket.satId = int.Parse(ogPacket.rawPacket[10].ToString());
+                        DBPacket.AddRange(new Dictionary<string, object>
+                        {
+                            {"splID",ogPacket.id },
+                            {"type",ogPacket.getTypeName() },
+                            {"subtype",ogPacket.getSubTypeName() },
+                            {"lenght",ogPacket.length },
+                            {"satId",ogPacket.getSatDex() }
+                        });
+                        DBPacket.AddRange(ogPacket.dataCatalog);
+                    }
+                    else
+                    {
+                        DBPacket.Add("type", "Error");
                     }
 
-                    DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + COLLECTION_NAME).Document();
+                    DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document();
 
-                    docRef.SetAsync(DBPacket);
+                    var t = docRef.SetAsync(DBPacket);
                 }
             });
         }
@@ -334,7 +349,7 @@ namespace packet_maker
         }
 
 
-        private packetObject po = new packetObject();
+        private packetObject po;
 
         private void RX(packetObject po)
         {
@@ -347,12 +362,12 @@ namespace packet_maker
                 transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
                 transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
                 transOut.AppendText("length: " + po.length + Environment.NewLine);
-                if (po.data.Count != 0)
+                if (po.dataCatalog.Count != 0)
                 {
                     transOut.AppendText("*******************************" + Environment.NewLine);
-                    for (int i = 0; i < po.data.Count; i++)
+                    for (int i = 0; i < po.dataCatalog.Count; i++)
                     {
-                        transOut.AppendText(po.dataNames[i] + ": " + po.data[i] + Environment.NewLine);
+                        transOut.AppendText(po.dataCatalog.ElementAt(i).Key + ": " + po.dataCatalog.ElementAt(i).Value + Environment.NewLine);
                     }
                 }
             }
@@ -384,14 +399,14 @@ namespace packet_maker
             {
                 if (success && mode == Packet_Mode.satelite)
                 {
-                    await Upload_Packet("tx packets", new packetObject {rawPacket = makeOut.Text});
+                    await Upload_Packet("tx packets", new packetObject(options,makeOut.Text));
                 }
             }
         }
         public async void trasBtn_click(string msg)
         {
             mess = msg.Trim();
-            po = packetObject.create(transOptions, mess);
+            po = new packetObject(transOptions, mess);
             if (po.type != -1)
             {
                 if(po.sateliteGroup == RxGroupsCB.SelectedItem.ToString() || RxGroupsCB.SelectedIndex == 0)
@@ -563,7 +578,13 @@ namespace packet_maker
         private async void resendTxBtn_Click(object sender, EventArgs e)
         {
             string id = ConvertToHexBytes(await getSplCurIdAsync(RxGroupsCB.SelectedIndex),3);
-            await RadioServer.Send($"{id} 0{groupsCB.SelectedIndex}{rawTxPacHisList[TxPacLibx.SelectedIndex].rawPacket.Substring(11)}"); //0-9 only
+            string tPac = $"{id} 0{groupsCB.SelectedIndex}{rawTxPacHisList[TxPacLibx.SelectedIndex].rawPacket.Substring(11)}";
+            await RadioServer.Send(tPac); //0-9 only
+
+            po = new packetObject(options, tPac);
+            rawTxPacHisList.Add(po);
+            addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}", TxPacLibx);
+            await Upload_Packet("tx packets", po);
         }
 
 
@@ -648,7 +669,7 @@ namespace packet_maker
             {
                 OkBtn_click(await getSplCurIdAsync(groupsCB.SelectedIndex), Packet_Mode.satelite);
 
-                po = packetObject.create(options, makeOut.Text.Trim());
+                po = new packetObject(options, makeOut.Text.Trim());
                 rawTxPacHisList.Add(po);
                 addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}", TxPacLibx);
 
@@ -676,7 +697,7 @@ namespace packet_maker
             var propList = new List<imagePropeties>();
             await Task.Run(async () => {
 
-                Query capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "imageInfo");
+                Query capitalQuery = Program.db.Collection("imageInfo");
                 QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
 
                 foreach (var docSnap in capitalQuerySnapshot.Documents)
@@ -694,7 +715,7 @@ namespace packet_maker
 
             await Task.Run(async () => {
 
-                Query capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "imageData").WhereEqualTo("splId",splId);
+                Query capitalQuery = Program.db.Collection("imageData").WhereEqualTo("splId",splId);
                 QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
 
                 foreach (var docSnap in capitalQuerySnapshot.Documents)
@@ -775,7 +796,7 @@ namespace packet_maker
                         imageType = type,
                         recivedChuncks = -1
                     };
-                    DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "imageInfo").Document(SplId.ToString());
+                    DocumentReference docRef = Program.db.Collection("imageInfo").Document(SplId.ToString());
                     docRef.SetAsync(imageInfo);
                 });
         }
@@ -805,7 +826,7 @@ namespace packet_maker
                     }
 
 
-                    DocumentReference docref = Program.db.Collection(Program.settings.collectionPrefix + "imageData").Document();
+                    DocumentReference docref = Program.db.Collection("imageData").Document();
                     imageData thisChunk = new imageData 
                     {
                         chunkId = Convert.ToInt32(result[9] + result[8], 16),
@@ -898,7 +919,7 @@ namespace packet_maker
         public async Task<List<PLInfo>> DowloadPL()
         {
             List<PLInfo> playLists = new List<PLInfo>();
-            Query capitalQuery = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo");
+            Query capitalQuery = Program.db.Collection("playListInfo");
             QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
 
             foreach(var doc in capitalQuerySnapshot)
@@ -930,7 +951,7 @@ namespace packet_maker
             commands.Clear();
             foreach(var item in Playlists[PlaylistCB.SelectedIndex].commands)
             {
-                packetObject po = packetObject.create(options, item);
+                packetObject po = new packetObject(options, item);
                 PLitemsLibx.Items.Add(po.getSubTypeName());
                 commands.Add(po);
             }
@@ -955,10 +976,10 @@ namespace packet_maker
             subtypeCB.SelectedItem = packet.getSubTypeName();
 
             int i = 0;
-            if (packet.data.Count != 0)
+            if (packet.dataCatalog.Count != 0)
                 foreach (DataGridViewRow item in dataTypesDGV.Rows)
                 {
-                    item.Cells[1].Value = packet.data[i];
+                    item.Cells[1].Value = packet.dataCatalog.ElementAt(i).Value;
                     i++;
                 }
         }
@@ -969,7 +990,7 @@ namespace packet_maker
         {
 
             OkBtn_click(256,Packet_Mode.database);
-            packetObject po = packetObject.create(options, makeOut.Text.Trim());
+            packetObject po = new packetObject(options, makeOut.Text.Trim());
             PLitemsLibx.Items.Add(po.getSubTypeName());
             commands.Add(po); 
             Playlists[PlaylistCB.SelectedIndex].commands.Add(po.rawPacket);
@@ -982,7 +1003,7 @@ namespace packet_maker
             {
                 Playlists[PlaylistCB.SelectedIndex].sleepBetweenCommands = int.Parse(sleepCmdTxb.Text);
 
-                DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo").Document(PlaylistCB.SelectedItem.ToString());
+                DocumentReference docRef = Program.db.Collection("playListInfo").Document(PlaylistCB.SelectedItem.ToString());
 
                 await docRef.SetAsync(Playlists[PlaylistCB.SelectedIndex]);
             }
@@ -996,7 +1017,7 @@ namespace packet_maker
                     PLitemsLibx.Items.Clear();
                     sleepCmdTxb.Text = "";
 
-                    DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo").Document(PlaylistCB.SelectedItem.ToString());
+                    DocumentReference docRef = Program.db.Collection("playListInfo").Document(PlaylistCB.SelectedItem.ToString());
 
                     await docRef.DeleteAsync();
 
@@ -1019,7 +1040,7 @@ namespace packet_maker
             PlaylistCB.SelectedIndex = PlaylistCB.Items.Count - 1;
 
 
-            DocumentReference docRef = Program.db.Collection(Program.settings.collectionPrefix + "playListInfo").Document(item);
+            DocumentReference docRef = Program.db.Collection("playListInfo").Document(item);
 
             await docRef.SetAsync(new PLInfo { commands = new List<string>(), name = item, sleepBetweenCommands = 0 });
         }
@@ -1090,7 +1111,7 @@ namespace packet_maker
                     string pac = (string)Invoke(f,i);
                     await Task.Delay(int.Parse(sleepCmdTxb.Text));
 
-                    po = packetObject.create(options, makeOut.Text.Trim());
+                    po = new packetObject(options, makeOut.Text.Trim());
                     rawTxPacHisList.Add(po);
                     addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}", TxPacLibx);
                     i++;
@@ -1157,22 +1178,26 @@ namespace packet_maker
 
                 foreach (var doc in RxSnapshot)
                 {
-                    var pk = doc.ConvertTo<Packet>();
-                    po = await Task.Run(() =>
-                    {
-                        return packetObject.create(transOptions, pk.packetString);
+                    var pk = doc.ConvertTo<Dictionary<string,object>>();
+
+                    po = await Task.Run(()=> {
+                        return new packetObject(transOptions, pk["packetString"].ToString());
                     });
 
                     rawRxPacHisList.Add(po);
 
-                    if(po.type != -1)
+                    if(pk["time"] is Timestamp ts)
                     {
-                        privHex.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+                        if (po.type != -1)
+                        {
+                            privHex.Items.Add($"[{ts.ToDateTime().ToLocalTime().ToShortDateString()} {ts.ToDateTime().ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+                        }
+                        else
+                        {
+                            privHex.Items.Add($"[{ts.ToDateTime().ToLocalTime().ToShortDateString()} {ts.ToDateTime().ToLocalTime().ToLongTimeString()}]   ERROR");
+                        }
                     }
-                    else
-                    {
-                        privHex.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   ERROR");
-                    }
+
                 }
                 #endregion
 
@@ -1215,21 +1240,24 @@ namespace packet_maker
 
                 foreach (var doc in TxSnapshots)
                 {
-                    var pk = doc.ConvertTo<Packet>();
+                    var pk = doc.ConvertTo<Dictionary<string,object>>();
                     po = await Task.Run(() =>
                     {
-                        return packetObject.create(options, pk.packetString);
+                        return new packetObject(options, pk["packetString"].ToString());
                     });
 
                     rawTxPacHisList.Add(po);
 
-                    if (po.type != -1)
+                    if (pk["time"] is Timestamp ts)
                     {
-                        TxPacLibx.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
-                    }
-                    else
-                    {
-                        TxPacLibx.Items.Add($"[{pk.time.ToLocalTime().ToShortDateString()} {pk.time.ToLocalTime().ToLongTimeString()}]   ERROR");
+                        if (po.type != -1)
+                        {
+                            TxPacLibx.Items.Add($"[{ts.ToDateTime().ToLocalTime().ToShortDateString()} {ts.ToDateTime().ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
+                        }
+                        else
+                        {
+                            TxPacLibx.Items.Add($"[{ts.ToDateTime().ToLocalTime().ToShortDateString()} {ts.ToDateTime().ToLocalTime().ToLongTimeString()}]   ERROR");
+                        }
                     }
                 }
 
@@ -1338,9 +1366,9 @@ namespace packet_maker
                     if(packet.type != -1)
                     {
                         string dataStr = "";
-                        for (int i = 0; i < packet.dataNames.Count; i++)
+                        for (int i = 0; i < packet.dataCatalog.Count; i++)
                         {
-                            dataStr += $"{packet.dataNames[i]}: {packet.data[i]}. ";
+                            dataStr += $"{packet.dataCatalog.ElementAt(i).Key}: {packet.dataCatalog.ElementAt(i).Value}. ";
                         }
                         T.Add(new List<string> { privHex.Items[j].ToString().Split('[', ']')[1], packet.id.ToString(), packet.sateliteGroup, packet.getTypeName(), packet.getSubTypeName(), packet.length.ToString(), packet.rawPacket, dataStr });
                     }
@@ -1389,7 +1417,7 @@ namespace packet_maker
                         else
                         {
                             var colStr = new List<string> { "Date", "Id", "SatGroup", "Type", "Subtype", "Lenght", "Raw data" };
-                            colStr.AddRange(packet.dataNames);
+                            colStr.AddRange(packet.dataCatalog.Keys.ToList());
 
                             type_subtype.Add(new FilePacket 
                             { 
@@ -1428,7 +1456,7 @@ namespace packet_maker
                                 pac.packet.length.ToString(),
                                 pac.packet.rawPacket
                             };
-                            tm.AddRange(pac.packet.data);
+                            tm.AddRange((IEnumerable<string>)pac.packet.dataCatalog.Values.ToList());
 
                             fileTble.Add(tm);
                         }

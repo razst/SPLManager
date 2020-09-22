@@ -7,5 +7,5 @@
 "collectionPrefix":"",
 "tcpPortNumber": 4,
 "defultSatGroup": 2,
-"enableExcel": false 
+"enableExcel": true 
 }

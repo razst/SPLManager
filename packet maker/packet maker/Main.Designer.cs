@@ -65,6 +65,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
             this.RxTab = new System.Windows.Forms.TabPage();
+            this.resendTxBtn = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.DBLimitCB = new System.Windows.Forms.ComboBox();
@@ -116,7 +117,8 @@
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toAFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resendTxBtn = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.qrySubtypeCB = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.TxTab.SuspendLayout();
@@ -275,7 +277,7 @@
             this.TabControl.Location = new System.Drawing.Point(0, 24);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(1190, 455);
+            this.TabControl.Size = new System.Drawing.Size(1280, 455);
             this.TabControl.TabIndex = 17;
             // 
             // TxTab
@@ -529,13 +531,25 @@
             this.RxTab.Location = new System.Drawing.Point(4, 22);
             this.RxTab.Name = "RxTab";
             this.RxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.RxTab.Size = new System.Drawing.Size(1182, 429);
+            this.RxTab.Size = new System.Drawing.Size(1272, 429);
             this.RxTab.TabIndex = 1;
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
             // 
+            // resendTxBtn
+            // 
+            this.resendTxBtn.Location = new System.Drawing.Point(168, 398);
+            this.resendTxBtn.Name = "resendTxBtn";
+            this.resendTxBtn.Size = new System.Drawing.Size(75, 23);
+            this.resendTxBtn.TabIndex = 33;
+            this.resendTxBtn.Text = "Resend";
+            this.resendTxBtn.UseVisualStyleBackColor = true;
+            this.resendTxBtn.Click += new System.EventHandler(this.resendTxBtn_Click);
+            // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.qrySubtypeCB);
+            this.panel4.Controls.Add(this.label21);
             this.panel4.Controls.Add(this.label20);
             this.panel4.Controls.Add(this.DBLimitCB);
             this.panel4.Controls.Add(this.label19);
@@ -545,7 +559,7 @@
             this.panel4.Controls.Add(this.loadDbBtn);
             this.panel4.Location = new System.Drawing.Point(817, 13);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(357, 65);
+            this.panel4.Size = new System.Drawing.Size(452, 65);
             this.panel4.TabIndex = 32;
             // 
             // label20
@@ -936,7 +950,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1190, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1280, 24);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1009,21 +1023,32 @@
             this.toAFolderToolStripMenuItem.Text = "to a folder";
             this.toAFolderToolStripMenuItem.Click += new System.EventHandler(this.toAFolderToolStripMenuItem_Click);
             // 
-            // resendTxBtn
+            // label21
             // 
-            this.resendTxBtn.Location = new System.Drawing.Point(168, 398);
-            this.resendTxBtn.Name = "resendTxBtn";
-            this.resendTxBtn.Size = new System.Drawing.Size(75, 23);
-            this.resendTxBtn.TabIndex = 33;
-            this.resendTxBtn.Text = "Resend";
-            this.resendTxBtn.UseVisualStyleBackColor = true;
-            this.resendTxBtn.Click += new System.EventHandler(this.resendTxBtn_Click);
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(378, 8);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(47, 13);
+            this.label21.TabIndex = 34;
+            this.label21.Text = "subtype:";
+            // 
+            // qrySubtypeCB
+            // 
+            this.qrySubtypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.qrySubtypeCB.DropDownWidth = 200;
+            this.qrySubtypeCB.FormattingEnabled = true;
+            this.qrySubtypeCB.Items.AddRange(new object[] {
+            "All"});
+            this.qrySubtypeCB.Location = new System.Drawing.Point(381, 31);
+            this.qrySubtypeCB.Name = "qrySubtypeCB";
+            this.qrySubtypeCB.Size = new System.Drawing.Size(60, 21);
+            this.qrySubtypeCB.TabIndex = 35;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1190, 479);
+            this.ClientSize = new System.Drawing.Size(1280, 479);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1145,6 +1170,8 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox DBLimitCB;
         private System.Windows.Forms.Button resendTxBtn;
+        private System.Windows.Forms.ComboBox qrySubtypeCB;
+        private System.Windows.Forms.Label label21;
     }
 }
 

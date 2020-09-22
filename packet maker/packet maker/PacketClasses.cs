@@ -23,12 +23,26 @@ namespace packet_maker
 
         public List<string> firstColumn { get; set; }
     }
-  
-    public class PacketWithTime
-    {
-        public packetObject packet { get; set; }
 
+    public class PacketWithTime : packetObject
+    {
         public string time { get; set; }
+
+        public PacketWithTime(packetObject packet,string timeString)
+        {
+            time = timeString;
+            try
+            {
+                jsonObject = packet.jsonObject;
+                ConvertFromString(packet.rawPacket);
+            }
+            catch
+            {
+                jsonObject = packet.jsonObject;
+                rawPacket = packet.rawPacket;
+                type = -1;
+            }
+        }
     }
 
     public class packetObject
@@ -57,7 +71,7 @@ namespace packet_maker
         public int length { get; set; }
 
         public Dictionary<string, object> dataCatalog = new Dictionary<string, object>();
-        
+
 
         public TypeList jsonObject { get; set; }
 
@@ -66,13 +80,13 @@ namespace packet_maker
         private int typeDex;
         private int subtypeDex;
 
-        private void ConvertFromString(string packetString)
+        public void ConvertFromString(string packetString)
         {
             rawPacket = packetString;
             string[] bitarr = packetString.Split(' ');
 
 
-            id = Convert.ToInt32(bitarr[3] +bitarr[2] + bitarr[1] + bitarr[0], 16);
+            id = Convert.ToInt32(bitarr[3] + bitarr[2] + bitarr[1] + bitarr[0], 16);
 
             type = Convert.ToInt32(bitarr[4], 16);
             subtype = Convert.ToInt32(bitarr[5], 16);
@@ -112,21 +126,21 @@ namespace packet_maker
 
                     case "datetime":
                     case "date":
-                        if(bitarr[j] != "NN" && bitarr[j] != "N+" && bitarr[j] != "N-")
+                        if (bitarr[j] != "NN" && bitarr[j] != "N+" && bitarr[j] != "N-")
                         {
                             DateTimeOffset dtDateTime = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
                             if (par.type == "datetime")
                             {
-                                dataCatalog.Add(par.name, dtDateTime.ToString("yyyy/MM/dd HH:mm:ss"));
+                                dataCatalog.Add(par.name, dtDateTime.ToUniversalTime());
                             }
                             else
                             {
-                                dataCatalog.Add(par.name, dtDateTime.ToString("yyyy/MM/dd"));
+                                dataCatalog.Add(par.name, dtDateTime.ToUniversalTime());
                             }
                         }
                         else
                         {
-                            if(bitarr[j][1] != 'N')
+                            if (bitarr[j][1] != 'N')
                             {
                                 dataCatalog.Add(par.name, $"now{bitarr[j][1]}{Convert.ToInt32(bitarr[j + 1] + bitarr[j + 2] + bitarr[j + 3], 16)}");
                             }
@@ -141,7 +155,7 @@ namespace packet_maker
 
                     case "bytes":
                         temp = "";
-                        for(int i = j; i < bitarr.Length; i++)
+                        for (int i = j; i < bitarr.Length; i++)
                         {
                             temp += bitarr[i] + " ";
                         }
@@ -151,7 +165,7 @@ namespace packet_maker
                     case "ascii":
                         temp = "";
                         List<char> letters = new List<char>();
-                        for (int i = j; i < bitarr.Length-1; i++)
+                        for (int i = j; i < bitarr.Length - 1; i++)
                         {
                             if (Convert.ToInt32(bitarr[i], 16) > 0 && Convert.ToInt32(bitarr[i], 16) < 128)
                             {
@@ -164,14 +178,14 @@ namespace packet_maker
 
                     case "bitwise":
                         temp = "";
-                        int numOfBytes = par.subParams.Count/8;
-                        for(int i = j; i < j+numOfBytes; i++)
+                        int numOfBytes = par.subParams.Count / 8;
+                        for (int i = j; i < j + numOfBytes; i++)
                         {
                             temp += bitarr[i];
                         }
                         temp = String.Join(String.Empty, temp.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
-                        
-                        for(int i = 0; i < temp.Length; i++)
+
+                        for (int i = 0; i < temp.Length; i++)
                         {
                             dataCatalog.Add(par.subParams[i], temp[i].ToString());
                         }
@@ -181,14 +195,14 @@ namespace packet_maker
             }
         }
 
-        private string Calibrate(int input, int paramId)
+        private float Calibrate(int input, int paramId)
         {
-            if(paramId != 0)
+            if (paramId != 0)
             {
-                Calibration calibration =  jsonObject.calibrations.Find(x => x.ID == paramId);
-                return (calibration.muliplayer * input + calibration.constent).ToString();
+                Calibration calibration = jsonObject.calibrations.Find(x => x.ID == paramId);
+                return calibration.muliplayer * input + calibration.constent;
             }
-            return input.ToString();
+            return input;
         }
 
         public packetObject(TypeList json, string packetString)
@@ -201,17 +215,17 @@ namespace packet_maker
             catch
             {
                 jsonObject = json;
-                rawPacket = packetString; 
+                rawPacket = packetString;
                 type = -1;
             }
         }
-        public packetObject(Dictionary<string,object> DBpacket)
+        public packetObject(Dictionary<string, object> DBpacket)
         {
             try
             {
                 id = int.Parse(DBpacket["splID"].ToString());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
@@ -225,14 +239,14 @@ namespace packet_maker
         {
             string HexType = type.ToString("X2");
             string HexSubType = subtype.ToString("X2");
-            string HexId =String.Join(" ",Regex.Replace(id.ToString("X6"), ".{2}", "$0 ").Split(' ').Reverse());
+            string HexId = String.Join(" ", Regex.Replace(id.ToString("X6"), ".{2}", "$0 ").Split(' ').Reverse());
             string HexLen = String.Join(" ", Regex.Replace(length.ToString("X6"), ".{2}", "$0 ").Split(' ').Reverse());
-            string HexGru = Array.FindIndex(groups,a => a==sateliteGroup).ToString("X2");
+            string HexGru = Array.FindIndex(groups, a => a == sateliteGroup).ToString("X2");
             if (dataCatalog.Count != 0)
             {
-                
+
             }
-            return HexId + " "+HexGru+" "+HexType+" "+HexSubType+" "+HexLen;
+            return HexId + " " + HexGru + " " + HexType + " " + HexSubType + " " + HexLen;
         }
 
         public string getTypeName() => jsonObject.typenum[typeDex].name;

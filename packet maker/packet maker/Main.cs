@@ -112,6 +112,13 @@ namespace packet_maker
                 groupsCB.Items.Add(s);
                 RxGroupsCB.Items.Add(s);
             }
+            foreach (Type t in transOptions)
+            {
+                foreach(SubType st in t)
+                {
+                    qrySubtypeCB.Items.Add(st.name);
+                }
+            }
             //
 
             minExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
@@ -120,6 +127,7 @@ namespace packet_maker
             groupsCB.SelectedIndex = Program.settings.defultSatGroup;
             RxGroupsCB.SelectedIndex = Program.settings.defultSatGroup;
             DBLimitCB.SelectedItem = "100";
+            qrySubtypeCB.SelectedItem = "All";
             frm = this;
         }
 
@@ -170,7 +178,7 @@ namespace packet_maker
                     Dictionary<string, object> DBPacket = new Dictionary<string, object>
                     {
                         {"packetString",ogPacket.rawPacket },
-                        {"time",DateTime.Now.ToUniversalTime() }
+                        {"time",DateTime.UtcNow }
                     };
                     
 
@@ -435,7 +443,7 @@ namespace packet_maker
                 rawRxPacHisList.Add(po);
                 addItemToListbox("ERROR",privHex);
             }
-            await Upload_Packet("rx packets", po);
+            await Upload_Packet("ParsedRx", po);
         }
 
 
@@ -1138,10 +1146,12 @@ namespace packet_maker
 
                 #region rxHistory
 
+                Query groupRxQry;
+                Query limitRxQry;
+                Query subtypeRxQry;
                 Query finalRxQry;
 
-
-                Query mainRxQry = Program.db.Collection("rx packets")
+                Query mainRxQry = Program.db.Collection("ParsedRx")
                     .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
                     .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
                     .OrderBy("time");
@@ -1149,29 +1159,32 @@ namespace packet_maker
                 //define query
                 if (RxGroupsCB.SelectedIndex == 0)
                 {
-                    if(DBLimitCB.SelectedItem.ToString() != "No Limit")
-                    {
-                        finalRxQry = mainRxQry
-                            .Limit(int.Parse(DBLimitCB.SelectedItem.ToString()));
-                    }
-                    else
-                    {
-                        finalRxQry = mainRxQry;
-                    }
+                    groupRxQry = mainRxQry;
                 }
                 else
                 {
-                    if (DBLimitCB.SelectedItem.ToString() != "No Limit")
-                    {
-                        finalRxQry = mainRxQry
-                            .WhereEqualTo("satId", RxGroupsCB.SelectedIndex)
-                            .Limit(int.Parse(DBLimitCB.SelectedItem.ToString()));
-                    }
-                    else
-                    {
-                        finalRxQry = mainRxQry.WhereEqualTo("satId", RxGroupsCB.SelectedIndex);
-                    }
+                    groupRxQry = mainRxQry
+                        .WhereEqualTo("satId", RxGroupsCB.SelectedIndex);
                 }
+                if (DBLimitCB.SelectedItem.ToString() == "No Limit")
+                {
+                    limitRxQry = groupRxQry;
+                }
+                else
+                {
+                    limitRxQry = groupRxQry
+                        .Limit(int.Parse(DBLimitCB.SelectedItem.ToString()));
+                }
+                if(qrySubtypeCB.SelectedItem.ToString() == "All")
+                {
+                    subtypeRxQry = limitRxQry;
+                }
+                else
+                {
+                    subtypeRxQry = limitRxQry
+                        .WhereEqualTo("subtype", qrySubtypeCB.SelectedItem.ToString());
+                }
+                finalRxQry = subtypeRxQry;
                 //
 
                 QuerySnapshot RxSnapshot = await finalRxQry.GetSnapshotAsync();
@@ -1412,7 +1425,7 @@ namespace packet_maker
                         int match = type_subtype.FindIndex(x => x.packetPrefix == $"{packet.getTypeName()}_{packet.getSubTypeName()}");
                         if (match != -1)
                         {
-                            type_subtype[match].packets.Add(new PacketWithTime { packet = packet,time = timeStr});
+                            type_subtype[match].packets.Add(new PacketWithTime(packet,timeStr));
                         }
                         else
                         {
@@ -1422,7 +1435,7 @@ namespace packet_maker
                             type_subtype.Add(new FilePacket 
                             { 
                                 packetPrefix = $"{packet.getTypeName()}_{packet.getSubTypeName()}" ,
-                                packets = new List<PacketWithTime> { new PacketWithTime {packet = packet, time=timeStr } },
+                                packets = new List<PacketWithTime> { new PacketWithTime (packet,timeStr) },
                                 firstColumn = colStr
                             });
                         }
@@ -1449,15 +1462,18 @@ namespace packet_maker
                             List<string> tm = new List<string>
                             {
                                 pac.time,
-                                pac.packet.id.ToString(),
-                                pac.packet.sateliteGroup,
-                                pac.packet.getTypeName(),
-                                pac.packet.getSubTypeName(),
-                                pac.packet.length.ToString(),
-                                pac.packet.rawPacket
+                                pac.id.ToString(),
+                                pac.sateliteGroup,
+                                pac.getTypeName(),
+                                pac.getSubTypeName(),
+                                pac.length.ToString(),
+                                pac.rawPacket
                             };
-                            tm.AddRange((IEnumerable<string>)pac.packet.dataCatalog.Values.ToList());
 
+                            foreach (var item in pac.dataCatalog.Values)
+                            {
+                                tm.Add(item.ToString());
+                            }
                             fileTble.Add(tm);
                         }
 

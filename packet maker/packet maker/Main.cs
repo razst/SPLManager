@@ -1510,6 +1510,11 @@ namespace packet_maker
         }
 
         #endregion
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

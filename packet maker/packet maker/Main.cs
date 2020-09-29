@@ -1293,70 +1293,69 @@ namespace packet_maker
 
         private void CreateCSV(List<List<string>> table,string fileName)
         {
-            if (Program.settings.enableExcel)
+            try
             {
-                Microsoft.Office.Interop.Excel.Application oXL;
-                Microsoft.Office.Interop.Excel._Workbook oWB;
-                Microsoft.Office.Interop.Excel._Worksheet oSheet;
-
-
-                //Start Excel and get Application object.
-                oXL = new Microsoft.Office.Interop.Excel.Application
+                if (Program.settings.enableExcel)
                 {
-                    Visible = false,
-                    UserControl = false
-                };
+                    Microsoft.Office.Interop.Excel.Application oXL;
+                    Microsoft.Office.Interop.Excel._Workbook oWB;
+                    Microsoft.Office.Interop.Excel._Worksheet oSheet;
 
-                object m = System.Type.Missing;
 
-                //Get a new workbook.
-                oWB = oXL.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
-                oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
-                oSheet.DisplayRightToLeft = false;
-
-                for(int i = 0; i < table.Count; i++)
-                {
-                    for(int j = 0; j < table[i].Count; j++)
+                    //Start Excel and get Application object.
+                    oXL = new Microsoft.Office.Interop.Excel.Application
                     {
-                        oSheet.Cells[i+1, j+1] = table[i][j];
+                        Visible = false,
+                        UserControl = false
+                    };
+
+                    object m = System.Type.Missing;
+
+                    //Get a new workbook.
+                    oWB = oXL.Workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+                    oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+                    oSheet.DisplayRightToLeft = false;
+
+                    for (int i = 0; i < table.Count; i++)
+                    {
+                        for (int j = 0; j < table[i].Count; j++)
+                        {
+                            oSheet.Cells[i + 1, j + 1] = table[i][j];
+                        }
+                    }
+
+                    oSheet.Columns.AutoFit();
+
+                    oWB.SaveAs(
+                        fileName,
+                        Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault,
+                        m, m, m, m,
+                        Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+                        m, m, m, m, m);
+
+
+                    oWB.Close();
+                    oXL.Quit();
+                }
+                else
+                {
+                    using (StreamWriter writer = new StreamWriter(new FileStream(
+                        fileName,
+                        FileMode.Create,
+                        FileAccess.Write)))
+                    {
+                        writer.WriteLine("sep=,");
+                        foreach (var line in table)
+                        {
+                            writer.WriteLine(String.Join(", ", line));
+                        }
                     }
                 }
-
-                oSheet.Columns.AutoFit();
-
-                oWB.SaveAs(
-                    fileName, 
-                    Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault,
-                    m,
-                    m,
-                    m, 
-                    m, 
-                    Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
-                    m, m, m, m , m);
-
-
-                oWB.Close();
-                oXL.Quit();
             }
-            else
+            catch
             {
-                using (StreamWriter writer = new StreamWriter(new FileStream(
-                    fileName,
-                    FileMode.Create,
-                    FileAccess.Write)))
-                {
-                    writer.WriteLine("sep=,");
-                    foreach(var line in table)
-                    {
-                        writer.WriteLine(String.Join(", ", line));
-                    }
-                }
+                MessageBox.Show("SPL manager was not able to export", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-            /*
-
-            */
         }
 
         private void toAFileToolStripMenuItem_Click(object sender, EventArgs e)

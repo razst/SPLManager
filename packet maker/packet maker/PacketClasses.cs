@@ -80,6 +80,10 @@ namespace packet_maker
         private int typeDex;
         private int subtypeDex;
 
+
+
+
+
         public void ConvertFromString(string packetString)
         {
             rawPacket = packetString;
@@ -205,6 +209,10 @@ namespace packet_maker
             return input;
         }
 
+
+
+
+
         public packetObject(TypeList json, string packetString)
         {
             try
@@ -235,6 +243,49 @@ namespace packet_maker
 
         }
 
+
+
+
+
+        public override string ToString()
+        {
+            string output = "";
+            if (type != -1)
+            {
+                output += "Satlite: " + sateliteGroup + Environment.NewLine;
+                output += "ID: " + id + Environment.NewLine;
+                output += "type: " + getTypeName() + Environment.NewLine;
+                output += "subtype: " + getSubTypeName() + Environment.NewLine;
+                output += "length: " + length + Environment.NewLine;
+                if (dataCatalog.Count != 0)
+                {
+                    output += "*******************************" + Environment.NewLine;
+                    foreach (var field in dataCatalog)
+                    {
+                        output += field.Key + ": " + field.Value + Environment.NewLine;
+                    }
+                }
+            }
+            else
+            {
+                output += "manager was not able to translate this packet:" + Environment.NewLine;
+                output += rawPacket + Environment.NewLine;
+            }
+            return output;
+        }
+
+        public string ToHeaderString(DateTime time)
+        {
+            if(type == -1)
+                return $"[{time}]   ERROR";
+            return $"[{time}]   {getTypeName()} - {getSubTypeName()}  ||| ID:{id}";
+        }
+
+
+
+
+
+
         public string castToString()
         {
             string HexType = type.ToString("X2");
@@ -248,6 +299,17 @@ namespace packet_maker
             }
             return HexId + " " + HexGru + " " + HexType + " " + HexSubType + " " + HexLen;
         }
+
+
+
+
+
+
+
+
+
+
+
 
         public string getTypeName() => jsonObject.typenum[typeDex].name;
         public string getSubTypeName() => jsonObject.typenum[typeDex].subTypes[subtypeDex].name;

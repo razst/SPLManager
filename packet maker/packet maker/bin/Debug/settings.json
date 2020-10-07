@@ -2,9 +2,6 @@
 "endNodePath":"C:/Users/pc/Desktop/GSC/GSC-EndNode/GSC-EndNode.exe",
 "enableImage":false,
 "dataBaseEnabled":true,
-"dataBaseKeyPath":"C:/key/satelite packets-a1af32f2133c.json",
-"dataBaseName":"satelite-packets",
-"collectionPrefix":"",
 "tcpPortNumber": 4,
 "defultSatGroup": 2,
 "enableExcel": false 

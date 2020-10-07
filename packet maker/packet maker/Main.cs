@@ -17,6 +17,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Interop;
+using Nest;
+using System.Xml.Linq;
 
 namespace packet_maker
 {
@@ -38,6 +40,9 @@ namespace packet_maker
         private bool success = false;
         public List<packetObject> rawRxPacHisList = new List<packetObject>();
         public List<packetObject> rawTxPacHisList = new List<packetObject>();
+        public List<packetObject> RxPacQryList = new List<packetObject>();
+        public List<packetObject> TxPacQryList = new List<packetObject>();
+        private List<SubType> subTypes = new List<SubType>();
 
         private string[] groups =
         {
@@ -55,13 +60,23 @@ namespace packet_maker
 
         enum Packet_Mode
         {
+            /// <summary>
+            /// the packet is sent to the satelite
+            /// </summary>
             satelite = 1,
+
+            /// <summary>
+            /// the packet is sent to the database
+            /// </summary>
             database = 2,
 
+            /// <summary>
+            /// the packet is not sent anywhere
+            /// </summary>
             none = 0
         }
 
-        private string[] imageTypes = 
+        private string[] imageTypes =
         {
             "XXL",
             "XL",
@@ -85,21 +100,18 @@ namespace packet_maker
             options = (TypeList)Serializer.Deserialize(tx, typeof(TypeList));
             transOptions = (TypeList)Serializer.Deserialize(rx, typeof(TypeList));
 
-            if (!Program.settings.enableImage) 
+            if (!Program.settings.enableImage)
             {
                 TabControl.TabPages.Remove(ImageTab);
             }
+
             if (Program.settings.dataBaseEnabled)
             {
-                if(Program.settings.enableImage)
-                fillImgTable();
-
                 PoupolatePL();
             }
 
-
             //filling comboboxes
-            foreach(string cell in imageTypes)
+            foreach (string cell in imageTypes)
             {
                 imgTypeCB.Items.Add(cell);
             }
@@ -111,23 +123,34 @@ namespace packet_maker
             {
                 groupsCB.Items.Add(s);
                 RxGroupsCB.Items.Add(s);
+                qrySatCB.Items.Add(s);
             }
             foreach (Type t in transOptions)
             {
-                foreach(SubType st in t)
+                foreach (SubType st in t)
                 {
                     qrySubtypeCB.Items.Add(st.name);
+                    subTypes.Add(st);
                 }
             }
             //
 
             minExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
             maxExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
+            qryMinDtp.CustomFormat = "dd/MM/yyyy HH:mm";
+            qryMaxDtp.CustomFormat = "dd/MM/yyyy HH:mm";
+            qryCondvalDtp.CustomFormat = "dd/MM/yyyy HH:mm";
+
             imgIdTxb.Text = Program.settings.pacCurId.ToString();
+
             groupsCB.SelectedIndex = Program.settings.defultSatGroup;
             RxGroupsCB.SelectedIndex = Program.settings.defultSatGroup;
             DBLimitCB.SelectedItem = "100";
             qrySubtypeCB.SelectedItem = "All";
+            qrySatCB.SelectedIndex = Program.settings.defultSatGroup;
+            qryConditionCB.SelectedIndex = 1;
+            qryLimitCB.SelectedIndex = 1;
+
             frm = this;
         }
 
@@ -143,18 +166,21 @@ namespace packet_maker
         {
             if (Program.settings.dataBaseEnabled)
             {
-                DocumentReference docRef = Program.db.Collection("local data").Document("SAT" + groupDex);
-                DocumentSnapshot docSnap = await docRef.GetSnapshotAsync();
-                Program.settings.pacCurId = int.Parse(docSnap.ConvertTo<Dictionary<string, object>>().First().Value.ToString());
+
+                var searchResponse = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
+                .Query(q => q.Ids(c => c.Values($"SAT{groupDex}")))
+                .Index("local-data"));
+
+                Program.settings.pacCurId = int.Parse(searchResponse.Documents.First().First().Value.ToString());
 
                 Program.settings.pacCurId += 1;
 
-                Dictionary<string,object> dd = new Dictionary<string, object> { { "CommandId", Program.settings.pacCurId } };
-                await docRef.SetAsync(dd);
+                Dictionary<string, object> dd = new Dictionary<string, object> { { "CommandId", Program.settings.pacCurId } };
+                var indexResponse = await Program.db.IndexAsync(new IndexRequest<Dictionary<string, object>>(dd, "local-data", $"SAT{groupDex}"));
             }
             else
             {
-               Program.settings.pacCurId = 20;
+                Program.settings.pacCurId = 20;
             }
 
 
@@ -163,28 +189,27 @@ namespace packet_maker
 
         private string ConvertToHexBytes(int value, int numberOfBytes)
         {
-            string format = "X" + (numberOfBytes*2);
+            string format = "X" + (numberOfBytes * 2);
             string Tid = value.ToString(format);
             string[] TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Trim().Split(' ');
             Array.Reverse(TidArr);
-            return String.Join(" ",TidArr).Trim();
+            return String.Join(" ", TidArr).Trim();
         }
-        private async Task Upload_Packet(string COLLECTION_NAME,packetObject ogPacket)
+        private async Task Upload_Packet(string COLLECTION_NAME, packetObject ogPacket)
         {
-            await Task.Run(() => {
 
-                if (Program.settings.dataBaseEnabled)
-                {
-                    Dictionary<string, object> DBPacket = new Dictionary<string, object>
+            if (Program.settings.dataBaseEnabled)
+            {
+                Dictionary<string, object> DBPacket = new Dictionary<string, object>
                     {
                         {"packetString",ogPacket.rawPacket },
                         {"time",DateTime.UtcNow }
                     };
-                    
 
-                    if(ogPacket.type != -1)
-                    {
-                        DBPacket.AddRange(new Dictionary<string, object>
+
+                if (ogPacket.type != -1)
+                {
+                    DBPacket.AddRange(new Dictionary<string, object>
                         {
                             {"splID",ogPacket.id },
                             {"type",ogPacket.getTypeName() },
@@ -192,25 +217,23 @@ namespace packet_maker
                             {"lenght",ogPacket.length },
                             {"satId",ogPacket.getSatDex() }
                         });
-                        DBPacket.AddRange(ogPacket.dataCatalog);
-                    }
-                    else
-                    {
-                        DBPacket.Add("type", "Error");
-                    }
-
-                    DocumentReference docRef = Program.db.Collection(COLLECTION_NAME).Document();
-
-                    var t = docRef.SetAsync(DBPacket);
+                    DBPacket.AddRange(ogPacket.dataCatalog);
                 }
-            });
+                else
+                {
+                    DBPacket.Add("type", "Error");
+                }
+
+                var indexResponse = await Program.db.IndexAsync(new IndexRequest<Dictionary<string, object>>(DBPacket, COLLECTION_NAME));
+
+            }
         }
 
         private void addItemToListbox(string diaplay, ListBox list)
         {
             if (list.SelectedIndex != -1)
             {
-                list.Items.Add($"[{DateTime.Now}]   {diaplay}");
+                list.Items.Add(diaplay);
 
 
                 if (list.Items.Count - 2 == privHex.SelectedIndex)
@@ -218,7 +241,7 @@ namespace packet_maker
             }
             else
             {
-                list.Items.Add($"[{DateTime.Now}]   {diaplay}");
+                list.Items.Add(diaplay);
                 list.SelectedIndex = 0;
             }
         }
@@ -229,9 +252,9 @@ namespace packet_maker
 
 
 
-        private void TX(int CurrId,Packet_Mode mode)
+        private void TX(int CurrId, Packet_Mode mode)
         {
-           
+
             int length = 0;
             foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
             {
@@ -261,10 +284,10 @@ namespace packet_maker
             long unix = 0;
 
             string type = ConvertToHexBytes(options.typenum[typeCB.SelectedIndex].id, 1);
-            string subtype = ConvertToHexBytes(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id,1);
-            string len = ConvertToHexBytes(length,2);
-            string id = ConvertToHexBytes(CurrId,3);
-            string satNum = ConvertToHexBytes(groupsCB.SelectedIndex,1);
+            string subtype = ConvertToHexBytes(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id, 1);
+            string len = ConvertToHexBytes(length, 2);
+            string id = ConvertToHexBytes(CurrId, 3);
+            string satNum = ConvertToHexBytes(groupsCB.SelectedIndex, 1);
 
 
 
@@ -295,7 +318,7 @@ namespace packet_maker
 
                         case "date":
                         case "datetime":
-                            if(mode != Packet_Mode.database)
+                            if (mode != Packet_Mode.database)
                             {
                                 if (curValue.Substring(0, 3) != "now")
                                 {
@@ -328,7 +351,7 @@ namespace packet_maker
                                 }
                                 else
                                 {
-                                    string p = ConvertToHexBytes(int.Parse(curValue.Substring(4)),3).Replace(" ", String.Empty)+"N"+curValue[3];
+                                    string p = ConvertToHexBytes(int.Parse(curValue.Substring(4)), 3).Replace(" ", String.Empty) + "N" + curValue[3];
                                     //String h = int.Parse(dataTypesDGV.Rows[i].Cells[1].Value.ToString().Substring(4)).ToString("X6").Trim() + "NN";
                                     data += p;
                                 }
@@ -341,61 +364,35 @@ namespace packet_maker
                             break;
 
                         case "bytes":
-                            makeOut.Text = id + " " + satNum + " " + type + " " + subtype +" "+ len + " " + dataTypesDGV.Rows[i].Cells[1].Value.ToString().ToUpper();
+                            makeOut.Text = id + " " + satNum + " " + type + " " + subtype + " " + len + " " + dataTypesDGV.Rows[i].Cells[1].Value.ToString().ToUpper();
                             return;
 
                     }
                 }
                 string[] revData = Regex.Replace(data, ".{2}", "$0 ").Trim().Split(' ');
                 Array.Reverse(revData);
-                makeOut.Text = id + " " + satNum + " " + type + " " + subtype +" "+ len+ " " + String.Join(" ", revData);
+                makeOut.Text = id + " " + satNum + " " + type + " " + subtype + " " + len + " " + String.Join(" ", revData);
             }
             else
             {
-                makeOut.Text = (id + " " + satNum + " " + type + " " + subtype +" "+ len);
+                makeOut.Text = (id + " " + satNum + " " + type + " " + subtype + " " + len);
             }
         }
 
 
         private packetObject po;
 
-        private void RX(packetObject po)
-        {
-            transIn.Text = po.rawPacket;
-            transOut.Clear();
-            if (po.type != -1)
-            {
-                transOut.AppendText("Satlite: " + po.sateliteGroup + Environment.NewLine);
-                transOut.AppendText("ID: " + po.id + Environment.NewLine);
-                transOut.AppendText("type: " + po.getTypeName() + Environment.NewLine);
-                transOut.AppendText("subtype: " + po.getSubTypeName() + Environment.NewLine);
-                transOut.AppendText("length: " + po.length + Environment.NewLine);
-                if (po.dataCatalog.Count != 0)
-                {
-                    transOut.AppendText("*******************************" + Environment.NewLine);
-                    for (int i = 0; i < po.dataCatalog.Count; i++)
-                    {
-                        transOut.AppendText(po.dataCatalog.ElementAt(i).Key + ": " + po.dataCatalog.ElementAt(i).Value + Environment.NewLine);
-                    }
-                }
-            }
-            else
-            {
-                transOut.AppendText("manager was not able to translate this packet:"+Environment.NewLine);
-                transOut.AppendText(po.rawPacket + Environment.NewLine);
-            }
-        }
 
         #endregion
 
         #region main click funcs
 
-        private async void OkBtn_click(int id,Packet_Mode mode)
+        private async void OkBtn_click(int id, Packet_Mode mode)
         {
             success = false;
             try
             {
-                TX(id,mode);
+                TX(id, mode);
                 success = true;
             }
             catch
@@ -407,7 +404,7 @@ namespace packet_maker
             {
                 if (success && mode == Packet_Mode.satelite)
                 {
-                    await Upload_Packet("tx packets", new packetObject(options,makeOut.Text));
+                    await Upload_Packet("parsed-tx", new packetObject(options, makeOut.Text));
                 }
             }
         }
@@ -417,33 +414,18 @@ namespace packet_maker
             po = new packetObject(transOptions, mess);
             if (po.type != -1)
             {
-                if(po.sateliteGroup == RxGroupsCB.SelectedItem.ToString() || RxGroupsCB.SelectedIndex == 0)
+                if (po.sateliteGroup == RxGroupsCB.SelectedItem.ToString() || RxGroupsCB.SelectedIndex == 0)
                 {
                     rawRxPacHisList.Add(po);
-                    addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}",privHex);
+                    addItemToListbox(po.ToHeaderString(DateTime.Now), privHex);
                 }
-                
             }
             else
             {
-                //image
-                string[] TArr = mess.Split(' ');
-
-                if (TArr.Length >= 6)
-                {
-                    if (TArr[4] == "02" && (TArr[5] == "E1" || TArr[5] == "E2"))
-                    {
-                        HandleNewImagePacket(TArr);
-                        return; //dont continue to error
-                    }
-                }
-
-
-                //error
                 rawRxPacHisList.Add(po);
-                addItemToListbox("ERROR",privHex);
+                addItemToListbox(po.ToHeaderString(DateTime.Now), privHex);
             }
-            await Upload_Packet("ParsedRx", po);
+            await Upload_Packet("parsed-rx", po);
         }
 
 
@@ -539,12 +521,12 @@ namespace packet_maker
             frm2.ShowDialog();
         }
 
-        private async void copyBTN_Click(object sender, EventArgs e) 
+        private async void copyBTN_Click(object sender, EventArgs e)
         {
-            OkBtn_click(await getSplCurIdAsync(groupsCB.SelectedIndex),Packet_Mode.satelite);
+            OkBtn_click(await getSplCurIdAsync(groupsCB.SelectedIndex), Packet_Mode.none);
 
-            if(makeOut.Text != null && makeOut.Text != "")
-            Clipboard.SetText(makeOut.Text.ToString());
+            if (makeOut.Text != null && makeOut.Text != "")
+                Clipboard.SetText(makeOut.Text.ToString());
         }
 
 
@@ -565,7 +547,7 @@ namespace packet_maker
 
         private void rx2txBtn_Click(object sender, EventArgs e)
         {
-            if(privHex.SelectedIndex != -1)
+            if (privHex.SelectedIndex != -1)
             {
                 int dex = rawTxPacHisList.FindIndex(x => x.id == rawRxPacHisList[privHex.SelectedIndex].id);
                 if (dex != -1)
@@ -585,14 +567,14 @@ namespace packet_maker
 
         private async void resendTxBtn_Click(object sender, EventArgs e)
         {
-            string id = ConvertToHexBytes(await getSplCurIdAsync(RxGroupsCB.SelectedIndex),3);
+            string id = ConvertToHexBytes(await getSplCurIdAsync(RxGroupsCB.SelectedIndex), 3);
             string tPac = $"{id} 0{groupsCB.SelectedIndex}{rawTxPacHisList[TxPacLibx.SelectedIndex].rawPacket.Substring(11)}";
             await RadioServer.Send(tPac); //0-9 only
 
             po = new packetObject(options, tPac);
             rawTxPacHisList.Add(po);
-            addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}", TxPacLibx);
-            await Upload_Packet("tx packets", po);
+            addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
+            await Upload_Packet("tx-packets", po);
         }
 
 
@@ -629,12 +611,14 @@ namespace packet_maker
         #region listbox
         private void privHex_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RX(rawRxPacHisList[privHex.SelectedIndex]);
+            transIn.Text = rawRxPacHisList[privHex.SelectedIndex].rawPacket;
+            transOut.Text = rawRxPacHisList[privHex.SelectedIndex].ToString();
         }
 
         private void TxPacLibx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RX(rawTxPacHisList[TxPacLibx.SelectedIndex]);
+            transIn.Text = rawTxPacHisList[TxPacLibx.SelectedIndex].rawPacket;
+            transOut.Text = rawTxPacHisList[TxPacLibx.SelectedIndex].ToString();
         }
         #endregion
 
@@ -647,14 +631,14 @@ namespace packet_maker
         #region Server
 
         private readonly RadioServer RadioServer = new RadioServer();
-        private void connectBtn_Click(object sender, EventArgs e) 
+        private void connectBtn_Click(object sender, EventArgs e)
         {
             connectBtn.Enabled = false;
             try
             {
                 System.Diagnostics.Process.Start(Program.settings.endNodePath);
             }
-            catch 
+            catch
             { connectBtn.Enabled = true; }
         }
 
@@ -679,7 +663,7 @@ namespace packet_maker
 
                 po = new packetObject(options, makeOut.Text.Trim());
                 rawTxPacHisList.Add(po);
-                addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}", TxPacLibx);
+                addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
 
                 await RadioServer.Send(makeOut.Text.Trim());
                 TabControl.SelectedTab = RxTab;
@@ -699,220 +683,6 @@ namespace packet_maker
 
 
 
-        #region Images
-        private async Task<List<imagePropeties>> GetImageInfos()
-        {
-            var propList = new List<imagePropeties>();
-            await Task.Run(async () => {
-
-                Query capitalQuery = Program.db.Collection("imageInfo");
-                QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
-
-                foreach (var docSnap in capitalQuerySnapshot.Documents)
-                {
-                    propList.Add(new imagePropeties { Inf = docSnap.ConvertTo<imageInfo>(), chunks = new List<imageData>() });
-                }
-
-            });
-            return propList;
-        }
-
-        private async Task<List<imageData>> GetImageDataOf(int splId)
-        {
-            List<imageData> imageDatas = new List<imageData>();
-
-            await Task.Run(async () => {
-
-                Query capitalQuery = Program.db.Collection("imageData").WhereEqualTo("splId",splId);
-                QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
-
-                foreach (var docSnap in capitalQuerySnapshot.Documents)
-                {
-                    imageDatas.Add(docSnap.ConvertTo<imageData>());
-                }
-
-            });
-
-            return imageDatas;
-        }
-
-
-        private async Task<List<string[]>> DownloadTable()
-        {
-            var result = new List<string[]>();
-            var currentImgs = await GetImageInfos();
-
-            foreach (var img in currentImgs)
-            {
-                if (img.Inf.recivedChuncks == img.Inf.TotalChunks)
-                {
-                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), "none","show image","0" });
-                }
-                else if (img.Inf.recivedChuncks == -1)
-                {
-                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), "chunk weren't requsted","get all chunks","0" });
-                }
-                else
-                {
-                    result.Add(new string[] { img.Inf.splDocId, img.Inf.imageId.ToString(), imageTypes[img.Inf.imageId - 1], img.Inf.TotalChunks.ToString(), (img.Inf.TotalChunks - img.Inf.recivedChuncks).ToString(),"get missing chunks","0" });
-                }
-            }
-            return result;
-        }
-
-
-        private async void sendImgReqBtn_Click(object sender, EventArgs e)
-        {
-            string id = ConvertToHexBytes(await getSplCurIdAsync(groupsCB.SelectedIndex), 3);
-            
-           await RadioServer.Send($"{id} 02 02 E1 01 00 {ConvertToHexBytes(imgTypeCB.SelectedIndex+1,1)}".Trim());
-        }
-
-        
-        private void HandleNewImagePacket(string[] packet)
-        {
-            switch (packet[5])
-            {
-                case "E1":
-                    HandleImageReqResult(packet);
-                    break;
-
-                case "E2":
-                    HandleNewChunk(packet);
-                    break;
-            }
-        }
-
-
-        private async void HandleImageReqResult(string[] result)
-        {
-            int SplId = Convert.ToInt32(result[2] + result[1] + result[0], 16);
-            string type = imageTypes[Convert.ToInt32(result[12], 16) - 1];
-            int totalChunks = Convert.ToInt32(result[11] + result[10], 16);
-            int imgId = Convert.ToInt32(result[9]+result[8], 16);
-            ImageDataDGV.Rows.Add(SplId,imgId ,type, totalChunks, "chunks weren't reqeusted", "get all chunks");
-            ImageDataDGV.AutoResizeColumns();
-
-            if (Program.settings.dataBaseEnabled)
-                await Task.Run(() => {
-                    imageInfo imageInfo = new imageInfo
-                    {
-                        imageId = imgId,
-                        splDocId = SplId.ToString(),
-                        TotalChunks = totalChunks,
-                        when = DateTime.UtcNow,
-                        imageType = type,
-                        recivedChuncks = -1
-                    };
-                    DocumentReference docRef = Program.db.Collection("imageInfo").Document(SplId.ToString());
-                    docRef.SetAsync(imageInfo);
-                });
-        }
-
-        private async void fillImgTable()
-        {
-            var table = await Task.Run(() => {
-                return DownloadTable();
-            });
-            
-            foreach(var row in table)
-            {
-                ImageDataDGV.Rows.Add(row);
-            }
-        }
-
-        private async void HandleNewChunk(string[] result)
-        {
-
-            if(Program.settings.dataBaseEnabled)
-                await Task.Run(() => 
-                {
-                    string temp = "";
-                    for(int i = 10; i < result.Length; i++)
-                    {
-                        temp += result[i] + " ";
-                    }
-
-
-                    DocumentReference docref = Program.db.Collection("imageData").Document();
-                    imageData thisChunk = new imageData 
-                    {
-                        chunkId = Convert.ToInt32(result[9] + result[8], 16),
-                        splId = Convert.ToInt32(result[2] + result[1] + result[0], 16),
-                        when = DateTime.UtcNow,
-                        chunkData = temp
-                    };
-
-                    docref.SetAsync(thisChunk);
-                });
-        }
-        
-
-        private async void ImageDataDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
-
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-            {
-                string len;
-                string id;
-                //senderGrid.SelectedCells[0].Value.ToString();
-                switch (senderGrid.SelectedCells[0].Value.ToString())
-                {
-                    case "get all chunks":
-                        //Convert.ToInt32(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString())
-                        id = ConvertToHexBytes(int.Parse(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()), 3);
-                        string imgId = ConvertToHexBytes(int.Parse(senderGrid.Rows[e.RowIndex].Cells[1].Value.ToString()), 2);
-
-                        await RadioServer.Send($"{id} 02 02 E2 02 00 {imgId}".Trim());
-                        break;
-
-                        case "get missing chunks":
-                        var chunks = await GetImageDataOf(int.Parse(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()));
-                        chunks = chunks.OrderBy(o => o.chunkId).ToList();
-                        Console.WriteLine(chunks.Count);
-                        List<int> missingChunksDex = new List<int>();
-
-                        int chunkDex = 0;
-                        for (int i = 1; i < int.Parse(senderGrid.Rows[e.RowIndex].Cells[3].Value.ToString())+1; i++)
-                        {
-                            if (chunks[chunkDex].chunkId == i)
-                            {
-                                if (chunkDex < chunks.Count - 1)
-                                    chunkDex++;
-                            }
-                            else
-                            {
-                                missingChunksDex.Add(i);
-                            }
-                        }
-
-                        len = ConvertToHexBytes(missingChunksDex.Count * 2, 2);
-                        string data = null;
-
-
-
-                        foreach (int dex in missingChunksDex)
-                        {
-                            data += ConvertToHexBytes(dex, 2)+" ";
-                        }
-                        id = ConvertToHexBytes(int.Parse(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()), 3);
-
-
-                        await RadioServer.Send($"{id} 02 02 E2 {len} {data}".Trim());
-                        break;
-                }
-            }
-        }
-
-        private void refreshBtn_Click(object sender, EventArgs e) 
-        {
-            ImageDataDGV.Rows.Clear();
-            fillImgTable();
-        }
-
-
-        #endregion
 
 
 
@@ -924,26 +694,17 @@ namespace packet_maker
         #region dowload
         private List<PLInfo> Playlists = new List<PLInfo>();
 
-        public async Task<List<PLInfo>> DowloadPL()
-        {
-            List<PLInfo> playLists = new List<PLInfo>();
-            Query capitalQuery = Program.db.Collection("playListInfo");
-            QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
 
-            foreach(var doc in capitalQuerySnapshot)
-            {
-                playLists.Add(doc.ConvertTo<PLInfo>());
-            }
-            return playLists;
-        }
 
         public async void PoupolatePL()
         {
-            Playlists = await Task.Run(async () => {
-                return await DowloadPL();
-            });
+            var searchResponse = await Program.db.SearchAsync<PLInfo>(s => s
+                    .Index("playlist-info")
+                    .Query(q => q.MatchAll()));
 
-            foreach(var list in Playlists)
+            Playlists = searchResponse.Documents.ToList();
+
+            foreach (var list in Playlists)
             {
                 PlaylistCB.Items.Add(list.name);
             }
@@ -957,7 +718,7 @@ namespace packet_maker
         {
             PLitemsLibx.Items.Clear();
             commands.Clear();
-            foreach(var item in Playlists[PlaylistCB.SelectedIndex].commands)
+            foreach (var item in Playlists[PlaylistCB.SelectedIndex].commands)
             {
                 packetObject po = new packetObject(options, item);
                 PLitemsLibx.Items.Add(po.getSubTypeName());
@@ -974,7 +735,7 @@ namespace packet_maker
             {
                 CastToDGV(commands[PLitemsLibx.SelectedIndex]);
 
-                OkBtn_click(Program.settings.pacCurId,Packet_Mode.none);
+                OkBtn_click(Program.settings.pacCurId, Packet_Mode.none);
             }
         }
 
@@ -997,10 +758,10 @@ namespace packet_maker
         private void add2PLBtn_Click(object sender, EventArgs e)
         {
 
-            OkBtn_click(256,Packet_Mode.database);
+            OkBtn_click(256, Packet_Mode.database);
             packetObject po = new packetObject(options, makeOut.Text.Trim());
             PLitemsLibx.Items.Add(po.getSubTypeName());
-            commands.Add(po); 
+            commands.Add(po);
             Playlists[PlaylistCB.SelectedIndex].commands.Add(po.rawPacket);
             PLitemsLibx.SelectedIndex = PLitemsLibx.Items.Count - 1;
         }
@@ -1011,26 +772,26 @@ namespace packet_maker
             {
                 Playlists[PlaylistCB.SelectedIndex].sleepBetweenCommands = int.Parse(sleepCmdTxb.Text);
 
-                DocumentReference docRef = Program.db.Collection("playListInfo").Document(PlaylistCB.SelectedItem.ToString());
 
-                await docRef.SetAsync(Playlists[PlaylistCB.SelectedIndex]);
+
+                var response = await Program.db.IndexAsync(new IndexRequest<PLInfo>(Playlists[PlaylistCB.SelectedIndex], "playlist-info", PlaylistCB.SelectedItem.ToString()));
+
+
             }
         }
 
         private async void DelListBtn_Click(object sender, EventArgs e)
         {
-            if(PlaylistCB.SelectedIndex != -1 && Program.settings.dataBaseEnabled)
-            if (MessageBox.Show("Are you sure?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
+            if (PlaylistCB.SelectedIndex != -1 && Program.settings.dataBaseEnabled)
+                if (MessageBox.Show("Are you sure?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
                     PLitemsLibx.Items.Clear();
                     sleepCmdTxb.Text = "";
 
-                    DocumentReference docRef = Program.db.Collection("playListInfo").Document(PlaylistCB.SelectedItem.ToString());
-
-                    await docRef.DeleteAsync();
+                    var DelResult = await Program.db.DeleteAsync<dynamic>(PlaylistCB.SelectedItem.ToString());
 
                     PlaylistCB.Items.RemoveAt(PlaylistCB.SelectedIndex);
-            }
+                }
         }
 
         private void NewListBtn_Click(object sender, EventArgs e)
@@ -1042,28 +803,29 @@ namespace packet_maker
 
         public async void newPLItem(string item)
         {
-            
+
             PlaylistCB.Items.Add(item);
             Playlists.Add(new PLInfo { commands = new List<string>(), name = item, sleepBetweenCommands = 0 });
             PlaylistCB.SelectedIndex = PlaylistCB.Items.Count - 1;
 
+            var indexResponse = await Program.db.IndexAsync(new IndexRequest<PLInfo>(
+                new PLInfo { commands = new List<string>(), name = item, sleepBetweenCommands = 0 },
+                "playListInfo",
+                "item"));
 
-            DocumentReference docRef = Program.db.Collection("playListInfo").Document(item);
-
-            await docRef.SetAsync(new PLInfo { commands = new List<string>(), name = item, sleepBetweenCommands = 0 });
         }
 
 
         private void DelLItemBtn_Click(object sender, EventArgs e)
         {
-            if(PLitemsLibx.SelectedIndex != -1)
+            if (PLitemsLibx.SelectedIndex != -1)
             {
                 int T = PLitemsLibx.SelectedIndex;
                 commands.RemoveAt(PLitemsLibx.SelectedIndex);
                 Playlists[PlaylistCB.SelectedIndex].commands.RemoveAt(PLitemsLibx.SelectedIndex);
                 PLitemsLibx.Items.RemoveAt(PLitemsLibx.SelectedIndex);
 
-                if (PLitemsLibx.Items.Count != 0) 
+                if (PLitemsLibx.Items.Count != 0)
                 {
                     if (T == PLitemsLibx.Items.Count) PLitemsLibx.SelectedIndex = T - 1;
                     else PLitemsLibx.SelectedIndex = T;
@@ -1073,7 +835,7 @@ namespace packet_maker
 
         private void MoveupBtn_Click(object sender, EventArgs e)
         {
-            if(PLitemsLibx.SelectedIndex != -1 && PLitemsLibx.SelectedIndex != 0)
+            if (PLitemsLibx.SelectedIndex != -1 && PLitemsLibx.SelectedIndex != 0)
             {
                 commands.Swap(PLitemsLibx.SelectedIndex, PLitemsLibx.SelectedIndex - 1);
                 Playlists[PlaylistCB.SelectedIndex].commands.Swap(PLitemsLibx.SelectedIndex, PLitemsLibx.SelectedIndex - 1);
@@ -1116,14 +878,14 @@ namespace packet_maker
                 Action<int> f = sendAutoWorker;
                 foreach (var packet in tem)
                 {
-                    string pac = (string)Invoke(f,i);
+                    string pac = (string)Invoke(f, i);
                     await Task.Delay(int.Parse(sleepCmdTxb.Text));
 
                     po = new packetObject(options, makeOut.Text.Trim());
                     rawTxPacHisList.Add(po);
-                    addItemToListbox($"{po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}", TxPacLibx);
+                    addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
                     i++;
-                        
+
                 }
             }
             else
@@ -1143,140 +905,101 @@ namespace packet_maker
                 UseWaitCursor = true;
                 clearRxBtn.PerformClick();
 
+                int qrySize = 20000;
+                if (DBLimitCB.SelectedItem.ToString() != "No Limit")
+                {
+                    qrySize = int.Parse(DBLimitCB.SelectedItem.ToString());
+                }
 
                 #region rxHistory
 
-                Query groupRxQry;
-                Query limitRxQry;
-                Query subtypeRxQry;
-                Query finalRxQry;
-
-                Query mainRxQry = Program.db.Collection("ParsedRx")
-                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
-                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
-                    .OrderBy("time");
 
                 //define query
-                if (RxGroupsCB.SelectedIndex == 0)
+                var RxQryFilters = new List<Func<QueryContainerDescriptor<Dictionary<string, object>>, QueryContainer>>
                 {
-                    groupRxQry = mainRxQry;
-                }
-                else
+                    q => q.DateRange(
+                        dr => dr
+                        .Field("time")
+                        .LessThanOrEquals(maxExportDateDtp.Value.ToUniversalTime())
+                        .GreaterThanOrEquals(minExportDateDtp.Value.ToUniversalTime()))
+                };
+
+
+                if (RxGroupsCB.SelectedIndex != 0)
                 {
-                    groupRxQry = mainRxQry
-                        .WhereEqualTo("satId", RxGroupsCB.SelectedIndex);
+                    RxQryFilters.Add(fq => fq.Match(
+                        m => m.Field("satId")
+                              .Query(RxGroupsCB.SelectedIndex.ToString())));
                 }
-                if (DBLimitCB.SelectedItem.ToString() == "No Limit")
+                if (qrySubtypeCB.SelectedItem.ToString() != "All")
                 {
-                    limitRxQry = groupRxQry;
+                    RxQryFilters.Add(fq => fq.Match(
+                        m => m.Field("subtype")
+                                .Query(qrySubtypeCB.SelectedItem.ToString())));
                 }
-                else
-                {
-                    limitRxQry = groupRxQry
-                        .Limit(int.Parse(DBLimitCB.SelectedItem.ToString()));
-                }
-                if(qrySubtypeCB.SelectedItem.ToString() == "All")
-                {
-                    subtypeRxQry = limitRxQry;
-                }
-                else
-                {
-                    subtypeRxQry = limitRxQry
-                        .WhereEqualTo("subtype", qrySubtypeCB.SelectedItem.ToString());
-                }
-                finalRxQry = subtypeRxQry;
                 //
 
-                QuerySnapshot RxSnapshot = await finalRxQry.GetSnapshotAsync();
+                var RxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
 
-                foreach (var doc in RxSnapshot)
+                    .Query(q => q.Bool(ft => ft.Must(RxQryFilters)))
+                    .Index("parsed-rx")
+                    .Size(qrySize)
+                    .Sort(q => q.Ascending(obj => obj["time"])));
+
+                foreach (var doc in RxSnapshot.Documents)
                 {
-                    var pk = doc.ConvertTo<Dictionary<string,object>>();
-
-                    po = await Task.Run(()=> {
-                        return new packetObject(transOptions, pk["packetString"].ToString());
+                    po = await Task.Run(() => {
+                        return new packetObject(transOptions, doc["packetString"].ToString());
                     });
 
                     rawRxPacHisList.Add(po);
 
-                    if(pk["time"] is Timestamp ts)
-                    {
-                        if (po.type != -1)
-                        {
-                            privHex.Items.Add($"[{ts.ToDateTime().ToLocalTime().ToShortDateString()} {ts.ToDateTime().ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
-                        }
-                        else
-                        {
-                            privHex.Items.Add($"[{ts.ToDateTime().ToLocalTime().ToShortDateString()} {ts.ToDateTime().ToLocalTime().ToLongTimeString()}]   ERROR");
-                        }
-                    }
-
+                    privHex.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
                 }
                 #endregion
 
-                #region TxHistory
+                #region txHistory
 
-                Query finalTxQry;
-                Query mainTxQry = Program.db.Collection("tx packets")
-                    .WhereGreaterThanOrEqualTo("time", minExportDateDtp.Value.ToUniversalTime())
-                    .WhereLessThanOrEqualTo("time", maxExportDateDtp.Value.ToUniversalTime())
-                    .OrderBy("time");
+
                 //define query
-                if (RxGroupsCB.SelectedIndex == 0)
+                var TxQryFilters = new List<Func<QueryContainerDescriptor<Dictionary<string, object>>, QueryContainer>>
                 {
-                    if (DBLimitCB.SelectedItem.ToString() != "No Limit")
-                    {
-                        finalTxQry = mainTxQry
-                            .Limit(int.Parse(DBLimitCB.SelectedItem.ToString()));
-                    }
-                    else
-                    {
-                        finalTxQry = mainTxQry;
-                    }
-                }
-                else
+                    q => q.DateRange(
+                        dr => dr
+                        .Field("time")
+                        .LessThanOrEquals(maxExportDateDtp.Value.ToUniversalTime())
+                        .GreaterThanOrEquals(minExportDateDtp.Value.ToUniversalTime()))
+                };
+
+
+                if (RxGroupsCB.SelectedIndex != 0)
                 {
-                    if (DBLimitCB.SelectedItem.ToString() != "No Limit")
-                    {
-                        finalTxQry = mainTxQry
-                            .WhereEqualTo("satId", RxGroupsCB.SelectedIndex)
-                            .Limit(int.Parse(DBLimitCB.SelectedItem.ToString()));
-                    }
-                    else
-                    {
-                        finalTxQry = mainTxQry.WhereEqualTo("satId", RxGroupsCB.SelectedIndex);
-                    }
+                    TxQryFilters.Add(fq => fq.Match(
+                        m => m.Field("satId")
+                              .Query(RxGroupsCB.SelectedIndex.ToString())));
                 }
                 //
 
-                QuerySnapshot TxSnapshots = await finalTxQry.GetSnapshotAsync();
+                var TxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
 
-                foreach (var doc in TxSnapshots)
+                    .Query(q => q.Bool(ft => ft.Must(RxQryFilters)))
+                    .Index("parsed-tx")
+                    .Size(qrySize)
+                    .Sort(q => q.Ascending(obj => obj["time"])));
+
+                foreach (var doc in TxSnapshot.Documents)
                 {
-                    var pk = doc.ConvertTo<Dictionary<string,object>>();
-                    po = await Task.Run(() =>
-                    {
-                        return new packetObject(options, pk["packetString"].ToString());
+                    po = await Task.Run(() => {
+                        return new packetObject(options, doc["packetString"].ToString());
                     });
 
                     rawTxPacHisList.Add(po);
 
-                    if (pk["time"] is Timestamp ts)
-                    {
-                        if (po.type != -1)
-                        {
-                            TxPacLibx.Items.Add($"[{ts.ToDateTime().ToLocalTime().ToShortDateString()} {ts.ToDateTime().ToLocalTime().ToLongTimeString()}]   {po.getTypeName()} - {po.getSubTypeName()}  |||  ID:{po.id}");
-                        }
-                        else
-                        {
-                            TxPacLibx.Items.Add($"[{ts.ToDateTime().ToLocalTime().ToShortDateString()} {ts.ToDateTime().ToLocalTime().ToLongTimeString()}]   ERROR");
-                        }
-                    }
+                    TxPacLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
                 }
-
                 #endregion
 
-                MessageBox.Show($"{RxSnapshot.Count} RX packet were recived. {Environment.NewLine}{TxSnapshots.Count} TX packet were recived.", "Query finished", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show($"{RxSnapshot.Documents.Count} RX packet were recived. {Environment.NewLine}{TxSnapshot.Documents.Count} TX packet were recived.", "Query finished", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             finally
             {
@@ -1291,7 +1014,7 @@ namespace packet_maker
         SaveFileDialog saveFileDialog = new SaveFileDialog();
 
 
-        private void CreateCSV(List<List<string>> table,string fileName)
+        private void CreateCSV(List<List<string>> table, string fileName)
         {
             try
             {
@@ -1375,7 +1098,7 @@ namespace packet_maker
                 List<List<string>> T = new List<List<string>> { new List<string> { "Date", "Id", "SatGroup", "Type", "Subtype", "Lenght", "Raw packet", "Data" } };
                 foreach (var packet in rawRxPacHisList)
                 {
-                    if(packet.type != -1)
+                    if (packet.type != -1)
                     {
                         string dataStr = "";
                         for (int i = 0; i < packet.dataCatalog.Count; i++)
@@ -1411,30 +1134,30 @@ namespace packet_maker
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 List<FilePacket> type_subtype = new List<FilePacket>();
-                List<List<string>> errorTable = new List<List<string>> { new List<string> {"Date","Packet" } };
+                List<List<string>> errorTable = new List<List<string>> { new List<string> { "Date", "Packet" } };
 
                 //sorting packets to files
                 int j = 0;
-                foreach(var packet in rawRxPacHisList)
+                foreach (var packet in rawRxPacHisList)
                 {
                     string timeStr = privHex.Items[j].ToString().Split('[', ']')[1];
 
-                    if(packet.type != -1)
+                    if (packet.type != -1)
                     {
                         int match = type_subtype.FindIndex(x => x.packetPrefix == $"{packet.getTypeName()}_{packet.getSubTypeName()}");
                         if (match != -1)
                         {
-                            type_subtype[match].packets.Add(new PacketWithTime(packet,timeStr));
+                            type_subtype[match].packets.Add(new PacketWithTime(packet, timeStr));
                         }
                         else
                         {
                             var colStr = new List<string> { "Date", "Id", "SatGroup", "Type", "Subtype", "Lenght", "Raw data" };
                             colStr.AddRange(packet.dataCatalog.Keys.ToList());
 
-                            type_subtype.Add(new FilePacket 
-                            { 
-                                packetPrefix = $"{packet.getTypeName()}_{packet.getSubTypeName()}" ,
-                                packets = new List<PacketWithTime> { new PacketWithTime (packet,timeStr) },
+                            type_subtype.Add(new FilePacket
+                            {
+                                packetPrefix = $"{packet.getTypeName()}_{packet.getSubTypeName()}",
+                                packets = new List<PacketWithTime> { new PacketWithTime(packet, timeStr) },
                                 firstColumn = colStr
                             });
                         }
@@ -1453,10 +1176,10 @@ namespace packet_maker
                 {
                     Application.UseWaitCursor = true;
                     //creating all files
-                    foreach(var file in type_subtype)
+                    foreach (var file in type_subtype)
                     {
                         List<List<string>> fileTble = new List<List<string>> { file.firstColumn };
-                        foreach(var pac in file.packets)
+                        foreach (var pac in file.packets)
                         {
                             List<string> tm = new List<string>
                             {
@@ -1511,9 +1234,207 @@ namespace packet_maker
 
         #endregion
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
 
+        #region query
+
+        private async void qryStartBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                qryClearBtn.PerformClick();
+                UseWaitCursor = true;
+                clearRxBtn.PerformClick();
+
+                int qrySize = 20000;
+                if (qryLimitCB.SelectedItem.ToString() != "No Limit")
+                {
+                    qrySize = int.Parse(qryLimitCB.SelectedItem.ToString());
+                }
+
+                int rxQryCount = 0;
+                int txQryCount = 0;
+
+                if (qryRxChbx.Checked)
+                {
+                    #region rxHistory
+
+
+                    //define query
+                    var RxQryFilters = new List<Func<QueryContainerDescriptor<Dictionary<string, object>>, QueryContainer>>
+                    {
+                        q => q.DateRange(
+                            dr => dr
+                            .Field("time")
+                            .LessThanOrEquals(qryMaxDtp.Value.ToUniversalTime())
+                            .GreaterThanOrEquals(qryMinDtp.Value.ToUniversalTime()))
+                    };
+
+
+                    if (qrySatCB.SelectedIndex != 0)
+                    {
+                        RxQryFilters.Add(fq => fq.Match(
+                            m => m.Field("satId")
+                                  .Query(qrySatCB.SelectedIndex.ToString())));
+                    }
+                    if (qrySubtypeCB.SelectedItem.ToString() != "All")
+                    {
+                        RxQryFilters.Add(fq => fq.Match(
+                            m => m.Field("subtype")
+                                    .Query(qrySubtypeCB.SelectedItem.ToString())));
+                    }
+                    //
+
+                    var RxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
+
+                        .Query(q => q.Bool(ft => ft.Must(RxQryFilters)))
+                        .Index("parsed-rx")
+                        .Size(qrySize)
+                        .Sort(q => q.Ascending(obj => obj["time"])));
+
+                    foreach (var doc in RxSnapshot.Documents)
+                    {
+                        po = await Task.Run(() =>
+                        {
+                            return new packetObject(transOptions, doc["packetString"].ToString());
+                        });
+
+                        RxPacQryList.Add(po);
+
+                        RxPacQryLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
+                    }
+                    #endregion
+
+                    rxQryCount = RxSnapshot.Documents.Count;
+                }
+
+                if (qryTxChbx.Checked)
+                {
+                    #region txHistory
+
+
+                    //define query
+                    var TxQryFilters = new List<Func<QueryContainerDescriptor<Dictionary<string, object>>, QueryContainer>>
+                {
+                    q => q.DateRange(
+                        dr => dr
+                        .Field("time")
+                        .LessThanOrEquals(maxExportDateDtp.Value.ToUniversalTime())
+                        .GreaterThanOrEquals(minExportDateDtp.Value.ToUniversalTime()))
+                };
+
+
+                    if (qrySatCB.SelectedIndex != 0)
+                    {
+                        TxQryFilters.Add(fq => fq.Match(
+                            m => m.Field("satId")
+                                  .Query(qrySatCB.SelectedIndex.ToString())));
+                    }
+                    //
+
+                    var TxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
+
+                        .Query(q => q.Bool(ft => ft.Must(TxQryFilters)))
+                        .Index("parsed-tx")
+                        .Size(qrySize)
+                        .Sort(q => q.Ascending(obj => obj["time"])));
+
+                    foreach (var doc in TxSnapshot.Documents)
+                    {
+                        po = await Task.Run(() =>
+                        {
+                            return new packetObject(options, doc["packetString"].ToString());
+                        });
+
+                        rawTxPacHisList.Add(po);
+
+                        TxPacLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
+                    }
+                    #endregion
+
+                    txQryCount = TxSnapshot.Documents.Count;
+                }
+
+                MessageBox.Show($"{rxQryCount} RX packet were recived. {Environment.NewLine}{txQryCount} TX packet were recived.", "Query finished", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            finally
+            {
+                UseWaitCursor = false;
+            }
+
+        }
+
+
+
+
+
+
+        
+
+        private List<Params> currentParams = new List<Params>();
+        private void qrySubtypeCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var f = typeof(int);
+            if (f == typeof(int))
+            {
+
+            }
+            currentParams.Clear();
+            qryFieldCB.Items.Clear();
+            if (qrySubtypeCB.SelectedIndex != 0)
+            {
+                currentParams = subTypes[qrySubtypeCB.SelectedIndex - 1].parmas;
+                foreach (var field in subTypes[qrySubtypeCB.SelectedIndex - 1].parmas)
+                {
+                    qryFieldCB.Items.Add(field.name);
+                }
+            }
+
+        }
+        #endregion
+
+        private void qryFieldChbx_CheckedChanged(object sender, EventArgs e)
+        {
+            fieldOptionsPnl.Visible = !fieldOptionsPnl.Visible;
+        }
+
+        private void qryIdChbx_CheckedChanged(object sender, EventArgs e)
+        {
+            qryIdTxb.ReadOnly = !qryIdTxb.ReadOnly;
+        }
+
+        private void qryFieldCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (currentParams[qryFieldCB.SelectedIndex].type)
+            {
+                case "date":
+                case "datetime":
+                    qryCondvalDtp.Visible = true;
+                    qryCondvalTxb.Visible = false;
+                    break;
+                default:
+                    qryCondvalDtp.Visible = false;
+                    qryCondvalTxb.Visible = true;
+                    break;
+            }
+        }
+
+
+        private void TxPacQryLibx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PacQryOutput.Text = TxPacQryList[TxPacQryLibx.SelectedIndex].ToString();
+        }
+
+        private void RxPacQryLibx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PacQryOutput.Text = RxPacQryList[RxPacQryLibx.SelectedIndex].ToString();
+        }
+
+        private void qryClearBtn_Click(object sender, EventArgs e)
+        {
+            RxPacQryLibx.Items.Clear();
+            TxPacQryLibx.Items.Clear();
+            RxPacQryList.Clear();
+            TxPacQryList.Clear();
         }
     }
 }

@@ -251,3 +251,13 @@ C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resou
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.xml

@@ -20,14 +20,6 @@ namespace packet_maker
         [JsonProperty("dataBaseEnabled")]
         public bool dataBaseEnabled { get; set; }
 
-
-        [JsonProperty("dataBaseKeyPath")]
-        public string dataBaseKeyPath { get; set; }
-
-
-        [JsonProperty("dataBaseName")]
-        public string dataBaseName { get; set; }
-
         public int pacCurId { get; set; }
 
         [JsonProperty("enableImage")]

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
-using Google.Cloud.Firestore; 
-
-
+using Google.Cloud.Firestore;
+using Nest;
 
 namespace packet_maker
 {
@@ -18,7 +17,7 @@ namespace packet_maker
     {
 
 
-        static public FirestoreDb db;
+        static public ElasticClient db;
         static public BasicSettings settings = new BasicSettings();
 
 
@@ -43,8 +42,10 @@ namespace packet_maker
 
             if (settings.dataBaseEnabled)
             {
-                System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", settings.dataBaseKeyPath);
-                db = FirestoreDb.Create(settings.dataBaseName);
+                var settings = new ConnectionSettings(new Uri("https://tevel:tevelData1!@search-satpackets-wmzdkqufk2m6tr6zyz4n6zfuhu.us-east-2.es.amazonaws.com"))
+                                    .DefaultIndex("testing_index");
+
+                db = new ElasticClient(settings);
             }
 
 

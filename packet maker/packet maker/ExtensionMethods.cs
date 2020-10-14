@@ -23,13 +23,15 @@ namespace packet_maker
             list[index2] = temp;
         }
 
-        public static dynamic Operator(this string logic, int x, int y)
+        public static dynamic Operator(this string logic, dynamic x, dynamic y)
         {
             switch (logic)
             {
                 case ">": return x > y;
                 case "<": return x < y;
                 case "==": return x == y;
+                case "=": return x == y;
+                case "!=": return x != y;
                 case "-": return x - y;
                 case "+": return x + y;
                 default: throw new Exception("invalid logic");

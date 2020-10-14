@@ -783,27 +783,30 @@ namespace packet_maker
         private async void DelListBtn_Click(object sender, EventArgs e)
         {
             if (PlaylistCB.SelectedIndex != -1 && Program.settings.dataBaseEnabled)
-                if (MessageBox.Show("Are you sure?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    PLitemsLibx.Items.Clear();
-                    sleepCmdTxb.Text = "";
+            if (MessageBox.Show("Are you sure?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                PLitemsLibx.Items.Clear();
+                sleepCmdTxb.Text = "";
+                Playlists.RemoveAt(PlaylistCB.SelectedIndex);
+                var DelResult = await Program.db.DeleteAsync<dynamic>(
+                    PlaylistCB.SelectedItem.ToString(),
+                    d => d.Index("playlist-info"));
 
-                    var DelResult = await Program.db.DeleteAsync<dynamic>(PlaylistCB.SelectedItem.ToString());
-
-                    PlaylistCB.Items.RemoveAt(PlaylistCB.SelectedIndex);
-                }
+                PlaylistCB.Items.RemoveAt(PlaylistCB.SelectedIndex);
+            }
         }
 
         private void NewListBtn_Click(object sender, EventArgs e)
         {
             NewPlaylistDialog playlistDialog = new NewPlaylistDialog();
             playlistDialog.ShowDialog();
+
+            //GOTO next func
         }
 
 
         public async void newPLItem(string item)
         {
-
             PlaylistCB.Items.Add(item);
             Playlists.Add(new PLInfo { commands = new List<string>(), name = item, sleepBetweenCommands = 0 });
             PlaylistCB.SelectedIndex = PlaylistCB.Items.Count - 1;
@@ -1236,6 +1239,7 @@ namespace packet_maker
 
 
         #region query
+        private List<Params> currentParams = new List<Params>();
 
         private async void qryStartBtn_Click(object sender, EventArgs e)
         {
@@ -1278,18 +1282,99 @@ namespace packet_maker
                     }
                     if (qrySubtypeCB.SelectedItem.ToString() != "All")
                     {
-                        RxQryFilters.Add(fq => fq.Match(
-                            m => m.Field("subtype")
-                                    .Query(qrySubtypeCB.SelectedItem.ToString())));
+                        RxQryFilters.Add(fq => fq.Term(
+                            f => f["subtype"].Suffix("keyword"),
+                            qrySubtypeCB.SelectedItem.ToString()));
                     }
+                    if (fieldOptionsPnl.Visible && qryFieldCB.SelectedIndex != -1 && (qryCondvalDtp.Visible || qryCondvalTxb.Text != ""))
+                    {
+                        switch (qryConditionCB.SelectedItem.ToString())
+                        {
+                            case "<":
+                                if (qryCondvalDtp.Visible)
+                                {
+                                    RxQryFilters.Add(q => q.DateRange(
+                                        dr => dr
+                                        .Field(qryFieldCB.SelectedItem.ToString())
+                                        .LessThan(qryCondvalDtp.Value.ToUniversalTime())));
+                                }
+                                else
+                                {
+                                    RxQryFilters.Add(q => q.Range(
+                                        r => r
+                                        .Field(qryFieldCB.SelectedItem.ToString())
+                                        .LessThan(int.Parse(qryCondvalTxb.Text))));
+                                }
+                                break;
+                            case ">":
+                                if (qryCondvalDtp.Visible)
+                                {
+                                    RxQryFilters.Add(q => q.DateRange(
+                                        dr => dr
+                                        .Field(qryFieldCB.SelectedItem.ToString())
+                                        .GreaterThan(qryCondvalDtp.Value.ToUniversalTime())));
+                                }
+                                else
+                                {
+                                    RxQryFilters.Add(q => q.Range(
+                                        r => r
+                                        .Field(qryFieldCB.SelectedItem.ToString())
+                                        .GreaterThan(int.Parse(qryCondvalTxb.Text))));
+                                }
+                                break;
+                            case "=":
+                                if (qryCondvalDtp.Visible)
+                                {
+                                    RxQryFilters.Add(q => q.Match(
+                                        dr => dr
+                                        .Field(qryFieldCB.SelectedItem.ToString())
+                                        .Query(qryCondvalDtp.Value.ToUniversalTime().ToString())));
+                                }
+                                else
+                                {
+                                    RxQryFilters.Add(q => q.Match(
+                                        r => r
+                                        .Field(qryFieldCB.SelectedItem.ToString())
+                                        .Query(qryCondvalTxb.Text)));
+                                }
+                                break;
+                            case "!=":
+                                if (qryCondvalTxb.Visible)
+                                {
+                                    RxQryFilters.Add(q => q.Bool(
+                                        b => b.MustNot(
+                                            g => g.Match(
+                                                mc => mc
+                                                .Field(qryFieldCB.SelectedItem.ToString())
+                                                .Query(qryCondvalTxb.Text)))));
+                                }
+                                break;
+                        }
+                    }
+
+
+
+                    dynamic RxSnapshot = null;
                     //
+                    if (!qryIdChbx.Checked)
+                    {
+                        RxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
 
-                    var RxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
+                            .Query(q => q.Bool(ft => ft.Must(RxQryFilters)))
+                            .Index("parsed-rx")
+                            .Size(qrySize)
+                            .Sort(q => q.Ascending(obj => obj["time"])));
 
-                        .Query(q => q.Bool(ft => ft.Must(RxQryFilters)))
-                        .Index("parsed-rx")
-                        .Size(qrySize)
-                        .Sort(q => q.Ascending(obj => obj["time"])));
+                    }
+                    else
+                    {
+                        RxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
+
+                            .Query(q => q.Bool(ft => ft.Must(qry => qry.MatchPhrase(mt => mt.Field("splID").Query(qryIdTxb.Text)))))
+                            .Index("parsed-rx")
+                            .Size(qrySize)
+                            .Sort(q => q.Ascending(obj => obj["time"])));
+                    }
 
                     foreach (var doc in RxSnapshot.Documents)
                     {
@@ -1318,14 +1403,14 @@ namespace packet_maker
                     q => q.DateRange(
                         dr => dr
                         .Field("time")
-                        .LessThanOrEquals(maxExportDateDtp.Value.ToUniversalTime())
-                        .GreaterThanOrEquals(minExportDateDtp.Value.ToUniversalTime()))
+                        .LessThanOrEquals(qryMaxDtp.Value.ToUniversalTime())
+                        .GreaterThanOrEquals(qryMinDtp.Value.ToUniversalTime()))
                 };
 
 
                     if (qrySatCB.SelectedIndex != 0)
                     {
-                        TxQryFilters.Add(fq => fq.Match(
+                        TxQryFilters.Add(fq => fq.MatchPhrase(
                             m => m.Field("satId")
                                   .Query(qrySatCB.SelectedIndex.ToString())));
                     }
@@ -1345,9 +1430,9 @@ namespace packet_maker
                             return new packetObject(options, doc["packetString"].ToString());
                         });
 
-                        rawTxPacHisList.Add(po);
+                        TxPacQryList.Add(po);
 
-                        TxPacLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
+                        TxPacQryLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
                     }
                     #endregion
 
@@ -1370,20 +1455,14 @@ namespace packet_maker
 
         
 
-        private List<Params> currentParams = new List<Params>();
         private void qrySubtypeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var f = typeof(int);
-            if (f == typeof(int))
-            {
-
-            }
             currentParams.Clear();
             qryFieldCB.Items.Clear();
             if (qrySubtypeCB.SelectedIndex != 0)
             {
                 currentParams = subTypes[qrySubtypeCB.SelectedIndex - 1].parmas;
-                foreach (var field in subTypes[qrySubtypeCB.SelectedIndex - 1].parmas)
+                foreach (var field in currentParams)
                 {
                     qryFieldCB.Items.Add(field.name);
                 }
@@ -1435,6 +1514,31 @@ namespace packet_maker
             TxPacQryLibx.Items.Clear();
             RxPacQryList.Clear();
             TxPacQryList.Clear();
+            PacQryOutput.Clear();
+        }
+
+        private void qryTx2RxBtn_Click(object sender, EventArgs e)
+        {
+            if (TxPacQryLibx.SelectedIndex != -1)
+            {
+                int dex = RxPacQryList.FindIndex(x => x.id == TxPacQryList[TxPacQryLibx.SelectedIndex].id);
+                if (dex != -1)
+                {
+                    RxPacQryLibx.SelectedIndex = dex;
+                }
+            }
+        }
+
+        private void qryRx2TxBtn_Click(object sender, EventArgs e)
+        {
+            if (RxPacQryLibx.SelectedIndex != -1)
+            {
+                int dex = TxPacQryList.FindIndex(x => x.id == RxPacQryList[RxPacQryLibx.SelectedIndex].id);
+                if (dex != -1)
+                {
+                    TxPacQryLibx.SelectedIndex = dex;
+                }
+            }
         }
     }
 }

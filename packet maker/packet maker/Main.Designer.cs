@@ -109,30 +109,30 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tabQuery = new System.Windows.Forms.TabPage();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.qrySettingsPnl = new System.Windows.Forms.Panel();
+            this.qryLimitCB = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.fieldOptionsPnl = new System.Windows.Forms.Panel();
             this.qryFieldCB = new System.Windows.Forms.ComboBox();
             this.qryConditionCB = new System.Windows.Forms.ComboBox();
             this.qryCondvalDtp = new System.Windows.Forms.DateTimePicker();
             this.qryCondvalTxb = new System.Windows.Forms.TextBox();
-            this.qryFieldChbx = new System.Windows.Forms.CheckBox();
             this.qrySubtypeCB = new System.Windows.Forms.ComboBox();
-            this.qryIdChbx = new System.Windows.Forms.CheckBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.qrySatCB = new System.Windows.Forms.ComboBox();
-            this.qryIdTxb = new System.Windows.Forms.TextBox();
+            this.qryFieldChbx = new System.Windows.Forms.CheckBox();
             this.qryTxChbx = new System.Windows.Forms.CheckBox();
             this.qryRxChbx = new System.Windows.Forms.CheckBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.qryLimitCB = new System.Windows.Forms.ComboBox();
-            this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.qryMaxDtp = new System.Windows.Forms.DateTimePicker();
-            this.qryMinDtp = new System.Windows.Forms.DateTimePicker();
+            this.qrySatCB = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
             this.qryStartBtn = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.qryMinDtp = new System.Windows.Forms.DateTimePicker();
+            this.label24 = new System.Windows.Forms.Label();
+            this.qryIdTxb = new System.Windows.Forms.TextBox();
+            this.qryIdChbx = new System.Windows.Forms.CheckBox();
+            this.qryMaxDtp = new System.Windows.Forms.DateTimePicker();
+            this.qryRx2TxBtn = new System.Windows.Forms.Button();
+            this.qryTx2RxBtn = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -163,7 +163,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ImageDataDGV)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabQuery.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.qrySettingsPnl.SuspendLayout();
             this.fieldOptionsPnl.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -984,9 +984,9 @@
             // 
             // tabQuery
             // 
-            this.tabQuery.Controls.Add(this.panel5);
-            this.tabQuery.Controls.Add(this.button3);
-            this.tabQuery.Controls.Add(this.button4);
+            this.tabQuery.Controls.Add(this.qrySettingsPnl);
+            this.tabQuery.Controls.Add(this.qryRx2TxBtn);
+            this.tabQuery.Controls.Add(this.qryTx2RxBtn);
             this.tabQuery.Controls.Add(this.label26);
             this.tabQuery.Controls.Add(this.comboBox3);
             this.tabQuery.Controls.Add(this.label27);
@@ -1004,29 +1004,52 @@
             this.tabQuery.Text = "Query";
             this.tabQuery.UseVisualStyleBackColor = true;
             // 
-            // panel5
+            // qrySettingsPnl
             // 
-            this.panel5.Controls.Add(this.fieldOptionsPnl);
-            this.panel5.Controls.Add(this.qryFieldChbx);
-            this.panel5.Controls.Add(this.qrySubtypeCB);
-            this.panel5.Controls.Add(this.qryIdChbx);
-            this.panel5.Controls.Add(this.label31);
-            this.panel5.Controls.Add(this.qrySatCB);
-            this.panel5.Controls.Add(this.qryIdTxb);
-            this.panel5.Controls.Add(this.qryTxChbx);
-            this.panel5.Controls.Add(this.qryRxChbx);
-            this.panel5.Controls.Add(this.label22);
-            this.panel5.Controls.Add(this.label23);
-            this.panel5.Controls.Add(this.qryLimitCB);
-            this.panel5.Controls.Add(this.label24);
-            this.panel5.Controls.Add(this.label25);
-            this.panel5.Controls.Add(this.qryMaxDtp);
-            this.panel5.Controls.Add(this.qryMinDtp);
-            this.panel5.Controls.Add(this.qryStartBtn);
-            this.panel5.Location = new System.Drawing.Point(8, 7);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1256, 65);
-            this.panel5.TabIndex = 50;
+            this.qrySettingsPnl.Controls.Add(this.qryLimitCB);
+            this.qrySettingsPnl.Controls.Add(this.label23);
+            this.qrySettingsPnl.Controls.Add(this.fieldOptionsPnl);
+            this.qrySettingsPnl.Controls.Add(this.qrySubtypeCB);
+            this.qrySettingsPnl.Controls.Add(this.qryFieldChbx);
+            this.qrySettingsPnl.Controls.Add(this.qryTxChbx);
+            this.qrySettingsPnl.Controls.Add(this.qryRxChbx);
+            this.qrySettingsPnl.Controls.Add(this.label25);
+            this.qrySettingsPnl.Controls.Add(this.qrySatCB);
+            this.qrySettingsPnl.Controls.Add(this.label22);
+            this.qrySettingsPnl.Controls.Add(this.label31);
+            this.qrySettingsPnl.Controls.Add(this.qryStartBtn);
+            this.qrySettingsPnl.Controls.Add(this.qryMinDtp);
+            this.qrySettingsPnl.Controls.Add(this.label24);
+            this.qrySettingsPnl.Controls.Add(this.qryIdTxb);
+            this.qrySettingsPnl.Controls.Add(this.qryIdChbx);
+            this.qrySettingsPnl.Controls.Add(this.qryMaxDtp);
+            this.qrySettingsPnl.Location = new System.Drawing.Point(8, 7);
+            this.qrySettingsPnl.Name = "qrySettingsPnl";
+            this.qrySettingsPnl.Size = new System.Drawing.Size(1261, 77);
+            this.qrySettingsPnl.TabIndex = 50;
+            // 
+            // qryLimitCB
+            // 
+            this.qryLimitCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.qryLimitCB.FormattingEnabled = true;
+            this.qryLimitCB.Items.AddRange(new object[] {
+            "100",
+            "500",
+            "1000",
+            "No Limit"});
+            this.qryLimitCB.Location = new System.Drawing.Point(993, 26);
+            this.qryLimitCB.Name = "qryLimitCB";
+            this.qryLimitCB.Size = new System.Drawing.Size(128, 21);
+            this.qryLimitCB.TabIndex = 32;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(956, 29);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(31, 13);
+            this.label23.TabIndex = 33;
+            this.label23.Text = "Limit:";
             // 
             // fieldOptionsPnl
             // 
@@ -1034,7 +1057,7 @@
             this.fieldOptionsPnl.Controls.Add(this.qryConditionCB);
             this.fieldOptionsPnl.Controls.Add(this.qryCondvalDtp);
             this.fieldOptionsPnl.Controls.Add(this.qryCondvalTxb);
-            this.fieldOptionsPnl.Location = new System.Drawing.Point(387, 31);
+            this.fieldOptionsPnl.Location = new System.Drawing.Point(244, 43);
             this.fieldOptionsPnl.Name = "fieldOptionsPnl";
             this.fieldOptionsPnl.Size = new System.Drawing.Size(343, 31);
             this.fieldOptionsPnl.TabIndex = 50;
@@ -1045,7 +1068,7 @@
             this.qryFieldCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.qryFieldCB.DropDownWidth = 200;
             this.qryFieldCB.FormattingEnabled = true;
-            this.qryFieldCB.Location = new System.Drawing.Point(10, 4);
+            this.qryFieldCB.Location = new System.Drawing.Point(10, 6);
             this.qryFieldCB.Name = "qryFieldCB";
             this.qryFieldCB.Size = new System.Drawing.Size(128, 21);
             this.qryFieldCB.TabIndex = 44;
@@ -1061,7 +1084,7 @@
             "<",
             "!=",
             "="});
-            this.qryConditionCB.Location = new System.Drawing.Point(144, 3);
+            this.qryConditionCB.Location = new System.Drawing.Point(144, 6);
             this.qryConditionCB.Name = "qryConditionCB";
             this.qryConditionCB.Size = new System.Drawing.Size(55, 21);
             this.qryConditionCB.TabIndex = 45;
@@ -1069,7 +1092,7 @@
             // qryCondvalDtp
             // 
             this.qryCondvalDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.qryCondvalDtp.Location = new System.Drawing.Point(215, 0);
+            this.qryCondvalDtp.Location = new System.Drawing.Point(205, 6);
             this.qryCondvalDtp.Name = "qryCondvalDtp";
             this.qryCondvalDtp.Size = new System.Drawing.Size(128, 20);
             this.qryCondvalDtp.TabIndex = 47;
@@ -1077,21 +1100,10 @@
             // 
             // qryCondvalTxb
             // 
-            this.qryCondvalTxb.Location = new System.Drawing.Point(205, 4);
+            this.qryCondvalTxb.Location = new System.Drawing.Point(205, 6);
             this.qryCondvalTxb.Name = "qryCondvalTxb";
             this.qryCondvalTxb.Size = new System.Drawing.Size(115, 20);
             this.qryCondvalTxb.TabIndex = 46;
-            // 
-            // qryFieldChbx
-            // 
-            this.qryFieldChbx.AutoSize = true;
-            this.qryFieldChbx.Location = new System.Drawing.Point(340, 41);
-            this.qryFieldChbx.Name = "qryFieldChbx";
-            this.qryFieldChbx.Size = new System.Drawing.Size(48, 17);
-            this.qryFieldChbx.TabIndex = 49;
-            this.qryFieldChbx.Text = "field:";
-            this.qryFieldChbx.UseVisualStyleBackColor = true;
-            this.qryFieldChbx.CheckedChanged += new System.EventHandler(this.qryFieldChbx_CheckedChanged);
             // 
             // qrySubtypeCB
             // 
@@ -1100,48 +1112,22 @@
             this.qrySubtypeCB.FormattingEnabled = true;
             this.qrySubtypeCB.Items.AddRange(new object[] {
             "All"});
-            this.qrySubtypeCB.Location = new System.Drawing.Point(49, 35);
+            this.qrySubtypeCB.Location = new System.Drawing.Point(593, 9);
             this.qrySubtypeCB.Name = "qrySubtypeCB";
             this.qrySubtypeCB.Size = new System.Drawing.Size(128, 21);
             this.qrySubtypeCB.TabIndex = 48;
             this.qrySubtypeCB.SelectedIndexChanged += new System.EventHandler(this.qrySubtypeCB_SelectedIndexChanged);
             // 
-            // qryIdChbx
+            // qryFieldChbx
             // 
-            this.qryIdChbx.AutoSize = true;
-            this.qryIdChbx.Location = new System.Drawing.Point(186, 39);
-            this.qryIdChbx.Name = "qryIdChbx";
-            this.qryIdChbx.Size = new System.Drawing.Size(37, 17);
-            this.qryIdChbx.TabIndex = 42;
-            this.qryIdChbx.Text = "ID";
-            this.qryIdChbx.UseVisualStyleBackColor = true;
-            this.qryIdChbx.CheckedChanged += new System.EventHandler(this.qryIdChbx_CheckedChanged);
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(345, 11);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(43, 13);
-            this.label31.TabIndex = 41;
-            this.label31.Text = "satelite:";
-            // 
-            // qrySatCB
-            // 
-            this.qrySatCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.qrySatCB.FormattingEnabled = true;
-            this.qrySatCB.Location = new System.Drawing.Point(394, 8);
-            this.qrySatCB.Name = "qrySatCB";
-            this.qrySatCB.Size = new System.Drawing.Size(136, 21);
-            this.qrySatCB.TabIndex = 40;
-            // 
-            // qryIdTxb
-            // 
-            this.qryIdTxb.Location = new System.Drawing.Point(224, 39);
-            this.qryIdTxb.Name = "qryIdTxb";
-            this.qryIdTxb.ReadOnly = true;
-            this.qryIdTxb.Size = new System.Drawing.Size(115, 20);
-            this.qryIdTxb.TabIndex = 38;
+            this.qryFieldChbx.AutoSize = true;
+            this.qryFieldChbx.Location = new System.Drawing.Point(199, 49);
+            this.qryFieldChbx.Name = "qryFieldChbx";
+            this.qryFieldChbx.Size = new System.Drawing.Size(48, 17);
+            this.qryFieldChbx.TabIndex = 49;
+            this.qryFieldChbx.Text = "field:";
+            this.qryFieldChbx.UseVisualStyleBackColor = true;
+            this.qryFieldChbx.CheckedChanged += new System.EventHandler(this.qryFieldChbx_CheckedChanged);
             // 
             // qryTxChbx
             // 
@@ -1158,82 +1144,52 @@
             this.qryRxChbx.AutoSize = true;
             this.qryRxChbx.Checked = true;
             this.qryRxChbx.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.qryRxChbx.Location = new System.Drawing.Point(911, 36);
+            this.qryRxChbx.Location = new System.Drawing.Point(910, 44);
             this.qryRxChbx.Name = "qryRxChbx";
             this.qryRxChbx.Size = new System.Drawing.Size(41, 17);
             this.qryRxChbx.TabIndex = 36;
             this.qryRxChbx.Text = "RX";
             this.qryRxChbx.UseVisualStyleBackColor = true;
             // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(3, 39);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(47, 13);
-            this.label22.TabIndex = 34;
-            this.label22.Text = "subtype:";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(957, 24);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(31, 13);
-            this.label23.TabIndex = 33;
-            this.label23.Text = "Limit:";
-            // 
-            // qryLimitCB
-            // 
-            this.qryLimitCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.qryLimitCB.FormattingEnabled = true;
-            this.qryLimitCB.Items.AddRange(new object[] {
-            "100",
-            "500",
-            "1000",
-            "No Limit"});
-            this.qryLimitCB.Location = new System.Drawing.Point(994, 21);
-            this.qryLimitCB.Name = "qryLimitCB";
-            this.qryLimitCB.Size = new System.Drawing.Size(128, 21);
-            this.qryLimitCB.TabIndex = 32;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(183, 10);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(19, 13);
-            this.label24.TabIndex = 31;
-            this.label24.Text = "to:";
-            // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(16, 10);
+            this.label25.Location = new System.Drawing.Point(16, 13);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(30, 13);
             this.label25.TabIndex = 30;
             this.label25.Text = "from:";
             // 
-            // qryMaxDtp
+            // qrySatCB
             // 
-            this.qryMaxDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.qryMaxDtp.Location = new System.Drawing.Point(208, 8);
-            this.qryMaxDtp.Name = "qryMaxDtp";
-            this.qryMaxDtp.Size = new System.Drawing.Size(128, 20);
-            this.qryMaxDtp.TabIndex = 29;
+            this.qrySatCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.qrySatCB.FormattingEnabled = true;
+            this.qrySatCB.Location = new System.Drawing.Point(394, 9);
+            this.qrySatCB.Name = "qrySatCB";
+            this.qrySatCB.Size = new System.Drawing.Size(136, 21);
+            this.qrySatCB.TabIndex = 40;
             // 
-            // qryMinDtp
+            // label22
             // 
-            this.qryMinDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.qryMinDtp.Location = new System.Drawing.Point(49, 8);
-            this.qryMinDtp.Name = "qryMinDtp";
-            this.qryMinDtp.Size = new System.Drawing.Size(128, 20);
-            this.qryMinDtp.TabIndex = 28;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(540, 13);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(47, 13);
+            this.label22.TabIndex = 34;
+            this.label22.Text = "subtype:";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(355, 13);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(43, 13);
+            this.label31.TabIndex = 41;
+            this.label31.Text = "satelite:";
             // 
             // qryStartBtn
             // 
-            this.qryStartBtn.Location = new System.Drawing.Point(1128, 19);
+            this.qryStartBtn.Location = new System.Drawing.Point(1128, 24);
             this.qryStartBtn.Name = "qryStartBtn";
             this.qryStartBtn.Size = new System.Drawing.Size(101, 23);
             this.qryStartBtn.TabIndex = 27;
@@ -1241,23 +1197,69 @@
             this.qryStartBtn.UseVisualStyleBackColor = true;
             this.qryStartBtn.Click += new System.EventHandler(this.qryStartBtn_Click);
             // 
-            // button3
+            // qryMinDtp
             // 
-            this.button3.Location = new System.Drawing.Point(392, 231);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(60, 23);
-            this.button3.TabIndex = 49;
-            this.button3.Text = "<<<";
-            this.button3.UseVisualStyleBackColor = true;
+            this.qryMinDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.qryMinDtp.Location = new System.Drawing.Point(52, 10);
+            this.qryMinDtp.Name = "qryMinDtp";
+            this.qryMinDtp.Size = new System.Drawing.Size(128, 20);
+            this.qryMinDtp.TabIndex = 28;
             // 
-            // button4
+            // label24
             // 
-            this.button4.Location = new System.Drawing.Point(392, 187);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(60, 23);
-            this.button4.TabIndex = 48;
-            this.button4.Text = ">>>";
-            this.button4.UseVisualStyleBackColor = true;
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(196, 13);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(19, 13);
+            this.label24.TabIndex = 31;
+            this.label24.Text = "to:";
+            // 
+            // qryIdTxb
+            // 
+            this.qryIdTxb.Location = new System.Drawing.Point(65, 49);
+            this.qryIdTxb.Name = "qryIdTxb";
+            this.qryIdTxb.ReadOnly = true;
+            this.qryIdTxb.Size = new System.Drawing.Size(115, 20);
+            this.qryIdTxb.TabIndex = 38;
+            // 
+            // qryIdChbx
+            // 
+            this.qryIdChbx.AutoSize = true;
+            this.qryIdChbx.Location = new System.Drawing.Point(19, 51);
+            this.qryIdChbx.Name = "qryIdChbx";
+            this.qryIdChbx.Size = new System.Drawing.Size(37, 17);
+            this.qryIdChbx.TabIndex = 42;
+            this.qryIdChbx.Text = "ID";
+            this.qryIdChbx.UseVisualStyleBackColor = true;
+            this.qryIdChbx.CheckedChanged += new System.EventHandler(this.qryIdChbx_CheckedChanged);
+            // 
+            // qryMaxDtp
+            // 
+            this.qryMaxDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.qryMaxDtp.Location = new System.Drawing.Point(221, 10);
+            this.qryMaxDtp.Name = "qryMaxDtp";
+            this.qryMaxDtp.Size = new System.Drawing.Size(128, 20);
+            this.qryMaxDtp.TabIndex = 29;
+            // 
+            // qryRx2TxBtn
+            // 
+            this.qryRx2TxBtn.Location = new System.Drawing.Point(392, 231);
+            this.qryRx2TxBtn.Name = "qryRx2TxBtn";
+            this.qryRx2TxBtn.Size = new System.Drawing.Size(60, 23);
+            this.qryRx2TxBtn.TabIndex = 49;
+            this.qryRx2TxBtn.Text = "<<<";
+            this.qryRx2TxBtn.UseVisualStyleBackColor = true;
+            this.qryRx2TxBtn.Click += new System.EventHandler(this.qryRx2TxBtn_Click);
+            // 
+            // qryTx2RxBtn
+            // 
+            this.qryTx2RxBtn.Location = new System.Drawing.Point(392, 187);
+            this.qryTx2RxBtn.Name = "qryTx2RxBtn";
+            this.qryTx2RxBtn.Size = new System.Drawing.Size(60, 23);
+            this.qryTx2RxBtn.TabIndex = 48;
+            this.qryTx2RxBtn.Text = ">>>";
+            this.qryTx2RxBtn.UseVisualStyleBackColor = true;
+            this.qryTx2RxBtn.Click += new System.EventHandler(this.qryTx2RxBtn_Click);
             // 
             // label26
             // 
@@ -1458,8 +1460,8 @@
             this.panel1.PerformLayout();
             this.tabQuery.ResumeLayout(false);
             this.tabQuery.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.qrySettingsPnl.ResumeLayout(false);
+            this.qrySettingsPnl.PerformLayout();
             this.fieldOptionsPnl.ResumeLayout(false);
             this.fieldOptionsPnl.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -1561,7 +1563,7 @@
         private System.Windows.Forms.Button resendTxBtn;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TabPage tabQuery;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel qrySettingsPnl;
         private System.Windows.Forms.CheckBox qryRxChbx;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
@@ -1571,8 +1573,8 @@
         private System.Windows.Forms.DateTimePicker qryMaxDtp;
         private System.Windows.Forms.DateTimePicker qryMinDtp;
         private System.Windows.Forms.Button qryStartBtn;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button qryRx2TxBtn;
+        private System.Windows.Forms.Button qryTx2RxBtn;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label27;

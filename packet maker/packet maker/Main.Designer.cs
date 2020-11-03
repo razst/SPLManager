@@ -44,6 +44,10 @@
             this.transIn = new System.Windows.Forms.TextBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
+            this.nextPass4Label = new System.Windows.Forms.Label();
+            this.nextPass3Label = new System.Windows.Forms.Label();
+            this.nextPass2Label = new System.Windows.Forms.Label();
+            this.nextPass1Label = new System.Windows.Forms.Label();
             this.nextPassLabel = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.TxTab = new System.Windows.Forms.TabPage();
@@ -157,10 +161,12 @@
             this.toAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toAFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextPassTimer = new System.Windows.Forms.Timer(this.components);
-            this.nextPass1Label = new System.Windows.Forms.Label();
-            this.nextPass2Label = new System.Windows.Forms.Label();
-            this.nextPass3Label = new System.Windows.Forms.Label();
-            this.nextPass4Label = new System.Windows.Forms.Label();
+            this.nextUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.label32 = new System.Windows.Forms.Label();
+            this.mainLastRxLabel = new System.Windows.Forms.Label();
+            this.MainSatCB = new System.Windows.Forms.ComboBox();
+            this.mainLastTxLabel = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
@@ -322,6 +328,11 @@
             // 
             // MainTab
             // 
+            this.MainTab.Controls.Add(this.mainLastTxLabel);
+            this.MainTab.Controls.Add(this.label34);
+            this.MainTab.Controls.Add(this.MainSatCB);
+            this.MainTab.Controls.Add(this.mainLastRxLabel);
+            this.MainTab.Controls.Add(this.label32);
             this.MainTab.Controls.Add(this.nextPass4Label);
             this.MainTab.Controls.Add(this.nextPass3Label);
             this.MainTab.Controls.Add(this.nextPass2Label);
@@ -336,14 +347,50 @@
             this.MainTab.Text = "Main";
             this.MainTab.UseVisualStyleBackColor = true;
             // 
+            // nextPass4Label
+            // 
+            this.nextPass4Label.AutoSize = true;
+            this.nextPass4Label.Location = new System.Drawing.Point(39, 232);
+            this.nextPass4Label.Name = "nextPass4Label";
+            this.nextPass4Label.Size = new System.Drawing.Size(0, 13);
+            this.nextPass4Label.TabIndex = 5;
+            // 
+            // nextPass3Label
+            // 
+            this.nextPass3Label.AutoSize = true;
+            this.nextPass3Label.Location = new System.Drawing.Point(39, 204);
+            this.nextPass3Label.Name = "nextPass3Label";
+            this.nextPass3Label.Size = new System.Drawing.Size(31, 13);
+            this.nextPass3Label.TabIndex = 4;
+            this.nextPass3Label.Text = "____";
+            // 
+            // nextPass2Label
+            // 
+            this.nextPass2Label.AutoSize = true;
+            this.nextPass2Label.Location = new System.Drawing.Point(39, 173);
+            this.nextPass2Label.Name = "nextPass2Label";
+            this.nextPass2Label.Size = new System.Drawing.Size(31, 13);
+            this.nextPass2Label.TabIndex = 3;
+            this.nextPass2Label.Text = "____";
+            // 
+            // nextPass1Label
+            // 
+            this.nextPass1Label.AutoSize = true;
+            this.nextPass1Label.Location = new System.Drawing.Point(39, 141);
+            this.nextPass1Label.Name = "nextPass1Label";
+            this.nextPass1Label.Size = new System.Drawing.Size(31, 13);
+            this.nextPass1Label.TabIndex = 2;
+            this.nextPass1Label.Text = "____";
+            // 
             // nextPassLabel
             // 
             this.nextPassLabel.AutoSize = true;
             this.nextPassLabel.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.nextPassLabel.Location = new System.Drawing.Point(38, 83);
             this.nextPassLabel.Name = "nextPassLabel";
-            this.nextPassLabel.Size = new System.Drawing.Size(0, 24);
+            this.nextPassLabel.Size = new System.Drawing.Size(54, 24);
             this.nextPassLabel.TabIndex = 1;
+            this.nextPassLabel.Text = "____";
             // 
             // label30
             // 
@@ -1481,37 +1528,60 @@
             this.nextPassTimer.Interval = 1000;
             this.nextPassTimer.Tick += new System.EventHandler(this.nextPassTimer_Tick);
             // 
-            // nextPass1Label
+            // nextUpdateTimer
             // 
-            this.nextPass1Label.AutoSize = true;
-            this.nextPass1Label.Location = new System.Drawing.Point(39, 141);
-            this.nextPass1Label.Name = "nextPass1Label";
-            this.nextPass1Label.Size = new System.Drawing.Size(0, 13);
-            this.nextPass1Label.TabIndex = 2;
+            this.nextUpdateTimer.Interval = 3600000;
+            this.nextUpdateTimer.Tick += new System.EventHandler(this.nextUpdateTimer_Tick);
             // 
-            // nextPass2Label
+            // label32
             // 
-            this.nextPass2Label.AutoSize = true;
-            this.nextPass2Label.Location = new System.Drawing.Point(39, 173);
-            this.nextPass2Label.Name = "nextPass2Label";
-            this.nextPass2Label.Size = new System.Drawing.Size(0, 13);
-            this.nextPass2Label.TabIndex = 3;
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label32.Location = new System.Drawing.Point(334, 44);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(89, 24);
+            this.label32.TabIndex = 6;
+            this.label32.Text = "Last Rx:";
             // 
-            // nextPass3Label
+            // mainLastRxLabel
             // 
-            this.nextPass3Label.AutoSize = true;
-            this.nextPass3Label.Location = new System.Drawing.Point(39, 204);
-            this.nextPass3Label.Name = "nextPass3Label";
-            this.nextPass3Label.Size = new System.Drawing.Size(0, 13);
-            this.nextPass3Label.TabIndex = 4;
+            this.mainLastRxLabel.AutoSize = true;
+            this.mainLastRxLabel.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.mainLastRxLabel.Location = new System.Drawing.Point(334, 83);
+            this.mainLastRxLabel.Name = "mainLastRxLabel";
+            this.mainLastRxLabel.Size = new System.Drawing.Size(43, 24);
+            this.mainLastRxLabel.TabIndex = 7;
+            this.mainLastRxLabel.Text = "___";
             // 
-            // nextPass4Label
+            // MainSatCB
             // 
-            this.nextPass4Label.AutoSize = true;
-            this.nextPass4Label.Location = new System.Drawing.Point(39, 232);
-            this.nextPass4Label.Name = "nextPass4Label";
-            this.nextPass4Label.Size = new System.Drawing.Size(0, 13);
-            this.nextPass4Label.TabIndex = 5;
+            this.MainSatCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.MainSatCB.FormattingEnabled = true;
+            this.MainSatCB.Location = new System.Drawing.Point(489, 17);
+            this.MainSatCB.Name = "MainSatCB";
+            this.MainSatCB.Size = new System.Drawing.Size(136, 21);
+            this.MainSatCB.TabIndex = 22;
+            this.MainSatCB.SelectedIndexChanged += new System.EventHandler(this.MainSatCB_SelectedIndexChanged);
+            // 
+            // mainLastTxLabel
+            // 
+            this.mainLastTxLabel.AutoSize = true;
+            this.mainLastTxLabel.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.mainLastTxLabel.Location = new System.Drawing.Point(334, 172);
+            this.mainLastTxLabel.Name = "mainLastTxLabel";
+            this.mainLastTxLabel.Size = new System.Drawing.Size(43, 24);
+            this.mainLastTxLabel.TabIndex = 24;
+            this.mainLastTxLabel.Text = "___";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label34.Location = new System.Drawing.Point(334, 133);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(88, 24);
+            this.label34.TabIndex = 23;
+            this.label34.Text = "Last Tx:";
             // 
             // Main
             // 
@@ -1691,6 +1761,12 @@
         private System.Windows.Forms.Label nextPass3Label;
         private System.Windows.Forms.Label nextPass2Label;
         private System.Windows.Forms.Label nextPass1Label;
+        private System.Windows.Forms.Timer nextUpdateTimer;
+        private System.Windows.Forms.Label mainLastRxLabel;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox MainSatCB;
+        private System.Windows.Forms.Label mainLastTxLabel;
+        private System.Windows.Forms.Label label34;
     }
 }
 

@@ -105,6 +105,7 @@ namespace packet_maker
                 groupsCB.Items.Add(s);
                 RxGroupsCB.Items.Add(s);
                 qrySatCB.Items.Add(s);
+                MainSatCB.Items.Add(s);
             }
             foreach (Type t in transOptions)
             {
@@ -126,6 +127,7 @@ namespace packet_maker
 
             groupsCB.SelectedIndex = Program.settings.defultSatGroup;
             RxGroupsCB.SelectedIndex = Program.settings.defultSatGroup;
+            MainSatCB.SelectedIndex = Program.settings.defultSatGroup;
             DBLimitCB.SelectedItem = "100";
             qrySubtypeCB.SelectedItem = "All";
             qrySatCB.SelectedIndex = Program.settings.defultSatGroup;
@@ -135,6 +137,11 @@ namespace packet_maker
             frm = this;
 
 
+            await UpdateLastPassLabel("parsed-rx",mainLastRxLabel);
+            await UpdateLastPassLabel("parsed-tx", mainLastTxLabel);
+
+
+            //next pass setup
             nextPassLabels[0] = this.nextPass1Label;
             nextPassLabels[1] = this.nextPass2Label;
             nextPassLabels[2] = this.nextPass3Label;
@@ -142,8 +149,12 @@ namespace packet_maker
 
             nextPassDate = await GetNextPass();
             secondsTilPass = GetSecondsTil(nextPassDate);
+            UpdatePassesLabels();
             nextPassTimer.Start();
+            nextUpdateTimer.Start();
+            //
         }
+
 
 
         private void Main_Shown(object sender, EventArgs e)
@@ -1576,38 +1587,75 @@ namespace packet_maker
         #region main controls
         private async void nextPassTimer_Tick(object sender, EventArgs e)
         {
-            string temp = "";
+            bool stopped = false;
+            string temp = "00:00:00";
+            if (!passOccured)
             await Task.Run(() => {
                 secondsTilPass--;
-                if (secondsTilPass > 1)
+                if (secondsTilPass == 0)
+                {
+                    passOccured = true;
+                }
+                else if (secondsTilPass == 60)
+                {
+                    nextPassTimer.Stop();
+
+                    var dt =  GetNextPass().GetAwaiter().GetResult();
+                    secondsTilPass = GetSecondsTil(dt);
+                    UpdatePassesLabels();
+
+                    TimeSpan time = TimeSpan.FromSeconds(secondsTilPass);
+                    temp = time.ToString(@"hh\:mm\:ss");
+
+                    nextUpdateTimer.Stop();
+                    nextUpdateTimer.Start();
+                    stopped = true;
+                }
+                else
                 {
                     TimeSpan time = TimeSpan.FromSeconds(secondsTilPass);
                     temp = time.ToString(@"hh\:mm\:ss");
                 }
-                else
-                {
-                    temp = "00:00:00";
-                    if ((long)passesData.passes[0].endUTC < DateTime.Now.Ticks / TimeSpan.TicksPerSecond)
-                    {
-                        passesData.passes.RemoveAt(0);
-                        if (passesData.passes.Count != 0)
-                        {
-                            if ((long)passesData.passes[0].startUTC > DateTime.Now.Ticks / TimeSpan.TicksPerSecond)
-                                secondsTilPass = (long)passesData.passes[0].startUTC - DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
-                        }
-                        else
-                        {
-                            var dt = GetNextPass().Result;
-                            secondsTilPass = GetSecondsTil(dt);
-                        }
-                    }
-                }
 
             });
             nextPassLabel.Text = temp;
+            if (stopped)
+            {
+                nextPassTimer.Start();
+            }
+            if (passOccured)
+            {
+                if ((long)passesData.passes[0].endUTC + 60 < DateTimeOffset.UtcNow.ToUnixTimeSeconds())
+                {
+                    nextPassTimer.Stop();
+                    var dt = await GetNextPass();
+                    secondsTilPass = GetSecondsTil(dt);
+                    UpdatePassesLabels();
+                    nextUpdateTimer.Start();
+                    passOccured = false;
+                    nextPassTimer.Start();
+                }
+            }
         }
 
+
+        private async void MainSatCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mainLastRxLabel.Text = "---";
+            mainLastTxLabel.Text = "---";
+            await UpdateLastPassLabel("parsed-rx", mainLastRxLabel);
+            await UpdateLastPassLabel("parsed-tx", mainLastTxLabel);
+        }
         #endregion
+
+        private async void nextUpdateTimer_Tick(object sender, EventArgs e)
+        {
+            nextPassTimer.Stop();
+            var dt = await GetNextPass();
+            secondsTilPass = GetSecondsTil(dt);
+            UpdatePassesLabels();
+            nextPassTimer.Start();
+        }
 
         #endregion
 
@@ -1640,19 +1688,37 @@ namespace packet_maker
                 dt = DateTimeOffset.FromUnixTimeSeconds(time).LocalDateTime;
 
                 passesData.info = data.info;
-                passesData.passes = ((IEnumerable<dynamic>)data.passes).Cast<dynamic>().ToList();
+                passesData.passes = ((IEnumerable<dynamic>)data.passes).ToList();
 
 
             }
-            for (int i = 0; i < 4; i++)
-            {
-                nextPassLabels[i].Text = DateTimeOffset.FromUnixTimeSeconds((long)passesData.passes[i + 1].startUTC).LocalDateTime.ToString();
-            }
+
             return dt;
         }
         private long GetSecondsTil(DateTime dt)
         {
             return (dt.Ticks - DateTime.Now.Ticks)/ TimeSpan.TicksPerSecond;
+        }
+
+        private void UpdatePassesLabels()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                nextPassLabels[i].Text = DateTimeOffset.FromUnixTimeSeconds((long)passesData.passes[i + 1].startUTC).LocalDateTime.ToString();
+            }
+        }
+
+        private async Task UpdateLastPassLabel(string collection, Label label)
+        {
+            var lastTimeSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
+
+                            .Query(q => q.Match(m => m.Field("satId").Query(MainSatCB.SelectedIndex.ToString())))
+                            .Index(collection)
+                            .Size(10)
+                            .Sort(q => q.Descending(obj => obj["time"])));
+
+            var temp = DateTime.Parse(lastTimeSnapshot.Documents.First()["time"].ToString()).ToLocalTime().ToString();
+            label.Text = temp;
         }
         #endregion
 
@@ -1661,6 +1727,8 @@ namespace packet_maker
         private DateTime nextPassDate;
         private long secondsTilPass;
         private Label[] nextPassLabels = new Label[4];
+        private bool passOccured = false;
+
 
         private PassReport passesData = new PassReport();
         class PassReport
@@ -1672,6 +1740,7 @@ namespace packet_maker
         #endregion
 
         #endregion
+
 
     }
 }

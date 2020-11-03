@@ -154,6 +154,12 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="AquaGauge.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AquaGauge.designer.cs">
+      <DependentUpon>AquaGauge.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="ImageClasses.cs" />
     <Compile Include="jsonFrm.cs">
@@ -188,6 +194,9 @@
     <Compile Include="ServerClasses.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AquaGauge.resx">
+      <DependentUpon>AquaGauge.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="jsonFrm.resx">
       <DependentUpon>jsonFrm.cs</DependentUpon>
@@ -233,6 +242,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\balbash_logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\space.jpg" />
+    <None Include="Resources\space1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Grpc.Core.1.22.1\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.22.1\build\net45\Grpc.Core.targets')" />

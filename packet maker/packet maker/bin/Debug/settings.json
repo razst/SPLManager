@@ -1,8 +1,31 @@
 {
-"endNodePath":"C:/Users/pc/Desktop/GSC/GSC-EndNode/GSC-EndNode.exe",
-"enableImage":false,
-"dataBaseEnabled":true,
-"tcpPortNumber": 4,
-"defultSatGroup": 2,
-"enableExcel": false 
+  "endNodePath": "C:/Users/pc/Desktop/GSC/GSC-EndNode/GSC-EndNode.exe",
+  "enableImage": false,
+  "dataBaseEnabled": true,
+  "tcpPortNumber": 4,
+  "defultSatGroup": 2,
+  "enableExcel": false,
+  "widgetSettings": {
+	"minThersholdSatPass":5
+  },
+  "groundStationLocation": {
+    "lat": 333,
+    "lng": 333,
+    "alt": 500,
+    "minElevation": 40
+  },
+  "satInfo": [
+    {
+      "id": 0,
+      "name": "any",
+      "desc": "all sats",
+      "noradID": 0
+    },
+    {
+      "id": 2,
+      "name": "T2YRC",
+      "desc": "Yerucham",
+      "noradID": 43199
+    }
+  ]
 }

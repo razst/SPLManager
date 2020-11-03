@@ -20,20 +20,6 @@ C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker
 C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
 C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
 C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Main.resources
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe.config
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\packet maker.pdb
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.dll
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.xml
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Main.resources
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Properties.Resources.resources
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.GenerateResource.cache
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCompileInputs.cache
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe.config
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.pdb
@@ -168,12 +154,57 @@ C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreC
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
+C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x86.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x64.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.so
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.so
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.dylib
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.dylib
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe.config
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\packet maker.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.dll
@@ -189,9 +220,24 @@ C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nest.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.pdb
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.pdb
@@ -218,57 +264,33 @@ C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.pdb
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.pdb
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.xml
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.xml
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.xml
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
-C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
-C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
-C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources
-C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
-C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
-C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
-C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
-C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
-C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
-C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nest.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nest.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.xml
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.AquaGauge.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Main.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Web.Infrastructure.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.xml
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Properties.Resources.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.GenerateResource.cache
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCompileInputs.cache
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache

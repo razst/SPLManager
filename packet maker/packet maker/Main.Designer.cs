@@ -44,12 +44,28 @@
             this.transIn = new System.Windows.Forms.TextBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
-            this.nextPass4Label = new System.Windows.Forms.Label();
-            this.nextPass3Label = new System.Windows.Forms.Label();
-            this.nextPass2Label = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label38 = new System.Windows.Forms.Label();
+            this.mainLastTxLabel = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label37 = new System.Windows.Forms.Label();
+            this.mainLastRxLabel = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label33 = new System.Windows.Forms.Label();
             this.nextPass1Label = new System.Windows.Forms.Label();
-            this.nextPassLabel = new System.Windows.Forms.Label();
+            this.nextPass2Label = new System.Windows.Forms.Label();
+            this.nextPass3Label = new System.Windows.Forms.Label();
+            this.nextPass4Label = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
+            this.nextPassLabel = new System.Windows.Forms.Label();
+            this.MainSatCB = new System.Windows.Forms.ComboBox();
             this.TxTab = new System.Windows.Forms.TabPage();
             this.descSubType = new System.Windows.Forms.Label();
             this.groupsCB = new System.Windows.Forms.ComboBox();
@@ -162,14 +178,26 @@
             this.toAFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextPassTimer = new System.Windows.Forms.Timer(this.components);
             this.nextUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.label32 = new System.Windows.Forms.Label();
-            this.mainLastRxLabel = new System.Windows.Forms.Label();
-            this.MainSatCB = new System.Windows.Forms.ComboBox();
-            this.mainLastTxLabel = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.aquaGauge4 = new AquaControls.AquaGauge();
+            this.aquaGauge5 = new AquaControls.AquaGauge();
+            this.aquaGauge3 = new AquaControls.AquaGauge();
+            this.aquaGauge2 = new AquaControls.AquaGauge();
+            this.aquaGauge1 = new AquaControls.AquaGauge();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.TxTab.SuspendLayout();
             this.panel3.SuspendLayout();
             this.RxTab.SuspendLayout();
@@ -182,6 +210,8 @@
             this.qrySettingsPnl.SuspendLayout();
             this.fieldOptionsPnl.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -323,84 +353,281 @@
             this.TabControl.Location = new System.Drawing.Point(0, 24);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(1280, 455);
+            this.TabControl.Size = new System.Drawing.Size(1420, 621);
             this.TabControl.TabIndex = 17;
             // 
             // MainTab
             // 
-            this.MainTab.Controls.Add(this.mainLastTxLabel);
-            this.MainTab.Controls.Add(this.label34);
+            this.MainTab.BackColor = System.Drawing.Color.Black;
+            this.MainTab.Controls.Add(this.aquaGauge4);
+            this.MainTab.Controls.Add(this.aquaGauge5);
+            this.MainTab.Controls.Add(this.aquaGauge3);
+            this.MainTab.Controls.Add(this.aquaGauge2);
+            this.MainTab.Controls.Add(this.panel12);
+            this.MainTab.Controls.Add(this.panel11);
+            this.MainTab.Controls.Add(this.panel10);
+            this.MainTab.Controls.Add(this.aquaGauge1);
+            this.MainTab.Controls.Add(this.panel9);
+            this.MainTab.Controls.Add(this.panel8);
+            this.MainTab.Controls.Add(this.panel7);
+            this.MainTab.Controls.Add(this.panel6);
+            this.MainTab.Controls.Add(this.panel5);
             this.MainTab.Controls.Add(this.MainSatCB);
-            this.MainTab.Controls.Add(this.mainLastRxLabel);
-            this.MainTab.Controls.Add(this.label32);
-            this.MainTab.Controls.Add(this.nextPass4Label);
-            this.MainTab.Controls.Add(this.nextPass3Label);
-            this.MainTab.Controls.Add(this.nextPass2Label);
-            this.MainTab.Controls.Add(this.nextPass1Label);
-            this.MainTab.Controls.Add(this.nextPassLabel);
-            this.MainTab.Controls.Add(this.label30);
             this.MainTab.Location = new System.Drawing.Point(4, 22);
             this.MainTab.Name = "MainTab";
             this.MainTab.Padding = new System.Windows.Forms.Padding(3);
-            this.MainTab.Size = new System.Drawing.Size(1272, 429);
+            this.MainTab.Size = new System.Drawing.Size(1412, 595);
             this.MainTab.TabIndex = 4;
             this.MainTab.Text = "Main";
-            this.MainTab.UseVisualStyleBackColor = true;
             // 
-            // nextPass4Label
+            // panel10
             // 
-            this.nextPass4Label.AutoSize = true;
-            this.nextPass4Label.Location = new System.Drawing.Point(39, 232);
-            this.nextPass4Label.Name = "nextPass4Label";
-            this.nextPass4Label.Size = new System.Drawing.Size(0, 13);
-            this.nextPass4Label.TabIndex = 5;
+            this.panel10.BackColor = System.Drawing.Color.DimGray;
+            this.panel10.Controls.Add(this.label32);
+            this.panel10.Controls.Add(this.label34);
+            this.panel10.Location = new System.Drawing.Point(630, 282);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(410, 100);
+            this.panel10.TabIndex = 31;
             // 
-            // nextPass3Label
+            // label32
             // 
-            this.nextPass3Label.AutoSize = true;
-            this.nextPass3Label.Location = new System.Drawing.Point(39, 204);
-            this.nextPass3Label.Name = "nextPass3Label";
-            this.nextPass3Label.Size = new System.Drawing.Size(31, 13);
-            this.nextPass3Label.TabIndex = 4;
-            this.nextPass3Label.Text = "____";
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label32.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label32.Location = new System.Drawing.Point(125, 13);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(118, 21);
+            this.label32.TabIndex = 1;
+            this.label32.Text = "Last Beacon";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nextPass2Label
+            // label34
             // 
-            this.nextPass2Label.AutoSize = true;
-            this.nextPass2Label.Location = new System.Drawing.Point(39, 173);
-            this.nextPass2Label.Name = "nextPass2Label";
-            this.nextPass2Label.Size = new System.Drawing.Size(31, 13);
-            this.nextPass2Label.TabIndex = 3;
-            this.nextPass2Label.Text = "____";
+            this.label34.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label34.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label34.Location = new System.Drawing.Point(0, 40);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(407, 56);
+            this.label34.TabIndex = 24;
+            this.label34.Text = "-- : -- : --";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.DimGray;
+            this.panel9.Controls.Add(this.label38);
+            this.panel9.Controls.Add(this.mainLastTxLabel);
+            this.panel9.Location = new System.Drawing.Point(630, 176);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(410, 100);
+            this.panel9.TabIndex = 29;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label38.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label38.Location = new System.Drawing.Point(125, 13);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(136, 21);
+            this.label38.TabIndex = 1;
+            this.label38.Text = "Last Frame TX";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mainLastTxLabel
+            // 
+            this.mainLastTxLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.mainLastTxLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.mainLastTxLabel.Location = new System.Drawing.Point(0, 40);
+            this.mainLastTxLabel.Name = "mainLastTxLabel";
+            this.mainLastTxLabel.Size = new System.Drawing.Size(407, 56);
+            this.mainLastTxLabel.TabIndex = 24;
+            this.mainLastTxLabel.Text = "-- : -- : --";
+            this.mainLastTxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.DimGray;
+            this.panel8.Controls.Add(this.label37);
+            this.panel8.Controls.Add(this.mainLastRxLabel);
+            this.panel8.Location = new System.Drawing.Point(630, 70);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(410, 100);
+            this.panel8.TabIndex = 28;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label37.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label37.Location = new System.Drawing.Point(124, 13);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(138, 21);
+            this.label37.TabIndex = 1;
+            this.label37.Text = "Last Frame RX";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mainLastRxLabel
+            // 
+            this.mainLastRxLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.mainLastRxLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.mainLastRxLabel.Location = new System.Drawing.Point(0, 44);
+            this.mainLastRxLabel.Name = "mainLastRxLabel";
+            this.mainLastRxLabel.Size = new System.Drawing.Size(409, 56);
+            this.mainLastRxLabel.TabIndex = 7;
+            this.mainLastRxLabel.Text = "-- : -- : --";
+            this.mainLastRxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.DimGray;
+            this.panel7.Controls.Add(this.label35);
+            this.panel7.Controls.Add(this.label36);
+            this.panel7.Location = new System.Drawing.Point(1047, 70);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(200, 100);
+            this.panel7.TabIndex = 27;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label35.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label35.Location = new System.Drawing.Point(69, 13);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(47, 21);
+            this.label35.TabIndex = 1;
+            this.label35.Text = "UTC";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label36.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label36.Location = new System.Drawing.Point(22, 44);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(141, 40);
+            this.label36.TabIndex = 1;
+            this.label36.Text = "-- : -- : --";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.DimGray;
+            this.panel6.Controls.Add(this.label33);
+            this.panel6.Controls.Add(this.nextPass1Label);
+            this.panel6.Controls.Add(this.nextPass2Label);
+            this.panel6.Controls.Add(this.nextPass3Label);
+            this.panel6.Controls.Add(this.nextPass4Label);
+            this.panel6.Location = new System.Drawing.Point(8, 176);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(200, 206);
+            this.panel6.TabIndex = 26;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Cursor = System.Windows.Forms.Cursors.AppStarting;
+            this.label33.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label33.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label33.Location = new System.Drawing.Point(21, 13);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(163, 21);
+            this.label33.TabIndex = 1;
+            this.label33.Text = "Following Passes";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // nextPass1Label
             // 
             this.nextPass1Label.AutoSize = true;
-            this.nextPass1Label.Location = new System.Drawing.Point(39, 141);
+            this.nextPass1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.nextPass1Label.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.nextPass1Label.Location = new System.Drawing.Point(25, 45);
             this.nextPass1Label.Name = "nextPass1Label";
-            this.nextPass1Label.Size = new System.Drawing.Size(31, 13);
+            this.nextPass1Label.Size = new System.Drawing.Size(40, 17);
             this.nextPass1Label.TabIndex = 2;
             this.nextPass1Label.Text = "____";
             // 
-            // nextPassLabel
+            // nextPass2Label
             // 
-            this.nextPassLabel.AutoSize = true;
-            this.nextPassLabel.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.nextPassLabel.Location = new System.Drawing.Point(38, 83);
-            this.nextPassLabel.Name = "nextPassLabel";
-            this.nextPassLabel.Size = new System.Drawing.Size(54, 24);
-            this.nextPassLabel.TabIndex = 1;
-            this.nextPassLabel.Text = "____";
+            this.nextPass2Label.AutoSize = true;
+            this.nextPass2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.nextPass2Label.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.nextPass2Label.Location = new System.Drawing.Point(25, 86);
+            this.nextPass2Label.Name = "nextPass2Label";
+            this.nextPass2Label.Size = new System.Drawing.Size(40, 17);
+            this.nextPass2Label.TabIndex = 3;
+            this.nextPass2Label.Text = "____";
+            // 
+            // nextPass3Label
+            // 
+            this.nextPass3Label.AutoSize = true;
+            this.nextPass3Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.nextPass3Label.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.nextPass3Label.Location = new System.Drawing.Point(25, 127);
+            this.nextPass3Label.Name = "nextPass3Label";
+            this.nextPass3Label.Size = new System.Drawing.Size(40, 17);
+            this.nextPass3Label.TabIndex = 4;
+            this.nextPass3Label.Text = "____";
+            // 
+            // nextPass4Label
+            // 
+            this.nextPass4Label.AutoSize = true;
+            this.nextPass4Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.nextPass4Label.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.nextPass4Label.Location = new System.Drawing.Point(25, 168);
+            this.nextPass4Label.Name = "nextPass4Label";
+            this.nextPass4Label.Size = new System.Drawing.Size(40, 17);
+            this.nextPass4Label.TabIndex = 5;
+            this.nextPass4Label.Text = "____";
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.DimGray;
+            this.panel5.Controls.Add(this.label30);
+            this.panel5.Controls.Add(this.nextPassLabel);
+            this.panel5.Location = new System.Drawing.Point(8, 70);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(200, 100);
+            this.panel5.TabIndex = 25;
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label30.Location = new System.Drawing.Point(38, 44);
+            this.label30.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label30.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label30.Location = new System.Drawing.Point(51, 13);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(208, 24);
-            this.label30.TabIndex = 0;
-            this.label30.Text = "Time until next pass:";
+            this.label30.Size = new System.Drawing.Size(98, 21);
+            this.label30.TabIndex = 1;
+            this.label30.Text = "Next Pass";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nextPassLabel
+            // 
+            this.nextPassLabel.AutoSize = true;
+            this.nextPassLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.nextPassLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.nextPassLabel.Location = new System.Drawing.Point(22, 44);
+            this.nextPassLabel.Name = "nextPassLabel";
+            this.nextPassLabel.Size = new System.Drawing.Size(141, 40);
+            this.nextPassLabel.TabIndex = 1;
+            this.nextPassLabel.Text = "-- : -- : --";
+            this.nextPassLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.nextPassLabel.Click += new System.EventHandler(this.nextPassLabel_Click);
+            // 
+            // MainSatCB
+            // 
+            this.MainSatCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.MainSatCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.MainSatCB.FormattingEnabled = true;
+            this.MainSatCB.Location = new System.Drawing.Point(362, 20);
+            this.MainSatCB.Name = "MainSatCB";
+            this.MainSatCB.Size = new System.Drawing.Size(261, 33);
+            this.MainSatCB.TabIndex = 22;
+            this.MainSatCB.SelectedIndexChanged += new System.EventHandler(this.MainSatCB_SelectedIndexChanged);
             // 
             // TxTab
             // 
@@ -423,7 +650,7 @@
             this.TxTab.Location = new System.Drawing.Point(4, 22);
             this.TxTab.Name = "TxTab";
             this.TxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.TxTab.Size = new System.Drawing.Size(1272, 429);
+            this.TxTab.Size = new System.Drawing.Size(1412, 595);
             this.TxTab.TabIndex = 0;
             this.TxTab.Text = "TX";
             this.TxTab.UseVisualStyleBackColor = true;
@@ -431,7 +658,7 @@
             // descSubType
             // 
             this.descSubType.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.descSubType.Location = new System.Drawing.Point(422, 53);
+            this.descSubType.Location = new System.Drawing.Point(562, 136);
             this.descSubType.Name = "descSubType";
             this.descSubType.Size = new System.Drawing.Size(198, 57);
             this.descSubType.TabIndex = 18;
@@ -662,7 +889,7 @@
             this.RxTab.Location = new System.Drawing.Point(4, 22);
             this.RxTab.Name = "RxTab";
             this.RxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.RxTab.Size = new System.Drawing.Size(1272, 429);
+            this.RxTab.Size = new System.Drawing.Size(1412, 595);
             this.RxTab.TabIndex = 1;
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
@@ -909,7 +1136,7 @@
             this.ImageTab.Controls.Add(this.panel1);
             this.ImageTab.Location = new System.Drawing.Point(4, 22);
             this.ImageTab.Name = "ImageTab";
-            this.ImageTab.Size = new System.Drawing.Size(1272, 429);
+            this.ImageTab.Size = new System.Drawing.Size(1412, 595);
             this.ImageTab.TabIndex = 2;
             this.ImageTab.Text = "images";
             this.ImageTab.UseVisualStyleBackColor = true;
@@ -1093,7 +1320,7 @@
             this.tabQuery.Location = new System.Drawing.Point(4, 22);
             this.tabQuery.Name = "tabQuery";
             this.tabQuery.Padding = new System.Windows.Forms.Padding(3);
-            this.tabQuery.Size = new System.Drawing.Size(1272, 429);
+            this.tabQuery.Size = new System.Drawing.Size(1412, 595);
             this.tabQuery.TabIndex = 3;
             this.tabQuery.Text = "Query";
             this.tabQuery.UseVisualStyleBackColor = true;
@@ -1450,7 +1677,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1280, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1420, 24);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1533,61 +1760,162 @@
             this.nextUpdateTimer.Interval = 3600000;
             this.nextUpdateTimer.Tick += new System.EventHandler(this.nextUpdateTimer_Tick);
             // 
-            // label32
+            // panel11
             // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label32.Location = new System.Drawing.Point(334, 44);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(89, 24);
-            this.label32.TabIndex = 6;
-            this.label32.Text = "Last Rx:";
+            this.panel11.BackColor = System.Drawing.Color.DimGray;
+            this.panel11.Controls.Add(this.label39);
+            this.panel11.Controls.Add(this.label40);
+            this.panel11.Location = new System.Drawing.Point(214, 70);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(410, 100);
+            this.panel11.TabIndex = 32;
             // 
-            // mainLastRxLabel
+            // label39
             // 
-            this.mainLastRxLabel.AutoSize = true;
-            this.mainLastRxLabel.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.mainLastRxLabel.Location = new System.Drawing.Point(334, 83);
-            this.mainLastRxLabel.Name = "mainLastRxLabel";
-            this.mainLastRxLabel.Size = new System.Drawing.Size(43, 24);
-            this.mainLastRxLabel.TabIndex = 7;
-            this.mainLastRxLabel.Text = "___";
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label39.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label39.Location = new System.Drawing.Point(157, 13);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(65, 21);
+            this.label39.TabIndex = 1;
+            this.label39.Text = "Status";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // MainSatCB
+            // label40
             // 
-            this.MainSatCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MainSatCB.FormattingEnabled = true;
-            this.MainSatCB.Location = new System.Drawing.Point(489, 17);
-            this.MainSatCB.Name = "MainSatCB";
-            this.MainSatCB.Size = new System.Drawing.Size(136, 21);
-            this.MainSatCB.TabIndex = 22;
-            this.MainSatCB.SelectedIndexChanged += new System.EventHandler(this.MainSatCB_SelectedIndexChanged);
+            this.label40.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label40.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label40.Location = new System.Drawing.Point(35, 37);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(319, 56);
+            this.label40.TabIndex = 1;
+            this.label40.Text = "Before Pass";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mainLastTxLabel
+            // panel12
             // 
-            this.mainLastTxLabel.AutoSize = true;
-            this.mainLastTxLabel.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.mainLastTxLabel.Location = new System.Drawing.Point(334, 172);
-            this.mainLastTxLabel.Name = "mainLastTxLabel";
-            this.mainLastTxLabel.Size = new System.Drawing.Size(43, 24);
-            this.mainLastTxLabel.TabIndex = 24;
-            this.mainLastTxLabel.Text = "___";
+            this.panel12.BackColor = System.Drawing.Color.DimGray;
+            this.panel12.Controls.Add(this.label41);
+            this.panel12.Controls.Add(this.label42);
+            this.panel12.Location = new System.Drawing.Point(214, 176);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(410, 100);
+            this.panel12.TabIndex = 33;
             // 
-            // label34
+            // label41
             // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Arial Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label34.Location = new System.Drawing.Point(334, 133);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(88, 24);
-            this.label34.TabIndex = 23;
-            this.label34.Text = "Last Tx:";
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label41.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label41.Location = new System.Drawing.Point(125, 13);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(94, 21);
+            this.label41.TabIndex = 1;
+            this.label41.Text = "Last Pass";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label42
+            // 
+            this.label42.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label42.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label42.Location = new System.Drawing.Point(3, 40);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(407, 56);
+            this.label42.TabIndex = 24;
+            this.label42.Text = "-- : -- : --";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // aquaGauge4
+            // 
+            this.aquaGauge4.BackColor = System.Drawing.Color.Transparent;
+            this.aquaGauge4.DialColor = System.Drawing.Color.Lavender;
+            this.aquaGauge4.DialText = "V Bat";
+            this.aquaGauge4.Glossiness = 11.36364F;
+            this.aquaGauge4.Location = new System.Drawing.Point(1046, 387);
+            this.aquaGauge4.MaxValue = 9F;
+            this.aquaGauge4.MinValue = 0F;
+            this.aquaGauge4.Name = "aquaGauge4";
+            this.aquaGauge4.NoOfDivisions = 9;
+            this.aquaGauge4.RecommendedValue = 8.1F;
+            this.aquaGauge4.Size = new System.Drawing.Size(200, 200);
+            this.aquaGauge4.TabIndex = 37;
+            this.aquaGauge4.ThresholdPercent = 30F;
+            this.aquaGauge4.Value = 7.89F;
+            // 
+            // aquaGauge5
+            // 
+            this.aquaGauge5.BackColor = System.Drawing.Color.Transparent;
+            this.aquaGauge5.DialColor = System.Drawing.Color.Lavender;
+            this.aquaGauge5.DialText = "V Bat";
+            this.aquaGauge5.Glossiness = 11.36364F;
+            this.aquaGauge5.Location = new System.Drawing.Point(840, 387);
+            this.aquaGauge5.MaxValue = 9F;
+            this.aquaGauge5.MinValue = 0F;
+            this.aquaGauge5.Name = "aquaGauge5";
+            this.aquaGauge5.NoOfDivisions = 9;
+            this.aquaGauge5.RecommendedValue = 8.1F;
+            this.aquaGauge5.Size = new System.Drawing.Size(200, 200);
+            this.aquaGauge5.TabIndex = 36;
+            this.aquaGauge5.ThresholdPercent = 30F;
+            this.aquaGauge5.Value = 7.89F;
+            // 
+            // aquaGauge3
+            // 
+            this.aquaGauge3.BackColor = System.Drawing.Color.Transparent;
+            this.aquaGauge3.DialColor = System.Drawing.Color.Lavender;
+            this.aquaGauge3.DialText = "V Bat";
+            this.aquaGauge3.Glossiness = 11.36364F;
+            this.aquaGauge3.Location = new System.Drawing.Point(630, 387);
+            this.aquaGauge3.MaxValue = 9F;
+            this.aquaGauge3.MinValue = 0F;
+            this.aquaGauge3.Name = "aquaGauge3";
+            this.aquaGauge3.NoOfDivisions = 9;
+            this.aquaGauge3.RecommendedValue = 8.1F;
+            this.aquaGauge3.Size = new System.Drawing.Size(200, 200);
+            this.aquaGauge3.TabIndex = 35;
+            this.aquaGauge3.ThresholdPercent = 30F;
+            this.aquaGauge3.Value = 7.89F;
+            // 
+            // aquaGauge2
+            // 
+            this.aquaGauge2.BackColor = System.Drawing.Color.Transparent;
+            this.aquaGauge2.DialColor = System.Drawing.Color.Lavender;
+            this.aquaGauge2.DialText = "V Bat";
+            this.aquaGauge2.Glossiness = 11.36364F;
+            this.aquaGauge2.Location = new System.Drawing.Point(8, 387);
+            this.aquaGauge2.MaxValue = 9F;
+            this.aquaGauge2.MinValue = 0F;
+            this.aquaGauge2.Name = "aquaGauge2";
+            this.aquaGauge2.NoOfDivisions = 9;
+            this.aquaGauge2.RecommendedValue = 8.1F;
+            this.aquaGauge2.Size = new System.Drawing.Size(200, 200);
+            this.aquaGauge2.TabIndex = 34;
+            this.aquaGauge2.ThresholdPercent = 30F;
+            this.aquaGauge2.Value = 7.89F;
+            // 
+            // aquaGauge1
+            // 
+            this.aquaGauge1.BackColor = System.Drawing.Color.Transparent;
+            this.aquaGauge1.DialColor = System.Drawing.Color.Lavender;
+            this.aquaGauge1.DialText = "V Bat";
+            this.aquaGauge1.Glossiness = 11.36364F;
+            this.aquaGauge1.Location = new System.Drawing.Point(1047, 176);
+            this.aquaGauge1.MaxValue = 9F;
+            this.aquaGauge1.MinValue = 0F;
+            this.aquaGauge1.Name = "aquaGauge1";
+            this.aquaGauge1.NoOfDivisions = 9;
+            this.aquaGauge1.RecommendedValue = 8.1F;
+            this.aquaGauge1.Size = new System.Drawing.Size(200, 200);
+            this.aquaGauge1.TabIndex = 30;
+            this.aquaGauge1.ThresholdPercent = 30F;
+            this.aquaGauge1.Value = 7.89F;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1280, 479);
+            this.ClientSize = new System.Drawing.Size(1420, 645);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1600,7 +1928,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).EndInit();
             this.TabControl.ResumeLayout(false);
             this.MainTab.ResumeLayout(false);
-            this.MainTab.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.TxTab.ResumeLayout(false);
             this.TxTab.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -1623,6 +1962,10 @@
             this.fieldOptionsPnl.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1754,7 +2097,6 @@
         private System.Windows.Forms.Panel fieldOptionsPnl;
         private System.Windows.Forms.Label descSubType;
         private System.Windows.Forms.TabPage MainTab;
-        private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Timer nextPassTimer;
         private System.Windows.Forms.Label nextPassLabel;
         private System.Windows.Forms.Label nextPass4Label;
@@ -1763,10 +2105,33 @@
         private System.Windows.Forms.Label nextPass1Label;
         private System.Windows.Forms.Timer nextUpdateTimer;
         private System.Windows.Forms.Label mainLastRxLabel;
-        private System.Windows.Forms.Label label32;
         private System.Windows.Forms.ComboBox MainSatCB;
         private System.Windows.Forms.Label mainLastTxLabel;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label37;
+        private AquaControls.AquaGauge aquaGauge1;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
+        private AquaControls.AquaGauge aquaGauge4;
+        private AquaControls.AquaGauge aquaGauge5;
+        private AquaControls.AquaGauge aquaGauge3;
+        private AquaControls.AquaGauge aquaGauge2;
     }
 }
 

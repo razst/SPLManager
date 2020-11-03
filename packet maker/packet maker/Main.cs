@@ -1737,11 +1737,15 @@ namespace packet_maker
 
             public List<dynamic> passes { get; set; }
         }
-        #endregion
 
         #endregion
 
+        #endregion
 
+        private void nextPassLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

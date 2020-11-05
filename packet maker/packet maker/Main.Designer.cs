@@ -53,13 +53,9 @@
             this.panel17 = new System.Windows.Forms.Panel();
             this.label47 = new System.Windows.Forms.Label();
             this.MainSatUptimeLabel = new System.Windows.Forms.Label();
-            this.FreeSpaceGauge = new AquaControls.AquaGauge();
-            this.BatTempGauge = new AquaControls.AquaGauge();
             this.panel15 = new System.Windows.Forms.Panel();
             this.label43 = new System.Windows.Forms.Label();
             this.MainSatTimeLabel = new System.Windows.Forms.Label();
-            this.OBCGauge = new AquaControls.AquaGauge();
-            this.VBatGauge = new AquaControls.AquaGauge();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label41 = new System.Windows.Forms.Label();
             this.mainLastPassLabel = new System.Windows.Forms.Label();
@@ -119,7 +115,6 @@
             this.RxTab = new System.Windows.Forms.TabPage();
             this.resendTxBtn = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.DBLimitCB = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -207,6 +202,13 @@
             this.nextPassTimer = new System.Windows.Forms.Timer(this.components);
             this.nextUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.everySecTimer = new System.Windows.Forms.Timer(this.components);
+            this.FreeSpaceGauge = new AquaControls.AquaGauge();
+            this.BatTempGauge = new AquaControls.AquaGauge();
+            this.OBCGauge = new AquaControls.AquaGauge();
+            this.VBatGauge = new AquaControls.AquaGauge();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
@@ -236,6 +238,7 @@
             this.qrySettingsPnl.SuspendLayout();
             this.fieldOptionsPnl.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel19.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -258,7 +261,7 @@
             // 
             // makeOut
             // 
-            this.makeOut.Location = new System.Drawing.Point(70, 367);
+            this.makeOut.Location = new System.Drawing.Point(65, 481);
             this.makeOut.Name = "makeOut";
             this.makeOut.Size = new System.Drawing.Size(700, 20);
             this.makeOut.TabIndex = 4;
@@ -266,7 +269,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 374);
+            this.label3.Location = new System.Drawing.Point(17, 488);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 20;
@@ -284,10 +287,10 @@
             this.value,
             this.desc});
             this.dataTypesDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataTypesDGV.Location = new System.Drawing.Point(70, 113);
+            this.dataTypesDGV.Location = new System.Drawing.Point(65, 113);
             this.dataTypesDGV.Name = "dataTypesDGV";
             this.dataTypesDGV.RowHeadersWidth = 62;
-            this.dataTypesDGV.Size = new System.Drawing.Size(700, 224);
+            this.dataTypesDGV.Size = new System.Drawing.Size(700, 338);
             this.dataTypesDGV.TabIndex = 3;
             this.dataTypesDGV.Visible = false;
             this.dataTypesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTypesDGV_CellClick);
@@ -377,12 +380,13 @@
             this.TabControl.Location = new System.Drawing.Point(0, 24);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(1370, 621);
+            this.TabControl.Size = new System.Drawing.Size(1271, 627);
             this.TabControl.TabIndex = 17;
             // 
             // MainTab
             // 
             this.MainTab.BackColor = System.Drawing.Color.Black;
+            this.MainTab.Controls.Add(this.panel19);
             this.MainTab.Controls.Add(this.panel18);
             this.MainTab.Controls.Add(this.panel16);
             this.MainTab.Controls.Add(this.panel17);
@@ -403,7 +407,7 @@
             this.MainTab.Location = new System.Drawing.Point(4, 22);
             this.MainTab.Name = "MainTab";
             this.MainTab.Padding = new System.Windows.Forms.Padding(3);
-            this.MainTab.Size = new System.Drawing.Size(1362, 595);
+            this.MainTab.Size = new System.Drawing.Size(1263, 601);
             this.MainTab.TabIndex = 4;
             this.MainTab.Text = "Main";
             // 
@@ -478,7 +482,7 @@
             this.panel17.BackColor = System.Drawing.Color.DimGray;
             this.panel17.Controls.Add(this.label47);
             this.panel17.Controls.Add(this.MainSatUptimeLabel);
-            this.panel17.Location = new System.Drawing.Point(869, 491);
+            this.panel17.Location = new System.Drawing.Point(836, 491);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(410, 100);
             this.panel17.TabIndex = 33;
@@ -506,48 +510,12 @@
             this.MainSatUptimeLabel.Text = "-- : -- : --";
             this.MainSatUptimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FreeSpaceGauge
-            // 
-            this.FreeSpaceGauge.BackColor = System.Drawing.Color.Transparent;
-            this.FreeSpaceGauge.DialColor = System.Drawing.Color.Lavender;
-            this.FreeSpaceGauge.DialText = "Free Space (MB)";
-            this.FreeSpaceGauge.Glossiness = 11.36364F;
-            this.FreeSpaceGauge.Location = new System.Drawing.Point(640, 388);
-            this.FreeSpaceGauge.MaxValue = 2200F;
-            this.FreeSpaceGauge.MinValue = 0F;
-            this.FreeSpaceGauge.Name = "FreeSpaceGauge";
-            this.FreeSpaceGauge.NoOfDivisions = 11;
-            this.FreeSpaceGauge.NoOfSubDivisions = 1;
-            this.FreeSpaceGauge.RecommendedValue = 150F;
-            this.FreeSpaceGauge.Size = new System.Drawing.Size(223, 223);
-            this.FreeSpaceGauge.TabIndex = 40;
-            this.FreeSpaceGauge.ThresholdPercent = 15F;
-            this.FreeSpaceGauge.Value = 900F;
-            // 
-            // BatTempGauge
-            // 
-            this.BatTempGauge.BackColor = System.Drawing.Color.Transparent;
-            this.BatTempGauge.DialColor = System.Drawing.Color.Lavender;
-            this.BatTempGauge.DialText = "Bat Temp";
-            this.BatTempGauge.Glossiness = 11.36364F;
-            this.BatTempGauge.Location = new System.Drawing.Point(428, 388);
-            this.BatTempGauge.MaxValue = 80F;
-            this.BatTempGauge.MinValue = -40F;
-            this.BatTempGauge.Name = "BatTempGauge";
-            this.BatTempGauge.NoOfDivisions = 12;
-            this.BatTempGauge.NoOfSubDivisions = 8;
-            this.BatTempGauge.RecommendedValue = 5F;
-            this.BatTempGauge.Size = new System.Drawing.Size(223, 223);
-            this.BatTempGauge.TabIndex = 38;
-            this.BatTempGauge.ThresholdPercent = 0.0001F;
-            this.BatTempGauge.Value = 0F;
-            // 
             // panel15
             // 
             this.panel15.BackColor = System.Drawing.Color.DimGray;
             this.panel15.Controls.Add(this.label43);
             this.panel15.Controls.Add(this.MainSatTimeLabel);
-            this.panel15.Location = new System.Drawing.Point(869, 388);
+            this.panel15.Location = new System.Drawing.Point(836, 388);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(410, 100);
             this.panel15.TabIndex = 32;
@@ -574,41 +542,6 @@
             this.MainSatTimeLabel.TabIndex = 7;
             this.MainSatTimeLabel.Text = "-- : -- : --";
             this.MainSatTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // OBCGauge
-            // 
-            this.OBCGauge.BackColor = System.Drawing.Color.Transparent;
-            this.OBCGauge.DialColor = System.Drawing.Color.Lavender;
-            this.OBCGauge.DialText = "OBC Temp";
-            this.OBCGauge.Glossiness = 11.36364F;
-            this.OBCGauge.Location = new System.Drawing.Point(214, 388);
-            this.OBCGauge.MaxValue = 80F;
-            this.OBCGauge.MinValue = -40F;
-            this.OBCGauge.Name = "OBCGauge";
-            this.OBCGauge.NoOfDivisions = 12;
-            this.OBCGauge.NoOfSubDivisions = 8;
-            this.OBCGauge.RecommendedValue = -30F;
-            this.OBCGauge.Size = new System.Drawing.Size(223, 223);
-            this.OBCGauge.TabIndex = 0;
-            this.OBCGauge.ThresholdPercent = 20F;
-            this.OBCGauge.Value = 0F;
-            // 
-            // VBatGauge
-            // 
-            this.VBatGauge.BackColor = System.Drawing.Color.Transparent;
-            this.VBatGauge.DialColor = System.Drawing.Color.Lavender;
-            this.VBatGauge.DialText = "VBat";
-            this.VBatGauge.Glossiness = 11.36364F;
-            this.VBatGauge.Location = new System.Drawing.Point(-15, 388);
-            this.VBatGauge.MaxValue = 9F;
-            this.VBatGauge.MinValue = 0F;
-            this.VBatGauge.Name = "VBatGauge";
-            this.VBatGauge.NoOfDivisions = 9;
-            this.VBatGauge.RecommendedValue = 8.25F;
-            this.VBatGauge.Size = new System.Drawing.Size(223, 223);
-            this.VBatGauge.TabIndex = 36;
-            this.VBatGauge.ThresholdPercent = 1E-05F;
-            this.VBatGauge.Value = 8F;
             // 
             // panel12
             // 
@@ -985,7 +918,7 @@
             this.MainSatCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainSatCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.MainSatCB.FormattingEnabled = true;
-            this.MainSatCB.Location = new System.Drawing.Point(362, 20);
+            this.MainSatCB.Location = new System.Drawing.Point(505, 18);
             this.MainSatCB.Name = "MainSatCB";
             this.MainSatCB.Size = new System.Drawing.Size(261, 33);
             this.MainSatCB.TabIndex = 22;
@@ -1012,7 +945,7 @@
             this.TxTab.Location = new System.Drawing.Point(4, 22);
             this.TxTab.Name = "TxTab";
             this.TxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.TxTab.Size = new System.Drawing.Size(1362, 595);
+            this.TxTab.Size = new System.Drawing.Size(1257, 595);
             this.TxTab.TabIndex = 0;
             this.TxTab.Text = "TX";
             this.TxTab.UseVisualStyleBackColor = true;
@@ -1020,7 +953,7 @@
             // descSubType
             // 
             this.descSubType.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.descSubType.Location = new System.Drawing.Point(512, 136);
+            this.descSubType.Location = new System.Drawing.Point(476, 53);
             this.descSubType.Name = "descSubType";
             this.descSubType.Size = new System.Drawing.Size(198, 57);
             this.descSubType.TabIndex = 18;
@@ -1048,7 +981,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label14.Location = new System.Drawing.Point(958, 84);
+            this.label14.Location = new System.Drawing.Point(1000, 103);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(68, 17);
             this.label14.TabIndex = 32;
@@ -1070,7 +1003,7 @@
             this.panel3.Controls.Add(this.label13);
             this.panel3.Controls.Add(this.label12);
             this.panel3.Controls.Add(this.PlaylistCB);
-            this.panel3.Location = new System.Drawing.Point(826, 94);
+            this.panel3.Location = new System.Drawing.Point(868, 113);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(329, 295);
             this.panel3.TabIndex = 32;
@@ -1200,7 +1133,7 @@
             // 
             // add2PLBtn
             // 
-            this.add2PLBtn.Location = new System.Drawing.Point(436, 393);
+            this.add2PLBtn.Location = new System.Drawing.Point(431, 507);
             this.add2PLBtn.Name = "add2PLBtn";
             this.add2PLBtn.Size = new System.Drawing.Size(75, 23);
             this.add2PLBtn.TabIndex = 25;
@@ -1210,7 +1143,7 @@
             // 
             // sendPacketBtn
             // 
-            this.sendPacketBtn.Location = new System.Drawing.Point(367, 393);
+            this.sendPacketBtn.Location = new System.Drawing.Point(362, 507);
             this.sendPacketBtn.Name = "sendPacketBtn";
             this.sendPacketBtn.Size = new System.Drawing.Size(51, 23);
             this.sendPacketBtn.TabIndex = 24;
@@ -1220,7 +1153,7 @@
             // 
             // copyBTN
             // 
-            this.copyBTN.Location = new System.Drawing.Point(294, 393);
+            this.copyBTN.Location = new System.Drawing.Point(289, 507);
             this.copyBTN.Name = "copyBTN";
             this.copyBTN.Size = new System.Drawing.Size(54, 23);
             this.copyBTN.TabIndex = 23;
@@ -1251,14 +1184,14 @@
             this.RxTab.Location = new System.Drawing.Point(4, 22);
             this.RxTab.Name = "RxTab";
             this.RxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.RxTab.Size = new System.Drawing.Size(1362, 595);
+            this.RxTab.Size = new System.Drawing.Size(1257, 595);
             this.RxTab.TabIndex = 1;
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
             // 
             // resendTxBtn
             // 
-            this.resendTxBtn.Location = new System.Drawing.Point(168, 398);
+            this.resendTxBtn.Location = new System.Drawing.Point(168, 506);
             this.resendTxBtn.Name = "resendTxBtn";
             this.resendTxBtn.Size = new System.Drawing.Size(75, 23);
             this.resendTxBtn.TabIndex = 33;
@@ -1268,7 +1201,6 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.label21);
             this.panel4.Controls.Add(this.label20);
             this.panel4.Controls.Add(this.DBLimitCB);
             this.panel4.Controls.Add(this.label19);
@@ -1278,17 +1210,8 @@
             this.panel4.Controls.Add(this.loadDbBtn);
             this.panel4.Location = new System.Drawing.Point(817, 13);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(452, 65);
+            this.panel4.Size = new System.Drawing.Size(357, 65);
             this.panel4.TabIndex = 32;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(378, 8);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(47, 13);
-            this.label21.TabIndex = 34;
-            this.label21.Text = "subtype:";
             // 
             // label20
             // 
@@ -1410,7 +1333,7 @@
             this.TxPacLibx.HorizontalScrollbar = true;
             this.TxPacLibx.Location = new System.Drawing.Point(48, 91);
             this.TxPacLibx.Name = "TxPacLibx";
-            this.TxPacLibx.Size = new System.Drawing.Size(336, 303);
+            this.TxPacLibx.Size = new System.Drawing.Size(336, 394);
             this.TxPacLibx.TabIndex = 12;
             this.TxPacLibx.SelectedIndexChanged += new System.EventHandler(this.TxPacLibx_SelectedIndexChanged);
             // 
@@ -1420,13 +1343,13 @@
             this.transOut.Multiline = true;
             this.transOut.Name = "transOut";
             this.transOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.transOut.Size = new System.Drawing.Size(420, 303);
+            this.transOut.Size = new System.Drawing.Size(459, 394);
             this.transOut.TabIndex = 11;
             this.transOut.WordWrap = false;
             // 
             // clearRxBtn
             // 
-            this.clearRxBtn.Location = new System.Drawing.Point(533, 400);
+            this.clearRxBtn.Location = new System.Drawing.Point(533, 508);
             this.clearRxBtn.Name = "clearRxBtn";
             this.clearRxBtn.Size = new System.Drawing.Size(75, 23);
             this.clearRxBtn.TabIndex = 10;
@@ -1487,7 +1410,7 @@
             this.privHex.HorizontalScrollbar = true;
             this.privHex.Location = new System.Drawing.Point(453, 91);
             this.privHex.Name = "privHex";
-            this.privHex.Size = new System.Drawing.Size(252, 303);
+            this.privHex.Size = new System.Drawing.Size(252, 394);
             this.privHex.TabIndex = 3;
             this.privHex.SelectedIndexChanged += new System.EventHandler(this.privHex_SelectedIndexChanged);
             // 
@@ -1498,7 +1421,7 @@
             this.ImageTab.Controls.Add(this.panel1);
             this.ImageTab.Location = new System.Drawing.Point(4, 22);
             this.ImageTab.Name = "ImageTab";
-            this.ImageTab.Size = new System.Drawing.Size(1362, 595);
+            this.ImageTab.Size = new System.Drawing.Size(1257, 595);
             this.ImageTab.TabIndex = 2;
             this.ImageTab.Text = "images";
             this.ImageTab.UseVisualStyleBackColor = true;
@@ -1682,7 +1605,7 @@
             this.tabQuery.Location = new System.Drawing.Point(4, 22);
             this.tabQuery.Name = "tabQuery";
             this.tabQuery.Padding = new System.Windows.Forms.Padding(3);
-            this.tabQuery.Size = new System.Drawing.Size(1362, 595);
+            this.tabQuery.Size = new System.Drawing.Size(1257, 595);
             this.tabQuery.TabIndex = 3;
             this.tabQuery.Text = "Query";
             this.tabQuery.UseVisualStyleBackColor = true;
@@ -2039,7 +1962,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1370, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1271, 24);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -2127,17 +2050,120 @@
             this.everySecTimer.Interval = 1000;
             this.everySecTimer.Tick += new System.EventHandler(this.everySecTimer_Tick);
             // 
+            // FreeSpaceGauge
+            // 
+            this.FreeSpaceGauge.BackColor = System.Drawing.Color.Transparent;
+            this.FreeSpaceGauge.DialColor = System.Drawing.Color.Lavender;
+            this.FreeSpaceGauge.DialText = "Free Space (MB)";
+            this.FreeSpaceGauge.Glossiness = 11.36364F;
+            this.FreeSpaceGauge.Location = new System.Drawing.Point(630, 388);
+            this.FreeSpaceGauge.MaxValue = 2200F;
+            this.FreeSpaceGauge.MinValue = 0F;
+            this.FreeSpaceGauge.Name = "FreeSpaceGauge";
+            this.FreeSpaceGauge.NoOfDivisions = 11;
+            this.FreeSpaceGauge.NoOfSubDivisions = 1;
+            this.FreeSpaceGauge.RecommendedValue = 150F;
+            this.FreeSpaceGauge.Size = new System.Drawing.Size(200, 200);
+            this.FreeSpaceGauge.TabIndex = 40;
+            this.FreeSpaceGauge.ThresholdPercent = 15F;
+            this.FreeSpaceGauge.Value = 900F;
+            // 
+            // BatTempGauge
+            // 
+            this.BatTempGauge.BackColor = System.Drawing.Color.Transparent;
+            this.BatTempGauge.DialColor = System.Drawing.Color.Lavender;
+            this.BatTempGauge.DialText = "Bat Temp";
+            this.BatTempGauge.Glossiness = 11.36364F;
+            this.BatTempGauge.Location = new System.Drawing.Point(423, 388);
+            this.BatTempGauge.MaxValue = 80F;
+            this.BatTempGauge.MinValue = -40F;
+            this.BatTempGauge.Name = "BatTempGauge";
+            this.BatTempGauge.NoOfDivisions = 12;
+            this.BatTempGauge.NoOfSubDivisions = 8;
+            this.BatTempGauge.RecommendedValue = 5F;
+            this.BatTempGauge.Size = new System.Drawing.Size(200, 200);
+            this.BatTempGauge.TabIndex = 38;
+            this.BatTempGauge.ThresholdPercent = 0.0001F;
+            this.BatTempGauge.Value = 0F;
+            // 
+            // OBCGauge
+            // 
+            this.OBCGauge.BackColor = System.Drawing.Color.Transparent;
+            this.OBCGauge.DialColor = System.Drawing.Color.Lavender;
+            this.OBCGauge.DialText = "OBC Temp";
+            this.OBCGauge.Glossiness = 11.36364F;
+            this.OBCGauge.Location = new System.Drawing.Point(214, 389);
+            this.OBCGauge.MaxValue = 80F;
+            this.OBCGauge.MinValue = -40F;
+            this.OBCGauge.Name = "OBCGauge";
+            this.OBCGauge.NoOfDivisions = 12;
+            this.OBCGauge.NoOfSubDivisions = 8;
+            this.OBCGauge.RecommendedValue = -30F;
+            this.OBCGauge.Size = new System.Drawing.Size(200, 200);
+            this.OBCGauge.TabIndex = 0;
+            this.OBCGauge.ThresholdPercent = 20F;
+            this.OBCGauge.Value = 0F;
+            // 
+            // VBatGauge
+            // 
+            this.VBatGauge.BackColor = System.Drawing.Color.Transparent;
+            this.VBatGauge.DialColor = System.Drawing.Color.Lavender;
+            this.VBatGauge.DialText = "VBat";
+            this.VBatGauge.Glossiness = 11.36364F;
+            this.VBatGauge.Location = new System.Drawing.Point(8, 388);
+            this.VBatGauge.MaxValue = 9F;
+            this.VBatGauge.MinValue = 0F;
+            this.VBatGauge.Name = "VBatGauge";
+            this.VBatGauge.NoOfDivisions = 9;
+            this.VBatGauge.RecommendedValue = 8.25F;
+            this.VBatGauge.Size = new System.Drawing.Size(200, 200);
+            this.VBatGauge.TabIndex = 36;
+            this.VBatGauge.ThresholdPercent = 1E-05F;
+            this.VBatGauge.Value = 8F;
+            // 
+            // panel19
+            // 
+            this.panel19.BackColor = System.Drawing.Color.DimGray;
+            this.panel19.Controls.Add(this.label44);
+            this.panel19.Controls.Add(this.label46);
+            this.panel19.Location = new System.Drawing.Point(1046, 282);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(200, 100);
+            this.panel19.TabIndex = 41;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label44.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label44.Location = new System.Drawing.Point(39, 13);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(132, 21);
+            this.label44.TabIndex = 1;
+            this.label44.Text = "Corrupt Bytes";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label46
+            // 
+            this.label46.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label46.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label46.Location = new System.Drawing.Point(51, 45);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(105, 40);
+            this.label46.TabIndex = 1;
+            this.label46.Text = "-- : -- : --";
+            this.label46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 645);
+            this.ClientSize = new System.Drawing.Size(1271, 651);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
             this.Text = "SPL Manager";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Main_Shown);
@@ -2194,6 +2220,8 @@
             this.fieldOptionsPnl.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel19.ResumeLayout(false);
+            this.panel19.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2288,7 +2316,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox DBLimitCB;
         private System.Windows.Forms.Button resendTxBtn;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TabPage tabQuery;
         private System.Windows.Forms.Panel qrySettingsPnl;
         private System.Windows.Forms.CheckBox qryRxChbx;
@@ -2378,6 +2405,9 @@
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label MainSatResetsLabel;
+        private System.Windows.Forms.Panel panel19;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label46;
     }
 }
 

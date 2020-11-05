@@ -282,7 +282,6 @@ C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.xml
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.AquaGauge.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Main.resources
@@ -295,3 +294,4 @@ C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources

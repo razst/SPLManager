@@ -27,6 +27,7 @@ namespace packet_maker
 {
     public partial class Main : Form
     {
+
         private packetObject po;
         private string[] groups =
 {
@@ -74,7 +75,7 @@ namespace packet_maker
         #region setup
 
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private  void Form1_Load(object sender, EventArgs e)
         {
             //http://jsonviewer.stack.hu/
             StreamReader rx = new StreamReader(@"rx.json");
@@ -135,24 +136,45 @@ namespace packet_maker
             qryLimitCB.SelectedIndex = 1;
 
             frm = this;
-
-
-            await UpdateLastPassLabel("parsed-rx",mainLastRxLabel);
-            await UpdateLastPassLabel("parsed-tx", mainLastTxLabel);
-
+            everySecTimer.Start();
 
             //next pass setup
             nextPassLabels[0] = this.nextPass1Label;
             nextPassLabels[1] = this.nextPass2Label;
             nextPassLabels[2] = this.nextPass3Label;
             nextPassLabels[3] = this.nextPass4Label;
-
-            nextPassDate = await GetNextPass();
-            secondsTilPass = GetSecondsTil(nextPassDate);
-            UpdatePassesLabels();
-            nextPassTimer.Start();
-            nextUpdateTimer.Start();
             //
+            
+            VBatGauge.ColorofG = new Dictionary<string, AquaControls.valuesOfColors>
+            {
+                {"healthy", new AquaControls.valuesOfColors{color = Color.LawnGreen , minVal = 7.5F,maxVal = 9 , threshVal = 8.25F, threshPrecent = 16.66F }},
+                {"bad", new AquaControls.valuesOfColors{color = Color.Red , minVal = 0,maxVal = 7 , threshVal = 3.5F , threshPrecent = 77.77F}},
+                {"notgreat", new AquaControls.valuesOfColors{color = Color.OrangeRed, minVal = 7,maxVal = 7.5F , threshVal = 7.25F, threshPrecent = 5.55F}}
+
+
+            };
+            OBCGauge.ColorofG = new Dictionary<string, AquaControls.valuesOfColors>
+            {
+                {"healthy", new AquaControls.valuesOfColors{color = Color.LawnGreen , minVal = -15F,maxVal = 30, threshVal = 7.5F, threshPrecent= 39 }},
+                {"bad", new AquaControls.valuesOfColors{color = Color.Red , minVal = 45,maxVal = 80 , threshVal = 62.5F , threshPrecent = 32 }},
+                {"notgreat", new AquaControls.valuesOfColors{color = Color.OrangeRed, minVal = 30,maxVal = 45 , threshVal = 37.5F , threshPrecent = 13}},
+                {"bad2", new AquaControls.valuesOfColors{color = Color.Red , minVal = -40,maxVal = -20 , threshVal = -30F , threshPrecent = 20 }},
+                {"notgreat2", new AquaControls.valuesOfColors{color = Color.OrangeRed, minVal = -20,maxVal = -15 , threshVal = -17.5F , threshPrecent = 4.6F}},
+            };
+            BatTempGauge.ColorofG = new Dictionary<string, AquaControls.valuesOfColors>
+            {
+                {"healthy", new AquaControls.valuesOfColors{color = Color.LawnGreen , minVal = -15F,maxVal = 30, threshVal = 7.5F, threshPrecent= 39 }},
+                {"bad", new AquaControls.valuesOfColors{color = Color.Red , minVal = 45,maxVal = 80 , threshVal = 62.5F , threshPrecent = 32 }},
+                {"notgreat", new AquaControls.valuesOfColors{color = Color.OrangeRed, minVal = 30,maxVal = 45 , threshVal = 37.5F , threshPrecent = 13}},
+                {"bad2", new AquaControls.valuesOfColors{color = Color.Red , minVal = -40,maxVal = -20 , threshVal = -30F , threshPrecent = 20 }},
+                {"notgreat2", new AquaControls.valuesOfColors{color = Color.OrangeRed, minVal = -20,maxVal = -15 , threshVal = -17.5F , threshPrecent = 4.6F}},
+            };
+            FreeSpaceGauge.ColorofG = new Dictionary<string, AquaControls.valuesOfColors>
+            {
+                {"healthy", new AquaControls.valuesOfColors{color = Color.LawnGreen , minVal = 800,maxVal = 2200, threshVal = 1500, threshPrecent= 63.63F }},
+                {"bad", new AquaControls.valuesOfColors{color = Color.Red , minVal = 0,maxVal = 300 , threshVal = 150 , threshPrecent = 13.63F }},
+                {"notgreat", new AquaControls.valuesOfColors{color = Color.OrangeRed, minVal = 300 ,maxVal = 800 , threshVal = 550 , threshPrecent = 22.72F}},
+            };
         }
 
 
@@ -175,7 +197,7 @@ namespace packet_maker
 
         #endregion
 
-        #region general funcs
+        #region general 
         private async Task<int> getSplCurIdAsync(int groupDex)
         {
             if (Program.settings.dataBaseEnabled)
@@ -260,6 +282,11 @@ namespace packet_maker
             }
         }
 
+        private  void everySecTimer_Tick(object sender, EventArgs e)
+        {
+                mainUtcLabel.Text = DateTime.UtcNow.ToString();
+        }
+
         #endregion
 
 
@@ -271,7 +298,7 @@ namespace packet_maker
         #region playlists
 
         #region objects
-        
+
         private List<PLInfo> Playlists = new List<PLInfo>();
         private List<packetObject> commands = new List<packetObject>();
 
@@ -1628,6 +1655,7 @@ namespace packet_maker
                 if ((long)passesData.passes[0].endUTC + 60 < DateTimeOffset.UtcNow.ToUnixTimeSeconds())
                 {
                     nextPassTimer.Stop();
+                    mainLastPassLabel.Text = passesData.passes[0].endUTC.ToString();
                     var dt = await GetNextPass();
                     secondsTilPass = GetSecondsTil(dt);
                     UpdatePassesLabels();
@@ -1643,8 +1671,23 @@ namespace packet_maker
         {
             mainLastRxLabel.Text = "---";
             mainLastTxLabel.Text = "---";
-            await UpdateLastPassLabel("parsed-rx", mainLastRxLabel);
-            await UpdateLastPassLabel("parsed-tx", mainLastTxLabel);
+            await UpdateControlFormDB("parsed-rx", mainLastRxLabel);
+            await UpdateControlFormDB("parsed-tx", mainLastTxLabel);
+             await UpdateControlFormDB("parsed-rx", mainLastBeaconLabel,"Beacon");
+            if(MainSatCB.SelectedIndex != 0)
+            {
+                nextPassDate = await GetNextPass();
+                secondsTilPass = GetSecondsTil(nextPassDate);
+                UpdatePassesLabels();
+                nextPassTimer.Start();
+
+            }
+            else
+            {
+                nextPassTimer.Stop();
+            }    
+
+            nextUpdateTimer.Start();
         }
         #endregion
 
@@ -1664,7 +1707,18 @@ namespace packet_maker
         private async Task<DateTime> GetNextPass()
         {
             DateTime dt = new DateTime();
+            dynamic t;
+            try
+            {
+                 t = ((IEnumerable<dynamic>)Program.settings.satInfo).AsEnumerable().ToList().Find(x => x.id == MainSatCB.SelectedIndex).noradID;
+            }
+            catch
+            {
+                t = 43199;
+                //TODO: show error
+            }
 
+            var t2 = Program.settings.groundStationLocation;
             dynamic data = null;
             using (var client = new HttpClient())
             {
@@ -1673,7 +1727,7 @@ namespace packet_maker
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response =  await client.GetAsync("/rest/v1/satellite/radiopasses/43199/30.983852/34.92953/500/7/40/&apiKey=78C29S-25XY9W-E8SWZD-4L2F");
+                HttpResponseMessage response =  await client.GetAsync($"/rest/v1/satellite/radiopasses/{t}/{t2.lat}/{t2.lng}/{t2.alt}/7/{t2.minElevation}/&apiKey=78C29S-25XY9W-E8SWZD-4L2F");
                 if (response.IsSuccessStatusCode)
                 {
                     var txtResponse =  await response.Content.ReadAsStringAsync();
@@ -1708,17 +1762,45 @@ namespace packet_maker
             }
         }
 
-        private async Task UpdateLastPassLabel(string collection, Label label)
+        private async Task UpdateControlFormDB(string collection, Label label, string type = null)
         {
+            var QryFilters = new List<Func<QueryContainerDescriptor<Dictionary<string, object>>, QueryContainer>>
+            {
+                q => q.Match(m => m.Field("satId").Query(MainSatCB.SelectedIndex.ToString()))
+            };
+            if(type != null)
+            {
+                QryFilters.Add(fq => fq.Term(f => f["subtype"].Suffix("keyword"),type));
+            }
+
             var lastTimeSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
 
-                            .Query(q => q.Match(m => m.Field("satId").Query(MainSatCB.SelectedIndex.ToString())))
+                            .Query(q => q.Bool(m => m.Must(QryFilters)))
                             .Index(collection)
                             .Size(10)
                             .Sort(q => q.Descending(obj => obj["time"])));
 
-            var temp = DateTime.Parse(lastTimeSnapshot.Documents.First()["time"].ToString()).ToLocalTime().ToString();
-            label.Text = temp;
+            if (lastTimeSnapshot.Documents.Count > 0)
+            {
+                var temp = DateTime.Parse(lastTimeSnapshot.Documents.First()["time"].ToString()).ToLocalTime().ToString();
+                label.Text = temp;
+                if(type == "Beacon")
+                {
+                    po = new packetObject(transOptions, lastTimeSnapshot.Documents.First()["packetString"].ToString());
+                    VBatGauge.Value =  float.Parse(po.dataCatalog["vbat"].ToString())/1000;
+                    OBCGauge.Value = float.Parse(po.dataCatalog["MCU Temperature"].ToString())/100;
+                    BatTempGauge.Value = float.Parse(po.dataCatalog["Battery Temperature"].ToString()) / 1000;
+                    FreeSpaceGauge.Value = float.Parse(po.dataCatalog["free_memory"].ToString()) / 1000000;
+                    MainSatTimeLabel.Text = DateTime.Parse(lastTimeSnapshot.Documents.First()["sat_time"].ToString()).ToLocalTime().ToString();
+                    MainSatResetsLabel.Text = lastTimeSnapshot.Documents.First()["number_of_resets"].ToString();
+                    MainCmdRestesLabel.Text = lastTimeSnapshot.Documents.First()["number_of_cmd_resets"].ToString();
+
+                    var tempTS = TimeSpan.FromSeconds(int.Parse( lastTimeSnapshot.Documents.First()["sat_uptime"].ToString()));
+                    MainSatUptimeLabel.Text = $"{tempTS.Days}:{tempTS.Hours}:{tempTS.Seconds + tempTS.Minutes*60}";
+
+                }
+            }
+
         }
         #endregion
 
@@ -1738,14 +1820,14 @@ namespace packet_maker
             public List<dynamic> passes { get; set; }
         }
 
-        #endregion
+
+
+
+
 
         #endregion
 
-        private void nextPassLabel_Click(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }
 

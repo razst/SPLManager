@@ -44,18 +44,46 @@
             this.transIn = new System.Windows.Forms.TextBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
+            this.panel18 = new System.Windows.Forms.Panel();
+            this.label49 = new System.Windows.Forms.Label();
+            this.MainCmdRestesLabel = new System.Windows.Forms.Label();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.label45 = new System.Windows.Forms.Label();
+            this.MainSatResetsLabel = new System.Windows.Forms.Label();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.label47 = new System.Windows.Forms.Label();
+            this.MainSatUptimeLabel = new System.Windows.Forms.Label();
+            this.FreeSpaceGauge = new AquaControls.AquaGauge();
+            this.BatTempGauge = new AquaControls.AquaGauge();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.label43 = new System.Windows.Forms.Label();
+            this.MainSatTimeLabel = new System.Windows.Forms.Label();
+            this.OBCGauge = new AquaControls.AquaGauge();
+            this.VBatGauge = new AquaControls.AquaGauge();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label41 = new System.Windows.Forms.Label();
+            this.mainLastPassLabel = new System.Windows.Forms.Label();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.label32 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
+            this.mainLastBeaconLabel = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label38 = new System.Windows.Forms.Label();
             this.mainLastTxLabel = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.mainLastRxLabel = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
+            this.utcTitle = new System.Windows.Forms.Label();
+            this.mainUtcLabel = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label33 = new System.Windows.Forms.Label();
             this.nextPass1Label = new System.Windows.Forms.Label();
@@ -178,23 +206,21 @@
             this.toAFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextPassTimer = new System.Windows.Forms.Timer(this.components);
             this.nextUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.aquaGauge4 = new AquaControls.AquaGauge();
-            this.aquaGauge5 = new AquaControls.AquaGauge();
-            this.aquaGauge3 = new AquaControls.AquaGauge();
-            this.aquaGauge2 = new AquaControls.AquaGauge();
-            this.aquaGauge1 = new AquaControls.AquaGauge();
+            this.everySecTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
+            this.panel18.SuspendLayout();
+            this.panel16.SuspendLayout();
+            this.panel17.SuspendLayout();
+            this.panel15.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
+            this.panel13.SuspendLayout();
+            this.panel14.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -210,8 +236,6 @@
             this.qrySettingsPnl.SuspendLayout();
             this.fieldOptionsPnl.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -353,20 +377,23 @@
             this.TabControl.Location = new System.Drawing.Point(0, 24);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(1420, 621);
+            this.TabControl.Size = new System.Drawing.Size(1370, 621);
             this.TabControl.TabIndex = 17;
             // 
             // MainTab
             // 
             this.MainTab.BackColor = System.Drawing.Color.Black;
-            this.MainTab.Controls.Add(this.aquaGauge4);
-            this.MainTab.Controls.Add(this.aquaGauge5);
-            this.MainTab.Controls.Add(this.aquaGauge3);
-            this.MainTab.Controls.Add(this.aquaGauge2);
+            this.MainTab.Controls.Add(this.panel18);
+            this.MainTab.Controls.Add(this.panel16);
+            this.MainTab.Controls.Add(this.panel17);
+            this.MainTab.Controls.Add(this.FreeSpaceGauge);
+            this.MainTab.Controls.Add(this.BatTempGauge);
+            this.MainTab.Controls.Add(this.panel15);
+            this.MainTab.Controls.Add(this.OBCGauge);
+            this.MainTab.Controls.Add(this.VBatGauge);
             this.MainTab.Controls.Add(this.panel12);
             this.MainTab.Controls.Add(this.panel11);
             this.MainTab.Controls.Add(this.panel10);
-            this.MainTab.Controls.Add(this.aquaGauge1);
             this.MainTab.Controls.Add(this.panel9);
             this.MainTab.Controls.Add(this.panel8);
             this.MainTab.Controls.Add(this.panel7);
@@ -376,15 +403,284 @@
             this.MainTab.Location = new System.Drawing.Point(4, 22);
             this.MainTab.Name = "MainTab";
             this.MainTab.Padding = new System.Windows.Forms.Padding(3);
-            this.MainTab.Size = new System.Drawing.Size(1412, 595);
+            this.MainTab.Size = new System.Drawing.Size(1362, 595);
             this.MainTab.TabIndex = 4;
             this.MainTab.Text = "Main";
+            // 
+            // panel18
+            // 
+            this.panel18.BackColor = System.Drawing.Color.DimGray;
+            this.panel18.Controls.Add(this.label49);
+            this.panel18.Controls.Add(this.MainCmdRestesLabel);
+            this.panel18.Location = new System.Drawing.Point(1046, 176);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(200, 100);
+            this.panel18.TabIndex = 27;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label49.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label49.Location = new System.Drawing.Point(39, 13);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(136, 21);
+            this.label49.TabIndex = 1;
+            this.label49.Text = "Planed Restes";
+            this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // MainCmdRestesLabel
+            // 
+            this.MainCmdRestesLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.MainCmdRestesLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.MainCmdRestesLabel.Location = new System.Drawing.Point(51, 45);
+            this.MainCmdRestesLabel.Name = "MainCmdRestesLabel";
+            this.MainCmdRestesLabel.Size = new System.Drawing.Size(105, 40);
+            this.MainCmdRestesLabel.TabIndex = 1;
+            this.MainCmdRestesLabel.Text = "-- : -- : --";
+            this.MainCmdRestesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel16
+            // 
+            this.panel16.BackColor = System.Drawing.Color.DimGray;
+            this.panel16.Controls.Add(this.label45);
+            this.panel16.Controls.Add(this.MainSatResetsLabel);
+            this.panel16.Location = new System.Drawing.Point(1046, 70);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(200, 100);
+            this.panel16.TabIndex = 26;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label45.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label45.Location = new System.Drawing.Point(25, 13);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(159, 21);
+            this.label45.TabIndex = 1;
+            this.label45.Text = "Unplaned Restes";
+            this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // MainSatResetsLabel
+            // 
+            this.MainSatResetsLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.MainSatResetsLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.MainSatResetsLabel.Location = new System.Drawing.Point(51, 44);
+            this.MainSatResetsLabel.Name = "MainSatResetsLabel";
+            this.MainSatResetsLabel.Size = new System.Drawing.Size(91, 40);
+            this.MainSatResetsLabel.TabIndex = 1;
+            this.MainSatResetsLabel.Text = "-- : -- : --";
+            this.MainSatResetsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel17
+            // 
+            this.panel17.BackColor = System.Drawing.Color.DimGray;
+            this.panel17.Controls.Add(this.label47);
+            this.panel17.Controls.Add(this.MainSatUptimeLabel);
+            this.panel17.Location = new System.Drawing.Point(869, 491);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(410, 100);
+            this.panel17.TabIndex = 33;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label47.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label47.Location = new System.Drawing.Point(160, 15);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(106, 21);
+            this.label47.TabIndex = 1;
+            this.label47.Text = "Sat Uptime";
+            this.label47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // MainSatUptimeLabel
+            // 
+            this.MainSatUptimeLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.MainSatUptimeLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.MainSatUptimeLabel.Location = new System.Drawing.Point(3, 48);
+            this.MainSatUptimeLabel.Name = "MainSatUptimeLabel";
+            this.MainSatUptimeLabel.Size = new System.Drawing.Size(406, 56);
+            this.MainSatUptimeLabel.TabIndex = 7;
+            this.MainSatUptimeLabel.Text = "-- : -- : --";
+            this.MainSatUptimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // FreeSpaceGauge
+            // 
+            this.FreeSpaceGauge.BackColor = System.Drawing.Color.Transparent;
+            this.FreeSpaceGauge.DialColor = System.Drawing.Color.Lavender;
+            this.FreeSpaceGauge.DialText = "Free Space (MB)";
+            this.FreeSpaceGauge.Glossiness = 11.36364F;
+            this.FreeSpaceGauge.Location = new System.Drawing.Point(640, 388);
+            this.FreeSpaceGauge.MaxValue = 2200F;
+            this.FreeSpaceGauge.MinValue = 0F;
+            this.FreeSpaceGauge.Name = "FreeSpaceGauge";
+            this.FreeSpaceGauge.NoOfDivisions = 11;
+            this.FreeSpaceGauge.NoOfSubDivisions = 1;
+            this.FreeSpaceGauge.RecommendedValue = 150F;
+            this.FreeSpaceGauge.Size = new System.Drawing.Size(223, 223);
+            this.FreeSpaceGauge.TabIndex = 40;
+            this.FreeSpaceGauge.ThresholdPercent = 15F;
+            this.FreeSpaceGauge.Value = 900F;
+            // 
+            // BatTempGauge
+            // 
+            this.BatTempGauge.BackColor = System.Drawing.Color.Transparent;
+            this.BatTempGauge.DialColor = System.Drawing.Color.Lavender;
+            this.BatTempGauge.DialText = "Bat Temp";
+            this.BatTempGauge.Glossiness = 11.36364F;
+            this.BatTempGauge.Location = new System.Drawing.Point(428, 388);
+            this.BatTempGauge.MaxValue = 80F;
+            this.BatTempGauge.MinValue = -40F;
+            this.BatTempGauge.Name = "BatTempGauge";
+            this.BatTempGauge.NoOfDivisions = 12;
+            this.BatTempGauge.NoOfSubDivisions = 8;
+            this.BatTempGauge.RecommendedValue = 5F;
+            this.BatTempGauge.Size = new System.Drawing.Size(223, 223);
+            this.BatTempGauge.TabIndex = 38;
+            this.BatTempGauge.ThresholdPercent = 0.0001F;
+            this.BatTempGauge.Value = 0F;
+            // 
+            // panel15
+            // 
+            this.panel15.BackColor = System.Drawing.Color.DimGray;
+            this.panel15.Controls.Add(this.label43);
+            this.panel15.Controls.Add(this.MainSatTimeLabel);
+            this.panel15.Location = new System.Drawing.Point(869, 388);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(410, 100);
+            this.panel15.TabIndex = 32;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label43.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label43.Location = new System.Drawing.Point(160, 9);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(99, 21);
+            this.label43.TabIndex = 1;
+            this.label43.Text = "OBC Time";
+            this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // MainSatTimeLabel
+            // 
+            this.MainSatTimeLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.MainSatTimeLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.MainSatTimeLabel.Location = new System.Drawing.Point(3, 44);
+            this.MainSatTimeLabel.Name = "MainSatTimeLabel";
+            this.MainSatTimeLabel.Size = new System.Drawing.Size(406, 56);
+            this.MainSatTimeLabel.TabIndex = 7;
+            this.MainSatTimeLabel.Text = "-- : -- : --";
+            this.MainSatTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // OBCGauge
+            // 
+            this.OBCGauge.BackColor = System.Drawing.Color.Transparent;
+            this.OBCGauge.DialColor = System.Drawing.Color.Lavender;
+            this.OBCGauge.DialText = "OBC Temp";
+            this.OBCGauge.Glossiness = 11.36364F;
+            this.OBCGauge.Location = new System.Drawing.Point(214, 388);
+            this.OBCGauge.MaxValue = 80F;
+            this.OBCGauge.MinValue = -40F;
+            this.OBCGauge.Name = "OBCGauge";
+            this.OBCGauge.NoOfDivisions = 12;
+            this.OBCGauge.NoOfSubDivisions = 8;
+            this.OBCGauge.RecommendedValue = -30F;
+            this.OBCGauge.Size = new System.Drawing.Size(223, 223);
+            this.OBCGauge.TabIndex = 0;
+            this.OBCGauge.ThresholdPercent = 20F;
+            this.OBCGauge.Value = 0F;
+            // 
+            // VBatGauge
+            // 
+            this.VBatGauge.BackColor = System.Drawing.Color.Transparent;
+            this.VBatGauge.DialColor = System.Drawing.Color.Lavender;
+            this.VBatGauge.DialText = "VBat";
+            this.VBatGauge.Glossiness = 11.36364F;
+            this.VBatGauge.Location = new System.Drawing.Point(-15, 388);
+            this.VBatGauge.MaxValue = 9F;
+            this.VBatGauge.MinValue = 0F;
+            this.VBatGauge.Name = "VBatGauge";
+            this.VBatGauge.NoOfDivisions = 9;
+            this.VBatGauge.RecommendedValue = 8.25F;
+            this.VBatGauge.Size = new System.Drawing.Size(223, 223);
+            this.VBatGauge.TabIndex = 36;
+            this.VBatGauge.ThresholdPercent = 1E-05F;
+            this.VBatGauge.Value = 8F;
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.DimGray;
+            this.panel12.Controls.Add(this.label41);
+            this.panel12.Controls.Add(this.mainLastPassLabel);
+            this.panel12.Location = new System.Drawing.Point(214, 176);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(410, 100);
+            this.panel12.TabIndex = 33;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label41.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label41.Location = new System.Drawing.Point(157, 13);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(94, 21);
+            this.label41.TabIndex = 1;
+            this.label41.Text = "Last Pass";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mainLastPassLabel
+            // 
+            this.mainLastPassLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.mainLastPassLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.mainLastPassLabel.Location = new System.Drawing.Point(3, 40);
+            this.mainLastPassLabel.Name = "mainLastPassLabel";
+            this.mainLastPassLabel.Size = new System.Drawing.Size(406, 56);
+            this.mainLastPassLabel.TabIndex = 24;
+            this.mainLastPassLabel.Text = "-- : -- : --";
+            this.mainLastPassLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.DimGray;
+            this.panel11.Controls.Add(this.label39);
+            this.panel11.Controls.Add(this.label40);
+            this.panel11.Location = new System.Drawing.Point(214, 70);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(410, 100);
+            this.panel11.TabIndex = 32;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label39.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label39.Location = new System.Drawing.Point(171, 13);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(65, 21);
+            this.label39.TabIndex = 1;
+            this.label39.Text = "Status";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label40
+            // 
+            this.label40.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label40.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label40.Location = new System.Drawing.Point(35, 37);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(319, 56);
+            this.label40.TabIndex = 1;
+            this.label40.Text = "Before Pass";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.Color.DimGray;
             this.panel10.Controls.Add(this.label32);
-            this.panel10.Controls.Add(this.label34);
+            this.panel10.Controls.Add(this.mainLastBeaconLabel);
             this.panel10.Location = new System.Drawing.Point(630, 282);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(410, 100);
@@ -395,23 +691,23 @@
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label32.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label32.Location = new System.Drawing.Point(125, 13);
+            this.label32.Location = new System.Drawing.Point(141, 13);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(118, 21);
             this.label32.TabIndex = 1;
             this.label32.Text = "Last Beacon";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label34
+            // mainLastBeaconLabel
             // 
-            this.label34.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label34.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label34.Location = new System.Drawing.Point(0, 40);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(407, 56);
-            this.label34.TabIndex = 24;
-            this.label34.Text = "-- : -- : --";
-            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mainLastBeaconLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.mainLastBeaconLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.mainLastBeaconLabel.Location = new System.Drawing.Point(3, 44);
+            this.mainLastBeaconLabel.Name = "mainLastBeaconLabel";
+            this.mainLastBeaconLabel.Size = new System.Drawing.Size(406, 56);
+            this.mainLastBeaconLabel.TabIndex = 24;
+            this.mainLastBeaconLabel.Text = "-- : -- : --";
+            this.mainLastBeaconLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel9
             // 
@@ -428,7 +724,7 @@
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label38.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label38.Location = new System.Drawing.Point(125, 13);
+            this.label38.Location = new System.Drawing.Point(123, 13);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(136, 21);
             this.label38.TabIndex = 1;
@@ -439,9 +735,9 @@
             // 
             this.mainLastTxLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.mainLastTxLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.mainLastTxLabel.Location = new System.Drawing.Point(0, 40);
+            this.mainLastTxLabel.Location = new System.Drawing.Point(3, 40);
             this.mainLastTxLabel.Name = "mainLastTxLabel";
-            this.mainLastTxLabel.Size = new System.Drawing.Size(407, 56);
+            this.mainLastTxLabel.Size = new System.Drawing.Size(406, 56);
             this.mainLastTxLabel.TabIndex = 24;
             this.mainLastTxLabel.Text = "-- : -- : --";
             this.mainLastTxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -449,6 +745,8 @@
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.DimGray;
+            this.panel8.Controls.Add(this.panel13);
+            this.panel8.Controls.Add(this.panel14);
             this.panel8.Controls.Add(this.label37);
             this.panel8.Controls.Add(this.mainLastRxLabel);
             this.panel8.Location = new System.Drawing.Point(630, 70);
@@ -456,12 +754,78 @@
             this.panel8.Size = new System.Drawing.Size(410, 100);
             this.panel8.TabIndex = 28;
             // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.Color.DimGray;
+            this.panel13.Controls.Add(this.label34);
+            this.panel13.Controls.Add(this.label35);
+            this.panel13.Location = new System.Drawing.Point(0, 212);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(410, 100);
+            this.panel13.TabIndex = 34;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label34.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label34.Location = new System.Drawing.Point(141, 13);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(118, 21);
+            this.label34.TabIndex = 1;
+            this.label34.Text = "Last Beacon";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label35
+            // 
+            this.label35.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label35.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label35.Location = new System.Drawing.Point(3, 40);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(406, 56);
+            this.label35.TabIndex = 24;
+            this.label35.Text = "-- : -- : --";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel14
+            // 
+            this.panel14.BackColor = System.Drawing.Color.DimGray;
+            this.panel14.Controls.Add(this.label36);
+            this.panel14.Controls.Add(this.label42);
+            this.panel14.Location = new System.Drawing.Point(0, 106);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(410, 100);
+            this.panel14.TabIndex = 33;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label36.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label36.Location = new System.Drawing.Point(123, 13);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(136, 21);
+            this.label36.TabIndex = 1;
+            this.label36.Text = "Last Frame TX";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label42
+            // 
+            this.label42.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label42.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label42.Location = new System.Drawing.Point(3, 40);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(406, 56);
+            this.label42.TabIndex = 24;
+            this.label42.Text = "-- : -- : --";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label37
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label37.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label37.Location = new System.Drawing.Point(124, 13);
+            this.label37.Location = new System.Drawing.Point(121, 13);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(138, 21);
             this.label37.TabIndex = 1;
@@ -472,9 +836,9 @@
             // 
             this.mainLastRxLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.mainLastRxLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.mainLastRxLabel.Location = new System.Drawing.Point(0, 44);
+            this.mainLastRxLabel.Location = new System.Drawing.Point(3, 44);
             this.mainLastRxLabel.Name = "mainLastRxLabel";
-            this.mainLastRxLabel.Size = new System.Drawing.Size(409, 56);
+            this.mainLastRxLabel.Size = new System.Drawing.Size(406, 56);
             this.mainLastRxLabel.TabIndex = 7;
             this.mainLastRxLabel.Text = "-- : -- : --";
             this.mainLastRxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -482,36 +846,35 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.DimGray;
-            this.panel7.Controls.Add(this.label35);
-            this.panel7.Controls.Add(this.label36);
-            this.panel7.Location = new System.Drawing.Point(1047, 70);
+            this.panel7.Controls.Add(this.utcTitle);
+            this.panel7.Controls.Add(this.mainUtcLabel);
+            this.panel7.Location = new System.Drawing.Point(214, 282);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(200, 100);
+            this.panel7.Size = new System.Drawing.Size(409, 100);
             this.panel7.TabIndex = 27;
             // 
-            // label35
+            // utcTitle
             // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label35.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label35.Location = new System.Drawing.Point(69, 13);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(47, 21);
-            this.label35.TabIndex = 1;
-            this.label35.Text = "UTC";
-            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.utcTitle.AutoSize = true;
+            this.utcTitle.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.utcTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.utcTitle.Location = new System.Drawing.Point(180, 13);
+            this.utcTitle.Name = "utcTitle";
+            this.utcTitle.Size = new System.Drawing.Size(47, 21);
+            this.utcTitle.TabIndex = 1;
+            this.utcTitle.Text = "UTC";
+            this.utcTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label36
+            // mainUtcLabel
             // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label36.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label36.Location = new System.Drawing.Point(22, 44);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(141, 40);
-            this.label36.TabIndex = 1;
-            this.label36.Text = "-- : -- : --";
-            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mainUtcLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.mainUtcLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.mainUtcLabel.Location = new System.Drawing.Point(3, 40);
+            this.mainUtcLabel.Name = "mainUtcLabel";
+            this.mainUtcLabel.Size = new System.Drawing.Size(406, 56);
+            this.mainUtcLabel.TabIndex = 1;
+            this.mainUtcLabel.Text = "-- : -- : --";
+            this.mainUtcLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel6
             // 
@@ -616,7 +979,6 @@
             this.nextPassLabel.TabIndex = 1;
             this.nextPassLabel.Text = "-- : -- : --";
             this.nextPassLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.nextPassLabel.Click += new System.EventHandler(this.nextPassLabel_Click);
             // 
             // MainSatCB
             // 
@@ -650,7 +1012,7 @@
             this.TxTab.Location = new System.Drawing.Point(4, 22);
             this.TxTab.Name = "TxTab";
             this.TxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.TxTab.Size = new System.Drawing.Size(1412, 595);
+            this.TxTab.Size = new System.Drawing.Size(1362, 595);
             this.TxTab.TabIndex = 0;
             this.TxTab.Text = "TX";
             this.TxTab.UseVisualStyleBackColor = true;
@@ -658,7 +1020,7 @@
             // descSubType
             // 
             this.descSubType.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.descSubType.Location = new System.Drawing.Point(562, 136);
+            this.descSubType.Location = new System.Drawing.Point(512, 136);
             this.descSubType.Name = "descSubType";
             this.descSubType.Size = new System.Drawing.Size(198, 57);
             this.descSubType.TabIndex = 18;
@@ -889,7 +1251,7 @@
             this.RxTab.Location = new System.Drawing.Point(4, 22);
             this.RxTab.Name = "RxTab";
             this.RxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.RxTab.Size = new System.Drawing.Size(1412, 595);
+            this.RxTab.Size = new System.Drawing.Size(1362, 595);
             this.RxTab.TabIndex = 1;
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
@@ -1136,7 +1498,7 @@
             this.ImageTab.Controls.Add(this.panel1);
             this.ImageTab.Location = new System.Drawing.Point(4, 22);
             this.ImageTab.Name = "ImageTab";
-            this.ImageTab.Size = new System.Drawing.Size(1412, 595);
+            this.ImageTab.Size = new System.Drawing.Size(1362, 595);
             this.ImageTab.TabIndex = 2;
             this.ImageTab.Text = "images";
             this.ImageTab.UseVisualStyleBackColor = true;
@@ -1320,7 +1682,7 @@
             this.tabQuery.Location = new System.Drawing.Point(4, 22);
             this.tabQuery.Name = "tabQuery";
             this.tabQuery.Padding = new System.Windows.Forms.Padding(3);
-            this.tabQuery.Size = new System.Drawing.Size(1412, 595);
+            this.tabQuery.Size = new System.Drawing.Size(1362, 595);
             this.tabQuery.TabIndex = 3;
             this.tabQuery.Text = "Query";
             this.tabQuery.UseVisualStyleBackColor = true;
@@ -1677,7 +2039,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1420, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1370, 24);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1760,162 +2122,16 @@
             this.nextUpdateTimer.Interval = 3600000;
             this.nextUpdateTimer.Tick += new System.EventHandler(this.nextUpdateTimer_Tick);
             // 
-            // panel11
+            // everySecTimer
             // 
-            this.panel11.BackColor = System.Drawing.Color.DimGray;
-            this.panel11.Controls.Add(this.label39);
-            this.panel11.Controls.Add(this.label40);
-            this.panel11.Location = new System.Drawing.Point(214, 70);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(410, 100);
-            this.panel11.TabIndex = 32;
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label39.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label39.Location = new System.Drawing.Point(157, 13);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(65, 21);
-            this.label39.TabIndex = 1;
-            this.label39.Text = "Status";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label40
-            // 
-            this.label40.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label40.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label40.Location = new System.Drawing.Point(35, 37);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(319, 56);
-            this.label40.TabIndex = 1;
-            this.label40.Text = "Before Pass";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.DimGray;
-            this.panel12.Controls.Add(this.label41);
-            this.panel12.Controls.Add(this.label42);
-            this.panel12.Location = new System.Drawing.Point(214, 176);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(410, 100);
-            this.panel12.TabIndex = 33;
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label41.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label41.Location = new System.Drawing.Point(125, 13);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(94, 21);
-            this.label41.TabIndex = 1;
-            this.label41.Text = "Last Pass";
-            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label42
-            // 
-            this.label42.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label42.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label42.Location = new System.Drawing.Point(3, 40);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(407, 56);
-            this.label42.TabIndex = 24;
-            this.label42.Text = "-- : -- : --";
-            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // aquaGauge4
-            // 
-            this.aquaGauge4.BackColor = System.Drawing.Color.Transparent;
-            this.aquaGauge4.DialColor = System.Drawing.Color.Lavender;
-            this.aquaGauge4.DialText = "V Bat";
-            this.aquaGauge4.Glossiness = 11.36364F;
-            this.aquaGauge4.Location = new System.Drawing.Point(1046, 387);
-            this.aquaGauge4.MaxValue = 9F;
-            this.aquaGauge4.MinValue = 0F;
-            this.aquaGauge4.Name = "aquaGauge4";
-            this.aquaGauge4.NoOfDivisions = 9;
-            this.aquaGauge4.RecommendedValue = 8.1F;
-            this.aquaGauge4.Size = new System.Drawing.Size(200, 200);
-            this.aquaGauge4.TabIndex = 37;
-            this.aquaGauge4.ThresholdPercent = 30F;
-            this.aquaGauge4.Value = 7.89F;
-            // 
-            // aquaGauge5
-            // 
-            this.aquaGauge5.BackColor = System.Drawing.Color.Transparent;
-            this.aquaGauge5.DialColor = System.Drawing.Color.Lavender;
-            this.aquaGauge5.DialText = "V Bat";
-            this.aquaGauge5.Glossiness = 11.36364F;
-            this.aquaGauge5.Location = new System.Drawing.Point(840, 387);
-            this.aquaGauge5.MaxValue = 9F;
-            this.aquaGauge5.MinValue = 0F;
-            this.aquaGauge5.Name = "aquaGauge5";
-            this.aquaGauge5.NoOfDivisions = 9;
-            this.aquaGauge5.RecommendedValue = 8.1F;
-            this.aquaGauge5.Size = new System.Drawing.Size(200, 200);
-            this.aquaGauge5.TabIndex = 36;
-            this.aquaGauge5.ThresholdPercent = 30F;
-            this.aquaGauge5.Value = 7.89F;
-            // 
-            // aquaGauge3
-            // 
-            this.aquaGauge3.BackColor = System.Drawing.Color.Transparent;
-            this.aquaGauge3.DialColor = System.Drawing.Color.Lavender;
-            this.aquaGauge3.DialText = "V Bat";
-            this.aquaGauge3.Glossiness = 11.36364F;
-            this.aquaGauge3.Location = new System.Drawing.Point(630, 387);
-            this.aquaGauge3.MaxValue = 9F;
-            this.aquaGauge3.MinValue = 0F;
-            this.aquaGauge3.Name = "aquaGauge3";
-            this.aquaGauge3.NoOfDivisions = 9;
-            this.aquaGauge3.RecommendedValue = 8.1F;
-            this.aquaGauge3.Size = new System.Drawing.Size(200, 200);
-            this.aquaGauge3.TabIndex = 35;
-            this.aquaGauge3.ThresholdPercent = 30F;
-            this.aquaGauge3.Value = 7.89F;
-            // 
-            // aquaGauge2
-            // 
-            this.aquaGauge2.BackColor = System.Drawing.Color.Transparent;
-            this.aquaGauge2.DialColor = System.Drawing.Color.Lavender;
-            this.aquaGauge2.DialText = "V Bat";
-            this.aquaGauge2.Glossiness = 11.36364F;
-            this.aquaGauge2.Location = new System.Drawing.Point(8, 387);
-            this.aquaGauge2.MaxValue = 9F;
-            this.aquaGauge2.MinValue = 0F;
-            this.aquaGauge2.Name = "aquaGauge2";
-            this.aquaGauge2.NoOfDivisions = 9;
-            this.aquaGauge2.RecommendedValue = 8.1F;
-            this.aquaGauge2.Size = new System.Drawing.Size(200, 200);
-            this.aquaGauge2.TabIndex = 34;
-            this.aquaGauge2.ThresholdPercent = 30F;
-            this.aquaGauge2.Value = 7.89F;
-            // 
-            // aquaGauge1
-            // 
-            this.aquaGauge1.BackColor = System.Drawing.Color.Transparent;
-            this.aquaGauge1.DialColor = System.Drawing.Color.Lavender;
-            this.aquaGauge1.DialText = "V Bat";
-            this.aquaGauge1.Glossiness = 11.36364F;
-            this.aquaGauge1.Location = new System.Drawing.Point(1047, 176);
-            this.aquaGauge1.MaxValue = 9F;
-            this.aquaGauge1.MinValue = 0F;
-            this.aquaGauge1.Name = "aquaGauge1";
-            this.aquaGauge1.NoOfDivisions = 9;
-            this.aquaGauge1.RecommendedValue = 8.1F;
-            this.aquaGauge1.Size = new System.Drawing.Size(200, 200);
-            this.aquaGauge1.TabIndex = 30;
-            this.aquaGauge1.ThresholdPercent = 30F;
-            this.aquaGauge1.Value = 7.89F;
+            this.everySecTimer.Interval = 1000;
+            this.everySecTimer.Tick += new System.EventHandler(this.everySecTimer_Tick);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1420, 645);
+            this.ClientSize = new System.Drawing.Size(1370, 645);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1928,12 +2144,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).EndInit();
             this.TabControl.ResumeLayout(false);
             this.MainTab.ResumeLayout(false);
+            this.panel18.ResumeLayout(false);
+            this.panel18.PerformLayout();
+            this.panel16.ResumeLayout(false);
+            this.panel16.PerformLayout();
+            this.panel17.ResumeLayout(false);
+            this.panel17.PerformLayout();
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
+            this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel6.ResumeLayout(false);
@@ -1962,10 +2194,6 @@
             this.fieldOptionsPnl.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2112,26 +2340,44 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label utcTitle;
+        private System.Windows.Forms.Label mainUtcLabel;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label label37;
-        private AquaControls.AquaGauge aquaGauge1;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label mainLastBeaconLabel;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label mainLastPassLabel;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
-        private AquaControls.AquaGauge aquaGauge4;
-        private AquaControls.AquaGauge aquaGauge5;
-        private AquaControls.AquaGauge aquaGauge3;
-        private AquaControls.AquaGauge aquaGauge2;
+        private System.Windows.Forms.Timer everySecTimer;
+        private AquaControls.AquaGauge VBatGauge;
+        private AquaControls.AquaGauge OBCGauge;
+        private AquaControls.AquaGauge FreeSpaceGauge;
+        private AquaControls.AquaGauge BatTempGauge;
+        private System.Windows.Forms.Panel panel15;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label MainSatTimeLabel;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Panel panel17;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label MainSatUptimeLabel;
+        private System.Windows.Forms.Panel panel18;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label MainCmdRestesLabel;
+        private System.Windows.Forms.Panel panel16;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label MainSatResetsLabel;
     }
 }
 

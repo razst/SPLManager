@@ -294,3 +294,4 @@ C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyCo
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources

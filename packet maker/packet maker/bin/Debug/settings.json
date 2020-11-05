@@ -2,6 +2,7 @@
   "endNodePath": "C:/Users/pc/Desktop/GSC/GSC-EndNode/GSC-EndNode.exe",
   "enableImage": false,
   "dataBaseEnabled": true,
+  "pacCurId": 0,
   "tcpPortNumber": 4,
   "defultSatGroup": 2,
   "enableExcel": false,
@@ -9,8 +10,8 @@
 	"minThersholdSatPass":5
   },
   "groundStationLocation": {
-    "lat": 333,
-    "lng": 333,
+    "lat": 30.983852,
+    "lng": 34.92953,
     "alt": 500,
     "minElevation": 40
   },

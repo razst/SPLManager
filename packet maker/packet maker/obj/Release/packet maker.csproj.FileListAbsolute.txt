@@ -250,3 +250,4 @@ C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\Sy
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\System.Web.WebPages.xml
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\System.Web.WebPages.Deployment.xml
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Release\System.Web.WebPages.Razor.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Release\AquaControls.valuesOfColors.resources

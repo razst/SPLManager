@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-
 using Google.Cloud.Firestore;
 using Nest;
+using System.Web.Helpers;
 
 namespace packet_maker
 {
@@ -18,7 +18,7 @@ namespace packet_maker
 
 
         static public ElasticClient db;
-        static public BasicSettings settings = new BasicSettings();
+        static public dynamic settings = null;
 
 
 
@@ -36,8 +36,7 @@ namespace packet_maker
         {
            using(StreamReader Tsettings = new StreamReader(@"settings.json"))
            {
-                JsonSerializer Serializer = new JsonSerializer();
-                settings = (BasicSettings)Serializer.Deserialize(Tsettings, typeof(BasicSettings));
+                settings = Json.Decode(Tsettings.ReadToEnd());
            }
 
             if (settings.dataBaseEnabled)

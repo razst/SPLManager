@@ -6,9 +6,20 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using packet_maker;
 
 namespace AquaControls
 {
+    public class valuesOfColors
+    {
+        public Color color { get; set; }
+        public float minVal { get; set; }
+        public float maxVal { get; set; }
+
+        public float threshVal { get; set; }
+        public float threshPrecent { get; set; }
+    }
+
     /// <summary>
     /// Aqua Gauge Control - A Windows User Control.
     /// Author  : Ambalavanar Thirugnanam
@@ -38,6 +49,7 @@ namespace AquaControls
         private bool requiresRedraw;
         private Image backgroundImg;
         private Rectangle rectImg;
+        private Dictionary<string, valuesOfColors> valOCal;
         #endregion
 
         public AquaGauge()
@@ -144,6 +156,19 @@ namespace AquaControls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Dictionary<string, valuesOfColors> ColorofG
+        {
+            get { return valOCal; }
+            set
+            {
+                valOCal = value;
+                requiresRedraw = true;
+                this.Invalidate();
+            }
+        }
+
+
         /// <summary>
         /// Value where the pointer will point to.
         /// </summary>
@@ -157,6 +182,14 @@ namespace AquaControls
                 if (value >= minValue && value <= maxValue)
                 {
                     currentValue = value;
+                    if(ColorofG != null)
+                    foreach (var item in ColorofG.Values)
+                    {
+                            if(currentValue < item.maxVal && currentValue > item.minVal)
+                            {
+                                this.DialColor = item.color;
+                            }
+                    }
                     this.Refresh();
                 }
             }
@@ -172,10 +205,12 @@ namespace AquaControls
             set
             {
                 dialColor = value;
-                requiresRedraw = true;
+                requiresRedraw = true; 
                 this.Invalidate();
             }
         }
+
+
 
         /// <summary>
         /// Glossiness strength. Range: 0-100
@@ -333,19 +368,19 @@ namespace AquaControls
                 Rectangle rectg = new Rectangle(rectImg.X + gap, rectImg.Y + gap, rectImg.Width - gap * 2, rectImg.Height - gap * 2);
                 g.DrawArc(colorPen, rectg, 135, 270);
 
-                //Draw Threshold
+                //*Draw Threshold
                 colorPen = new Pen(Color.FromArgb(200, Color.LawnGreen), this.Width / 50);
                 rectg = new Rectangle(rectImg.X + gap, rectImg.Y + gap, rectImg.Width - gap * 2, rectImg.Height - gap * 2);
                 float val = MaxValue - MinValue;
                 val = (100 * (this.recommendedValue - MinValue)) / val;
                 val = ((toAngle - fromAngle) * val) / 100;
                 val += fromAngle;
-                float stAngle = val - ((270 * threshold) / 200);
+                float stAngle = val - (270 * threshold / 200);
                 if (stAngle <= 135) stAngle = 135;
                 float sweepAngle = ((270 * threshold) / 100);
                 if (stAngle + sweepAngle > 405) sweepAngle = 405 - stAngle;
                 g.DrawArc(colorPen, rectg, stAngle, sweepAngle);
-
+                
                 //Draw Digital Value
                 RectangleF digiRect = new RectangleF((float)this.Width / 2F - (float)this.width / 5F, (float)this.height / 1.2F, (float)this.width / 2.5F, (float)this.Height / 9F);
                 RectangleF digiFRect = new RectangleF(this.Width / 2 - this.width / 7, (int)(this.height / 1.18), this.width / 4, this.Height / 12);
@@ -356,6 +391,26 @@ namespace AquaControls
                 RectangleF digiFRectText = new RectangleF(this.Width / 2 - textSize.Width / 2, (int)(this.height / 1.5), textSize.Width, textSize.Height);
                 g.DrawString(dialText, this.Font, new SolidBrush(this.ForeColor), digiFRectText);
                 requiresRedraw = false;
+
+                //Draw Critical Threshold
+                if(ColorofG != null)
+                foreach (var item in ColorofG.Values)
+                {
+                        var newVal = item.threshVal;
+                        var newThresh = item.threshPrecent;
+
+                        colorPen = new Pen(item.color, this.Width / 35);
+                        rectg = new Rectangle(rectImg.X + gap, rectImg.Y + gap, rectImg.Width - gap * 2, rectImg.Height - gap * 2);
+                        float critHold = MaxValue - MinValue;
+                        critHold = (100 * (newVal - MinValue)) / critHold;
+                        critHold = ((toAngle - fromAngle) * critHold) / 100;
+                        critHold += fromAngle;
+                        float critStAngel = critHold - ((270 * newThresh) / 200);
+                        if (critStAngel <= 135) critStAngel = 135;
+                        float critSweepAngle = ((270 * newThresh) / 100);
+                        if (critStAngel + critSweepAngle > 405) critSweepAngle = 405 - critStAngel;
+                        g.DrawArc(colorPen, rectg, critStAngel, critSweepAngle);
+                }
             }
             e.Graphics.DrawImage(backgroundImg, rectImg);
         }
@@ -746,6 +801,8 @@ namespace AquaControls
                     width/7));
             }
         }
+
+
 
         /// <summary>
         /// Gets Relative X for the given width to draw digit

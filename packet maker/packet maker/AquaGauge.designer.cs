@@ -1,3 +1,5 @@
+
+
 namespace AquaControls
 {
     partial class AquaGauge
@@ -36,6 +38,7 @@ namespace AquaControls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "AquaGauge";
             this.ResumeLayout(false);
+
 
         }
 

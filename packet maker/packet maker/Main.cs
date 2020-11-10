@@ -1794,7 +1794,7 @@ namespace packet_maker
                     MainSatTimeLabel.Text = DateTime.Parse(lastTimeSnapshot.Documents.First()["sat_time"].ToString()).ToLocalTime().ToString();
                     MainSatResetsLabel.Text = lastTimeSnapshot.Documents.First()["number_of_resets"].ToString();
                     MainCmdRestesLabel.Text = lastTimeSnapshot.Documents.First()["number_of_cmd_resets"].ToString();
-
+                    MainCorruptLabel.Text = lastTimeSnapshot.Documents.First()["corrupt_bytes"].ToString();
                     var tempTS = TimeSpan.FromSeconds(int.Parse( lastTimeSnapshot.Documents.First()["sat_uptime"].ToString()));
                     MainSatUptimeLabel.Text = $"{tempTS.Days}:{tempTS.Hours}:{tempTS.Seconds + tempTS.Minutes*60}";
 

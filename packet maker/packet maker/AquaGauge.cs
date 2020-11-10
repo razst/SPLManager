@@ -399,7 +399,7 @@ namespace AquaControls
                         var newVal = item.threshVal;
                         var newThresh = item.threshPrecent;
 
-                        colorPen = new Pen(item.color, this.Width / 35);
+                        colorPen = new Pen(item.color, this.Width / 50);
                         rectg = new Rectangle(rectImg.X + gap, rectImg.Y + gap, rectImg.Width - gap * 2, rectImg.Height - gap * 2);
                         float critHold = MaxValue - MinValue;
                         critHold = (100 * (newVal - MinValue)) / critHold;

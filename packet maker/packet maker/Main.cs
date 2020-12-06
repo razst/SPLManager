@@ -237,22 +237,24 @@ namespace packet_maker
             if (Program.settings.dataBaseEnabled)
             {
                 Dictionary<string, object> DBPacket = new Dictionary<string, object>
-                    {
-                        {"packetString",ogPacket.rawPacket },
-                        {"time",DateTime.UtcNow }
-                    };
+                {
+                    {"packetString",ogPacket.rawPacket },
+                    {"time",DateTime.UtcNow }
+                };
 
 
                 if (ogPacket.type != -1)
                 {
                     DBPacket.AddRange(new Dictionary<string, object>
-                        {
-                            {"splID",ogPacket.id },
-                            {"type",ogPacket.getTypeName() },
-                            {"subtype",ogPacket.getSubTypeName() },
-                            {"lenght",ogPacket.length },
-                            {"satId",ogPacket.getSatDex() }
-                        });
+                    {
+                        {"splID",ogPacket.id },
+                        {"type",ogPacket.getTypeName() },
+                        {"subtype",ogPacket.getSubTypeName() },
+                        {"lenght",ogPacket.length },
+                        {"satId",ogPacket.getSatDex() },
+                        {"satName", ogPacket.sateliteGroup }
+                        
+                    });
                     DBPacket.AddRange(ogPacket.dataCatalog);
                 }
                 else

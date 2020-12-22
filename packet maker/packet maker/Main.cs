@@ -181,7 +181,7 @@ namespace packet_maker
 
         private void Main_Shown(object sender, EventArgs e)
         {
-            RadioServer.Start();
+            RadioServer.Start(Program.settings.serverMode);
         }
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {

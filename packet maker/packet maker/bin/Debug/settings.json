@@ -9,6 +9,11 @@
   "widgetSettings": {
 	"minThersholdSatPass":5
   },
+  "serverMode":"UDP",
+  "UDPports": {
+	"client": 27002,
+	"server": 27002
+  },
   "groundStationLocation": {
     "lat": 30.983852,
     "lng": 34.92953,

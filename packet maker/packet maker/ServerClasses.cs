@@ -31,18 +31,38 @@ namespace packet_maker
         private Thread childThread = null;
         private TcpClient client = null;
         private TcpListener server = null;
+        private UDPSocket UDPserver = null;
+        private UDPSocket UDPclient = null;
 
         public bool isOnline;
+        public string serverMode = null;
 
-        public void Start()
+
+        public void Start(string mode)
         {
-            if (childThread == null)
+            serverMode = mode;
+            switch (mode)
             {
-                ThreadStart childref = new ThreadStart(Server_Thread);
-                childThread = new Thread(childref);
-                childThread.IsBackground = true;
-                childThread.Start();
+                case "TCP":
+                    if (childThread == null)
+                    {
+                        ThreadStart childref = new ThreadStart(Server_Thread);
+                        childThread = new Thread(childref)
+                        {
+                            IsBackground = true
+                        };
+                        childThread.Start();
+                    }
+                    break;
+                case "UDP":
+                    UDPclient = new UDPSocket();
+                    UDPserver = new UDPSocket();
+                    UDPserver.Server(Program.settings.UDPports.server, Main.frm);
+                    UDPclient.Client("127.0.0.1", Program.settings.UDPports.client);
+                    isOnline = true;
+                    break;
             }
+
         }
 
         private byte[] ConvertHexToBytes(string str)
@@ -62,24 +82,33 @@ namespace packet_maker
         }
 
 
-        public void Stop() => Kill_Server_Thread();
+        public void Stop() { if (serverMode == "TCP") Kill_Server_Thread(); }
 
         public async Task Send(string msg)
         {
-            await Task.Run(() => {
-                if (isOnline)
-                {
-                    byte[] j = ConvertHexToBytes(msg);
-                    cmd command = new cmd { Type = "RawTelecommand", Content = j };
-                    var toSend = JObject.FromObject(command);
-                    byte[] dataToSend = Encoding.Default.GetBytes(toSend.ToString());
-                    client.GetStream().Write(dataToSend, 0, dataToSend.Length);
-                }
-                else
-                {
-                    MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            });
+            switch (serverMode)
+            {
+                case "TCP":
+                    await Task.Run(() => {
+                        if (isOnline)
+                        {
+                            byte[] j = ConvertHexToBytes(msg);
+                            cmd command = new cmd { Type = "RawTelecommand", Content = j };
+                            var toSend = JObject.FromObject(command);
+                            byte[] dataToSend = Encoding.Default.GetBytes(toSend.ToString());
+                            client.GetStream().Write(dataToSend, 0, dataToSend.Length);
+                        }
+                        else
+                        {
+                            MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    });
+                    break;
+                case "UDP":
+                    await Task.Run(() => UDPclient.Send(msg));
+                    break;
+            }
+
         }
 
         private void Server_Thread()
@@ -206,4 +235,65 @@ namespace packet_maker
         }
 
     }
+
+
+    public class UDPSocket
+    {
+        private Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        private const int bufSize = 8 * 1024;
+        private State state = new State();
+        private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0);
+        private AsyncCallback recv = null;
+        private Main serverForm = null;
+
+        public class State
+        {
+            public byte[] buffer = new byte[bufSize];
+        }
+
+        public void Server(int port, Main serverForm)
+        {
+            this.serverForm = serverForm;
+            _socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.ReuseAddress, true);
+            _socket.EnableBroadcast = true;
+            // _socket.Bind(new IPEndPoint(IPAddress.Parse(address), port));
+            _socket.Bind(new IPEndPoint(IPAddress.Any, port));
+            Receive();
+        }
+
+        public void Client(string address, int port)
+        {
+            _socket.Connect(IPAddress.Parse(address), port);
+            Receive();
+        }
+
+        public void Send(string text)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(text);
+            _socket.BeginSend(data, 0, data.Length, SocketFlags.None, (ar) =>
+            {
+                State so = (State)ar.AsyncState;
+                int bytes = _socket.EndSend(ar);
+                Console.WriteLine("SEND: {0}, {1}", bytes, text);
+            }, state);
+        }
+
+        private void Receive()
+        {
+            _socket.BeginReceiveFrom(state.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv = (ar) =>
+            {
+                State so = (State)ar.AsyncState;
+                int bytes = _socket.EndReceiveFrom(ar, ref epFrom);
+                _socket.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
+                Console.WriteLine("RECV: {0}: {1}, {2}", epFrom.ToString(), bytes, Encoding.ASCII.GetString(so.buffer, 0, bytes));
+
+
+                Action<string> clickCall = serverForm.trasBtn_click;
+                serverForm.BeginInvoke(clickCall, Encoding.ASCII.GetString(so.buffer, 0, bytes));
+
+
+            }, state);
+        }
+    }
+
 }

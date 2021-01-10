@@ -9,7 +9,7 @@
   "widgetSettings": {
 	"minThersholdSatPass":5
   },
-  "serverMode":"UDP",
+  "serverMode":"TCP",
   "UDPports": {
 	"client": 27002,
 	"server": 27002

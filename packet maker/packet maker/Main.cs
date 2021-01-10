@@ -1657,13 +1657,18 @@ namespace packet_maker
                 if ((long)passesData.passes[0].endUTC + 60 < DateTimeOffset.UtcNow.ToUnixTimeSeconds())
                 {
                     nextPassTimer.Stop();
-                    mainLastPassLabel.Text = passesData.passes[0].endUTC.ToString();
+                    mainLastPassLabel.Text = DateTimeOffset.FromUnixTimeSeconds((long)passesData.passes[0].endUTC).LocalDateTime.ToString();
                     var dt = await GetNextPass();
                     secondsTilPass = GetSecondsTil(dt);
                     UpdatePassesLabels();
                     nextUpdateTimer.Start();
                     passOccured = false;
+                    PassStatusLabel.Text = "Before Pass";
                     nextPassTimer.Start();
+                }
+                else
+                {
+                    PassStatusLabel.Text = "Passing";
                 }
             }
         }

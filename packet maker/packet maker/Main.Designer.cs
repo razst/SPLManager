@@ -68,7 +68,7 @@
             this.mainLastPassLabel = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
             this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
+            this.PassStatusLabel = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.label32 = new System.Windows.Forms.Label();
             this.mainLastBeaconLabel = new System.Windows.Forms.Label();
@@ -684,7 +684,7 @@
             // 
             this.panel11.BackColor = System.Drawing.Color.DimGray;
             this.panel11.Controls.Add(this.label39);
-            this.panel11.Controls.Add(this.label40);
+            this.panel11.Controls.Add(this.PassStatusLabel);
             this.panel11.Location = new System.Drawing.Point(214, 70);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(410, 100);
@@ -702,16 +702,16 @@
             this.label39.Text = "Status";
             this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label40
+            // PassStatusLabel
             // 
-            this.label40.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label40.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label40.Location = new System.Drawing.Point(35, 37);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(319, 56);
-            this.label40.TabIndex = 1;
-            this.label40.Text = "Before Pass";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.PassStatusLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.PassStatusLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.PassStatusLabel.Location = new System.Drawing.Point(35, 37);
+            this.PassStatusLabel.Name = "PassStatusLabel";
+            this.PassStatusLabel.Size = new System.Drawing.Size(319, 56);
+            this.PassStatusLabel.TabIndex = 1;
+            this.PassStatusLabel.Text = "Before Pass";
+            this.PassStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel10
             // 
@@ -2383,7 +2383,7 @@
         private System.Windows.Forms.Label mainLastPassLabel;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label PassStatusLabel;
         private System.Windows.Forms.Timer everySecTimer;
         private AquaControls.AquaGauge VBatGauge;
         private AquaControls.AquaGauge OBCGauge;

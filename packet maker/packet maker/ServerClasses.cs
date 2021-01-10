@@ -150,48 +150,50 @@ namespace packet_maker
 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
-
                         Console.WriteLine("");
-                        // Translate data bytes to a ASCII string.
-                        data = Encoding.ASCII.GetString(bytes, 0, i);
-                        Msg msg1 = JsonConvert.DeserializeObject<Msg>(data);
-                        Console.WriteLine($"Received: {data}");
-
-
-                        Console.WriteLine("");
-                        switch (msg1.Type)
+                        try
                         {
-                            case "EndNode":
-                                // Process the data sent by the client.
-                                data = $@"{{'Type': 'ClientId', 'Content': {@Program.settings.tcpPortNumber}}}";
-                                byte[] msg = Encoding.ASCII.GetBytes(data);
-
-                                // Send back a response.
-                                stream.Write(msg, 0, msg.Length);
-                                Console.WriteLine("Sent: {0}", data);
-                                break;
+                            // Translate data bytes to a ASCII string.
+                            data = Encoding.ASCII.GetString(bytes, 0, i);
+                            Msg msg1 = JsonConvert.DeserializeObject<Msg>(data);
+                            Console.WriteLine($"Received: {data}");
 
 
-                            case "RawTelemetry":
-                                byte[] bbb = (byte[])(JValue)msg1.Content;
-                                string[] sArr = new string[bbb.Length];
-                                for (int k = 0; k < bbb.Length; k++)
-                                {
-                                    sArr[k] = bbb[k].ToString("X2");
-                                }
+                            Console.WriteLine("");
+                            switch (msg1.Type)
+                            {
+                                case "EndNode":
+                                    // Process the data sent by the client.
+                                    data = $@"{{'Type': 'ClientId', 'Content': {@Program.settings.tcpPortNumber}}}";
+                                    byte[] msg = Encoding.ASCII.GetBytes(data);
 
-                                string packetRecived = String.Join(" ", sArr);
-                                Action<string> clickCall = Main.frm.trasBtn_click;
-                                Main.frm.BeginInvoke(clickCall, packetRecived);
-                                break;
+                                    // Send back a response.
+                                    stream.Write(msg, 0, msg.Length);
+                                    Console.WriteLine("Sent: {0}", data);
+                                    break;
+
+
+                                case "RawTelemetry":
+                                    byte[] bbb = (byte[])(JValue)msg1.Content;
+                                    string[] sArr = new string[bbb.Length];
+                                    for (int k = 0; k < bbb.Length; k++)
+                                    {
+                                        sArr[k] = bbb[k].ToString("X2");
+                                    }
+
+                                    string packetRecived = String.Join(" ", sArr);
+                                    Action<string> clickCall = Main.frm.trasBtn_click;
+                                    Main.frm.BeginInvoke(clickCall, packetRecived);
+                                    break;
+                            }
                         }
-                        Console.WriteLine("*******************");
+                        finally
+                        {
+                            Console.WriteLine("*******************");
+                        }
+
                     }
                 }
-            }
-            catch
-            {
-
             }
             finally
             {

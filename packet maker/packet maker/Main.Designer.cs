@@ -56,13 +56,9 @@
             this.panel17 = new System.Windows.Forms.Panel();
             this.label47 = new System.Windows.Forms.Label();
             this.MainSatUptimeLabel = new System.Windows.Forms.Label();
-            this.FreeSpaceGauge = new AquaControls.AquaGauge();
-            this.BatTempGauge = new AquaControls.AquaGauge();
             this.panel15 = new System.Windows.Forms.Panel();
             this.label43 = new System.Windows.Forms.Label();
             this.MainSatTimeLabel = new System.Windows.Forms.Label();
-            this.OBCGauge = new AquaControls.AquaGauge();
-            this.VBatGauge = new AquaControls.AquaGauge();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label41 = new System.Windows.Forms.Label();
             this.mainLastPassLabel = new System.Windows.Forms.Label();
@@ -209,6 +205,10 @@
             this.nextPassTimer = new System.Windows.Forms.Timer(this.components);
             this.nextUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.everySecTimer = new System.Windows.Forms.Timer(this.components);
+            this.FreeSpaceGauge = new AquaControls.AquaGauge();
+            this.BatTempGauge = new AquaControls.AquaGauge();
+            this.OBCGauge = new AquaControls.AquaGauge();
+            this.VBatGauge = new AquaControls.AquaGauge();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
@@ -543,42 +543,6 @@
             this.MainSatUptimeLabel.Text = "-- : -- : --";
             this.MainSatUptimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FreeSpaceGauge
-            // 
-            this.FreeSpaceGauge.BackColor = System.Drawing.Color.Transparent;
-            this.FreeSpaceGauge.DialColor = System.Drawing.Color.Lavender;
-            this.FreeSpaceGauge.DialText = "Free Space (MB)";
-            this.FreeSpaceGauge.Glossiness = 11.36364F;
-            this.FreeSpaceGauge.Location = new System.Drawing.Point(630, 388);
-            this.FreeSpaceGauge.MaxValue = 2200F;
-            this.FreeSpaceGauge.MinValue = 0F;
-            this.FreeSpaceGauge.Name = "FreeSpaceGauge";
-            this.FreeSpaceGauge.NoOfDivisions = 11;
-            this.FreeSpaceGauge.NoOfSubDivisions = 1;
-            this.FreeSpaceGauge.RecommendedValue = 150F;
-            this.FreeSpaceGauge.Size = new System.Drawing.Size(200, 200);
-            this.FreeSpaceGauge.TabIndex = 40;
-            this.FreeSpaceGauge.ThresholdPercent = 15F;
-            this.FreeSpaceGauge.Value = 900F;
-            // 
-            // BatTempGauge
-            // 
-            this.BatTempGauge.BackColor = System.Drawing.Color.Transparent;
-            this.BatTempGauge.DialColor = System.Drawing.Color.Lavender;
-            this.BatTempGauge.DialText = "Bat Temp";
-            this.BatTempGauge.Glossiness = 11.36364F;
-            this.BatTempGauge.Location = new System.Drawing.Point(423, 388);
-            this.BatTempGauge.MaxValue = 80F;
-            this.BatTempGauge.MinValue = -40F;
-            this.BatTempGauge.Name = "BatTempGauge";
-            this.BatTempGauge.NoOfDivisions = 12;
-            this.BatTempGauge.NoOfSubDivisions = 8;
-            this.BatTempGauge.RecommendedValue = 5F;
-            this.BatTempGauge.Size = new System.Drawing.Size(200, 200);
-            this.BatTempGauge.TabIndex = 38;
-            this.BatTempGauge.ThresholdPercent = 0.0001F;
-            this.BatTempGauge.Value = 0F;
-            // 
             // panel15
             // 
             this.panel15.BackColor = System.Drawing.Color.DimGray;
@@ -611,41 +575,6 @@
             this.MainSatTimeLabel.TabIndex = 7;
             this.MainSatTimeLabel.Text = "-- : -- : --";
             this.MainSatTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // OBCGauge
-            // 
-            this.OBCGauge.BackColor = System.Drawing.Color.Transparent;
-            this.OBCGauge.DialColor = System.Drawing.Color.Lavender;
-            this.OBCGauge.DialText = "OBC Temp";
-            this.OBCGauge.Glossiness = 11.36364F;
-            this.OBCGauge.Location = new System.Drawing.Point(214, 389);
-            this.OBCGauge.MaxValue = 80F;
-            this.OBCGauge.MinValue = -40F;
-            this.OBCGauge.Name = "OBCGauge";
-            this.OBCGauge.NoOfDivisions = 12;
-            this.OBCGauge.NoOfSubDivisions = 8;
-            this.OBCGauge.RecommendedValue = -30F;
-            this.OBCGauge.Size = new System.Drawing.Size(200, 200);
-            this.OBCGauge.TabIndex = 0;
-            this.OBCGauge.ThresholdPercent = 20F;
-            this.OBCGauge.Value = 0F;
-            // 
-            // VBatGauge
-            // 
-            this.VBatGauge.BackColor = System.Drawing.Color.Transparent;
-            this.VBatGauge.DialColor = System.Drawing.Color.Lavender;
-            this.VBatGauge.DialText = "VBat";
-            this.VBatGauge.Glossiness = 11.36364F;
-            this.VBatGauge.Location = new System.Drawing.Point(8, 388);
-            this.VBatGauge.MaxValue = 9F;
-            this.VBatGauge.MinValue = 0F;
-            this.VBatGauge.Name = "VBatGauge";
-            this.VBatGauge.NoOfDivisions = 9;
-            this.VBatGauge.RecommendedValue = 8.25F;
-            this.VBatGauge.Size = new System.Drawing.Size(200, 200);
-            this.VBatGauge.TabIndex = 36;
-            this.VBatGauge.ThresholdPercent = 1E-05F;
-            this.VBatGauge.Value = 8F;
             // 
             // panel12
             // 
@@ -1057,9 +986,9 @@
             // descSubType
             // 
             this.descSubType.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.descSubType.Location = new System.Drawing.Point(476, 53);
+            this.descSubType.Location = new System.Drawing.Point(422, 53);
             this.descSubType.Name = "descSubType";
-            this.descSubType.Size = new System.Drawing.Size(198, 57);
+            this.descSubType.Size = new System.Drawing.Size(144, 28);
             this.descSubType.TabIndex = 18;
             this.descSubType.Text = "Description:";
             // 
@@ -2153,6 +2082,77 @@
             // 
             this.everySecTimer.Interval = 1000;
             this.everySecTimer.Tick += new System.EventHandler(this.everySecTimer_Tick);
+            // 
+            // FreeSpaceGauge
+            // 
+            this.FreeSpaceGauge.BackColor = System.Drawing.Color.Transparent;
+            this.FreeSpaceGauge.DialColor = System.Drawing.Color.Lavender;
+            this.FreeSpaceGauge.DialText = "Free Space (MB)";
+            this.FreeSpaceGauge.Glossiness = 11.36364F;
+            this.FreeSpaceGauge.Location = new System.Drawing.Point(630, 388);
+            this.FreeSpaceGauge.MaxValue = 2200F;
+            this.FreeSpaceGauge.MinValue = 0F;
+            this.FreeSpaceGauge.Name = "FreeSpaceGauge";
+            this.FreeSpaceGauge.NoOfDivisions = 11;
+            this.FreeSpaceGauge.NoOfSubDivisions = 1;
+            this.FreeSpaceGauge.RecommendedValue = 150F;
+            this.FreeSpaceGauge.Size = new System.Drawing.Size(200, 200);
+            this.FreeSpaceGauge.TabIndex = 40;
+            this.FreeSpaceGauge.ThresholdPercent = 15F;
+            this.FreeSpaceGauge.Value = 900F;
+            // 
+            // BatTempGauge
+            // 
+            this.BatTempGauge.BackColor = System.Drawing.Color.Transparent;
+            this.BatTempGauge.DialColor = System.Drawing.Color.Lavender;
+            this.BatTempGauge.DialText = "Bat Temp";
+            this.BatTempGauge.Glossiness = 11.36364F;
+            this.BatTempGauge.Location = new System.Drawing.Point(423, 388);
+            this.BatTempGauge.MaxValue = 80F;
+            this.BatTempGauge.MinValue = -40F;
+            this.BatTempGauge.Name = "BatTempGauge";
+            this.BatTempGauge.NoOfDivisions = 12;
+            this.BatTempGauge.NoOfSubDivisions = 8;
+            this.BatTempGauge.RecommendedValue = 5F;
+            this.BatTempGauge.Size = new System.Drawing.Size(200, 200);
+            this.BatTempGauge.TabIndex = 38;
+            this.BatTempGauge.ThresholdPercent = 0.0001F;
+            this.BatTempGauge.Value = 0F;
+            // 
+            // OBCGauge
+            // 
+            this.OBCGauge.BackColor = System.Drawing.Color.Transparent;
+            this.OBCGauge.DialColor = System.Drawing.Color.Lavender;
+            this.OBCGauge.DialText = "OBC Temp";
+            this.OBCGauge.Glossiness = 11.36364F;
+            this.OBCGauge.Location = new System.Drawing.Point(214, 389);
+            this.OBCGauge.MaxValue = 80F;
+            this.OBCGauge.MinValue = -40F;
+            this.OBCGauge.Name = "OBCGauge";
+            this.OBCGauge.NoOfDivisions = 12;
+            this.OBCGauge.NoOfSubDivisions = 8;
+            this.OBCGauge.RecommendedValue = -30F;
+            this.OBCGauge.Size = new System.Drawing.Size(200, 200);
+            this.OBCGauge.TabIndex = 0;
+            this.OBCGauge.ThresholdPercent = 20F;
+            this.OBCGauge.Value = 0F;
+            // 
+            // VBatGauge
+            // 
+            this.VBatGauge.BackColor = System.Drawing.Color.Transparent;
+            this.VBatGauge.DialColor = System.Drawing.Color.Lavender;
+            this.VBatGauge.DialText = "VBat";
+            this.VBatGauge.Glossiness = 11.36364F;
+            this.VBatGauge.Location = new System.Drawing.Point(8, 388);
+            this.VBatGauge.MaxValue = 9F;
+            this.VBatGauge.MinValue = 0F;
+            this.VBatGauge.Name = "VBatGauge";
+            this.VBatGauge.NoOfDivisions = 9;
+            this.VBatGauge.RecommendedValue = 8.25F;
+            this.VBatGauge.Size = new System.Drawing.Size(200, 200);
+            this.VBatGauge.TabIndex = 36;
+            this.VBatGauge.ThresholdPercent = 1E-05F;
+            this.VBatGauge.Value = 8F;
             // 
             // Main
             // 

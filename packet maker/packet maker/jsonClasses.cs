@@ -9,36 +9,6 @@ using Newtonsoft.Json;
 namespace packet_maker
 {
 
-    #region settings
-
-    public class BasicSettings
-    {
-        [JsonProperty("endNodePath")]
-        public string endNodePath { get; set; }
-
-
-        [JsonProperty("dataBaseEnabled")]
-        public bool dataBaseEnabled { get; set; }
-
-        public int pacCurId { get; set; }
-
-        [JsonProperty("enableImage")]
-        public bool enableImage { get; set; }
-
-        [JsonProperty("tcpPortNumber")]
-        public int tcpPortNumber { get; set; }
-
-        [JsonProperty("defultSatGroup")]
-        public int defultSatGroup { get; set; }
-
-        [JsonProperty("enableExcel")]
-        public bool enableExcel { get; set; }
-
-    }
-
-    #endregion
-
-
     #region rx/tx
     public class vars
     {
@@ -65,7 +35,7 @@ namespace packet_maker
         public List<string> subParams { get; set; }
 
         [JsonProperty("calibration")]
-        public int calibration { get; set; }
+        public string calibration { get; set; }
     }
     public class SubType
     {
@@ -123,7 +93,7 @@ namespace packet_maker
     public class Calibration
     {
         [JsonProperty("ID")]
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         [JsonProperty("name")]
         public string name { get; set; }

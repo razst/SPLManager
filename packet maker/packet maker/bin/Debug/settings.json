@@ -23,15 +23,72 @@
   "satInfo": [
     {
       "id": 0,
-      "name": "any",
+      "name": "Any",
       "desc": "all sats",
-      "noradID": 0
+      "noradID": -1,
+      "isUnique": false
+    },
+    {
+      "id": 1,
+      "name": "T1OFK",
+      "desc": "Ofakim",
+      "noradID": 43199,
+      "isUnique": false
     },
     {
       "id": 2,
       "name": "T2YRC",
       "desc": "Yerucham",
-      "noradID": 43199
+      "noradID": 43199,
+      "isUnique": false
+    },
+    {
+      "id": 3,
+      "name": "T3TYB",
+      "desc": "Taybe",
+      "noradID": 43199,
+      "isUnique": false
+    },
+    {
+      "id": 4,
+      "name": "T4ATA",
+      "desc": "Kiryat Ata",
+      "noradID": 43199,
+      "isUnique": false
+    },
+    {
+      "id": 5,
+      "name": "T5SNG",
+      "desc": "Shaar HaNegev",
+      "noradID": 43199,
+      "isUnique": false
+    },
+    {
+      "id": 6,
+      "name": "T6NZR",
+      "desc": "Nazareth",
+      "noradID": 43199,
+      "isUnique": false
+    },
+    {
+      "id": 7,
+      "name": "T7ADM",
+      "desc": "Maale Adomim",
+      "noradID": 43199,
+      "isUnique": false
+    },
+    {
+      "id": 8,
+      "name": "T8GBS",
+      "desc": "Guvat Shmuel",
+      "noradID": 43199,
+      "isUnique": false
+    },
+    {
+      "id": 11,
+      "name": "TAUSAT1",
+      "desc": "TA",
+      "isUnique": true
     }
   ]
 }

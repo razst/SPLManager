@@ -19,8 +19,7 @@ namespace packet_maker
 
         static public ElasticClient db;
         static public dynamic settings = null;
-
-
+        public static List<string> groups = new List<string>();
 
 
         /// <summary>
@@ -37,6 +36,10 @@ namespace packet_maker
            using(StreamReader Tsettings = new StreamReader(@"settings.json"))
            {
                 settings = Json.Decode(Tsettings.ReadToEnd());
+                foreach(var group in settings.satInfo)
+                {
+                    groups.Add($"{group.name} ({group.desc})");
+                }
            }
 
             if (settings.dataBaseEnabled)

@@ -28,7 +28,7 @@ namespace packet_maker
     {
         public string time { get; set; }
 
-        public PacketWithTime(packetObject packet,string timeString)
+        public PacketWithTime(packetObject packet, string timeString)
         {
             time = timeString;
             try
@@ -45,70 +45,41 @@ namespace packet_maker
         }
     }
 
-    public class packetObject
+    public class TAUPacket : packetObject
     {
-        private string[] groups =
-        {
-            "Any",
-            "T1OFK (Ofakim)",
-            "T2YRC (Yerucham)",
-            "T3TYB (Taybe)",
-            "T4ATA (Kiryat Ata)",
-            "T5SNG (Shaar HaNegev)",
-            "T6NZR (Nazareth)",
-            "T7ADM (Maale Adomim)",
-            "T8GBS (Guvat Shmuel)"
-        };
-
-        public int id { get; set; }
-
-        public string sateliteGroup { get; set; }
-
-        public int type { get; set; }
-
-        public int subtype { get; set; }
-
-        public int length { get; set; }
-
-        public Dictionary<string, object> dataCatalog = new Dictionary<string, object>();
-
-
-        public TypeList jsonObject { get; set; }
-
-        public string rawPacket { get; set; }
-
-        private int typeDex;
-        private int subtypeDex;
-
-
-
-
-
-        public void ConvertFromString(string packetString)
+        protected override void ConvertFromString(string packetString)
         {
             rawPacket = packetString;
             string[] bitarr = packetString.Split(' ');
 
 
-            id = Convert.ToInt32(bitarr[3] + bitarr[2] + bitarr[1] + bitarr[0], 16);
 
-            type = Convert.ToInt32(bitarr[4], 16);
-            subtype = Convert.ToInt32(bitarr[5], 16);
-            length = Convert.ToInt32(bitarr[7] + bitarr[6], 16);
-            sateliteGroup = groups[Convert.ToInt32(bitarr[3])];
+            type = Convert.ToInt32(bitarr[0], 16);
+            subtype = Convert.ToInt32(bitarr[1], 16);
+            length = Convert.ToInt32(bitarr[3] + bitarr[2], 16);
 
             typeDex = jsonObject.typenum.FindIndex(item => item.id == type);
             subtypeDex = jsonObject.typenum[typeDex].subTypes.FindIndex(item => item.id == subtype);
-            int j = 8;
+            
+            int j = 4;
             foreach (Params par in jsonObject.typenum[typeDex].subTypes[subtypeDex].parmas)
             {
                 string temp = null;
                 switch (par.type)
                 {
-                    case "int":
-
+                    case "int16":
                         dataCatalog.Add(par.name, Calibrate(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16), par.calibration));
                         j += 4;
+                        break;
+
+                    case "uint16":
+                        dataCatalog.Add(par.name, Calibrate(Convert.ToInt32(Convert.ToUInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)), par.calibration));
+                        j += 4;
+                        break;
+
+                    case "uint32":
+                        dataCatalog.Add(par.name, Calibrate(Convert.ToInt32(Convert.ToUInt32(bitarr[j+7]+bitarr[j+6]+bitarr[j+5]+bitarr[j+4]+bitarr[j+3]+bitarr[j+2]+bitarr[j+1]+bitarr[j], 16)), par.calibration));
+                        j += 8;
                         break;
 
                     case "char":
@@ -198,10 +169,203 @@ namespace packet_maker
                 }
             }
         }
-
-        private float Calibrate(int input, int paramId)
+        public TAUPacket(string group, TypeList json, string packetString)
         {
-            if (paramId != 0)
+            sateliteGroup = group;
+            jsonObject = json;
+            try
+            {
+                ConvertFromString(packetString);
+            }
+            catch
+            {
+                rawPacket = packetString;
+                type = -1;
+            }
+        }
+        protected int time { get; set; }
+        public override string ToString()
+        {
+            string output = "";
+            if(type == -1)
+            {
+                output += "manager was not able to translate this packet:" + Environment.NewLine;
+                output += rawPacket + Environment.NewLine;
+                return output;
+            }
+            output += "type: " + getTypeName() + Environment.NewLine;
+            output += "subtype: " + getSubTypeName() + Environment.NewLine;
+            output += "length: " + length + Environment.NewLine;
+            if (dataCatalog.Count != 0)
+            {
+                output += "*******************************" + Environment.NewLine;
+                foreach (var field in dataCatalog)
+                {
+                    output += field.Key + ": " + field.Value + Environment.NewLine;
+                }
+            }
+
+
+            return output;
+        }
+    }
+
+    public class packetObject
+    {
+        protected string[] groups =
+        {
+            "Any",
+            "T1OFK (Ofakim)",
+            "T2YRC (Yerucham)",
+            "T3TYB (Taybe)",
+            "T4ATA (Kiryat Ata)",
+            "T5SNG (Shaar HaNegev)",
+            "T6NZR (Nazareth)",
+            "T7ADM (Maale Adomim)",
+            "T8GBS (Guvat Shmuel)"
+        };
+
+        public int id { get; set; }
+
+        public string sateliteGroup { get; set; }
+
+        public int type { get; set; }
+
+        public int subtype { get; set; }
+
+        public int length { get; set; }
+
+        public Dictionary<string, object> dataCatalog = new Dictionary<string, object>();
+
+
+        public TypeList jsonObject { get; set; }
+
+        public string rawPacket { get; set; }
+
+        protected int typeDex;
+        protected int subtypeDex;
+
+
+
+
+
+        protected virtual void ConvertFromString(string packetString)
+        {
+            rawPacket = packetString;
+            string[] bitarr = packetString.Split(' ');
+
+
+            id = Convert.ToInt32(bitarr[3] + bitarr[2] + bitarr[1] + bitarr[0], 16);
+
+            type = Convert.ToInt32(bitarr[4], 16);
+            subtype = Convert.ToInt32(bitarr[5], 16);
+            length = Convert.ToInt32(bitarr[7] + bitarr[6], 16);
+            sateliteGroup = groups[Convert.ToInt32(bitarr[3])];
+
+            typeDex = jsonObject.typenum.FindIndex(item => item.id == type);
+            subtypeDex = jsonObject.typenum[typeDex].subTypes.FindIndex(item => item.id == subtype);
+            int j = 8;
+            foreach (Params par in jsonObject.typenum[typeDex].subTypes[subtypeDex].parmas)
+            {
+                string temp = null;
+                switch (par.type)
+                {
+                    case "int":
+
+                        dataCatalog.Add(par.name, Calibrate(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16), par.calibration));
+                        j += 4;
+                        break;
+
+                    case "char":
+                        if (par.values == null)
+                        {
+                            dataCatalog.Add(par.name, Calibrate(Convert.ToInt32(bitarr[j], 16), par.calibration));
+                            j++;
+                            break;
+                        }
+                        dataCatalog.Add(par.name, par.values[par.values.FindIndex(item => item.id == Convert.ToInt32(bitarr[j], 16))].name);   
+                        j++;
+                        break;
+
+                    case "short":
+                        dataCatalog.Add(par.name, Calibrate(Convert.ToInt32(bitarr[j + 1] + bitarr[j], 16), par.calibration));
+                        j += 2;
+                        break;
+
+                    case "datetime":
+                    case "date":
+                        if (bitarr[j] != "NN" && bitarr[j] != "N+" && bitarr[j] != "N-")
+                        {
+                            DateTimeOffset dtDateTime = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt32(bitarr[j + 3] + bitarr[j + 2] + bitarr[j + 1] + bitarr[j], 16)).ToLocalTime();
+                            if (par.type == "datetime")
+                            {
+                                dataCatalog.Add(par.name, dtDateTime.ToUniversalTime());
+                            }
+                            else
+                            {
+                                dataCatalog.Add(par.name, dtDateTime.ToUniversalTime());
+                            }
+                        }
+                        else
+                        {
+                            if (bitarr[j][1] != 'N')
+                            {
+                                dataCatalog.Add(par.name, $"now{bitarr[j][1]}{Convert.ToInt32(bitarr[j + 1] + bitarr[j + 2] + bitarr[j + 3], 16)}");
+                            }
+                            else
+                            {
+                                dataCatalog.Add(par.name, "now");
+                            }
+                        }
+
+                        j += 4;
+                        break;
+
+                    case "bytes":
+                        temp = "";
+                        for (int i = j; i < bitarr.Length; i++)
+                        {
+                            temp += bitarr[i] + " ";
+                        }
+                        dataCatalog.Add(par.name, temp);
+                        return;
+
+                    case "ascii":
+                        temp = "";
+                        List<char> letters = new List<char>();
+                        for (int i = j; i < bitarr.Length - 1; i++)
+                        {
+                            if (Convert.ToInt32(bitarr[i], 16) > 0 && Convert.ToInt32(bitarr[i], 16) < 128)
+                            {
+                                letters.Add(Convert.ToChar(Convert.ToInt32(bitarr[i], 16)));
+                            }
+                        }
+                        temp = string.Join("", letters).ToString();
+                        dataCatalog.Add(par.name, temp);
+                        return;
+
+                    case "bitwise":
+                        temp = "";
+                        int numOfBytes = par.subParams.Count / 8;
+                        for (int i = j; i < j + numOfBytes; i++)
+                        {
+                            temp += bitarr[i];
+                        }
+                        temp = String.Join(String.Empty, temp.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+
+                        for (int i = 0; i < temp.Length; i++)
+                        {
+                            dataCatalog.Add(par.subParams[i], temp[i].ToString());
+                        }
+                        j += numOfBytes;
+                        break;
+                }
+            }
+        }
+
+        protected float Calibrate(int input, string paramId)
+        {
+            if (paramId != null)
             {
                 Calibration calibration = jsonObject.calibrations.Find(x => x.ID == paramId);
                 return calibration.muliplayer * input + calibration.constent;
@@ -250,33 +414,33 @@ namespace packet_maker
         public override string ToString()
         {
             string output = "";
-            if (type != -1)
-            {
-                output += "Satlite: " + sateliteGroup + Environment.NewLine;
-                output += "ID: " + id + Environment.NewLine;
-                output += "type: " + getTypeName() + Environment.NewLine;
-                output += "subtype: " + getSubTypeName() + Environment.NewLine;
-                output += "length: " + length + Environment.NewLine;
-                if (dataCatalog.Count != 0)
-                {
-                    output += "*******************************" + Environment.NewLine;
-                    foreach (var field in dataCatalog)
-                    {
-                        output += field.Key + ": " + field.Value + Environment.NewLine;
-                    }
-                }
-            }
-            else
+            if (type == -1)
             {
                 output += "manager was not able to translate this packet:" + Environment.NewLine;
                 output += rawPacket + Environment.NewLine;
+                return output;
+            }
+
+            output += "Satlite: " + sateliteGroup + Environment.NewLine;
+            output += "ID: " + id + Environment.NewLine;
+            output += "type: " + getTypeName() + Environment.NewLine;
+            output += "subtype: " + getSubTypeName() + Environment.NewLine;
+            output += "length: " + length + Environment.NewLine;
+            if (dataCatalog.Count != 0)
+            {
+                output += "*******************************" + Environment.NewLine;
+                foreach (var field in dataCatalog)
+                {
+                    output += field.Key + ": " + field.Value + Environment.NewLine;
+                }
             }
             return output;
+
         }
 
         public string ToHeaderString(DateTime time)
         {
-            if(type == -1)
+            if (type == -1)
                 return $"[{time}]   ERROR";
             return $"[{time}]   {getTypeName()} - {getSubTypeName()}  ||| ID:{id}";
         }

@@ -1,8 +1,8 @@
 {
-	"calibrations": [
-		{"ID":"1","name":"Temperature","a":"0.0009765625","b":"0"},
-		{"ID":"2","name":"Voltage","a":"0","b":"0"}
-	],
+  "calibrations": [
+    { "ID": "1", "name": "Temperature", "a": "0.0009765625", "b": "0" },
+    { "ID": "2", "name": "Voltage", "a": "0", "b": "0" }
+  ],
 
   "types": [
     {
@@ -64,43 +64,43 @@
               "desc": "",
               "type": "short"
             },
-           {
+            {
               "name": "Solar panel 1 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "Solar panel 2 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "Solar panel 3 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "Solar panel 4 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "Solar panel 5 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "Solar panel 6 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
-             {
+            {
               "name": "sat_time",
               "desc": "satellite's clock current unix time",
               "type": "datetime"
@@ -149,7 +149,7 @@
               "name": "ADC channel 4 (mV)",
               "desc": "na",
               "type": "int"
-            },			
+            },
             {
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",
@@ -180,7 +180,7 @@
               "type": "int"
             }
           ]
-        },		
+        },
         {
           "id": "19",
           "name": "get baud rate",
@@ -463,13 +463,12 @@
           "name": "ACK_ERROR_MSG",
           "desc": "when error has occurred",
           "inParams": [
-           {
+            {
               "name": "error number",
               "desc": "TODO",
               "type": "int"
             }
-		  
-		  ]
+          ]
         }
       ]
     },
@@ -673,15 +672,6 @@
               "desc": "Output V, I and P of output bus channel in raw form",
               "type": "short"
             },
-			
-			
-			
-			
-			
-			
-			
-			
-			
 
             {
               "name": "vip_obc05-volt",
@@ -729,14 +719,6 @@
               "type": "short"
             },
 
-
-
-
-
-
-
-
-
             {
               "name": "vip_obc08-volt",
               "desc": "Output V, I and P of output bus channel in raw form",
@@ -777,13 +759,7 @@
               "desc": "Data on conditioning chain in raw form",
               "type": "short"
             },
-			
-	
 
-
-
-	
-			
             {
               "name": "cc2-curr_in_mppt",
               "desc": "Data on conditioning chain in raw form",
@@ -799,16 +775,7 @@
               "desc": "Data on conditioning chain in raw form",
               "type": "short"
             },
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
             {
               "name": "cc3-volt_in_mppt",
               "desc": "Data on conditioning chain in raw form",
@@ -823,25 +790,7 @@
               "name": "cc3-volt_out_mppt",
               "desc": "Data on conditioning chain in raw form",
               "type": "short"
-            },
-			
-			
-			
-			
-			
-
-
-
-
-
-
-			
-			
-			
-			
-			
-			
-			
+            }
           ]
         },
         {
@@ -908,37 +857,37 @@
               "name": "Solar panel 1 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "Solar panel 2 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "Solar panel 3 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "Solar panel 4 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "Solar panel 5 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "Solar panel 6 Temperature",
               "desc": "",
               "type": "int",
-			  "calibration":"1"
+              "calibration": "1"
             },
             {
               "name": "sat_time",
@@ -964,7 +913,7 @@
               "name": "sat_uptime",
               "desc": "satellite's up time in seconds",
               "type": "int"
-            },			
+            },
             {
               "name": "ADC channel 0 (mV)",
               "desc": "na",
@@ -989,7 +938,7 @@
               "name": "ADC channel 4 (mV)",
               "desc": "na",
               "type": "int"
-            },			
+            },
             {
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",
@@ -997,9 +946,7 @@
             }
           ]
         },
-		
-		
-		
+
         {
           "id": "13",
           "name": "LOG",
@@ -1022,7 +969,7 @@
             }
           ]
         },
-		
+
         {
           "id": "3",
           "name": "Solar Panels",
@@ -1094,7 +1041,6 @@
           ]
         },
 
-		
         {
           "id": "1",
           "name": "TX",
@@ -1152,8 +1098,7 @@
             }
           ]
         },
-		
-		
+
         {
           "id": "6",
           "name": "RX",
@@ -1213,7 +1158,7 @@
         }
       ]
     },
-	
+
     {
       "id": "2",
       "name": "Telemetry",
@@ -1227,17 +1172,17 @@
               "name": "EPS interval",
               "desc": "",
               "type": "int"
-            },            
+            },
             {
               "name": "TRXVU interval",
               "desc": "",
               "type": "int"
-            },            
+            },
             {
               "name": "Ant interval",
               "desc": "",
               "type": "int"
-            },            
+            },
             {
               "name": "Solar Panel interval",
               "desc": "",
@@ -1247,9 +1192,8 @@
               "name": "WOD Panel interval",
               "desc": "",
               "type": "int"
-            }	
-		  
-		  ]
+            }
+          ]
         },
         {
           "id": "187",
@@ -1260,13 +1204,12 @@
               "name": "Last Error",
               "desc": "",
               "type": "int"
-            }            
+            }
           ]
         }
       ]
-    },	
-	
-	
+    },
+
     {
       "id": "1",
       "name": "EPS",
@@ -1332,7 +1275,7 @@
           "name": "Rest EPS WDT",
           "desc": "Resets the watchdog timer keeping the system from performing a reset",
           "inParams": []
-        },		
+        }
       ]
     },
     {
@@ -1363,7 +1306,7 @@
               "type": "bytes"
             }
           ]
-        },		
+        },
         {
           "id": "224",
           "name": "FRAM Wtite",
@@ -1375,7 +1318,7 @@
               "type": "bytes"
             }
           ]
-        },		
+        },
         {
           "id": "227",
           "name": "Get Sat Uptime",
@@ -1387,8 +1330,7 @@
               "type": "int"
             }
           ]
-        },
-		
+        }
       ]
     }
   ]

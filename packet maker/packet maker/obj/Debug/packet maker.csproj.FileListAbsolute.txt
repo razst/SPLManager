@@ -295,3 +295,102 @@ C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
 C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x86.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x64.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.so
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.so
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.dylib
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.dylib
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe.config
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\packet maker.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Nest.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Nest.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Nest.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Main.resources
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Properties.Resources.resources
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.GenerateResource.cache
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCompileInputs.cache
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb

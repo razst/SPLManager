@@ -7,12 +7,12 @@
   "defultSatGroup": 2,
   "enableExcel": false,
   "widgetSettings": {
-	"minThersholdSatPass":5
+    "minThersholdSatPass": 5
   },
-  "serverMode":"TCP",
+  "serverMode": "TCP",
   "UDPports": {
-	"client": 27002,
-	"server": 27002
+    "client": 27002,
+    "server": 27002
   },
   "groundStationLocation": {
     "lat": 30.983852,
@@ -85,9 +85,10 @@
       "isUnique": false
     },
     {
-      "id": 11,
+      "id": 9,
       "name": "TAUSAT1",
       "desc": "TA",
+      "noradID": 47926,
       "isUnique": true
     }
   ]

@@ -22,6 +22,7 @@ using System.Xml.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Helpers;
+using packet_maker.MainComponents;
 
 namespace packet_maker
 {
@@ -36,7 +37,7 @@ namespace packet_maker
         private bool success = false;
         private readonly RadioServer RadioServer = new RadioServer();
         static public Main frm = null;
-
+        private NextPassWorker NextPass;
         enum Packet_Mode
         {
             /// <summary>
@@ -67,6 +68,7 @@ namespace packet_maker
 
         private  void Form1_Load(object sender, EventArgs e)
         {
+            //packet settings
             //http://jsonviewer.stack.hu/
             StreamReader rx = new StreamReader(@"rx.json");
             StreamReader tx = new StreamReader(@"tx.json");
@@ -77,10 +79,6 @@ namespace packet_maker
             options = (TypeList)Serializer.Deserialize(tx, typeof(TypeList));
             transOptions = (TypeList)Serializer.Deserialize(rx, typeof(TypeList));
             tauTransOptions = (TypeList)Serializer.Deserialize(tauRx, typeof(TypeList));
-            if (!Program.settings.enableImage)
-            {
-                TabControl.TabPages.Remove(ImageTab);
-            }
 
             if (Program.settings.dataBaseEnabled)
             {
@@ -109,14 +107,14 @@ namespace packet_maker
             }
             //
 
+            //DatePickers
             minExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
             maxExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
             qryMinDtp.CustomFormat = "dd/MM/yyyy HH:mm";
             qryMaxDtp.CustomFormat = "dd/MM/yyyy HH:mm";
             qryCondvalDtp.CustomFormat = "dd/MM/yyyy HH:mm";
 
-            imgIdTxb.Text = Program.settings.pacCurId.ToString();
-
+            //Combo boxes selected index
             groupsCB.SelectedIndex = Program.settings.defultSatGroup;
             RxGroupsCB.SelectedIndex = Program.settings.defultSatGroup;
             MainSatCB.SelectedIndex = Program.settings.defultSatGroup;
@@ -125,6 +123,11 @@ namespace packet_maker
             qrySatCB.SelectedIndex = Program.settings.defultSatGroup;
             qryConditionCB.SelectedIndex = 1;
             qryLimitCB.SelectedIndex = 1;
+
+            NextPass = new NextPassWorker(MainSatCB.SelectedIndex);
+
+
+
 
             frm = this;
             everySecTimer.Start();
@@ -135,7 +138,10 @@ namespace packet_maker
             nextPassLabels[2] = this.nextPass3Label;
             nextPassLabels[3] = this.nextPass4Label;
             //
-            
+
+
+
+            //GaugesSetup
             VBatGauge.ColorofG = new Dictionary<string, AquaControls.valuesOfColors>
             {
                 {"healthy", new AquaControls.valuesOfColors{color = Color.LawnGreen , minVal = 7.5F,maxVal = 9 , threshVal = 8.25F, threshPrecent = 16.66F }},
@@ -268,7 +274,15 @@ namespace packet_maker
 
         private  void everySecTimer_Tick(object sender, EventArgs e)
         {
-                mainUtcLabel.Text = DateTime.UtcNow.ToString();
+            mainUtcLabel.Text = DateTime.UtcNow.ToString();
+            if (NextPass.passesArr == null) return;
+
+            for (int i = 0; i < 4; i++)
+            {
+                nextPassLabels[i].Text = DateTimeOffset.FromUnixTimeSeconds(NextPass.passesArr[i + 1].startUTC).LocalDateTime.ToString();
+            }
+            nextPassLabel.Text = NextPass.TimeTilPassStr;
+            PassStatusLabel.Text = NextPass.PassStatus;
         }
 
         #endregion
@@ -773,121 +787,69 @@ namespace packet_maker
                 {
                     #region rxHistory
 
-
-                    //define query
-                    var RxQryFilters = new List<Func<QueryContainerDescriptor<Dictionary<string, object>>, QueryContainer>>
-                    {
-                        q => q.DateRange(
-                            dr => dr
-                            .Field("time")
-                            .LessThanOrEquals(qryMaxDtp.Value.ToUniversalTime())
-                            .GreaterThanOrEquals(qryMinDtp.Value.ToUniversalTime()))
-                    };
-
-
+                    //define worker logic
+                    var RxQryWorker = new DataBaseWorker();
+                    RxQryWorker.AddDateRangeFilter("time", qryMinDtp.Value.ToUniversalTime(), qryMaxDtp.Value.ToUniversalTime());
                     if (qrySatCB.SelectedIndex != 0)
                     {
-                        RxQryFilters.Add(fq => fq.Match(
-                            m => m.Field("satId")
-                                  .Query(qrySatCB.SelectedIndex.ToString())));
+                        RxQryWorker.AddMatchFilter("satId", qrySatCB.SelectedIndex.ToString());
                     }
                     if (qrySubtypeCB.SelectedItem.ToString() != "All")
                     {
-                        RxQryFilters.Add(fq => fq.Term(
-                            f => f["subtype"].Suffix("keyword"),
-                            qrySubtypeCB.SelectedItem.ToString()));
+                        RxQryWorker.AddTermFilter("subtype", qrySubtypeCB.SelectedItem.ToString());
                     }
                     if (fieldOptionsPnl.Visible && qryFieldCB.SelectedIndex != -1 && (qryCondvalDtp.Visible || qryCondvalTxb.Text != ""))
                     {
+                        string field = qryFieldCB.SelectedItem.ToString();
+                        var dtpValue = qryCondvalDtp.Value.ToUniversalTime();
                         switch (qryConditionCB.SelectedItem.ToString())
                         {
                             case "<":
                                 if (qryCondvalDtp.Visible)
                                 {
-                                    RxQryFilters.Add(q => q.DateRange(
-                                        dr => dr
-                                        .Field(qryFieldCB.SelectedItem.ToString())
-                                        .LessThan(qryCondvalDtp.Value.ToUniversalTime())));
+                                    RxQryWorker.AddDateRangeFilter(field, default, dtpValue);
                                 }
                                 else
                                 {
-                                    RxQryFilters.Add(q => q.Range(
-                                        r => r
-                                        .Field(qryFieldCB.SelectedItem.ToString())
-                                        .LessThan(int.Parse(qryCondvalTxb.Text))));
+                                    RxQryWorker.AddRangeFilter(field, -.5, int.Parse(qryCondvalTxb.Text));
                                 }
                                 break;
                             case ">":
                                 if (qryCondvalDtp.Visible)
                                 {
-                                    RxQryFilters.Add(q => q.DateRange(
-                                        dr => dr
-                                        .Field(qryFieldCB.SelectedItem.ToString())
-                                        .GreaterThan(qryCondvalDtp.Value.ToUniversalTime())));
+                                    RxQryWorker.AddDateRangeFilter(field, dtpValue, default);
                                 }
                                 else
                                 {
-                                    RxQryFilters.Add(q => q.Range(
-                                        r => r
-                                        .Field(qryFieldCB.SelectedItem.ToString())
-                                        .GreaterThan(int.Parse(qryCondvalTxb.Text))));
+                                    RxQryWorker.AddRangeFilter(field, int.Parse(qryCondvalTxb.Text), -.5);
                                 }
                                 break;
                             case "=":
-                                if (qryCondvalDtp.Visible)
-                                {
-                                    RxQryFilters.Add(q => q.Match(
-                                        dr => dr
-                                        .Field(qryFieldCB.SelectedItem.ToString())
-                                        .Query(qryCondvalDtp.Value.ToUniversalTime().ToString())));
-                                }
-                                else
-                                {
-                                    RxQryFilters.Add(q => q.Match(
-                                        r => r
-                                        .Field(qryFieldCB.SelectedItem.ToString())
-                                        .Query(qryCondvalTxb.Text)));
-                                }
+                                string match = qryCondvalDtp.Visible? 
+                                    dtpValue.ToString() : qryCondvalTxb.Text;
+                                RxQryWorker.AddMatchFilter(field, match);
                                 break;
                             case "!=":
                                 if (qryCondvalTxb.Visible)
                                 {
-                                    RxQryFilters.Add(q => q.Bool(
-                                        b => b.MustNot(
-                                            g => g.Match(
-                                                mc => mc
-                                                .Field(qryFieldCB.SelectedItem.ToString())
-                                                .Query(qryCondvalTxb.Text)))));
+                                    RxQryWorker.AddMustNotMatchFilter(field, qryCondvalTxb.Text);
                                 }
                                 break;
                         }
                     }
 
-
-
-                    dynamic RxSnapshot = null;
-                    //
-                    if (!qryIdChbx.Checked)
+                    //id only search
+                    if (qryIdChbx.Checked)
                     {
-                        RxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
-
-                            .Query(q => q.Bool(ft => ft.Must(RxQryFilters)))
-                            .Index("parsed-rx")
-                            .Size(qrySize)
-                            .Sort(q => q.Ascending(obj => obj["time"])));
-
-                    }
-                    else
-                    {
-                        RxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
-
-                            .Query(q => q.Bool(ft => ft.Must(qry => qry.MatchPhrase(mt => mt.Field("splID").Query(qryIdTxb.Text)))))
-                            .Index("parsed-rx")
-                            .Size(qrySize)
-                            .Sort(q => q.Ascending(obj => obj["time"])));
+                        RxQryWorker.QryFilters.Clear();
+                        RxQryWorker.AddMatchPhraseFilter("splID", qryIdTxb.Text);
                     }
 
-                    foreach (var doc in RxSnapshot.Documents)
+                    //search
+                    await RxQryWorker.StartWork(qrySize, "parsed-rx", "time");
+
+
+                    foreach (var doc in RxQryWorker.Documents)
                     {
                         po = await Task.Run(() =>
                         {
@@ -900,7 +862,7 @@ namespace packet_maker
                     }
                     #endregion
 
-                    rxQryCount = RxSnapshot.Documents.Count;
+                    rxQryCount = RxQryWorker.Documents.Count;
                 }
 
                 if (qryTxChbx.Checked)
@@ -909,32 +871,18 @@ namespace packet_maker
 
 
                     //define query
-                    var TxQryFilters = new List<Func<QueryContainerDescriptor<Dictionary<string, object>>, QueryContainer>>
-                {
-                    q => q.DateRange(
-                        dr => dr
-                        .Field("time")
-                        .LessThanOrEquals(qryMaxDtp.Value.ToUniversalTime())
-                        .GreaterThanOrEquals(qryMinDtp.Value.ToUniversalTime()))
-                };
-
+                    var TxQryWorker = new DataBaseWorker();
+                    TxQryWorker.AddDateRangeFilter("time", qryMinDtp.Value.ToUniversalTime(), qryMaxDtp.Value.ToUniversalTime());
 
                     if (qrySatCB.SelectedIndex != 0)
                     {
-                        TxQryFilters.Add(fq => fq.MatchPhrase(
-                            m => m.Field("satId")
-                                  .Query(qrySatCB.SelectedIndex.ToString())));
+                        TxQryWorker.AddMatchPhraseFilter("satId", qrySatCB.SelectedIndex.ToString());
                     }
                     //
 
-                    var TxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
+                    await TxQryWorker.StartWork(qrySize, "parsed-tx", "time");
 
-                        .Query(q => q.Bool(ft => ft.Must(TxQryFilters)))
-                        .Index("parsed-tx")
-                        .Size(qrySize)
-                        .Sort(q => q.Ascending(obj => obj["time"])));
-
-                    foreach (var doc in TxSnapshot.Documents)
+                    foreach (var doc in TxQryWorker.Documents)
                     {
                         po = await Task.Run(() =>
                         {
@@ -947,7 +895,7 @@ namespace packet_maker
                     }
                     #endregion
 
-                    txQryCount = TxSnapshot.Documents.Count;
+                    txQryCount = TxQryWorker.Documents.Count;
                 }
 
                 MessageBox.Show($"{rxQryCount} RX packet were recived. {Environment.NewLine}{txQryCount} TX packet were recived.", "Query finished", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1536,62 +1484,7 @@ namespace packet_maker
         #region controls
 
         #region main controls
-        private async void nextPassTimer_Tick(object sender, EventArgs e)
-        {
-            bool stopped = false;
-            string temp = "00:00:00";
-            if (!passOccured)
-            await Task.Run(() => {
-                secondsTilPass--;
-                if (secondsTilPass == 0)
-                {
-                    passOccured = true;
-                    return;
-                }
-                if (secondsTilPass != 60)
-                {
-                    TimeSpan timespan = TimeSpan.FromSeconds(secondsTilPass);
-                    temp = timespan.ToString(@"hh\:mm\:ss");
-                    return;
-                }
-
-                nextPassTimer.Stop();
-
-                var dt = GetNextPass().GetAwaiter().GetResult();
-                secondsTilPass = GetSecondsTil(dt);
-                UpdatePassesLabels();
-
-                TimeSpan time = TimeSpan.FromSeconds(secondsTilPass);
-                temp = time.ToString(@"hh\:mm\:ss");
-
-                nextUpdateTimer.Stop();
-                nextUpdateTimer.Start();
-                stopped = true;
-            });
-            nextPassLabel.Text = temp;
-            if (stopped)
-            {
-                nextPassTimer.Start();
-            }
-            if (passOccured)
-            {
-                if ((long)passesData.passes[0].endUTC + 60 >= DateTimeOffset.UtcNow.ToUnixTimeSeconds())
-                {
-                    PassStatusLabel.Text = "Passing";
-                    return;
-                }
-
-                nextPassTimer.Stop();
-                mainLastPassLabel.Text = DateTimeOffset.FromUnixTimeSeconds((long)passesData.passes[0].endUTC).LocalDateTime.ToString();
-                var dt = await GetNextPass();
-                secondsTilPass = GetSecondsTil(dt);
-                UpdatePassesLabels();
-                nextUpdateTimer.Start();
-                passOccured = false;
-                PassStatusLabel.Text = "Before Pass";
-                nextPassTimer.Start();
-            }
-        }
+        private void nextPassTimer_Tick(object sender, EventArgs e) { }
 
 
         private async void MainSatCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -1603,127 +1496,53 @@ namespace packet_maker
             await UpdateControlFormDB("parsed-rx", mainLastBeaconLabel,"Beacon");
             if (MainSatCB.SelectedIndex == 0)
             {
-                nextPassTimer.Stop();
-                nextUpdateTimer.Start();
+                //nextPassTimer.Stop();
+                //nextUpdateTimer.Start();
                 return;
             }
 
-            nextPassDate = await GetNextPass();
-            secondsTilPass = GetSecondsTil(nextPassDate);
-            UpdatePassesLabels();
-            nextPassTimer.Start();
-            nextUpdateTimer.Start();
+            NextPass.SetCurrentGroup(MainSatCB.SelectedIndex);
         }
         #endregion
 
-        private async void nextUpdateTimer_Tick(object sender, EventArgs e)
+        private void nextUpdateTimer_Tick(object sender, EventArgs e)
         {
-            nextPassTimer.Stop();
-            var dt = await GetNextPass();
-            secondsTilPass = GetSecondsTil(dt);
-            UpdatePassesLabels();
-            nextPassTimer.Start();
+            
         }
 
         #endregion
 
 
         #region funcs
-        private async Task<DateTime> GetNextPass()
-        {
-            DateTime dt = new DateTime();
-            dynamic t;
-            try
-            {
-                 t = ((IEnumerable<dynamic>)Program.settings.satInfo).AsEnumerable().ToList().Find(x => x.id == MainSatCB.SelectedIndex).noradID;
-            }
-            catch
-            {
-                t = 43199;
-                //TODO: show error
-            }
-
-            var t2 = Program.settings.groundStationLocation;
-            dynamic data = null;
-            using (var client = new HttpClient())
-            {
-
-                client.BaseAddress = new Uri("https://api.n2yo.com");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage response =  await client.GetAsync($"/rest/v1/satellite/radiopasses/{t}/{t2.lat}/{t2.lng}/{t2.alt}/7/{t2.minElevation}/&apiKey=78C29S-25XY9W-E8SWZD-4L2F");
-                if (response.IsSuccessStatusCode)
-                {
-                    var txtResponse =  await response.Content.ReadAsStringAsync();
-
-                    data = Json.Decode(txtResponse);
-                }
-            }
-            if (data != null)
-            {
-                long time = (long)data.passes[0].startUTC;
-
-                dt = DateTimeOffset.FromUnixTimeSeconds(time).LocalDateTime;
-
-                passesData.info = data.info;
-                passesData.passes = ((IEnumerable<dynamic>)data.passes).ToList();
-
-
-            }
-
-            return dt;
-        }
-        private long GetSecondsTil(DateTime dt)
-        {
-            return (dt.Ticks - DateTime.Now.Ticks)/ TimeSpan.TicksPerSecond;
-        }
-
-        private void UpdatePassesLabels()
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                nextPassLabels[i].Text = DateTimeOffset.FromUnixTimeSeconds((long)passesData.passes[i + 1].startUTC).LocalDateTime.ToString();
-            }
-        }
 
         private async Task UpdateControlFormDB(string collection, Label label, string type = null)
         {
-            var QryFilters = new List<Func<QueryContainerDescriptor<Dictionary<string, object>>, QueryContainer>>
+            var lastTimeSnapshot = new DataBaseWorker();
+            lastTimeSnapshot.AddMatchFilter("satId", MainSatCB.SelectedIndex.ToString());
+            if (type != null)
+                lastTimeSnapshot.AddTermFilter("subtype", type);
+
+            await lastTimeSnapshot.StartWork(10, collection, "time");
+
+            if (lastTimeSnapshot.Documents.Count <= 0) return;
+
+            var temp = DateTime.Parse(lastTimeSnapshot.Documents[0]["time"].ToString()).ToLocalTime().ToString();
+            label.Text = temp;
+
+            if (type == "Beacon")
             {
-                q => q.Match(m => m.Field("satId").Query(MainSatCB.SelectedIndex.ToString()))
-            };
-            if(type != null)
-            {
-                QryFilters.Add(fq => fq.Term(f => f["subtype"].Suffix("keyword"),type));
-            }
+                po = new packetObject(transOptions, lastTimeSnapshot.Documents[0]["packetString"].ToString());
+                VBatGauge.Value = float.Parse(po.dataCatalog["vbat"].ToString()) / 1000;
+                OBCGauge.Value = float.Parse(po.dataCatalog["MCU Temperature"].ToString()) / 100;
+                BatTempGauge.Value = float.Parse(po.dataCatalog["Battery Temperature"].ToString()) / 1000;
+                FreeSpaceGauge.Value = float.Parse(po.dataCatalog["free_memory"].ToString()) / 1000000;
+                MainSatTimeLabel.Text = DateTime.Parse(lastTimeSnapshot.Documents[0]["sat_time"].ToString()).ToLocalTime().ToString();
+                MainSatResetsLabel.Text = lastTimeSnapshot.Documents[0]["number_of_resets"].ToString();
+                MainCmdRestesLabel.Text = lastTimeSnapshot.Documents[0]["number_of_cmd_resets"].ToString();
+                MainCorruptLabel.Text = lastTimeSnapshot.Documents[0]["corrupt_bytes"].ToString();
+                var tempTS = TimeSpan.FromSeconds(int.Parse(lastTimeSnapshot.Documents[0]["sat_uptime"].ToString()));
+                MainSatUptimeLabel.Text = $"{tempTS.Days}:{tempTS.Hours}:{tempTS.Seconds + tempTS.Minutes * 60}";
 
-            var lastTimeSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
-
-                            .Query(q => q.Bool(m => m.Must(QryFilters)))
-                            .Index(collection)
-                            .Size(10)
-                            .Sort(q => q.Descending(obj => obj["time"])));
-
-            if (lastTimeSnapshot.Documents.Count > 0)
-            {
-                var temp = DateTime.Parse(lastTimeSnapshot.Documents.First()["time"].ToString()).ToLocalTime().ToString();
-                label.Text = temp;
-                if(type == "Beacon")
-                {
-                    po = new packetObject(transOptions, lastTimeSnapshot.Documents.First()["packetString"].ToString());
-                    VBatGauge.Value =  float.Parse(po.dataCatalog["vbat"].ToString())/1000;
-                    OBCGauge.Value = float.Parse(po.dataCatalog["MCU Temperature"].ToString())/100;
-                    BatTempGauge.Value = float.Parse(po.dataCatalog["Battery Temperature"].ToString()) / 1000;
-                    FreeSpaceGauge.Value = float.Parse(po.dataCatalog["free_memory"].ToString()) / 1000000;
-                    MainSatTimeLabel.Text = DateTime.Parse(lastTimeSnapshot.Documents.First()["sat_time"].ToString()).ToLocalTime().ToString();
-                    MainSatResetsLabel.Text = lastTimeSnapshot.Documents.First()["number_of_resets"].ToString();
-                    MainCmdRestesLabel.Text = lastTimeSnapshot.Documents.First()["number_of_cmd_resets"].ToString();
-                    MainCorruptLabel.Text = lastTimeSnapshot.Documents.First()["corrupt_bytes"].ToString();
-                    var tempTS = TimeSpan.FromSeconds(int.Parse( lastTimeSnapshot.Documents.First()["sat_uptime"].ToString()));
-                    MainSatUptimeLabel.Text = $"{tempTS.Days}:{tempTS.Hours}:{tempTS.Seconds + tempTS.Minutes*60}";
-
-                }
             }
 
         }
@@ -1731,24 +1550,7 @@ namespace packet_maker
 
 
         #region objects
-        private DateTime nextPassDate;
-        private long secondsTilPass;
         private Label[] nextPassLabels = new Label[4];
-        private bool passOccured = false;
-
-
-        private PassReport passesData = new PassReport();
-        class PassReport
-        {
-            public dynamic info { get; set; }
-
-            public List<dynamic> passes { get; set; }
-        }
-
-
-
-
-
 
         #endregion
 

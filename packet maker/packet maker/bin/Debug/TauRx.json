@@ -2,14 +2,12 @@
   "calibrations": [
     { "ID": "mV", "name": "Temperature", "a": "0.0009765625", "b": "0" },
     { "ID": "mA", "name": "Voltage", "a": "1", "b": "0" },
-	{ "ID": "mW", "name": "Voltage", "a": "1", "b": "0" },
-	{ "ID": "deg", "name": "Temperature", "a": "1", "b": "0" },
-	{ "ID": "deg c", "name": "Temperature", "a": "1", "b": "0" },
-	{ "ID": "dBm", "name": "Voltage", "a": "1", "b": "0" },
-	{ "ID": "Hz", "name": "Voltage", "a": "1", "b": "0" },
-	{ "ID": "sec", "name": "Seconds", "a": "1", "b": "0" }
-
-
+    { "ID": "mW", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "deg", "name": "Temperature", "a": "1", "b": "0" },
+    { "ID": "deg c", "name": "Temperature", "a": "1", "b": "0" },
+    { "ID": "dBm", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "Hz", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "sec", "name": "Seconds", "a": "1", "b": "0" }
   ],
   "types": [
     {

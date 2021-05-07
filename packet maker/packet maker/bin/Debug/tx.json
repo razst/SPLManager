@@ -449,8 +449,7 @@
           "name": "Rest EPS WDT",
           "desc": "Resets the watchdog timer keeping the system from performing a reset",
           "inParams": []
-        },
-		
+        }
       ]
     },
     {
@@ -544,14 +543,13 @@
               ]
             },
 
-			{
+            {
               "name": "TLM interval",
               "desc": "number of seconds between every TLM save",
               "type": "int"
-            }            
+            }
           ]
         },
-		
 
         {
           "id": "205",
@@ -560,14 +558,11 @@
           "inParams": []
         },
 
-
         {
           "id": "187",
           "name": "Get Last FS Error",
           "desc": "Get last file system error",
-          "inParams": [
-            
-          ]
+          "inParams": []
         }
       ]
     },
@@ -589,7 +584,7 @@
                   "id": "0",
                   "name": "reset software"
                 },
-                
+
                 {
                   "id": "2",
                   "name": "reset MCU using EPS"
@@ -642,16 +637,13 @@
           "id": "227",
           "name": "Get Sat Uptime",
           "desc": "Get Sat Uptime",
-          "inParams": [
-          ]
+          "inParams": []
         },
         {
           "id": "226",
           "name": "FRAM Resart",
           "desc": "restart the FRAM",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "221",

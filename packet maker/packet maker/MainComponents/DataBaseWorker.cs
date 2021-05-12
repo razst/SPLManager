@@ -42,20 +42,20 @@ namespace packet_maker.MainComponents
             mt.Field(fieldName)
               .Query(WantedPhrase)));
         }
-        public void AddRangeFilter(string fieldName, double min = -.5, double max = -.5)
+        public void AddRangeFilter(string fieldName, double? min, double? max)
         {
             var range = new NumericRangeQueryDescriptor<Dictionary<string, object>>();
             range.Field(fieldName);
-            if (min != -.5) range.GreaterThanOrEquals(min);
-            if (max != -.5) range.LessThanOrEquals(max);
+            if (min != null) range.GreaterThanOrEquals(min);
+            if (max != null) range.LessThanOrEquals(max);
             QryFilters.Add(q => q.Range(r => range));
         }
-        public void AddDateRangeFilter(string fieldName, DateTime min,DateTime max)
+        public void AddDateRangeFilter(string fieldName, DateTime? min,DateTime? max)
         {
             var dateRange = new DateRangeQueryDescriptor<Dictionary<string, object>>();
             dateRange.Field(fieldName);
-            if (min != default) dateRange.GreaterThanOrEquals(min);
-            if (max != default) dateRange.LessThanOrEquals(max);
+            if (min != null) dateRange.GreaterThanOrEquals(min);
+            if (max != null) dateRange.LessThanOrEquals(max);
             QryFilters.Add(q => q.DateRange(dr => dateRange));
         }
         public void AddMustNotMatchFilter(string fieldName, string UnwantedValue)

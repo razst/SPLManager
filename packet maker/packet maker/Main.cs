@@ -70,20 +70,13 @@ namespace packet_maker
         {
             //packet settings
             //http://jsonviewer.stack.hu/
-            StreamReader rx = new StreamReader(@"rx.json");
-            StreamReader tx = new StreamReader(@"tx.json");
-            StreamReader tauRx = new StreamReader(@"TauRx.json");
 
-            JsonSerializer Serializer = new JsonSerializer();
 
-            options = (TypeList)Serializer.Deserialize(tx, typeof(TypeList));
-            transOptions = (TypeList)Serializer.Deserialize(rx, typeof(TypeList));
-            tauTransOptions = (TypeList)Serializer.Deserialize(tauRx, typeof(TypeList));
+            options = new TypeList(@"tx.json");
+            transOptions = new TypeList(@"rx.json");
+            tauTransOptions = new TypeList(@"TauRx.json");
 
-            if (Program.settings.dataBaseEnabled)
-            {
-                PoupolatePL();
-            }
+            if (Program.settings.dataBaseEnabled) PoupolatePL();
 
             //filling comboboxes
             foreach (Type t in options)
@@ -106,6 +99,7 @@ namespace packet_maker
                 }
             }
             //
+            NextPass = new NextPassWorker(Program.settings.defaultSatGroup);
 
             //DatePickers
             minExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
@@ -115,16 +109,15 @@ namespace packet_maker
             qryCondvalDtp.CustomFormat = "dd/MM/yyyy HH:mm";
 
             //Combo boxes selected index
-            groupsCB.SelectedIndex = Program.settings.defultSatGroup;
-            RxGroupsCB.SelectedIndex = Program.settings.defultSatGroup;
-            MainSatCB.SelectedIndex = Program.settings.defultSatGroup;
+            groupsCB.SelectedIndex = Program.settings.defaultSatGroup;
+            RxGroupsCB.SelectedIndex = Program.settings.defaultSatGroup;
+            MainSatCB.SelectedIndex = Program.settings.defaultSatGroup;
             DBLimitCB.SelectedItem = "100";
             qrySubtypeCB.SelectedItem = "All";
-            qrySatCB.SelectedIndex = Program.settings.defultSatGroup;
+            qrySatCB.SelectedIndex = Program.settings.defaultSatGroup;
             qryConditionCB.SelectedIndex = 1;
             qryLimitCB.SelectedIndex = 1;
 
-            NextPass = new NextPassWorker(MainSatCB.SelectedIndex);
 
 
 
@@ -286,6 +279,7 @@ namespace packet_maker
         }
 
         #endregion
+
 
 
 
@@ -701,7 +695,7 @@ namespace packet_maker
         private void subtypeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             descSubType.Text = "Description: " + options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].desc;
-            
+
             if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas.Count() == 0)
             {
                 dataTypesDGV.Visible = false;
@@ -745,7 +739,7 @@ namespace packet_maker
             }
             dataTypesDGV.AutoResizeColumns();
 
-            dataTypesDGV.Columns[1].Width = bit? 456 : 200;
+            dataTypesDGV.Columns[1].Width = bit ? 456 : 200;
         }
 
         #endregion
@@ -768,6 +762,11 @@ namespace packet_maker
         #region main controls
         private async void qryStartBtn_Click(object sender, EventArgs e)
         {
+            if(!Program.settings.dataBaseEnabled)
+            {
+                MessageBox.Show("database is disabled in the settings", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 qryClearBtn.PerformClick();
@@ -807,21 +806,21 @@ namespace packet_maker
                             case "<":
                                 if (qryCondvalDtp.Visible)
                                 {
-                                    RxQryWorker.AddDateRangeFilter(field, default, dtpValue);
+                                    RxQryWorker.AddDateRangeFilter(field, null, dtpValue);
                                 }
                                 else
                                 {
-                                    RxQryWorker.AddRangeFilter(field, -.5, int.Parse(qryCondvalTxb.Text));
+                                    RxQryWorker.AddRangeFilter(field, null, int.Parse(qryCondvalTxb.Text));
                                 }
                                 break;
                             case ">":
                                 if (qryCondvalDtp.Visible)
                                 {
-                                    RxQryWorker.AddDateRangeFilter(field, dtpValue, default);
+                                    RxQryWorker.AddDateRangeFilter(field, dtpValue, null);
                                 }
                                 else
                                 {
-                                    RxQryWorker.AddRangeFilter(field, int.Parse(qryCondvalTxb.Text), -.5);
+                                    RxQryWorker.AddRangeFilter(field, int.Parse(qryCondvalTxb.Text), null);
                                 }
                                 break;
                             case "=":
@@ -1007,6 +1006,11 @@ namespace packet_maker
         //
         private async void loadDbBtn_Click(object sender, EventArgs e)
         {
+            if (!Program.settings.dataBaseEnabled)
+            {
+                MessageBox.Show("database is disabled in the settings", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 UseWaitCursor = true;
@@ -1191,19 +1195,9 @@ namespace packet_maker
         public async void trasBtn_click(string msg)
         {
             string mess = msg.Trim();
-            if (Program.settings.satInfo[RxGroupsCB.SelectedIndex].isUnique) 
-            {
-                switch (Program.settings.satInfo[RxGroupsCB.SelectedIndex].name)
-                {
-                    case "TAUSAT1":
-                        po = new TAUPacket("TAUSAT1",tauTransOptions,mess);
-                        break;
-                }
-            }
-            else
-            {
-                po = new packetObject(transOptions, mess);
-            }
+
+            po = new packetObject(transOptions, mess);
+
             if (po.type == -1)
             {
                 rawRxPacHisList.Add(po);
@@ -1484,31 +1478,24 @@ namespace packet_maker
         #region controls
 
         #region main controls
-        private void nextPassTimer_Tick(object sender, EventArgs e) { }
-
 
         private async void MainSatCB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mainLastRxLabel.Text = "---";
-            mainLastTxLabel.Text = "---";
+            mainLastRxLabel.Text = "-- : -- : --";
+            mainLastTxLabel.Text = "-- : -- : --";
+            MainSatTimeLabel.Text = "-- : -- : --";
+            MainSatUptimeLabel.Text = "-- : -- : --";
+            MainSatResetsLabel.Text = "---";
+            MainCmdRestesLabel.Text = "---";
+            MainCorruptLabel.Text = "---";
+
             await UpdateControlFormDB("parsed-rx", mainLastRxLabel);
             await UpdateControlFormDB("parsed-tx", mainLastTxLabel);
             await UpdateControlFormDB("parsed-rx", mainLastBeaconLabel,"Beacon");
-            if (MainSatCB.SelectedIndex == 0)
-            {
-                //nextPassTimer.Stop();
-                //nextUpdateTimer.Start();
-                return;
-            }
 
             NextPass.SetCurrentGroup(MainSatCB.SelectedIndex);
         }
         #endregion
-
-        private void nextUpdateTimer_Tick(object sender, EventArgs e)
-        {
-            
-        }
 
         #endregion
 
@@ -1517,11 +1504,12 @@ namespace packet_maker
 
         private async Task UpdateControlFormDB(string collection, Label label, string type = null)
         {
+            if (!Program.settings.dataBaseEnabled) return;
+
             var lastTimeSnapshot = new DataBaseWorker();
             lastTimeSnapshot.AddMatchFilter("satId", MainSatCB.SelectedIndex.ToString());
             if (type != null)
                 lastTimeSnapshot.AddTermFilter("subtype", type);
-
             await lastTimeSnapshot.StartWork(10, collection, "time");
 
             if (lastTimeSnapshot.Documents.Count <= 0) return;
@@ -1544,7 +1532,6 @@ namespace packet_maker
                 MainSatUptimeLabel.Text = $"{tempTS.Days}:{tempTS.Hours}:{tempTS.Seconds + tempTS.Minutes * 60}";
 
             }
-
         }
         #endregion
 

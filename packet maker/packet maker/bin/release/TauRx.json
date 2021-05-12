@@ -1,0 +1,244 @@
+{
+  "calibrations": [
+    { "ID": "mV", "name": "Temperature", "a": "0.0009765625", "b": "0" },
+    { "ID": "mA", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "mW", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "deg", "name": "Temperature", "a": "1", "b": "0" },
+    { "ID": "deg c", "name": "Temperature", "a": "1", "b": "0" },
+    { "ID": "dBm", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "Hz", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "sec", "name": "Seconds", "a": "1", "b": "0" }
+  ],
+  "types": [
+    {
+      "name": "TRXVU",
+      "desc": "All TRXVU function calls",
+      "id": "3",
+      "subtypes": [
+        {
+          "name": "Beacon",
+          "id": "25",
+          "inParams": [
+            {
+              "name": "vbatt",
+              "type": "uint16",
+              "-isLittleEndian": "false",
+              "desc": "EPS,Battery Voltage",
+              "calibration": "mV",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Batt_Curr",
+              "-isLittleEndian": "false",
+              "type": "uint16",
+              "desc": "EPS,Output Current",
+              "calibration": "mA",
+              "-self-closing": "true"
+            },
+            {
+              "name": "3v3_curr",
+              "-isLittleEndian": "false",
+              "type": "uint16",
+              "desc": "EPS,3v3 Output Current",
+              "calibration": "mA",
+              "-self-closing": "true"
+            },
+            {
+              "name": "5v_curr",
+              "-isLittleEndian": "false",
+              "type": "uint16",
+              "desc": "EPS,5v Output Current",
+              "calibration": "mA",
+              "-self-closing": "true"
+            },
+            {
+              "name": "LOtrxvu_temp",
+              "-isLittleEndian": "false",
+              "type": "uint16",
+              "desc": "Comms,Local Oscillator Temp",
+              "calibration": "deg c",
+              "-rangeStart": "-40",
+              "-rangeEnd": "60",
+              "-calibration": "7",
+              "-self-closing": "true"
+            },
+            {
+              "name": "PAtrxvu_temp",
+              "-isLittleEndian": "false",
+              "type": "uint16",
+              "desc": "Comms,Power Amplifier Temp",
+              "calibration": "deg c",
+              "-rangeStart": "-40",
+              "-rangeEnd": "95",
+              "-calibration": "7",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Eps_temp[0]",
+              "-isLittleEndian": "false",
+              "type": "int16",
+              "desc": "EPS,Board Temp Sensor 0",
+              "calibration": "deg c",
+              "-rangeStart": "-40",
+              "-rangeEnd": "125",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Eps_temp[1]",
+              "-isLittleEndian": "false",
+              "type": "int16",
+              "desc": "EPS,Board Temp Sensor 1",
+              "calibration": "deg c",
+              "-rangeStart": "-40",
+              "-rangeEnd": "125",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Eps_temp[2]",
+              "-isLittleEndian": "false",
+              "type": "int16",
+              "desc": "EPS,Board Temp Sensor 2",
+              "calibration": "deg c",
+              "-rangeStart": "-40",
+              "-rangeEnd": "125",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Eps_temp[3]",
+              "-isLittleEndian": "false",
+              "type": "int16",
+              "desc": "EPS,Board Temp Sensor 3",
+              "calibration": "deg c",
+              "-rangeStart": "0",
+              "-rangeEnd": "45",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Batt_temp[0]",
+              "-isLittleEndian": "false",
+              "type": "int16",
+              "desc": "EPS,Battery Temp Sensor 0",
+              "calibration": "deg c",
+              "-rangeStart": "0",
+              "-rangeEnd": "45",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Batt_temp[1]",
+              "-isLittleEndian": "false",
+              "type": "int16",
+              "desc": "EPS,Battery Temp Sensor 1",
+              "calibration": "deg c",
+              "-rangeStart": "0",
+              "-rangeEnd": "45",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Rxdoppler",
+              "-isLittleEndian": "false",
+              "type": "uint16",
+              "desc": "Comms,RX Doppler",
+              "calibration": "Hz",
+              "-calibration": "6",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Rxrssi",
+              "-isLittleEndian": "false",
+              "type": "uint16",
+              "desc": "Comms,RX RSSI",
+              "calibration": "dBm",
+              "-calibration": "5",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Txrefl",
+              "-isLittleEndian": "false",
+              "type": "uint16",
+              "desc": "Comms,TX Reflected SWR",
+              "calibration": "mW",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Txfrow",
+              "-isLittleEndian": "false",
+              "type": "uint16",
+              "desc": "Comms,TX Forward SWR",
+              "calibration": "mW",
+              "-self-closing": "true"
+            },
+            {
+              "name": "AltitudeAngelsRoll",
+              "-isLittleEndian": "false",
+              "type": "int16",
+              "desc": "ADCS,Attitude Angles Roll",
+              "calibration": "deg",
+              "-self-closing": "true"
+            },
+            {
+              "name": "AltitudeAngelsPich",
+              "-isLittleEndian": "false",
+              "type": "int16",
+              "desc": "ADCS,Attitude Angles Pitch",
+              "calibration": "deg",
+              "-self-closing": "true"
+            },
+            {
+              "name": "AltitudeAngelsYaw",
+              "-isLittleEndian": "false",
+              "type": "int16",
+              "desc": "ADCS,Attitude Angles Yaw",
+              "calibration": "deg",
+              "-self-closing": "true"
+            },
+            {
+              "name": "FileSystem last error",
+              "-isLittleEndian": "false",
+              "type": "byte",
+              "desc": "OBC,File System Last Error",
+              "-rangeStart": "0",
+              "-rangeEnd": "0",
+              "-self-closing": "true"
+            },
+            {
+              "name": "EPS battery state",
+              "-isLittleEndian": "false",
+              "type": "byte",
+              "desc": "EPS,Logic State Number",
+              "-self-closing": "true"
+            },
+            {
+              "name": "NumberDelayd_comms",
+              "-isLittleEndian": "false",
+              "type": "byte",
+              "desc": "OBC,Number of Stored Delayed Commands",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Number_Resets",
+              "-isLittleEndian": "false",
+              "type": "uint32",
+              "desc": "OBC,Number of Resets",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Last_Resets",
+              "-isLittleEndian": "false",
+              "type": "datetime",
+              "desc": "OBC,Last Boot Time",
+              "calibration": "sec",
+              "-self-closing": "true"
+            },
+            {
+              "name": "states",
+              "-isLittleEndian": "false",
+              "type": "byte",
+              "desc": "OBC,Magic number that only Elai can understand",
+              "-self-closing": "true"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

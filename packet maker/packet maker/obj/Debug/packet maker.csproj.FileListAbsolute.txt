@@ -381,7 +381,6 @@ C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.xml
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
@@ -394,3 +393,4 @@ C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
+C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache

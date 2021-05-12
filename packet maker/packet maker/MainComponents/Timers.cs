@@ -35,7 +35,7 @@ namespace packet_maker.MainComponents
             CurrnetGroup = newCurrentGroup;
             EverySecondTimer.Stop();
 
-            if (newCurrentGroup == 0) return;
+            if (newCurrentGroup == 0 || !Program.Online) return;
 
             await GetNextPass(newCurrentGroup);
             for (int i = 0; i < 4; i++)

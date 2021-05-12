@@ -44,21 +44,20 @@ namespace packet_maker
             switch (mode)
             {
                 case "TCP":
-                    if (childThread == null)
+                    if (childThread != null) break;
+
+                    ThreadStart childref = new ThreadStart(Server_Thread);
+                    childThread = new Thread(childref)
                     {
-                        ThreadStart childref = new ThreadStart(Server_Thread);
-                        childThread = new Thread(childref)
-                        {
-                            IsBackground = true
-                        };
-                        childThread.Start();
-                    }
+                        IsBackground = true
+                    };
+                    childThread.Start();
                     break;
                 case "UDP":
                     UDPclient = new UDPSocket();
                     UDPserver = new UDPSocket();
-                    UDPserver.Server(Program.settings.UDPports.server, Main.frm);
-                    UDPclient.Client("127.0.0.1", Program.settings.UDPports.client);
+                    UDPserver.Server(Program.settings.UDP_ports.server, Main.frm);
+                    UDPclient.Client("127.0.0.1", Program.settings.UDP_ports.client);
                     isOnline = true;
                     break;
             }
@@ -72,10 +71,7 @@ namespace packet_maker
             for (int idx = 0; idx < toReturn.Length; idx++)
             {
                 bool isSuccessful = byte.TryParse(bytesAsStrings[idx], System.Globalization.NumberStyles.HexNumber, null, out byte b);
-                if (!isSuccessful)
-                {
-                    return null;
-                }
+                if (!isSuccessful) return null;
                 toReturn[idx] = b;
             }
             return toReturn;

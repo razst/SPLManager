@@ -1,4 +1,10 @@
 {
+  "spl_header": {
+    "ID": { "startByte": 0, "length": 4 },
+    "Type": { "startByte": 4, "length": 1 },
+    "Subtype": { "startByte": 5, "length": 1 },
+    "Length": { "startByte": 6, "length": 2 }
+  },
   "calibrations": [
     { "ID": "1", "name": "Temperature", "a": "0.0009765625", "b": "0" },
     { "ID": "2", "name": "Voltage", "a": "0", "b": "0" }
@@ -299,7 +305,7 @@
         {
           "id": "115",
           "name": "ACK_ANTS_RESET",
-          "desc": "before reseting antennas",
+          "desc": "before resetting antennas",
           "inParams": []
         },
         {
@@ -425,7 +431,7 @@
         {
           "id": "158",
           "name": "ACK_RESET_DELAYED_CMD",
-          "desc": "dont need it???",
+          "desc": "don't need it???",
           "inParams": []
         },
         {
@@ -1309,7 +1315,7 @@
         },
         {
           "id": "224",
-          "name": "FRAM Wtite",
+          "name": "FRAM Write",
           "desc": "Write FRAM value and transmit it",
           "inParams": [
             {

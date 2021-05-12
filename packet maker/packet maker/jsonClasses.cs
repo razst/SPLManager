@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,7 +50,10 @@ namespace packet_maker
         [JsonProperty("inParams")]
         public List<Params> parmas { get; set; }
 
-
+        public override string ToString()
+        {
+            return name;
+        }
         public IEnumerator<Params> GetEnumerator()
         {
             foreach (var type in parmas)
@@ -67,6 +71,10 @@ namespace packet_maker
         [JsonProperty("subtypes")]
         public List<SubType> subTypes { get; set; }
 
+        public override string ToString()
+        {
+            return name;
+        }
 
         public IEnumerator<SubType> GetEnumerator()
         {
@@ -79,6 +87,10 @@ namespace packet_maker
         [JsonProperty("types")]
         public List<Type> typenum { get; set; }
 
+        [JsonProperty("spl_header")]
+
+        public dynamic header; 
+
         [JsonProperty("calibrations")]
         public List<Calibration> calibrations { get; set; }
 
@@ -87,7 +99,16 @@ namespace packet_maker
             foreach (var type in typenum)
                 yield return type;
         }
-
+        public TypeList(string jsonPath)
+        {
+            JsonSerializer Serializer = new JsonSerializer();
+            StreamReader sr = new StreamReader(jsonPath);
+            var t = (TypeList)Serializer.Deserialize(sr, typeof(TypeList));
+            typenum = t.typenum ?? null;
+            header = t.header ?? null;
+            calibrations = t.calibrations ?? null;
+        }
+        public TypeList() { }
     }
 
     public class Calibration
@@ -103,6 +124,11 @@ namespace packet_maker
 
         [JsonProperty("b")]
         public float constent { get; set; }
+
+        public override string ToString()
+        {
+            return $"{name} ({ID})";
+        }
     }
 
     #endregion

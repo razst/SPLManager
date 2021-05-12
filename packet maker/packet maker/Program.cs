@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Google.Cloud.Firestore;
 using Nest;
 using System.Web.Helpers;
+using System.Net.NetworkInformation;
 
 namespace packet_maker
 {
@@ -20,7 +21,7 @@ namespace packet_maker
         static public ElasticClient db;
         static public dynamic settings = null;
         public static List<string> groups = new List<string>();
-
+        public static bool Online;
 
         /// <summary>
         /// The main entry point for the application.
@@ -33,14 +34,27 @@ namespace packet_maker
 
         static void Main()
         {
-           using(StreamReader Tsettings = new StreamReader(@"settings.json"))
-           {
+
+            using (StreamReader Tsettings = new StreamReader(@"settings.json"))
+            {
                 settings = Json.Decode(Tsettings.ReadToEnd());
-                foreach(var group in settings.satInfo)
+                foreach (var group in settings.satInfo)
                 {
                     groups.Add($"{group.name} ({group.desc})");
                 }
-           }
+
+                try
+                {
+                    Online = new Ping().Send("www.google.com.mx").Status == IPStatus.Success;
+                    settings.dataBaseEnabled = settings.dataBaseEnabled && Online;
+                }
+                catch
+                {
+                    Online = false;
+                    settings.dataBaseEnabled = false;
+                }
+
+            }
 
             if (settings.dataBaseEnabled)
             {

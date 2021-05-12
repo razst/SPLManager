@@ -4,13 +4,13 @@
   "dataBaseEnabled": true,
   "pacCurId": 0,
   "tcpPortNumber": 4,
-  "defaultSatGroup": 2,
+  "defultSatGroup": 2,
   "enableExcel": false,
   "widgetSettings": {
-    "minThresholdSatPass": 5
+    "minThersholdSatPass": 5
   },
   "serverMode": "TCP",
-  "UDP_ports": {
+  "UDPports": {
     "client": 27002,
     "server": 27002
   },

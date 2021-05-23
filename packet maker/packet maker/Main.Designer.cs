@@ -1,4 +1,6 @@
-﻿namespace packet_maker
+﻿using System;
+
+namespace packet_maker
 {
     partial class Main
     {
@@ -188,6 +190,7 @@
             this.nextPassLabel = new System.Windows.Forms.Label();
             this.MainSatCB = new System.Windows.Forms.ComboBox();
             this.TabControl = new System.Windows.Forms.TabControl();
+            this.MainLabelsWorker = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.tabQuery.SuspendLayout();
             this.qrySettingsPnl.SuspendLayout();
@@ -1944,6 +1947,10 @@
             this.TabControl.Size = new System.Drawing.Size(1271, 627);
             this.TabControl.TabIndex = 17;
             // 
+            // MainLabelsWorker
+            // 
+            this.MainLabelsWorker.Tick += new System.EventHandler(this.MainLabelsWorker_Tick);
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2011,6 +2018,8 @@
             this.PerformLayout();
 
         }
+
+
 
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -2172,6 +2181,7 @@
         private System.Windows.Forms.Label nextPassLabel;
         private System.Windows.Forms.ComboBox MainSatCB;
         private System.Windows.Forms.TabControl TabControl;
+        private System.Windows.Forms.Timer MainLabelsWorker;
     }
 }
 

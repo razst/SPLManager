@@ -23,7 +23,7 @@ namespace packet_maker.MainComponents
 
 
 
-        public string LastPassStr { get;  set; }
+        public string LastPassStr { get; private set; }
         public string PassStatus;
         public int CurrnetGroup
         {
@@ -50,7 +50,7 @@ namespace packet_maker.MainComponents
 
 
         public string TimeTilPassStr {
-            get;set;
+            get;private set;
         }
         private long SecondsTilPass;
 

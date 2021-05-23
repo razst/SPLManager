@@ -3,7 +3,8 @@
     "ID": { "startByte": 0, "length": 4 },
     "Type": { "startByte": 4, "length": 1 },
     "Subtype": { "startByte": 5, "length": 1 },
-    "Length": { "startByte": 6, "length": 2 }
+    "Length": { "startByte": 6, "length": 2 },
+    "DataStartingByte": 8
   },
   "calibrations": [
     { "ID": "1", "name": "Temperature", "a": "0.0009765625", "b": "0" },

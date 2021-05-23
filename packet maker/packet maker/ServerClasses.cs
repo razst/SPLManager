@@ -26,7 +26,7 @@ namespace packet_maker
         public byte[] Content { get; set; }
     }
 
-    class RadioServer
+    class RadioServer //this server simulates trans button click in main
     {
         private Thread childThread = null;
         private TcpClient client = null;

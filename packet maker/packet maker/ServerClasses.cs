@@ -64,20 +64,6 @@ namespace packet_maker
 
         }
 
-        private byte[] ConvertHexToBytes(string str)
-        {
-            string[] bytesAsStrings = str.Split(' ');
-            byte[] toReturn = new byte[bytesAsStrings.Length];
-            for (int idx = 0; idx < toReturn.Length; idx++)
-            {
-                bool isSuccessful = byte.TryParse(bytesAsStrings[idx], System.Globalization.NumberStyles.HexNumber, null, out byte b);
-                if (!isSuccessful) return null;
-                toReturn[idx] = b;
-            }
-            return toReturn;
-        }
-
-
         public void Stop() { if (serverMode == "TCP") Kill_Server_Thread(); }
 
         public async Task Send(string msg)
@@ -106,6 +92,9 @@ namespace packet_maker
             }
 
         }
+
+
+
 
         private void Server_Thread()
         {
@@ -205,7 +194,18 @@ namespace packet_maker
                 }
             }
         }
-
+        private byte[] ConvertHexToBytes(string str)
+        {
+            string[] bytesAsStrings = str.Split(' ');
+            byte[] toReturn = new byte[bytesAsStrings.Length];
+            for (int idx = 0; idx < toReturn.Length; idx++)
+            {
+                bool isSuccessful = byte.TryParse(bytesAsStrings[idx], System.Globalization.NumberStyles.HexNumber, null, out byte b);
+                if (!isSuccessful) return null;
+                toReturn[idx] = b;
+            }
+            return toReturn;
+        }
         private void Kill_Server_Thread()
         {
             if (isOnline)

@@ -35,7 +35,6 @@ namespace packet_maker
         private TypeList options;
         private TypeList transOptions;
         private TypeList tauTransOptions;
-        private bool success = false;
         private readonly RadioServer RadioServer = new RadioServer();
         static public Main frm = null;
         private NextPassWorker NextPass;
@@ -494,120 +493,29 @@ namespace packet_maker
 
         private void TX(int CurrId, Packet_Mode mode)
         {
-
-            int length = 0;
-            foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
+            packetObject txPac = new packetObject()
             {
-                switch (par.type)
+                JsonObject = options,
+                Type = typeCB.SelectedIndex,
+                Subtype = subtypeCB.SelectedIndex,
+                Id = CurrId,
+                SateliteGroup = groupsCB.Text
+            };
+
+            if(dataTypesDGV.Visible)
+                for (int i = 0; i < dataTypesDGV.Rows.Count; i++)
                 {
-                    case "int":
-                    case "date":
-                    case "datetime":
-                        length += 4;
-                        break;
-
-                    case "char":
-                        length++;
-                        break;
-
-                    case "short":
-                        length += 2;
-                        break;
-
-                    case "bytes":
-                        length += (dataTypesDGV.Rows[0].Cells[1].Value.ToString().Trim().Length + 1) / 3;
-                        break;
+                    string curValue = dataTypesDGV.Rows[i].Cells[1].Value.ToString();
+                    string parName = options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].name;
+                    txPac.DataCatalog.Add(parName, curValue);
                 }
-            }
 
-            string type = ConvertToHexBytes(options.typenum[typeCB.SelectedIndex].id, 1);
-            string subtype = ConvertToHexBytes(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].id, 1);
-            string len = ConvertToHexBytes(length, 2);
-            string id = ConvertToHexBytes(CurrId, 3);
-            string satNum = ConvertToHexBytes(groupsCB.SelectedIndex, 1);
-
-
-
-            if (length == 0)
-            {
-                makeOut.Text = (id + " " + satNum + " " + type + " " + subtype + " " + len);
-                return;
-            }
-            string data = "";
-            int CBi = cList.Count - 1;
-            for (int i = dataTypesDGV.Rows.Count - 1; i >= 0; i--)
-            {
-                string curValue = dataTypesDGV.Rows[i].Cells[1].Value.ToString();
-                switch (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].type)
-                {
-                    case "int":
-                        data += Convert.ToInt32(curValue).ToString("X8");
-                        break;
-
-                    case "char":
-                        if (options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values == null)
-                        {
-                            data += Convert.ToInt32(curValue).ToString("X2");
-                            break;
-                        }
-
-                        data += Convert.ToInt32(options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas[i].values[cList[CBi].Items.IndexOf(curValue)].id).ToString("X2");
-                        CBi--;
-                        break;
-
-                    case "date":
-                    case "datetime":
-                        long unix;
-                        DateTime dt;
-
-                        if (curValue.Substring(0, 3) != "now")
-                        {
-                            dt = DateTime.Parse(curValue);
-                            unix = (int)(dt.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                            data += Convert.ToInt64(unix).ToString("X8");
-                            break;
-                        }
-                        if (curValue == "now")
-                        {
-                            if (mode == Packet_Mode.database)
-                            {
-                                data += "000000NN";
-                                break;
-                            }
-                            dt = DateTime.Now;
-                            unix = (int)(dt.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                            data += Convert.ToInt64(unix).ToString("X8");
-                            break;
-                        }
-                        if (mode == Packet_Mode.database)
-                        {
-                            string p = ConvertToHexBytes(int.Parse(curValue.Substring(4)), 3).Replace(" ", String.Empty) + "N" + curValue[3];
-                            data += p;
-                            break;
-                        }
-                        unix = curValue[3].ToString().Operator((int)(DateTime.Now.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, int.Parse(curValue.Substring(4)));
-                        data += Convert.ToInt64(unix).ToString("X8");
-                        break;
-
-                    case "short":
-                        data += Convert.ToInt32(dataTypesDGV.Rows[i].Cells[1].Value).ToString("X4");
-                        break;
-
-                    case "bytes":
-                        makeOut.Text = id + " " + satNum + " " + type + " " + subtype + " " + len + " " + dataTypesDGV.Rows[i].Cells[1].Value.ToString().ToUpper();
-                        return;
-
-                }
-            }
-            string[] revData = Regex.Replace(data, ".{2}", "$0 ").Trim().Split(' ');
-            Array.Reverse(revData);
-            makeOut.Text = id + " " + satNum + " " + type + " " + subtype + " " + len + " " + String.Join(" ", revData);
-
+            makeOut.Text = txPac.CastToString((int)mode);
         }
 
         private async void CreateTxPacket(int id, Packet_Mode mode)
         {
-            success = false;
+            bool success = false;
             try
             {
                 TX(id, mode);
@@ -645,7 +553,7 @@ namespace packet_maker
         }
         private async void sendPacketBtn_Click(object sender, EventArgs e)
         {
-            if (!RadioServer.isOnline || Program.settings.satInfo[groupsCB.SelectedIndex].isUnique)
+            if (!RadioServer.isOnline)
             {
                 MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1286,10 +1194,10 @@ namespace packet_maker
                     continue;
                 }
 
-                int match = type_subtype.FindIndex(x => x.packetPrefix == $"{packet.GetTypeName()}_{packet.GetSubTypeName()}");
+                int match = type_subtype.FindIndex(x => x.PacketPrefix == $"{packet.GetTypeName()}_{packet.GetSubTypeName()}");
                 if (match != -1)
                 {
-                    type_subtype[match].packets.Add(new PacketWithTime(packet, timeStr));
+                    type_subtype[match].Packets.Add(new PacketWithTime(packet, timeStr));
                     j++;
                     continue;
                 }
@@ -1300,9 +1208,9 @@ namespace packet_maker
 
                 type_subtype.Add(new FilePacket
                 {
-                    packetPrefix = $"{packet.GetTypeName()}_{packet.GetSubTypeName()}",
-                    packets = new List<PacketWithTime> { new PacketWithTime(packet, timeStr) },
-                    firstColumn = colStr
+                    PacketPrefix = $"{packet.GetTypeName()}_{packet.GetSubTypeName()}",
+                    Packets = new List<PacketWithTime> { new PacketWithTime(packet, timeStr) },
+                    FirstColumn = colStr
                 });
                 j++;
             }
@@ -1315,12 +1223,12 @@ namespace packet_maker
                 //creating all files
                 foreach (var file in type_subtype)
                 {
-                    List<List<string>> fileTble = new List<List<string>> { file.firstColumn };
-                    foreach (var pac in file.packets)
+                    List<List<string>> fileTble = new List<List<string>> { file.FirstColumn };
+                    foreach (var pac in file.Packets)
                     {
                         List<string> tm = new List<string>
                             {
-                                pac.time,
+                                pac.Time,
                                 pac.Id.ToString(),
                                 pac.SateliteGroup,
                                 pac.GetTypeName(),
@@ -1336,7 +1244,7 @@ namespace packet_maker
                         fileTble.Add(tm);
                     }
 
-                    CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.packetPrefix}.{stufix}");
+                    CreateCSV(fileTble, $"{saveFileDialog.FileName}_{file.PacketPrefix}.{stufix}");
 
                 }
                 //

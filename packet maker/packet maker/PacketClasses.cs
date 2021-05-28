@@ -17,20 +17,20 @@ namespace packet_maker
 
     public class FilePacket
     {
-        public string packetPrefix { get; set; }
+        public string PacketPrefix { get; set; }
 
-        public List<PacketWithTime> packets { get; set; }
+        public List<PacketWithTime> Packets { get; set; }
 
-        public List<string> firstColumn { get; set; }
+        public List<string> FirstColumn { get; set; }
     }
 
     public class PacketWithTime : packetObject
     {
-        public string time { get; set; }
+        public string Time { get; set; }
 
         public PacketWithTime(packetObject packet, string timeString) : base(packet)
         {
-            time = timeString;
+            Time = timeString;
         }
     }
 
@@ -119,34 +119,14 @@ namespace packet_maker
 
         }
 
+
+
         public string ToHeaderString(DateTime time)
         {
             if (Type == -1)
                 return $"[{time}]   ERROR";
             return $"[{time}]   {GetTypeName()} - {GetSubTypeName()}  ||| ID:{Id}";
         }
-
-
-
-
-
-
-        public string castToString()
-        {
-            string HexType = Type.ToString("X2");
-            string HexSubType = Subtype.ToString("X2");
-            string HexId = String.Join(" ", Regex.Replace(Id.ToString("X6"), ".{2}", "$0 ").Split(' ').Reverse());
-            string HexLen = String.Join(" ", Regex.Replace(Length.ToString("X6"), ".{2}", "$0 ").Split(' ').Reverse());
-            string HexGru = Groups.FindIndex(a => a == SateliteGroup).ToString("X2");
-            if (DataCatalog.Count != 0)
-            {
-
-            }
-            return HexId + " " + HexGru + " " + HexType + " " + HexSubType + " " + HexLen;
-        }
-
-
-
 
 
 
@@ -163,7 +143,7 @@ namespace packet_maker
     }
 
 
-    static class PacketConvertion
+    static class HexStringToPacket
     {
         private static int j;
         private static List<string> bitarr;
@@ -331,6 +311,150 @@ namespace packet_maker
                 pacObj.DataCatalog.Add(currentParams.subParams[i], temp[i].ToString());
             }
             j += numOfBytes;
+        }
+
+
+        #endregion
+    }
+
+
+
+    static class PacketToHexString
+    {
+        private static packetObject pacObj;
+        private static TypeList json;
+        private static List<string> HexBytes;
+        private static int Length;
+        private static int PacketMode;
+
+        private static Params currentParams;
+        private static string currentField;
+
+        //add new data types here (after you wrote an apropriate function):
+        private static readonly Dictionary<string, Action> DataTypesActions = new Dictionary<string, Action>()
+        {
+            {"int", HandeleIntParam},
+            {"short", HandeleShortParam},
+            {"char", HandeleCharParam},
+            {"date", HandeleDateParam},
+            {"datetime", HandeleDateParam},
+            {"ascii", HandeleAsciiParam},
+            {"bytes", HandeleBytesParam},
+            {"bitwise", HandeleBitwiseParam}
+        };
+
+        public static string CastToString(this packetObject po, int packetMode)
+        {
+            HexBytes = new List<string>();
+            pacObj = po;
+            json = pacObj.JsonObject;
+            PacketMode = packetMode;
+            Length = 0;
+
+            po.Subtype = json.typenum[po.Type].subTypes[po.Subtype].id;
+            po.Type = json.typenum[po.Type].id;
+
+            var typeDex = json.typenum.FindIndex(item => item.id == po.Type);
+            var subtypeDex = json.typenum[typeDex].subTypes.FindIndex(item => item.id == po.Subtype);
+
+            HexBytes.Add(ConvertToHexBytes(pacObj.Id, 3));
+            HexBytes.Add(ConvertToHexBytes(pacObj.GetSatDex(), 1));
+            HexBytes.Add(ConvertToHexBytes(json.typenum[typeDex].id, 1));
+            HexBytes.Add(ConvertToHexBytes(json.typenum[typeDex].subTypes[subtypeDex].id, 1));
+            HexBytes.Add("");//length, will be calced in code. Hexbytes[4]
+
+            foreach (Params par in json.typenum[typeDex].subTypes[subtypeDex].parmas)
+            {
+                currentParams = par;
+                currentField = pacObj.DataCatalog[par.name].ToString();
+                DataTypesActions[par.type]();
+            }
+            HexBytes[4] = ConvertToHexBytes(Length, 2);
+
+            return String.Join(" ", HexBytes);
+        }
+
+
+        private static string ConvertToHexBytes(int value, int numberOfBytes)
+        {
+            string format = "X" + (numberOfBytes * 2);
+            string Tid = value.ToString(format);
+            string[] TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Trim().Split(' ');
+            Array.Reverse(TidArr);
+            return String.Join(" ", TidArr).Trim();
+        }
+
+
+        #region Data types handelers
+        private static void HandeleIntParam()
+        {
+            HexBytes.Add(ConvertToHexBytes(Convert.ToInt32(currentField), 4));
+            Length += 4;
+        }
+        private static void HandeleShortParam()
+        {
+            HexBytes.Add(ConvertToHexBytes(Convert.ToInt32(currentField), 2));
+            Length += 2;
+        }
+        private static void HandeleCharParam()
+        {
+            if(currentParams.values == null)
+            {
+                HexBytes.Add(ConvertToHexBytes(Convert.ToInt32(currentField), 1));
+            }
+            else
+            {
+                HexBytes.Add(ConvertToHexBytes(currentParams.values.Find(val => val.name == currentField).id, 1));
+            }
+            Length++;
+        }
+        private static void HandeleDateParam()
+        {
+            DateTime dt;
+            int unix;
+
+            if (currentField.Substring(0, 3) != "now")
+            {
+                dt = DateTime.Parse(currentField);
+                unix = (int)(dt.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                HexBytes.Add(ConvertToHexBytes(unix, 4));
+            }
+            else if (currentField == "now")
+            {
+                if (PacketMode == 2)
+                {
+                    HexBytes.Add("00 00 00 NN");
+                    return;
+                }
+                dt = DateTime.Now;
+                unix = (int)dt.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+                HexBytes.Add(ConvertToHexBytes(unix, 4));
+            }
+            else if (PacketMode == 2)
+            {
+                string p = ConvertToHexBytes(int.Parse(currentField.Substring(4)), 3).Replace(" ", String.Empty) + "N" + currentField[3];
+                HexBytes.Add(p);
+            }
+            else
+            {
+                unix = currentField[3].ToString().Operator((int)(DateTime.Now.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, int.Parse(currentField.Substring(4)));
+                HexBytes.Add(ConvertToHexBytes(unix, 4));
+            }
+            Length += 4;
+
+        }
+        private static void HandeleBytesParam() 
+        {
+            HexBytes.Add(currentField.ToUpper());
+            Length += (currentField.Trim().Length + 1) / 3;
+        }
+        private static void HandeleAsciiParam()
+        {
+
+        }
+        private static void HandeleBitwiseParam()
+        {
+
         }
 
 

@@ -12,9 +12,6 @@ using System.Windows.Forms;
 
 namespace packet_maker
 {
-
-
-
     public class FilePacket
     {
         public string PacketPrefix { get; set; }
@@ -24,11 +21,11 @@ namespace packet_maker
         public List<string> FirstColumn { get; set; }
     }
 
-    public class PacketWithTime : packetObject
+    public class PacketWithTime : PacketObject
     {
         public string Time { get; set; }
 
-        public PacketWithTime(packetObject packet, string timeString) : base(packet)
+        public PacketWithTime(PacketObject packet, string timeString) : base(packet)
         {
             Time = timeString;
         }
@@ -36,7 +33,7 @@ namespace packet_maker
 
 
 
-    public class packetObject
+    public class PacketObject
     {
         private static readonly List<string> Groups = Program.groups;
 
@@ -57,7 +54,7 @@ namespace packet_maker
         public string RawPacket { get; set; }
 
 
-        public packetObject(TypeList json, string packetString, int gpDex = -1)
+        public PacketObject(TypeList json, string packetString, int gpDex = -1)
         {
             DataCatalog = new Dictionary<string, object>();
             RawPacket = packetString;
@@ -72,13 +69,13 @@ namespace packet_maker
                 Type = -1;
             }
         }
-        public packetObject()
+        public PacketObject()
         {
             DataCatalog = new Dictionary<string, object>();
             RawPacket = "";
             Type = -1;
         }
-        public packetObject(packetObject packet)
+        public PacketObject(PacketObject packet)
         {
             Id = packet.Id;
             Type = packet.Type;
@@ -88,7 +85,6 @@ namespace packet_maker
             JsonObject = packet.JsonObject;
             RawPacket = packet.RawPacket;
         }
-
 
 
 
@@ -130,11 +126,6 @@ namespace packet_maker
 
 
 
-
-
-
-
-
         private int GetTypeDex() => JsonObject.typenum.FindIndex(item => item.id == Type);
         private int GetSubtypeDex() => JsonObject.typenum[GetTypeDex()].subTypes.FindIndex(item => item.id == Subtype);
         public string GetTypeName() => JsonObject.typenum[GetTypeDex()].name;
@@ -149,7 +140,7 @@ namespace packet_maker
         private static List<string> bitarr;
         private static TypeList json;
         private static Params currentParams;
-        private static packetObject pacObj;
+        private static PacketObject pacObj;
 
 
         //add new data types here (after you wrote an apropriate function):
@@ -166,7 +157,7 @@ namespace packet_maker
         };
 
 
-        public static void ConvertFromString(this packetObject po, int groupDex = -1)
+        public static void ConvertFromString(this PacketObject po, int groupDex = -1)
         {
             pacObj = po;
             json = po.JsonObject;
@@ -324,7 +315,7 @@ namespace packet_maker
 
     static class PacketToHexString
     {
-        private static packetObject pacObj;
+        private static PacketObject pacObj;
         private static TypeList json;
         private static List<string> HexBytes;
         private static int Length;
@@ -346,7 +337,7 @@ namespace packet_maker
             {"bitwise", HandeleBitwiseParam}
         };
 
-        public static string CastToString(this packetObject po, int packetMode)
+        public static string CastToString(this PacketObject po, int packetMode)
         {
             HexBytes = new List<string>();
             pacObj = po;

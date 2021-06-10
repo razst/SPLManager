@@ -29,7 +29,7 @@ namespace packet_maker
     public partial class Main : Form
     {
 
-        private packetObject po;
+        private PacketObject po;
 
         private Dictionary<string, TypeList> SatRxOptions = new Dictionary<string, TypeList>();
         private TypeList options;
@@ -75,6 +75,7 @@ namespace packet_maker
             transOptions = new TypeList(@"rx.json");
             tauTransOptions = new TypeList(@"TauRx.json");
             SatRxOptions.Add("TAU", new TypeList(@"TauRx.json"));
+            SatRxOptions.Add("TEVEL", transOptions);
 
             if (Program.settings.dataBaseEnabled) PoupolatePL();
 
@@ -218,13 +219,13 @@ namespace packet_maker
             Array.Reverse(TidArr);
             return String.Join(" ", TidArr).Trim();
         }
-        private async Task Upload_Packet(string COLLECTION_NAME, packetObject ogPacket)
+        private async Task Upload_Packet(string COLLECTION_NAME, PacketObject ogPacket)
         {
             if (!Program.settings.dataBaseEnabled) return;
             var DBPacket = CreateDBP(ogPacket); 
             await Program.db.IndexAsync(new IndexRequest<Dictionary<string, object>>(DBPacket, COLLECTION_NAME));
         }
-        private Dictionary<string, object> CreateDBP(packetObject ogPacket)
+        private Dictionary<string, object> CreateDBP(PacketObject ogPacket)
         {
             Dictionary<string, object> DBPacket = new Dictionary<string, object>
             {
@@ -285,7 +286,7 @@ namespace packet_maker
         #region objects
 
         private List<PLInfo> Playlists = new List<PLInfo>();
-        private List<packetObject> commands = new List<packetObject>();
+        private List<PacketObject> commands = new List<PacketObject>();
 
 
         #endregion
@@ -316,7 +317,7 @@ namespace packet_maker
                     string pac = (string)Invoke(f, i);
                     await Task.Delay(int.Parse(sleepCmdTxb.Text));
 
-                    po = new packetObject(options, makeOut.Text.Trim());
+                    po = new PacketObject(options, makeOut.Text.Trim());
                     rawTxPacHisList.Add(po);
                     addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
                     i++;
@@ -334,7 +335,7 @@ namespace packet_maker
         {
 
             CreateTxPacket(256, Packet_Mode.database);
-            packetObject po = new packetObject(options, makeOut.Text.Trim());
+            PacketObject po = new PacketObject(options, makeOut.Text.Trim());
             PLitemsLibx.Items.Add(po.GetSubTypeName());
             commands.Add(po);
             Playlists[PlaylistCB.SelectedIndex].commands.Add(po.RawPacket);
@@ -380,7 +381,7 @@ namespace packet_maker
             commands.Clear();
             foreach (var item in Playlists[PlaylistCB.SelectedIndex].commands)
             {
-                packetObject po = new packetObject(options, item);
+                PacketObject po = new PacketObject(options, item);
                 PLitemsLibx.Items.Add(po.GetSubTypeName());
                 commands.Add(po);
             }
@@ -447,7 +448,7 @@ namespace packet_maker
             }
         }
 
-        private void CastToDGV(packetObject packet)
+        private void CastToDGV(PacketObject packet)
         {
             typeCB.SelectedItem = packet.GetTypeName();
             subtypeCB.SelectedItem = packet.GetSubTypeName();
@@ -493,7 +494,7 @@ namespace packet_maker
 
         private void TX(int CurrId, Packet_Mode mode)
         {
-            packetObject txPac = new packetObject()
+            PacketObject txPac = new PacketObject()
             {
                 JsonObject = options,
                 Type = typeCB.SelectedIndex,
@@ -530,7 +531,7 @@ namespace packet_maker
             {
                 if (success && mode == Packet_Mode.satelite)
                 {
-                    await Upload_Packet("parsed-tx", new packetObject(options, makeOut.Text));
+                    await Upload_Packet("parsed-tx", new PacketObject(options, makeOut.Text));
                 }
             }
         }
@@ -561,7 +562,7 @@ namespace packet_maker
 
             CreateTxPacket(await getSplCurIdAsync(groupsCB.SelectedIndex), Packet_Mode.satelite);
 
-            po = new packetObject(options, makeOut.Text.Trim());
+            po = new PacketObject(options, makeOut.Text.Trim());
             rawTxPacHisList.Add(po);
             addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
 
@@ -717,7 +718,7 @@ namespace packet_maker
                 foreach (var doc in RxSnapshot.Documents)
                 {
                     po = await Task.Run(() => {
-                        return new packetObject(transOptions, doc["packetString"].ToString());
+                        return new PacketObject(transOptions, doc["packetString"].ToString());
                     });
 
                     rawRxPacHisList.Add(po);
@@ -758,7 +759,7 @@ namespace packet_maker
                 foreach (var doc in TxSnapshot.Documents)
                 {
                     po = await Task.Run(() => {
-                        return new packetObject(options, doc["packetString"].ToString());
+                        return new PacketObject(options, doc["packetString"].ToString());
                     });
 
                     rawTxPacHisList.Add(po);
@@ -840,7 +841,7 @@ namespace packet_maker
             string tPac = $"{id} 0{groupsCB.SelectedIndex}{rawTxPacHisList[TxPacLibx.SelectedIndex].RawPacket.Substring(11)}";
             await RadioServer.Send(tPac); //0-9 only
 
-            po = new packetObject(options, tPac);
+            po = new PacketObject(options, tPac);
             rawTxPacHisList.Add(po);
             addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
             await Upload_Packet("tx-packets", po);
@@ -851,23 +852,17 @@ namespace packet_maker
         #region funcs
         public async void trasBtn_click(string msg)
         {
-            string mess = msg.Trim();
+            string mess = msg.Trim().Replace('-', ' ');
 
-            po = new packetObject(transOptions, mess);
-
-            if (po.Type == -1)
+            foreach (var RxOption in SatRxOptions.Values)
             {
-                po = new packetObject(SatRxOptions[RxGroupsCB.Text.Substring(0,3)], mess, RxGroupsCB.SelectedIndex);
-                if(po.Type == -1)
-                {
-                    rawRxPacHisList.Add(po);
-                    addItemToListbox(po.ToHeaderString(DateTime.Now), privHex);
-                    await Upload_Packet("parsed-rx", po);
-                    return;
-                }
+                po = new PacketObject(RxOption, mess, RxGroupsCB.SelectedIndex);
+                if (po.Type != -1) break;
             }
-            //add item to 
-            if (po.SateliteGroup == RxGroupsCB.SelectedItem.ToString() || RxGroupsCB.SelectedIndex == 0)
+
+
+            //add item
+            if (po.SateliteGroup == RxGroupsCB.SelectedItem.ToString() || RxGroupsCB.SelectedIndex == 0 || po.Type == -1)
             {
                 rawRxPacHisList.Add(po);
                 addItemToListbox(po.ToHeaderString(DateTime.Now), privHex);
@@ -878,8 +873,8 @@ namespace packet_maker
 
 
         #region objects
-        public List<packetObject> rawRxPacHisList = new List<packetObject>();
-        public List<packetObject> rawTxPacHisList = new List<packetObject>();
+        public List<PacketObject> rawRxPacHisList = new List<PacketObject>();
+        public List<PacketObject> rawTxPacHisList = new List<PacketObject>();
         #endregion
         #endregion
 
@@ -981,7 +976,7 @@ namespace packet_maker
                     {
                         po = await Task.Run(() =>
                         {
-                            return new packetObject(transOptions, doc["packetString"].ToString());
+                            return new PacketObject(transOptions, doc["packetString"].ToString());
                         });
 
                         RxPacQryList.Add(po);
@@ -1014,7 +1009,7 @@ namespace packet_maker
                     {
                         po = await Task.Run(() =>
                         {
-                            return new packetObject(options, doc["packetString"].ToString());
+                            return new PacketObject(options, doc["packetString"].ToString());
                         });
 
                         TxPacQryList.Add(po);
@@ -1119,8 +1114,8 @@ namespace packet_maker
 
 
         #region objects
-        public List<packetObject> RxPacQryList = new List<packetObject>();
-        public List<packetObject> TxPacQryList = new List<packetObject>();
+        public List<PacketObject> RxPacQryList = new List<PacketObject>();
+        public List<PacketObject> TxPacQryList = new List<PacketObject>();
         private List<SubType> subTypes = new List<SubType>();
         private List<Params> currentParams = new List<Params>();
         #endregion
@@ -1437,7 +1432,7 @@ namespace packet_maker
 
             if (type == "Beacon")
             {
-                po = new packetObject(transOptions, lastTimeSnapshot.Documents[0]["packetString"].ToString());
+                po = new PacketObject(transOptions, lastTimeSnapshot.Documents[0]["packetString"].ToString());
                 VBatGauge.Value = float.Parse(po.DataCatalog["vbat"].ToString()) / 1000;
                 OBCGauge.Value = float.Parse(po.DataCatalog["MCU Temperature"].ToString()) / 100;
                 BatTempGauge.Value = float.Parse(po.DataCatalog["Battery Temperature"].ToString()) / 1000;

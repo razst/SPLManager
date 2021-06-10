@@ -10,7 +10,7 @@
     { "ID": "1", "name": "Temperature", "a": "0.0009765625", "b": "0" },
     { "ID": "2", "name": "Voltage", "a": "0", "b": "0" }
   ],
-
+  "ReverseBytes": true,
   "types": [
     {
       "id": "0",

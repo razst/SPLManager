@@ -203,15 +203,18 @@ namespace packet_maker
         private static int ConvertBytesToSplInt(dynamic setting)
         {
             List<string> r = bitarr.GetRange((int)setting.startByte, (int)setting.length);
-            r.Reverse();
-            var t = String.Join("", r);
-            return Convert.ToInt32(t, 16);
+            return ConvertBytesToSplInt(r);
         }
         private static int ConvertBytesToSplInt(int NumOfBytes)
         {
             List<string> r = bitarr.GetRange(j,NumOfBytes);
-            r.Reverse();
-            var t = String.Join("", r);
+            return ConvertBytesToSplInt(r);
+        }
+        private static int ConvertBytesToSplInt(List<string> bits)
+        {
+            if (json.ReverseBytes)
+                bits.Reverse();
+            var t = String.Join("", bits);
             return Convert.ToInt32(t, 16);
         }
         static float Calibrate(int input)

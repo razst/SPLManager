@@ -136,7 +136,7 @@ namespace packet_maker
 
 
             //GaugesSetup
-            VBatGauge.ColorofG = new Dictionary<string, AquaControls.valuesOfColors>
+            VBatGauge.ColorOfG = new Dictionary<string, AquaControls.valuesOfColors>
             {
                 {"healthy", new AquaControls.valuesOfColors{color = Color.LawnGreen , minVal = 7.5F,maxVal = 9 , threshVal = 8.25F, threshPrecent = 16.66F }},
                 {"bad", new AquaControls.valuesOfColors{color = Color.Red , minVal = 0,maxVal = 7 , threshVal = 3.5F , threshPrecent = 77.77F}},
@@ -144,7 +144,7 @@ namespace packet_maker
 
 
             };
-            OBCGauge.ColorofG = new Dictionary<string, AquaControls.valuesOfColors>
+            OBCGauge.ColorOfG = new Dictionary<string, AquaControls.valuesOfColors>
             {
                 {"healthy", new AquaControls.valuesOfColors{color = Color.LawnGreen , minVal = -15F,maxVal = 30, threshVal = 7.5F, threshPrecent= 39 }},
                 {"bad", new AquaControls.valuesOfColors{color = Color.Red , minVal = 45,maxVal = 80 , threshVal = 62.5F , threshPrecent = 32 }},
@@ -152,7 +152,7 @@ namespace packet_maker
                 {"bad2", new AquaControls.valuesOfColors{color = Color.Red , minVal = -40,maxVal = -20 , threshVal = -30F , threshPrecent = 20 }},
                 {"notgreat2", new AquaControls.valuesOfColors{color = Color.OrangeRed, minVal = -20,maxVal = -15 , threshVal = -17.5F , threshPrecent = 4.6F}},
             };
-            BatTempGauge.ColorofG = new Dictionary<string, AquaControls.valuesOfColors>
+            BatTempGauge.ColorOfG = new Dictionary<string, AquaControls.valuesOfColors>
             {
                 {"healthy", new AquaControls.valuesOfColors{color = Color.LawnGreen , minVal = -15F,maxVal = 30, threshVal = 7.5F, threshPrecent= 39 }},
                 {"bad", new AquaControls.valuesOfColors{color = Color.Red , minVal = 45,maxVal = 80 , threshVal = 62.5F , threshPrecent = 32 }},
@@ -160,7 +160,7 @@ namespace packet_maker
                 {"bad2", new AquaControls.valuesOfColors{color = Color.Red , minVal = -40,maxVal = -20 , threshVal = -30F , threshPrecent = 20 }},
                 {"notgreat2", new AquaControls.valuesOfColors{color = Color.OrangeRed, minVal = -20,maxVal = -15 , threshVal = -17.5F , threshPrecent = 4.6F}},
             };
-            FreeSpaceGauge.ColorofG = new Dictionary<string, AquaControls.valuesOfColors>
+            FreeSpaceGauge.ColorOfG = new Dictionary<string, AquaControls.valuesOfColors>
             {
                 {"healthy", new AquaControls.valuesOfColors{color = Color.LawnGreen , minVal = 800,maxVal = 2200, threshVal = 1500, threshPrecent= 63.63F }},
                 {"bad", new AquaControls.valuesOfColors{color = Color.Red , minVal = 0,maxVal = 300 , threshVal = 150 , threshPrecent = 13.63F }},

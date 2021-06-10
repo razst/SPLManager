@@ -1,7 +1,7 @@
 {
   "endNodePath": "C:/Users/pc/Desktop/GSC/GSC-EndNode/GSC-EndNode.exe",
   "enableImage": false,
-  "dataBaseEnabled": false,
+  "dataBaseEnabled": true,
   "pacCurId": 0,
   "tcpPortNumber": 4,
   "defaultSatGroup": 2,

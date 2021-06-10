@@ -157,7 +157,7 @@ namespace AquaControls
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Dictionary<string, valuesOfColors> ColorofG
+        public Dictionary<string, valuesOfColors> ColorOfG
         {
             get { return valOCal; }
             set
@@ -182,8 +182,8 @@ namespace AquaControls
                 if (value >= minValue && value <= maxValue)
                 {
                     currentValue = value;
-                    if(ColorofG != null)
-                    foreach (var item in ColorofG.Values)
+                    if(ColorOfG != null)
+                    foreach (var item in ColorOfG.Values)
                     {
                             if(currentValue < item.maxVal && currentValue > item.minVal)
                             {
@@ -393,8 +393,8 @@ namespace AquaControls
                 requiresRedraw = false;
 
                 //Draw Critical Threshold
-                if(ColorofG != null)
-                foreach (var item in ColorofG.Values)
+                if(ColorOfG != null)
+                foreach (var item in ColorOfG.Values)
                 {
                         var newVal = item.threshVal;
                         var newThresh = item.threshPrecent;

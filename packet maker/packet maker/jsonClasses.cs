@@ -89,7 +89,10 @@ namespace packet_maker
 
         [JsonProperty("spl_header")]
 
-        public dynamic header; 
+        public dynamic header;
+
+        [JsonProperty("ReverseBytes")]
+        public bool ReverseBytes { get; set; }
 
         [JsonProperty("calibrations")]
         public List<Calibration> calibrations { get; set; }
@@ -107,6 +110,7 @@ namespace packet_maker
             typenum = t.typenum ?? null;
             header = t.header ?? null;
             calibrations = t.calibrations ?? null;
+            ReverseBytes = t.ReverseBytes;
         }
         public TypeList() { }
     }

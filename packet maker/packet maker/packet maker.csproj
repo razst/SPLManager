@@ -182,6 +182,7 @@
     </Compile>
     <Compile Include="MainComponents\BeaconViz.cs" />
     <Compile Include="MainComponents\DataBaseWorker.cs" />
+    <Compile Include="MainComponents\PacketTracking.cs" />
     <Compile Include="MainComponents\Timers.cs" />
     <Compile Include="NewPlaylistDialog.cs">
       <SubType>Form</SubType>

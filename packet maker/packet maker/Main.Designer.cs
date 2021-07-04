@@ -827,6 +827,7 @@ namespace packet_maker
             this.RxGroupsCB.Name = "RxGroupsCB";
             this.RxGroupsCB.Size = new System.Drawing.Size(136, 21);
             this.RxGroupsCB.TabIndex = 23;
+            this.RxGroupsCB.SelectedIndexChanged += new System.EventHandler(this.RxGroupsCB_SelectedIndexChanged);
             // 
             // label16
             // 

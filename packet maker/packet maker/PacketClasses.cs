@@ -6,9 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-
-
-
+using Nest;
+using System.Threading.Tasks;
 
 namespace packet_maker
 {
@@ -86,9 +85,20 @@ namespace packet_maker
             RawPacket = packet.RawPacket;
         }
 
-
-
         public override string ToString()
+        {
+            if (Type == 1) return "Errored Packet";
+            return $"ID: {Id}, Type: {GetTypeName()}, SubType: {GetSubTypeName()}";
+        }
+
+        public async Task Upload(string COLLECTION_NAME)
+        {
+            if (GetSatDex() == 9) return;
+            await Program.db.IndexAsync(new IndexRequest<Dictionary<string, object>>
+                (this.CastToDict(), COLLECTION_NAME));
+        }
+
+        public string GetDescriptionString()
         {
             string output = "";
             if (Type == -1)
@@ -114,7 +124,6 @@ namespace packet_maker
             return output;
 
         }
-
 
 
         public string ToHeaderString(DateTime time)
@@ -453,5 +462,35 @@ namespace packet_maker
 
 
         #endregion
+    }
+
+
+
+    static class PacketToDatabase
+    {
+        public static Dictionary<string, object> CastToDict(this PacketObject PacObj)
+        {
+            Dictionary<string, object> DBPacket = new Dictionary<string, object>
+            {
+                {"packetString",PacObj.RawPacket },
+                {"time",DateTime.UtcNow }
+            };
+            if (PacObj.Type == -1)
+            {
+                DBPacket.Add("type", "Error");
+                return DBPacket;
+            }
+
+            DBPacket.Add("splID", PacObj.Id);
+            DBPacket.Add("type", PacObj.GetTypeName());
+            DBPacket.Add("subtype", PacObj.GetSubTypeName());
+            DBPacket.Add("lenght", PacObj.Length);
+            DBPacket.Add("satId", PacObj.GetSatDex());
+            DBPacket.Add("satName", PacObj.SateliteGroup);
+
+            foreach (var item in PacObj.DataCatalog) DBPacket.Add(item.Key, item.Value);
+
+            return DBPacket;
+        }
     }
 }

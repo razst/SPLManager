@@ -68,14 +68,22 @@ namespace packet_maker
 
         private  void Form1_Load(object sender, EventArgs e)
         {
+            frm = this;
             //packet settings
             //http://jsonviewer.stack.hu/
 
             options = new TypeList(@"tx.json");
             transOptions = new TypeList(@"rx.json");
             tauTransOptions = new TypeList(@"TauRx.json");
-            SatRxOptions.Add("TAU", new TypeList(@"TauRx.json"));
+
+            everySecTimer.Start();
+            MainLabelsWorker.Start();
+
             SatRxOptions.Add("TEVEL", transOptions);
+            SatRxOptions.Add("TAU", new TypeList(@"TauRx.json"));
+
+            NextPass = new NextPassWorker(Program.settings.defaultSatGroup);
+            RxHisTracker = new PacketHistoryTracker(RxGroupsCB, privHex, transOut);
 
             if (Program.settings.dataBaseEnabled) PoupolatePL();
 
@@ -100,7 +108,6 @@ namespace packet_maker
                 }
             }
             //
-            NextPass = new NextPassWorker(Program.settings.defaultSatGroup);
 
             //DatePickers
             minExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
@@ -121,12 +128,6 @@ namespace packet_maker
 
 
 
-
-
-            frm = this;
-            everySecTimer.Start();
-            MainLabelsWorker.Start();
-
             //next pass setup
             nextPassLabels[0] = this.nextPass1Label;
             nextPassLabels[1] = this.nextPass2Label;
@@ -136,7 +137,7 @@ namespace packet_maker
 
 
 
-            //GaugesSetup
+            //Gauges Setup
             VBatGauge.ColorOfG = new Dictionary<string, AquaControls.valuesOfColors>
             {
                 {"healthy", new AquaControls.valuesOfColors{color = Color.LawnGreen , minVal = 7.5F,maxVal = 9 , threshVal = 8.25F, threshPrecent = 16.66F }},
@@ -218,37 +219,6 @@ namespace packet_maker
             string[] TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Trim().Split(' ');
             Array.Reverse(TidArr);
             return String.Join(" ", TidArr).Trim();
-        }
-        private async Task Upload_Packet(string COLLECTION_NAME, PacketObject ogPacket)
-        {
-            if (!Program.settings.dataBaseEnabled) return;
-            var DBPacket = CreateDBP(ogPacket); 
-            await Program.db.IndexAsync(new IndexRequest<Dictionary<string, object>>(DBPacket, COLLECTION_NAME));
-        }
-        private Dictionary<string, object> CreateDBP(PacketObject ogPacket)
-        {
-            Dictionary<string, object> DBPacket = new Dictionary<string, object>
-            {
-                {"packetString",ogPacket.RawPacket },
-                {"time",DateTime.UtcNow }
-            };
-            if (ogPacket.Type == -1)
-            {
-                DBPacket.Add("type", "Error");
-                return DBPacket;
-            }
-            DBPacket.AddRange(new Dictionary<string, object>
-            {
-                {"splID",ogPacket.Id },
-                {"type",ogPacket.GetTypeName() },
-                {"subtype",ogPacket.GetSubTypeName() },
-                {"lenght",ogPacket.Length },
-                {"satId",ogPacket.GetSatDex() },
-                {"satName", ogPacket.SateliteGroup }
-
-            });
-            DBPacket.AddRange(ogPacket.DataCatalog);
-            return DBPacket;
         }
         private void addItemToListbox(string diaplay, ListBox list)
         {
@@ -531,7 +501,7 @@ namespace packet_maker
             {
                 if (success && mode == Packet_Mode.satelite)
                 {
-                    await Upload_Packet("parsed-tx", new PacketObject(options, makeOut.Text));
+                    await new PacketObject(options, makeOut.Text).Upload("parsed-tx");
                 }
             }
         }
@@ -605,11 +575,11 @@ namespace packet_maker
                 return;
             }
 
+            var cList = new List<DataGridViewComboBoxCell>();
             dataTypesDGV.Rows.Clear();
             dataTypesDGV.Visible = true;
             int i = 0;
             bool bit = false;
-            cList.Clear();
             foreach (Params par in options.typenum[typeCB.SelectedIndex].subTypes[subtypeCB.SelectedIndex].parmas)
             {
                 dataTypesDGV.Rows.Add(par.name, "", par.desc);
@@ -648,7 +618,6 @@ namespace packet_maker
         #endregion
 
         #region objects
-        private List<DataGridViewComboBoxCell> cList = new List<DataGridViewComboBoxCell>();
         #endregion
 
         #endregion
@@ -662,121 +631,15 @@ namespace packet_maker
         private void trasBtn_Click(object sender, EventArgs e) => trasBtn_click(transIn.Text);
 
         //
-        private async void loadDbBtn_Click(object sender, EventArgs e)
+        private void loadDbBtn_Click(object sender, EventArgs e) { }
+        //
+
+        private void RxGroupsCB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!Program.settings.dataBaseEnabled)
-            {
-                MessageBox.Show("database is disabled in the settings", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            try
-            {
-                UseWaitCursor = true;
-                clearRxBtn.PerformClick();
-
-                int qrySize = 20000;
-                if (DBLimitCB.SelectedItem.ToString() != "No Limit")
-                {
-                    qrySize = int.Parse(DBLimitCB.SelectedItem.ToString());
-                }
-
-                #region rxHistory
-
-
-                //define query
-                var RxQryFilters = new List<Func<QueryContainerDescriptor<Dictionary<string, object>>, QueryContainer>>
-                        {
-                            q => q.DateRange(
-                                dr => dr
-                                .Field("time")
-                                .LessThanOrEquals(maxExportDateDtp.Value.ToUniversalTime())
-                                .GreaterThanOrEquals(minExportDateDtp.Value.ToUniversalTime()))
-                        };
-
-
-                if (RxGroupsCB.SelectedIndex != 0)
-                {
-                    RxQryFilters.Add(fq => fq.Match(
-                        m => m.Field("satId")
-                              .Query(RxGroupsCB.SelectedIndex.ToString())));
-                }
-                if (qrySubtypeCB.SelectedItem.ToString() != "All")
-                {
-                    RxQryFilters.Add(fq => fq.Match(
-                        m => m.Field("subtype")
-                                .Query(qrySubtypeCB.SelectedItem.ToString())));
-                }
-                //
-
-                var RxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
-
-                    .Query(q => q.Bool(ft => ft.Must(RxQryFilters)))
-                    .Index("parsed-rx")
-                    .Size(qrySize)
-                    .Sort(q => q.Ascending(obj => obj["time"])));
-
-                foreach (var doc in RxSnapshot.Documents)
-                {
-                    po = await Task.Run(() => {
-                        return new PacketObject(transOptions, doc["packetString"].ToString());
-                    });
-
-                    rawRxPacHisList.Add(po);
-
-                    privHex.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
-                }
-                #endregion
-
-                #region txHistory
-
-
-                //define query
-                var TxQryFilters = new List<Func<QueryContainerDescriptor<Dictionary<string, object>>, QueryContainer>>
-                        {
-                            q => q.DateRange(
-                                dr => dr
-                                .Field("time")
-                                .LessThanOrEquals(maxExportDateDtp.Value.ToUniversalTime())
-                                .GreaterThanOrEquals(minExportDateDtp.Value.ToUniversalTime()))
-                        };
-
-
-                if (RxGroupsCB.SelectedIndex != 0)
-                {
-                    TxQryFilters.Add(fq => fq.Match(
-                        m => m.Field("satId")
-                              .Query(RxGroupsCB.SelectedIndex.ToString())));
-                }
-                //
-
-                var TxSnapshot = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
-
-                    .Query(q => q.Bool(ft => ft.Must(RxQryFilters)))
-                    .Index("parsed-tx")
-                    .Size(qrySize)
-                    .Sort(q => q.Ascending(obj => obj["time"])));
-
-                foreach (var doc in TxSnapshot.Documents)
-                {
-                    po = await Task.Run(() => {
-                        return new PacketObject(options, doc["packetString"].ToString());
-                    });
-
-                    rawTxPacHisList.Add(po);
-
-                    TxPacLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
-                }
-                #endregion
-
-                MessageBox.Show($"{RxSnapshot.Documents.Count} RX packet were recived. {Environment.NewLine}{TxSnapshot.Documents.Count} TX packet were recived.", "Query finished", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            }
-            finally
-            {
-                UseWaitCursor = false;
-            }
+            clearRxBtn.PerformClick();
+            RxHisTracker.UpdateDisplayGroup();
 
         }
-        //
 
         #endregion
 
@@ -786,14 +649,14 @@ namespace packet_maker
 
         private void privHex_SelectedIndexChanged(object sender, EventArgs e)
         {
-            transIn.Text = rawRxPacHisList[privHex.SelectedIndex].RawPacket;
-            transOut.Text = rawRxPacHisList[privHex.SelectedIndex].ToString();
+            transIn.Text = RxHisTracker.GetCurrentPacket().RawPacket;
+            transOut.Text = RxHisTracker.GetCurrentPacket().GetDescriptionString();
         }
 
         private void TxPacLibx_SelectedIndexChanged(object sender, EventArgs e)
         {
             transIn.Text = rawTxPacHisList[TxPacLibx.SelectedIndex].RawPacket;
-            transOut.Text = rawTxPacHisList[TxPacLibx.SelectedIndex].ToString();
+            transOut.Text = rawTxPacHisList[TxPacLibx.SelectedIndex].GetDescriptionString();
         }
 
         private void clearRxBtn_Click(object sender, EventArgs e)
@@ -802,7 +665,6 @@ namespace packet_maker
             TxPacLibx.Items.Clear();
             transIn.Clear();
             transOut.Clear();
-            rawRxPacHisList.Clear();
             rawTxPacHisList.Clear();
         }
 
@@ -822,7 +684,7 @@ namespace packet_maker
         private void tx2rxBtn_Click(object sender, EventArgs e)
         {
             if (TxPacLibx.SelectedIndex == -1) return;
-            int dex = rawRxPacHisList.FindIndex(x => x.Id == rawTxPacHisList[TxPacLibx.SelectedIndex].Id);
+            var dex = RxHisTracker.FindPacketIndexById(rawTxPacHisList[TxPacLibx.SelectedIndex].Id);
             if (dex == -1) return;
             privHex.SelectedIndex = dex;
         }
@@ -830,7 +692,7 @@ namespace packet_maker
         private void rx2txBtn_Click(object sender, EventArgs e)
         {
             if (privHex.SelectedIndex == -1) return;
-            int dex = rawTxPacHisList.FindIndex(x => x.Id == rawRxPacHisList[privHex.SelectedIndex].Id);
+            int dex = rawTxPacHisList.FindIndex(x => x.Id == RxHisTracker.GetCurrentPacket().Id);
             if (dex == -1) return;
             TxPacLibx.SelectedIndex = dex;
         }
@@ -844,7 +706,7 @@ namespace packet_maker
             po = new PacketObject(options, tPac);
             rawTxPacHisList.Add(po);
             addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
-            await Upload_Packet("tx-packets", po);
+            await po.Upload("tx-packets");
         }
         #endregion
 
@@ -854,26 +716,25 @@ namespace packet_maker
         {
             string mess = msg.Trim().Replace('-', ' ');
 
-            foreach (var RxOption in SatRxOptions.Values)
+            foreach (var RxOption in SatRxOptions)
             {
-                po = new PacketObject(RxOption, mess, RxGroupsCB.SelectedIndex);
+                int currentGroupDex = -1;
+                if (RxOption.Key == "TAU") currentGroupDex = 9;
+
+                po = new PacketObject(RxOption.Value, mess, currentGroupDex);
                 if (po.Type != -1) break;
             }
 
+            RxHisTracker.AddPacket(po);
 
-            //add item
-            if (po.SateliteGroup == RxGroupsCB.SelectedItem.ToString() || RxGroupsCB.SelectedIndex == 0 || po.Type == -1)
-            {
-                rawRxPacHisList.Add(po);
-                addItemToListbox(po.ToHeaderString(DateTime.Now), privHex);
-                await Upload_Packet("parsed-rx", po);
-            }
+            await po.Upload("parsed-rx");
         }
         #endregion
 
 
         #region objects
-        public List<PacketObject> rawRxPacHisList = new List<PacketObject>();
+        private PacketHistoryTracker RxHisTracker;
+
         public List<PacketObject> rawTxPacHisList = new List<PacketObject>();
         #endregion
         #endregion
@@ -974,13 +835,8 @@ namespace packet_maker
 
                     foreach (var doc in RxQryWorker.Documents)
                     {
-                        po = await Task.Run(() =>
-                        {
-                            return new PacketObject(transOptions, doc["packetString"].ToString());
-                        });
-
+                        po =  new PacketObject(transOptions, doc["packetString"].ToString());
                         RxPacQryList.Add(po);
-
                         RxPacQryLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
                     }
                     #endregion
@@ -1061,12 +917,12 @@ namespace packet_maker
 
         private void TxPacQryLibx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PacQryOutput.Text = TxPacQryList[TxPacQryLibx.SelectedIndex].ToString();
+            PacQryOutput.Text = TxPacQryList[TxPacQryLibx.SelectedIndex].GetDescriptionString();
         }
 
         private void RxPacQryLibx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PacQryOutput.Text = RxPacQryList[RxPacQryLibx.SelectedIndex].ToString();
+            PacQryOutput.Text = RxPacQryList[RxPacQryLibx.SelectedIndex].GetDescriptionString();
         }
 
         private void qryClearBtn_Click(object sender, EventArgs e)
@@ -1136,7 +992,7 @@ namespace packet_maker
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
             int j = 0;
             List<List<string>> T = new List<List<string>> { new List<string> { "Date", "Id", "SatGroup", "Type", "Subtype", "Lenght", "Raw packet", "Data" } };
-            foreach (var packet in rawRxPacHisList)
+            foreach (var packet in RxHisTracker.GetCurrentPacketList())
             {
                 if (packet.Type == -1)
                 {
@@ -1178,7 +1034,7 @@ namespace packet_maker
 
             //sorting packets to files
             int j = 0;
-            foreach (var packet in rawRxPacHisList)
+            foreach (var packet in RxHisTracker.GetCurrentPacketList())
             {
                 string timeStr = privHex.Items[j].ToString().Split('[', ']')[1];
 
@@ -1418,6 +1274,7 @@ namespace packet_maker
         private async Task UpdateControlFormDB(string collection, Label label, string type = null)
         {
             if (!Program.settings.dataBaseEnabled) return;
+            if (MainSatCB.SelectedIndex == 9) return;
 
             var lastTimeSnapshot = new DataBaseWorker();
             lastTimeSnapshot.AddMatchFilter("satId", MainSatCB.SelectedIndex.ToString());
@@ -1455,6 +1312,8 @@ namespace packet_maker
         #endregion
 
         #endregion
+
+
     }
 }
 

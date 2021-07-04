@@ -39,12 +39,6 @@ namespace packet_maker
                 default: throw new Exception("invalid logic");
             }
         }
-
-        public static void AddRange<T>(this ICollection<T> target, IEnumerable<T> source)
-        {
-            foreach (var element in source)
-                target.Add(element);
-        }
     }
 }
 

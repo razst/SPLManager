@@ -1,0 +1,182 @@
+{
+  "ReverseBytes": false,
+  "calibrations": [
+    { "ID": "mV", "name": "Temperature", "a": "1", "b": "0" },
+    { "ID": "mA", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "mW", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "deg", "name": "Temperature", "a": "1", "b": "0" },
+    { "ID": "deg c", "name": "Temperature", "a": "1", "b": "0" },
+    { "ID": "dBm", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "Hz", "name": "Voltage", "a": "1", "b": "0" },
+    { "ID": "sec", "name": "Seconds", "a": "1", "b": "0" }
+  ],
+  "spl_header": {
+    "ID": { "startByte": 8, "length": 2 },
+    "Type": { "startByte": 0, "length": 1 },
+    "Subtype": { "startByte": 1, "length": 1 },
+    "Length": { "startByte": 2, "length": 2 },
+    "DataStartingByte": 8
+  },
+  "types": [
+    {
+      "name": "TRXVU",
+      "desc": "All TRXVU function calls",
+      "id": "3",
+      "subtypes": [
+        {
+          "name": "Beacon",
+          "id": "25",
+          "inParams": [
+            {
+              "name": "vbatt",
+              "type": "short",
+              "-isLittleEndian": "false",
+              "desc": "EPS,Battery Voltage",
+              "calibration": "mV",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Batt_Curr",
+              "-isLittleEndian": "false",
+              "type": "short",
+              "desc": "EPS,Output Current",
+              "calibration": "mA",
+              "-self-closing": "true"
+            },
+            {
+              "name": "3v3_curr",
+              "-isLittleEndian": "false",
+              "type": "short",
+              "desc": "EPS,3v3 Output Current",
+              "calibration": "mA",
+              "-self-closing": "true"
+            },
+            {
+              "name": "5v_curr",
+              "-isLittleEndian": "false",
+              "type": "short",
+              "desc": "EPS,5v Output Current",
+              "calibration": "mA",
+              "-self-closing": "true"
+            },
+            {
+              "name": "LOtrxvu_temp",
+              "-isLittleEndian": "false",
+              "type": "short",
+              "desc": "Comms,Local Oscillator Temp",
+              "calibration": "deg c",
+              "-rangeStart": "-40",
+              "-rangeEnd": "60",
+              "-calibration": "7",
+              "-self-closing": "true"
+            },
+            {
+              "name": "PAtrxvu_temp",
+              "-isLittleEndian": "false",
+              "type": "short",
+              "desc": "Comms,Power Amplifier Temp",
+              "calibration": "deg c",
+              "-rangeStart": "-40",
+              "-rangeEnd": "95",
+              "-calibration": "7",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Eps_temp[0]",
+              "-isLittleEndian": "false",
+              "type": "int",
+              "desc": "EPS,Board Temp Sensor 0",
+              "calibration": "deg c",
+              "-rangeStart": "-40",
+              "-rangeEnd": "125",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Eps_temp[1]",
+              "-isLittleEndian": "false",
+              "type": "int",
+              "desc": "EPS,Board Temp Sensor 1",
+              "calibration": "deg c",
+              "-rangeStart": "-40",
+              "-rangeEnd": "125",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Eps_temp[2]",
+              "-isLittleEndian": "false",
+              "type": "int",
+              "desc": "EPS,Board Temp Sensor 2",
+              "calibration": "deg c",
+              "-rangeStart": "-40",
+              "-rangeEnd": "125",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Eps_temp[3]",
+              "-isLittleEndian": "false",
+              "type": "int",
+              "desc": "EPS,Board Temp Sensor 3",
+              "calibration": "deg c",
+              "-rangeStart": "0",
+              "-rangeEnd": "45",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Batt_temp[0]",
+              "-isLittleEndian": "false",
+              "type": "int",
+              "desc": "EPS,Battery Temp Sensor 0",
+              "calibration": "deg c",
+              "-rangeStart": "0",
+              "-rangeEnd": "45",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Batt_temp[1]",
+              "-isLittleEndian": "false",
+              "type": "int",
+              "desc": "EPS,Battery Temp Sensor 1",
+              "calibration": "deg c",
+              "-rangeStart": "0",
+              "-rangeEnd": "45",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Rxdoppler",
+              "-isLittleEndian": "false",
+              "type": "short",
+              "desc": "Comms,RX Doppler",
+              "calibration": "Hz",
+              "-calibration": "6",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Rxrssi",
+              "-isLittleEndian": "false",
+              "type": "short",
+              "desc": "Comms,RX RSSI",
+              "calibration": "dBm",
+              "-calibration": "5",
+              "-self-closing": "true"
+            },
+            {
+              "name": "Txrefl",
+              "-isLittleEndian": "false",
+              "type": "short",
+              "desc": "Comms,TX Reflected SWR",
+              "calibration": "mW",
+              "-self-closing": "true"
+            },
+            {
+              "name": "more bits",
+              "-isLittleEndian": "false",
+              "type": "bytes",
+              "desc": "OBC,Magic number that only Elai can understand",
+              "-self-closing": "true"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

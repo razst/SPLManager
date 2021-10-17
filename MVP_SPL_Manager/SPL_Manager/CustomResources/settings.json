@@ -1,0 +1,84 @@
+{
+  "endNodePath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\GSC\\endnode\\endnode\\windows\\GSC-EndNode.exe",
+  "enableImage": false,
+  "dataBaseEnabled": true,
+  "tcpPortNumber": 4,
+  "defaultSatGroup": 2,
+  "enableExcel": true,
+  "widgetSettings": {
+    "minThresholdSatPass": 5
+  },
+  "serverMode": "UDP",
+  "UDP_ports": {
+    "client": 27002,
+    "server": 27002
+  },
+  "groundStationLocation": {
+    "lat": 30.983852,
+    "lng": 34.92953,
+    "alt": 500,
+    "minElevation": 1
+  },
+  "satInfo": [
+    {
+      "id": 0,
+      "name": "Any",
+      "desc": "all sats",
+      "noradID": -1
+    },
+    {
+      "id": 1,
+      "name": "T1OFK",
+      "desc": "Ofakim",
+      "noradID": 43199
+    },
+    {
+      "id": 2,
+      "name": "T2YRC",
+      "desc": "Yerucham",
+      "noradID": 43199
+    },
+    {
+      "id": 3,
+      "name": "T3TYB",
+      "desc": "Taybe",
+      "noradID": 43199
+    },
+    {
+      "id": 4,
+      "name": "T4ATA",
+      "desc": "Kiryat Ata",
+      "noradID": 43199
+    },
+    {
+      "id": 5,
+      "name": "T5SNG",
+      "desc": "Shaar HaNegev",
+      "noradID": 43199
+    },
+    {
+      "id": 6,
+      "name": "T6NZR",
+      "desc": "Nazareth",
+      "noradID": 43199
+    },
+    {
+      "id": 7,
+      "name": "T7ADM",
+      "desc": "Maale Adomim",
+      "noradID": 43199
+    },
+    {
+      "id": 8,
+      "name": "T8GBS",
+      "desc": "Guvat Shmuel",
+      "noradID": 43199
+    },
+    {
+      "id": 9,
+      "name": "TAUSAT1",
+      "desc": "TA",
+      "noradID": 47926
+    }
+  ]
+}

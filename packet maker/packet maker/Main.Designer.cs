@@ -178,7 +178,6 @@ namespace packet_maker
             this.mainLastRxLabel = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.utcTitle = new System.Windows.Forms.Label();
-            this.mainUtcLabel = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label33 = new System.Windows.Forms.Label();
             this.nextPass1Label = new System.Windows.Forms.Label();
@@ -191,6 +190,7 @@ namespace packet_maker
             this.MainSatCB = new System.Windows.Forms.ComboBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainLabelsWorker = new System.Windows.Forms.Timer(this.components);
+            this.mainUtcLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabQuery.SuspendLayout();
             this.qrySettingsPnl.SuspendLayout();
@@ -1543,7 +1543,7 @@ namespace packet_maker
             this.VBatGauge.DialColor = System.Drawing.Color.Lavender;
             this.VBatGauge.DialText = "VBat";
             this.VBatGauge.Glossiness = 11.36364F;
-            this.VBatGauge.Location = new System.Drawing.Point(8, 388);
+            this.VBatGauge.Location = new System.Drawing.Point(8, 389);
             this.VBatGauge.MaxValue = 9F;
             this.VBatGauge.MinValue = 0F;
             this.VBatGauge.Name = "VBatGauge";
@@ -1809,17 +1809,6 @@ namespace packet_maker
             this.utcTitle.Text = "UTC";
             this.utcTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mainUtcLabel
-            // 
-            this.mainUtcLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.mainUtcLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.mainUtcLabel.Location = new System.Drawing.Point(3, 40);
-            this.mainUtcLabel.Name = "mainUtcLabel";
-            this.mainUtcLabel.Size = new System.Drawing.Size(406, 56);
-            this.mainUtcLabel.TabIndex = 1;
-            this.mainUtcLabel.Text = "-- : -- : --";
-            this.mainUtcLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.DimGray;
@@ -1951,6 +1940,17 @@ namespace packet_maker
             // MainLabelsWorker
             // 
             this.MainLabelsWorker.Tick += new System.EventHandler(this.MainLabelsWorker_Tick);
+            // 
+            // mainUtcLabel
+            // 
+            this.mainUtcLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.mainUtcLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.mainUtcLabel.Location = new System.Drawing.Point(3, 40);
+            this.mainUtcLabel.Name = "mainUtcLabel";
+            this.mainUtcLabel.Size = new System.Drawing.Size(406, 56);
+            this.mainUtcLabel.TabIndex = 1;
+            this.mainUtcLabel.Text = "-- : -- : --";
+            this.mainUtcLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Main
             // 
@@ -2170,7 +2170,6 @@ namespace packet_maker
         private System.Windows.Forms.Label mainLastRxLabel;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label utcTitle;
-        private System.Windows.Forms.Label mainUtcLabel;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label nextPass1Label;
@@ -2183,6 +2182,7 @@ namespace packet_maker
         private System.Windows.Forms.ComboBox MainSatCB;
         private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.Timer MainLabelsWorker;
+        private System.Windows.Forms.Label mainUtcLabel;
     }
 }
 

@@ -139,6 +139,7 @@ namespace SPL_Manager.Views.RxTabViews
             this.RxQueryMinDateDtp.Name = "RxQueryMinDateDtp";
             this.RxQueryMinDateDtp.Size = new System.Drawing.Size(128, 23);
             this.RxQueryMinDateDtp.TabIndex = 28;
+            this.RxQueryMinDateDtp.Value = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
             // 
             // RxLoadDBBtn
             // 

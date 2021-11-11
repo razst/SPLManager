@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0ySv04TDKfDEMB7VknKxSGzzslmDw4on1gBkLKyKaYESYUEoRkyYu8w5JQXMuhFuoNmCz0lnJPzpCbJnVneA+Q==",
+  "dgSpecHash": "1WqEhRLvb1REHtfz/qz0D1Wt4FgBXkXJdwnHKumeyb4eC/ac7mktGn4AhoIXLHNdJJdxEaxgYV6UIv6ciocVGw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\MVP projects\\MVP_SPL_Manager\\SPL_Manager\\SPL_Manager.csproj",
+  "projectFilePath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\MVP_SPL_Manager\\SPL_Manager\\SPL_Manager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\closedxml\\0.95.4\\closedxml.0.95.4.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\documentformat.openxml\\2.7.2\\documentformat.openxml.2.7.2.nupkg.sha512",

@@ -268,6 +268,7 @@ namespace SPL_Manager.Views.QueryTabViews
             this.QryMinDateDtp.Name = "QryMinDateDtp";
             this.QryMinDateDtp.Size = new System.Drawing.Size(128, 23);
             this.QryMinDateDtp.TabIndex = 28;
+            this.QryMinDateDtp.Value = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
             // 
             // label24
             // 

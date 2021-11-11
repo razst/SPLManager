@@ -7925,11 +7925,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\MVP projects\\MVP_SPL_Manager\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\MVP_SPL_Manager\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
       "projectName": "SPL_Manager.Tests",
-      "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\MVP projects\\MVP_SPL_Manager\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
+      "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\MVP_SPL_Manager\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\MVP projects\\MVP_SPL_Manager\\SPL_Manager.Tests\\obj\\",
+      "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\MVP_SPL_Manager\\SPL_Manager.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7946,8 +7946,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\MVP projects\\MVP_SPL_Manager\\SPL_Manager\\SPL_Manager.csproj": {
-              "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\MVP projects\\MVP_SPL_Manager\\SPL_Manager\\SPL_Manager.csproj"
+            "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\MVP_SPL_Manager\\SPL_Manager\\SPL_Manager.csproj": {
+              "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\MVP_SPL_Manager\\SPL_Manager\\SPL_Manager.csproj"
             }
           }
         }
@@ -8006,7 +8006,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

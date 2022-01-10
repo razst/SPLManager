@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "b250f9f0-2c7c-4063-8036-4356c78f8de1": {
+      "ProjectGuid": "b250f9f0-2c7c-4063-8036-4356c78f8de1",
+      "DisplayName": "SPL_Manager.UI",
+      "ColorIndex": 0
+    },
+    "a2777e96-3979-4912-8f13-9e8428a04fa7": {
+      "ProjectGuid": "a2777e96-3979-4912-8f13-9e8428a04fa7",
+      "DisplayName": "SPL_Manager.Library",
+      "ColorIndex": 1
+    },
+    "6b2ac611-b8e3-49e6-914f-41f228626664": {
+      "ProjectGuid": "6b2ac611-b8e3-49e6-914f-41f228626664",
+      "DisplayName": "SPL_Manager.Tests",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

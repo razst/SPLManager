@@ -1,0 +1,10 @@
+C:\Users\User\OneDrive\מסמכים\projects\Spl_Manager_Rewirte\SPL_Manager.Library\obj\Debug\netcoreapp3.1\SPL_Manager.Library.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\OneDrive\מסמכים\projects\Spl_Manager_Rewirte\SPL_Manager.Library\obj\Debug\netcoreapp3.1\SPL_Manager.Library.AssemblyInfoInputs.cache
+C:\Users\User\OneDrive\מסמכים\projects\Spl_Manager_Rewirte\SPL_Manager.Library\obj\Debug\netcoreapp3.1\SPL_Manager.Library.AssemblyInfo.cs
+C:\Users\User\OneDrive\מסמכים\projects\Spl_Manager_Rewirte\SPL_Manager.Library\obj\Debug\netcoreapp3.1\SPL_Manager.Library.csproj.CoreCompileInputs.cache
+C:\Users\User\OneDrive\מסמכים\projects\Spl_Manager_Rewirte\SPL_Manager.Library\bin\Debug\netcoreapp3.1\SPL_Manager.Library.deps.json
+C:\Users\User\OneDrive\מסמכים\projects\Spl_Manager_Rewirte\SPL_Manager.Library\bin\Debug\netcoreapp3.1\SPL_Manager.Library.dll
+C:\Users\User\OneDrive\מסמכים\projects\Spl_Manager_Rewirte\SPL_Manager.Library\bin\Debug\netcoreapp3.1\SPL_Manager.Library.pdb
+C:\Users\User\OneDrive\מסמכים\projects\Spl_Manager_Rewirte\SPL_Manager.Library\obj\Debug\netcoreapp3.1\SPL_Manager.Library.dll
+C:\Users\User\OneDrive\מסמכים\projects\Spl_Manager_Rewirte\SPL_Manager.Library\obj\Debug\netcoreapp3.1\SPL_Manager.Library.pdb
+C:\Users\User\OneDrive\מסמכים\projects\Spl_Manager_Rewirte\SPL_Manager.Library\obj\Debug\netcoreapp3.1\SPL_Manager.Library.csproj.AssemblyReference.cache

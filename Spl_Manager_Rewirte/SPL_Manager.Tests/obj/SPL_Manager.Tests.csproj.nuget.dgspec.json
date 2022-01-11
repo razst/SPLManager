@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj": {}
+    "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
+    "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
+        "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
         "projectName": "SPL_Manager.Library",
-        "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
+        "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Library\\obj\\",
+        "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -80,14 +80,14 @@
         }
       }
     },
-    "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj": {
+    "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
         "projectName": "SPL_Manager.Tests",
-        "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
+        "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\obj\\",
+        "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -104,8 +104,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
-                "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj"
+              "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
+                "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj"
               }
             }
           }

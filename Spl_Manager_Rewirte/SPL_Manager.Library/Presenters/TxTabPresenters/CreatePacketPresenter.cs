@@ -73,6 +73,7 @@ namespace SPL_Manager.Library.Presenters.TxTabPresenters
             }
             catch (Exception e)
             {
+                //TODO notify user
                 //MessageBox.Show($"invaled input: {Environment.NewLine}-{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _view.TxPacketHexStr = "";
                 return;
@@ -87,6 +88,7 @@ namespace SPL_Manager.Library.Presenters.TxTabPresenters
                     break;
 
                 case "clipboard":
+                    //TODO: for some reason, clipboard is in the windows library - so ask view to do this instead
                     //if (Hex != null && Hex != "")
                     //Clipboard.SetText(Hex);
                     break;

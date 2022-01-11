@@ -6207,11 +6207,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.UI\\SPL_Manager.UI.csproj",
+      "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.UI\\SPL_Manager.UI.csproj",
       "projectName": "SPL_Manager.UI",
-      "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.UI\\SPL_Manager.UI.csproj",
+      "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.UI\\SPL_Manager.UI.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.UI\\obj\\",
+      "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6228,8 +6228,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
-              "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj"
+            "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
+              "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj"
             }
           }
         }

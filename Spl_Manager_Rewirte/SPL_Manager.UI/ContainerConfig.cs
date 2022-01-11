@@ -4,11 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
-using SPL_Manager.UI.Views.MainTabViews;
 
-using SPL_Manager.Library.Views.RxTabViews;
-using SPL_Manager.Library.Views.MainTabViews;
-using SPL_Manager.Library.Views.TxTabViews;
 using SPL_Manager.Library.Presenters;
 using SPL_Manager.Library.Models.PacketServer;
 using SPL_Manager.Library.Models.PacketFilesModels;
@@ -36,7 +32,7 @@ namespace SPL_Manager.UI
             var builder = new ContainerBuilder();
 
             // Presenters
-            builder.RegisterType<PacketServerPresenter>()
+            builder.RegisterType<PacketServerPresenter>() //TODO: work out better server, presenter may not be needed
                 .SingleInstance();
 
             builder.RegisterType<PacketFilesPresenter>()
@@ -68,8 +64,8 @@ namespace SPL_Manager.UI
 
             //Models
 
-            // TODO: rework this registery: TCP server or UDP server
-            builder.RegisterType<PacketServer>()
+            
+            builder.RegisterType<PacketServer>()// TODO: rework this registery: TCP server or UDP server
                 .As<IPacketServer>()
                 .SingleInstance();
 

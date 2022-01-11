@@ -126,7 +126,13 @@ namespace SPL_Manager.Library.Presenters.MainTabPresenters
         private string ConvertUnixToString(long unix) => DateTimeOffset.FromUnixTimeSeconds(unix).ToLocalTime().ToString("G");
 
 
-        public void Dispose()
+        public void Dispose()// TODO: use finalizer?
+        {
+            UtcTimer.Dispose();
+            EverySecondTimer.Dispose();
+            EveryHourTimer.Dispose();
+        }
+        ~RadioPassesPresenter()
         {
             UtcTimer.Dispose();
             EverySecondTimer.Dispose();

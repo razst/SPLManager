@@ -22,7 +22,7 @@ namespace SPL_Manager.Library.Presenters.RxTabPresenters
             _view = view;
         }
 
-        private string AskUserForFileName()
+        private string AskUserForFileName()//TODO TODO -- right now it's broken
         {
             /*
             SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -61,6 +61,7 @@ namespace SPL_Manager.Library.Presenters.RxTabPresenters
             }
             catch (Exception e)
             {
+                //TODO: notify user
                 //MessageBox.Show($"failed to save packet \n-{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -113,6 +114,7 @@ namespace SPL_Manager.Library.Presenters.RxTabPresenters
                 }
                 catch (Exception e)
                 {
+                    //TODO: notify user
                     //MessageBox.Show($"failed to save packet \n-{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }

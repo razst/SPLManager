@@ -17,13 +17,13 @@ namespace SPL_Manager.Tests.Mucks.View
 
         public object Invoke(Delegate method, params object[] args)
         {
-            method.DynamicInvoke(args);
+            method.Method.Invoke(method.Target, args);
             return "nill";
         }
 
         public object Invoke(Delegate method)
         {
-            method.DynamicInvoke();
+            method.Method.Invoke(method.Target, null);
             return "nill";
         }
 

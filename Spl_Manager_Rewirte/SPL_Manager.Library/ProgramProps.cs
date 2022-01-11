@@ -37,6 +37,7 @@ namespace SPL_Manager
         public static Dictionary<string, PacketTypeList> PacketJsonFiles = new Dictionary<string, PacketTypeList>();
 
         // try ping google to cheack if online
+        //TODO: apparently ping is banned in many places, find a better way to cheack connection
         public static bool IsOnline 
         {
             get 
@@ -44,9 +45,9 @@ namespace SPL_Manager
                 try
                 {
                     Ping myPing = new Ping();
-                    String host = "8.8.8.8";
+                    String host = "8.8.8.8";//google ip, i think
                     byte[] buffer = new byte[32];
-                    int timeout = 1000;
+                    int timeout = 500;
                     PingOptions pingOptions = new PingOptions();
                     PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
                     return (reply.Status == IPStatus.Success);
@@ -79,7 +80,7 @@ namespace SPL_Manager
 
             //load settings in json files
             string path = Directory.GetParent(Directory.GetCurrentDirectory() ?? "")?.Parent?.Parent?.Parent?.FullName ?? "nill";
-            if (path == "nill") throw new Exception("no settings found");
+            if (path == "nill") throw new Exception("no settings found");//TODO: softer way to handle this
             path += "\\SPL_Manager.Library\\CustomResources\\";
             settings = JObject.Parse(File.ReadAllText($"{path}settings.json"));
 

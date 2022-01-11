@@ -88,6 +88,7 @@ namespace SPL_Manager.Library.Presenters.QueryTabPresenters
             }
 
 
+            //TODO: notify user:
             //MessageBox.Show($"{rxCount} RX packet were recived. \n{txCount} TX packet were recived.", "Query finished", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
             return result;

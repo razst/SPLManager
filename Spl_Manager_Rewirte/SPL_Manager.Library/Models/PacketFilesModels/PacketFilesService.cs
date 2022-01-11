@@ -14,7 +14,7 @@ namespace SPL_Manager.Library.Models.PacketFilesModels
         {
 
         }
-        public void CreateNewPacketFile(PacketFileData fileData)
+        public void CreateNewPacketFile(PacketFileData fileData) //TODO: return XLTable and let the presenter choose how to save
         {
             DataTable XlTable = new DataTable();
             List<string> lst = new List<string>

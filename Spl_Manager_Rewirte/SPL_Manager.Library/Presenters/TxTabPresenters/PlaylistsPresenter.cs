@@ -75,6 +75,7 @@ namespace SPL_Manager.Library.Presenters.TxTabPresenters
             }
             catch (Exception e)
             {
+                // TODO notify user
                 //MessageBox.Show($"invaled input: {Environment.NewLine}-{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -159,6 +160,8 @@ namespace SPL_Manager.Library.Presenters.TxTabPresenters
             if (_plView.SelectedPlaylist == -1) return;
             if (!ProgramProps.DataBaseEnabled) return;
 
+
+            // TODO put this in view:
             /*
             if (MessageBox.Show
                 ("Are you sure?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question)

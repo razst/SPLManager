@@ -47,6 +47,8 @@ namespace SPL_Manager.Library.Presenters.RxTabPresenters
             AddRxQueryItems(RxDocs);
             AddTxQueryItems(TxDocs);
 
+
+            //TODO notify user:
             /*
             MessageBox.Show
                 (

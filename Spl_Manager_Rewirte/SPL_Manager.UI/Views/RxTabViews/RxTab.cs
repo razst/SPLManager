@@ -37,8 +37,6 @@ namespace SPL_Manager.UI.Views.RxTabViews
         }
         public void Init()
         {
-            //RxQueryPresenter = new RxQueryPresenter(this);
-
 
         }
 

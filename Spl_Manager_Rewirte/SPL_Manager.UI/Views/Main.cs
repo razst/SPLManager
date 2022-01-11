@@ -35,14 +35,6 @@ namespace SPL_Manager.UI
 
         private void Main_Load(object sender, EventArgs e)
         {
-            // link presenters to views
-            //PacketFilesPresenter = new(RxTabControl);
-            //PacketServerPresenter = new(RxTabControl, TxTabControl);
-
-            // strat presenters
-            TxTabControl.Init();
-
-
             PacketServerPresenter.StartServer();
         }
 

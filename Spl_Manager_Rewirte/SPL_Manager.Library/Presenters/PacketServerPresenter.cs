@@ -36,6 +36,7 @@ namespace SPL_Manager.Library.Presenters
             if (!PacketServer.isOnline)
             {
                 if (count == 1)
+                    // TODO notify user:
                     //MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
             }

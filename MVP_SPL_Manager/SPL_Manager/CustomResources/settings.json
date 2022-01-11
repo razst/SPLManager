@@ -1,5 +1,5 @@
 {
-  "endNodePath": "C:\\Users\\User\\OneDrive\\מסמכים\\projects\\GSC\\endnode\\endnode\\windows\\GSC-EndNode.exe",
+  "endNodePath": "C:/dev/GSC-EndNode/GSC-EndNode.exe",
   "enableImage": false,
   "dataBaseEnabled": true,
   "tcpPortNumber": 4,
@@ -8,7 +8,7 @@
   "widgetSettings": {
     "minThresholdSatPass": 5
   },
-  "serverMode": "UDP",
+  "serverMode": "TCP",
   "UDP_ports": {
     "client": 27002,
     "server": 27002

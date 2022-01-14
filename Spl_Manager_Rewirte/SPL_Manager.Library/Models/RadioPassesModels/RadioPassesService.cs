@@ -17,7 +17,7 @@ namespace SPL_Manager.Library.Models.RadioPassesModels
         {
             var emptyResult = new List<pass>();
 
-            if (!ProgramProps.IsOnline) return emptyResult;
+            if (!ProgramProps.GetIfOnline()) return emptyResult;
             if (satId == -1) return emptyResult;
 
             int noradID = -1;

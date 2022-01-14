@@ -75,7 +75,7 @@ namespace SPL_Manager.Library.Models.DataAccess
         private IRedisTypedClient<int> IdClient;
         public Task<int> GetSplId(string group)
         {
-            if (!ProgramProps.IsOnline)
+            if (!ProgramProps.GetIfOnline())
             {
                 return Task.FromResult(20);
             }

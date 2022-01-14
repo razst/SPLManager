@@ -15,48 +15,28 @@ namespace SPL_Manager
         public static dynamic settings = "nill";
         public static List<string> groups = new List<string>();
 
-
-        //load elastic db connection
-        private static ElasticClient _db;
-        public static ElasticClient? Database 
-        {
-            get
-            {
-                if(!DataBaseEnabled) return null;
-                if (_db != null) return _db;
-
-                var settings = new ConnectionSettings(new Uri("https://tevel:tevelData1!@search-satpackets-wmzdkqufk2m6tr6zyz4n6zfuhu.us-east-2.es.amazonaws.com"))
-                .DefaultIndex("testing_index");
-
-                _db = new ElasticClient(settings);
-                return _db;
-
-            }
-        }
+        public static ElasticClient? Database { get; private set; }
 
         public static Dictionary<string, PacketTypeList> PacketJsonFiles = new Dictionary<string, PacketTypeList>();
 
         // try ping google to cheack if online
         //TODO: apparently ping is banned in many places, find a better way to cheack connection
-        public static bool IsOnline 
+        public static bool GetIfOnline()
         {
-            get 
+            try
             {
-                try
-                {
-                    Ping myPing = new Ping();
-                    String host = "8.8.8.8";//google ip, i think
-                    byte[] buffer = new byte[32];
-                    int timeout = 500;
-                    PingOptions pingOptions = new PingOptions();
-                    PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
-                    return (reply.Status == IPStatus.Success);
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            } 
+                Ping myPing = new Ping();
+                String host = "8.8.8.8";//google ip, i think
+                byte[] buffer = new byte[32];
+                int timeout = 500;
+                PingOptions pingOptions = new PingOptions();
+                PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
+                return (reply.Status == IPStatus.Success);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         // true if db is enabled
@@ -65,11 +45,7 @@ namespace SPL_Manager
         {
             get
             {
-                return _dbOn && IsOnline;
-            }
-            set
-            {
-                _dbOn = value;
+                return _dbOn && GetIfOnline();
             }
         }
 
@@ -92,14 +68,13 @@ namespace SPL_Manager
 
 
             _dbOn = (bool)settings.dataBaseEnabled;
-            if (DataBaseEnabled)
-            {
-                var settings = new ConnectionSettings(new Uri("https://tevel:tevelData1!@search-satpackets-wmzdkqufk2m6tr6zyz4n6zfuhu.us-east-2.es.amazonaws.com"))
-                                    .DefaultIndex("testing_index");
 
-                _db = new ElasticClient(settings);
-            }
-            
+            var dbSettings = new ConnectionSettings(new Uri("https://tevel:tevelData1!@search-satpackets-wmzdkqufk2m6tr6zyz4n6zfuhu.us-east-2.es.amazonaws.com"))
+                                .DefaultIndex("testing_index");
+
+            Database = new ElasticClient(dbSettings);
+
+
 
             // load packet protocols to types
             PacketJsonFiles.Add("Tx", new PacketTypeList($"{path}tx.json"));
@@ -112,7 +87,7 @@ namespace SPL_Manager
             settings = "";
             groups.Clear();
             PacketJsonFiles.Clear();
-            DataBaseEnabled = false;
+            _dbOn = false;
         }
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace SPL_Manager.Library.Presenters.MainTabPresenters
 {
@@ -28,10 +29,9 @@ namespace SPL_Manager.Library.Presenters.MainTabPresenters
             PacketObject po = await _repository.LoadLastBeacon(_view.MainTabGroupIndex);
             var RxTxBeaconFrames = await _repository.LoadLastFrameDates(_view.MainTabGroupIndex);
 
-            if (RxTxBeaconFrames.Count == 0) return;
-            _view.LastRxFrameDate = RxTxBeaconFrames[0];
-            _view.LastTxFrameDate = RxTxBeaconFrames[1];
-            _view.LastBeaconDate = RxTxBeaconFrames[2];
+            _view.LastRxFrameDate = RxTxBeaconFrames.ElementAtOrDefault(0) ?? "---";
+            _view.LastTxFrameDate = RxTxBeaconFrames.ElementAtOrDefault(1) ?? "---";
+            _view.LastBeaconDate = RxTxBeaconFrames.ElementAtOrDefault(2) ?? "---";
 
             if (po.Type == -1) return;
 

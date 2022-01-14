@@ -38,7 +38,7 @@ namespace SPL_Manager.Library.Models.PacketServer
                     break;
 
                 case "UDP":
-                    if (!ProgramProps.IsOnline) return;
+                    if (!ProgramProps.GetIfOnline()) return;
                     UDPclient = new UDPSocket(OnPacketRecived);
                     UDPserver = new UDPSocket(OnPacketRecived);
                     UDPserver.Server((int)ProgramProps.settings.UDP_ports.server);

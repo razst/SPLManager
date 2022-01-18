@@ -33,7 +33,7 @@ namespace SPL_Manager.Library.Presenters
 
         public async Task SendCurrentPacket(int count = 1)
         {
-            if (!PacketServer.isOnline)
+            if (!_packetServer.IsRunning)
             {
                 if (count == 1)
                     // TODO notify user:
@@ -57,7 +57,7 @@ namespace SPL_Manager.Library.Presenters
 
         public void StartServer()
         {
-            _packetServer.Strat();
+            _packetServer.Start();
         }
 
 
@@ -92,6 +92,7 @@ namespace SPL_Manager.Library.Presenters
         public async Task ResendCurrentTxItem()
         {
             if (_rxView.TxItemsIndex == -1) return;
+            if (!_packetServer.IsRunning) return;
             PacketObject po = _rxView.RxTabPresenter.GetCurrentTxItem();
             await _packetServer.Send(po.RawPacket);
             _rxView.RxTabPresenter.AddSentPacket(po, DateTime.Now);
@@ -103,7 +104,7 @@ namespace SPL_Manager.Library.Presenters
 
         public void OpenEndNode()
         {
-            if (PacketServer.ServerMode != "TCP") return; //TODO: popup to user - "no need to init connection"
+            if ((string)ProgramProps.settings.serverMode != "TCP") return; //TODO: popup to user? - "no need to init connection"
             try
             {
                 System.Diagnostics.Process.Start((string)ProgramProps.settings.endNodePath);

@@ -6184,19 +6184,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pc\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pc\\Documents\\GitHub\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
+      "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
       "projectName": "SPL_Manager.Library",
-      "projectPath": "C:\\Users\\pc\\Documents\\GitHub\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
-      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pc\\Documents\\GitHub\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\obj\\",
+      "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6208,6 +6208,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -6219,6 +6220,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Autofac": {
             "target": "Package",
@@ -6251,18 +6253,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.2, 3.1.2]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

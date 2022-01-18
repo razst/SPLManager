@@ -10,11 +10,12 @@ namespace SPL_Manager.Library.Models.PacketFilesModels
 {
     public class PacketFilesService : IPacketFilesService
     {
+        private DataTable _packetFileTable;
         public PacketFilesService()
         {
 
         }
-        public void CreateNewPacketFile(PacketFileData fileData) //TODO: return XLTable and let the presenter choose how to save
+        public void CreateNewTableFromData(PacketFileData fileData)
         {
             DataTable XlTable = new DataTable();
             List<string> lst = new List<string>
@@ -80,30 +81,23 @@ namespace SPL_Manager.Library.Models.PacketFilesModels
 
 
 
-            if ((bool)ProgramProps.settings.enableExcel)
-            {
-                SaveAsExcelFileAt($"{fileData.FileLocation}.xlsx", XlTable);
-            }
-            else
-            {
-                SaveAsCsvFileAt($"{fileData.FileLocation}.csv", XlTable);
-            }
+            _packetFileTable = XlTable;
 
         }
 
 
-        private void SaveAsExcelFileAt(string fileLoc, DataTable XLTable)
+        public void SaveAsExcelFileAt(string fileLoc)
         {
             using XLWorkbook wk = new XLWorkbook();
 
-            var sheet = wk.Worksheets.Add(XLTable, "Packets");
+            var sheet = wk.Worksheets.Add(_packetFileTable, "Packets");
             sheet.Table(0).Theme = XLTableTheme.None;
             sheet.Table(0).SetShowAutoFilter(false);
             sheet.Columns().AdjustToContents();
             sheet.RightToLeft = false;
             wk.SaveAs(fileLoc);
         }
-        private void SaveAsCsvFileAt(string fileLoc, DataTable XLTable)
+        public void SaveAsCsvFileAt(string fileLoc)
         {
             using StreamWriter writer = new StreamWriter(new FileStream(
                     fileLoc,
@@ -111,11 +105,11 @@ namespace SPL_Manager.Library.Models.PacketFilesModels
                     FileAccess.Write));
 
             var f = String.Join(", ",
-                XLTable.Columns.Cast<DataColumn>().ToList()
+                _packetFileTable.Columns.Cast<DataColumn>().ToList()
                 .ConvertAll(col => col.ColumnName));
             writer.WriteLine(f);
 
-            foreach (var line in XLTable.Rows.Cast<DataRow>())
+            foreach (var line in _packetFileTable.Rows.Cast<DataRow>())
             {
                 writer.WriteLine(String.Join(", ", line.ItemArray));
             }

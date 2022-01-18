@@ -64,10 +64,21 @@ namespace SPL_Manager.UI
 
             //Models
 
+
+            string packetServerMode = (string)ProgramProps.settings.serverMode;
+            if(packetServerMode == "TCP")
+            {
+                builder.RegisterType<TCPServer>()
+                    .As<IPacketServer>()
+                    .SingleInstance();
+            }
+            else
+            {
+                builder.RegisterType<UDPServer>()
+                    .As<IPacketServer>()
+                    .SingleInstance();
+            }
             
-            builder.RegisterType<PacketServer>()// TODO: rework this registery: TCP server or UDP server
-                .As<IPacketServer>()
-                .SingleInstance();
 
             builder.RegisterType<PacketFilesService>()
                 .As<IPacketFilesService>()

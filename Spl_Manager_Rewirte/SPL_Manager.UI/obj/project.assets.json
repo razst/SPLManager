@@ -6202,19 +6202,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pc\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pc\\Documents\\GitHub\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.UI\\SPL_Manager.UI.csproj",
+      "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.UI\\SPL_Manager.UI.csproj",
       "projectName": "SPL_Manager.UI",
-      "projectPath": "C:\\Users\\pc\\Documents\\GitHub\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.UI\\SPL_Manager.UI.csproj",
-      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pc\\Documents\\GitHub\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.UI\\obj\\",
+      "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.UI\\SPL_Manager.UI.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6226,9 +6226,10 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\pc\\Documents\\GitHub\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
-              "projectPath": "C:\\Users\\pc\\Documents\\GitHub\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj"
+            "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
+              "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj"
             }
           }
         }
@@ -6241,6 +6242,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "imports": [
           "net461",
           "net462",
@@ -6251,12 +6253,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.2, 3.1.2]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -6265,7 +6261,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

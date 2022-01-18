@@ -10,87 +10,36 @@ using System.Threading.Tasks;
 
 namespace SPL_Manager.Library.Models.PacketServer
 {
-    public class PacketServer : IPacketServer
+
+
+
+
+    public class TCPServer: IPacketServer
     {
-
-
-        private UDPSocket UDPserver = null;
-        private UDPSocket UDPclient = null;
-        private TCPSocket TCPserver = null;
-
-        public static bool isOnline = false;
-        public static string ServerMode = (string)ProgramProps.settings.serverMode;
-
+        public bool IsRunning { get; private set; } = false;
+        private TcpClient client = null;
+        private TcpListener server = null;
         public event Action<string> OnPacketRecived;
 
-        public PacketServer()
+        public TCPServer()
         {
         }
-
-        public void Strat()
+        public void Start()
         {
-            switch (ServerMode)
-            {
-                case "TCP":
-                    if (TCPserver != null) break;
-                    TCPserver = new TCPSocket(OnPacketRecived);
-                    TCPserver.Start();
-                    break;
-
-                case "UDP":
-                    if (!ProgramProps.GetIfOnline()) return;
-                    UDPclient = new UDPSocket(OnPacketRecived);
-                    UDPserver = new UDPSocket(OnPacketRecived);
-                    UDPserver.Server((int)ProgramProps.settings.UDP_ports.server);
-                    UDPclient.Client("127.0.0.1", (int)ProgramProps.settings.UDP_ports.client);
-                    isOnline = true;
-                    break;
-            }
+            Task.Factory.StartNew(Server_Thread,TaskCreationOptions.LongRunning);
         }
+
 
 
         public Task Send(string msg)
         {
-            if (ServerMode == "TCP") TCPserver.Send(msg);
-            else UDPclient.Send(msg);
 
-            return Task.CompletedTask;
+            byte[]? j = ConvertHexToBytes(msg);
+            var command = new { Type = "RawTelecommand", Content = j };
+            var toSend = JObject.FromObject(command);
+            byte[] dataToSend = Encoding.Default.GetBytes(toSend.ToString());
+            return client.GetStream().WriteAsync(dataToSend, 0, dataToSend.Length);
         }
-
-        public void Stop()
-        {
-            if (ServerMode == "TCP") TCPserver.Stop();
-            isOnline = false;
-        }
-
-
-    }
-
-
-
-
-    class TCPSocket
-    {
-        private Thread childThread = null;
-        private TcpClient client = null;
-        private TcpListener server = null;
-        private event Action<string> OnPacketRecived;
-
-        public TCPSocket(Action<string> PacketRecivedEvent)
-        {
-            OnPacketRecived = PacketRecivedEvent;
-            ThreadStart childref = new ThreadStart(Server_Thread);
-            childThread = new Thread(childref)
-            {
-                IsBackground = true
-            };
-        }
-        internal void Start()
-        {
-            if (childThread == null) return;
-            childThread.Start();
-        }
-
         private byte[]? ConvertHexToBytes(string str)
         {
             string[] bytesAsStrings = str.Split(' ');
@@ -105,23 +54,13 @@ namespace SPL_Manager.Library.Models.PacketServer
         }
 
 
-        struct cmd
+        public void Stop()
         {
-            public string Type;
-            public byte[]? Content;
+            if (!IsRunning) return;
+            client.Close();
+            server.Stop();
+            IsRunning = false;
         }
-        internal void Send(string msg)
-        {
-
-            byte[]? j = ConvertHexToBytes(msg);
-            cmd command = new cmd { Type = "RawTelecommand", Content = j };
-            var toSend = JObject.FromObject(command);
-            byte[] dataToSend = Encoding.Default.GetBytes(toSend.ToString());
-            client.GetStream().Write(dataToSend, 0, dataToSend.Length);
-
-        }
-
-
 
 
         struct Msg
@@ -130,7 +69,7 @@ namespace SPL_Manager.Library.Models.PacketServer
             public string Content;
         };
 
-        private void Server_Thread()
+        private Task Server_Thread()
         {
             try
             {
@@ -147,7 +86,6 @@ namespace SPL_Manager.Library.Models.PacketServer
                 // Buffer for reading data
                 Byte[] bytes = new Byte[256];
                 String data;
-
                 // Enter the listening loop.
                 while (true)
                 {
@@ -157,7 +95,7 @@ namespace SPL_Manager.Library.Models.PacketServer
                     // You could also use server.AcceptSocket() here.
                     client = server.AcceptTcpClient();
                     Console.WriteLine("Connected!");
-                    PacketServer.isOnline = true;
+                    IsRunning = true;
 
                     // Get a stream object for reading and writing
                     NetworkStream stream = client.GetStream();
@@ -218,44 +156,23 @@ namespace SPL_Manager.Library.Models.PacketServer
             }
         }
 
-        internal void Stop()
-        {
-            if (PacketServer.isOnline)
-            {
-                client.Close();
-                server.Stop();
-            }
 
-            if (childThread != null)
-            {
-                if (childThread.IsAlive)
-                {
-                    childThread.Interrupt();
-                    childThread.Join(0);
-                }
-            }
-
-
-
-            client = null;
-            server = null;
-            childThread = null;
-            PacketServer.isOnline = false;
-        }
     }
 
 
 
 
-    class UDPSocket
+    public class UDPServer: IPacketServer
     {
-        private Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        private Socket _serverSocket;
+        private Socket _cilentSocket;
+
         private const int bufSize = 8 * 1024;
         private State state = new State();
         private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0);
         private AsyncCallback recv = null;
-
-        private event Action<string> OnPacketRecived;
+        public bool IsRunning { get; private set; } = false;
+        public event Action<string> OnPacketRecived;
 
         private class State
         {
@@ -263,45 +180,60 @@ namespace SPL_Manager.Library.Models.PacketServer
         }
 
 
-        internal UDPSocket(Action<string> PacketRecivedEvent)
+        public UDPServer()
         {
-            OnPacketRecived = PacketRecivedEvent;
+            _cilentSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         }
-
+        public void Start()
+        {
+            IsRunning = true;
+            Server((int)ProgramProps.settings.UDP_ports.server);
+            Client("127.0.0.1", (int)ProgramProps.settings.UDP_ports.client);
+        }
 
 
         internal void Server(int port)
         {
-            _socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.ReuseAddress, true);
-            _socket.EnableBroadcast = true;
-            _socket.Bind(new IPEndPoint(IPAddress.Any, port));
-            Receive();
+            _serverSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.ReuseAddress, true);
+            _serverSocket.EnableBroadcast = true;
+            _serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
+            Receive(_serverSocket);
         }
         internal void Client(string address, int port)
         {
-            _socket.Connect(IPAddress.Parse(address), port);
-            Receive();
+            _cilentSocket.Connect(IPAddress.Parse(address), port);
+            Receive(_cilentSocket); //TODO: figure this [[HYPERLINK BLOCKED]] out - do we even need this?
         }
 
 
-        internal void Send(string text)
+        public Task Send(string text)
         {
             byte[] data = Encoding.ASCII.GetBytes(text);
-            _socket.BeginSend(data, 0, data.Length, SocketFlags.None, (ar) =>
+            _cilentSocket.BeginSend(data, 0, data.Length, SocketFlags.None, (ar) =>
             {
                 State? so = (State?)ar.AsyncState;
-                int bytes = _socket.EndSend(ar);
+                int bytes = _cilentSocket.EndSend(ar);
                 Console.WriteLine("SEND: {0}, {1}", bytes, text);
             }, state);
+            return Task.CompletedTask;
         }
 
-        private void Receive()
+        public void Stop()
         {
-            _socket.BeginReceiveFrom(state.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv = (ar) =>
+            if (!IsRunning) return;
+            _cilentSocket.Close();
+            _serverSocket.Close();
+            IsRunning = false;
+        }
+
+        private void Receive(Socket socket)
+        {
+            socket.BeginReceiveFrom(state.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv = (ar) =>
             {
                 State? so = (State?)ar.AsyncState;
-                int bytes = _socket.EndReceiveFrom(ar, ref epFrom);
-                _socket.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
+                int bytes = socket.EndReceiveFrom(ar, ref epFrom);
+                socket.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
                 Console.WriteLine("RECV: {0}: {1}, {2}", epFrom.ToString(), bytes, Encoding.ASCII.GetString(so.buffer, 0, bytes));
 
                 string packet = Encoding.ASCII.GetString(so.buffer, 0, bytes);

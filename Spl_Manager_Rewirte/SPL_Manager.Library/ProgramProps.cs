@@ -4,6 +4,7 @@ using SPL_Manager.Library.Models.SatPacketModels.JsonModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Text;
@@ -19,21 +20,19 @@ namespace SPL_Manager
 
         public static Dictionary<string, PacketTypeList> PacketJsonFiles = new Dictionary<string, PacketTypeList>();
 
-        // try ping google to cheack if online
-        //TODO: apparently ping is banned in many places, find a better way to cheack connection
+
         public static bool GetIfOnline()
         {
             try
             {
-                Ping myPing = new Ping();
-                String host = "8.8.8.8";//google ip, i think
-                byte[] buffer = new byte[32];
-                int timeout = 500;
-                PingOptions pingOptions = new PingOptions();
-                PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
-                return (reply.Status == IPStatus.Success);
+                var url = "http://www.gstatic.com/generate_204";
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                request.KeepAlive = false;
+                request.Timeout = 5000;
+                using var response = (HttpWebResponse)request.GetResponse();
+                return true;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }

@@ -229,8 +229,9 @@ namespace SPL_Manager.UI.Views.TxTabViews
 
         private async void PlSaveListBtn_Click(object sender, EventArgs e)
         {
+            if (!ProgramProps.GetIfOnline()) return; //TODO: error msg to user
             await PlaylistsPresenter.SaveCurrentPlaylist();
-            //TODO: add a popup window
+            //TODO: add a popup window - playlist saved.
         }
         private async void PlDeleteListBtn_Click(object sender, EventArgs e)
         {

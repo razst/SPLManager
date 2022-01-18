@@ -33,7 +33,7 @@ namespace SPL_Manager.Library.Presenters.RxTabPresenters
             };
 
 
-            if (saveFileDialog.ShowDialog() != DialogResult.OK) return "null";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return "nill";
             return saveFileDialog.FileName;
             */
             return "";
@@ -57,7 +57,16 @@ namespace SPL_Manager.Library.Presenters.RxTabPresenters
             };
             try
             {
-                _fileService.CreateNewPacketFile(fileData);
+                _fileService.CreateNewTableFromData(fileData);
+                
+                if ((bool)ProgramProps.settings.enableExcel)
+                {
+                    _fileService.SaveAsExcelFileAt(fileData.FileLocation);
+                }
+                else
+                {
+                    _fileService.SaveAsCsvFileAt(fileData.FileLocation);
+                }
             }
             catch (Exception e)
             {
@@ -110,7 +119,16 @@ namespace SPL_Manager.Library.Presenters.RxTabPresenters
                 };
                 try
                 {
-                    _fileService.CreateNewPacketFile(fileData);
+                    _fileService.CreateNewTableFromData(fileData);
+
+                    if ((bool)ProgramProps.settings.enableExcel)
+                    {
+                        _fileService.SaveAsExcelFileAt(fileData.FileLocation);
+                    }
+                    else
+                    {
+                        _fileService.SaveAsCsvFileAt(fileData.FileLocation);
+                    }
                 }
                 catch (Exception e)
                 {

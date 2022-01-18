@@ -21,15 +21,19 @@ namespace SPL_Manager.Tests
             _radioPassesPresenter.SetView(_radioViewMuck);
         }
 
-        [Fact (Skip = "Only works on Debug for some reason")]
+        [Fact /*(Skip = "Only works on Debug for some reason")*/]
         public void BasicUtcTest()
         {
-            string time1 = _radioViewMuck.UtcDate;
-            time1.Should().NotBeNullOrEmpty();
-
             Task.Delay(1000).GetAwaiter().GetResult();
 
-            _radioViewMuck.UtcDate.Should().NotBe(time1);
+            string time1 = _radioViewMuck.UtcDate;
+            time1.Should().NotBeNullOrEmpty();
+            Task.Delay(1000).GetAwaiter().GetResult();
+            var time2 = _radioViewMuck.UtcDate;
+            time2.Should()
+                .NotBeNullOrEmpty()
+                .And
+                .NotBe(time1);
         }
     }
 }

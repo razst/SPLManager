@@ -1,13 +1,16 @@
 ﻿using SPL_Manager.Library.Models.SatPacketModels;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace SPL_Manager.Library.Models.PacketFilesModels
 {
     public interface IPacketFilesService
     {
-        public void CreateNewPacketFile(PacketFileData fileData);
+        public void CreateNewTableFromData(PacketFileData fileData);
+        public void SaveAsExcelFileAt(string fileLoc);
+        public void SaveAsCsvFileAt(string fileLoc);
     }
     public struct PacketFileData
     {

@@ -81,12 +81,15 @@ namespace SPL_Manager.Library.Models.DataAccess
             }
 
             string SatIndex = $"SAT{ProgramProps.groups.FindIndex(g => g == group)}";
-            int id = 0;
-
-            id = IdClient.GetValue(SatIndex);
-            IdClient.IncrementValue(SatIndex);
-
-
+            int id = 20;
+            try
+            {
+                id = IdClient.GetValue(SatIndex);
+                IdClient.IncrementValue(SatIndex);
+            }
+            finally
+            {
+            }
             return Task.FromResult(id);
         }
     }

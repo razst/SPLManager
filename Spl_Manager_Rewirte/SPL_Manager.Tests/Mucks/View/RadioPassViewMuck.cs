@@ -16,14 +16,14 @@ namespace SPL_Manager.Tests.Mucks.View
         public string UtcDate { get; set; }
 
         public object Invoke(Delegate method, params object[] args)
-        {
-            method.Method.Invoke(method.Target, args);
+        {                
+            method.DynamicInvoke(args);
             return "nill";
         }
 
         public object Invoke(Delegate method)
         {
-            method.Method.Invoke(method.Target, null);
+            method.DynamicInvoke();
             return "nill";
         }
 

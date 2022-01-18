@@ -7,7 +7,8 @@ namespace SPL_Manager.Library.Models.PacketServer
 {
     public interface IPacketServer
     {
-        public void Strat();
+        public bool IsRunning { get; }
+        public void Start();
 
         public Task Send(string msg);
 

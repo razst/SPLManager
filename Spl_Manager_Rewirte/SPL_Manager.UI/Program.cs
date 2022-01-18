@@ -11,8 +11,8 @@ namespace SPL_Manager.UI
         [STAThread]
         static void Main()
         {
-            ContainerConfig.ConfigMain();
             ProgramProps.Init();
+            ContainerConfig.ConfigMain();
 
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);

@@ -103,7 +103,7 @@ namespace SPL_Manager.UI.Views.RxTabViews
 
         public void AddTxItem(string DisplayText)
         {
-            //TODO - idk yet
+            //TODO - change to latest item - sometimes...
             RxSentPacketsLibx.Items.Add(DisplayText);
             //RxSentPacketsLibx.SelectedIndex = RxSentPacketsLibx.Items.Count - 1;
 

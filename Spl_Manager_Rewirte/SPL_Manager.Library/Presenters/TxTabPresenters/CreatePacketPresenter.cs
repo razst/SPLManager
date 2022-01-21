@@ -80,19 +80,6 @@ namespace SPL_Manager.Library.Presenters.TxTabPresenters
             }
 
             _view.TxPacketHexStr = Hex;
-
-            switch (mode)
-            {
-                case "satelite":
-                    await new PacketObject(TxOptions, Hex).Upload("parsed-tx");
-                    break;
-
-                case "clipboard":
-                    //TODO: for some reason, clipboard is in the windows library - so ask view to do this instead
-                    //if (Hex != null && Hex != "")
-                    //Clipboard.SetText(Hex);
-                    break;
-            }
         }
 
         public void CastPacketToView(PacketObject packet)

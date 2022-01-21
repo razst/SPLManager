@@ -71,6 +71,38 @@ namespace SPL_Manager.Library.Models.DataAccess
             return output;
         }
 
+        public async Task UploadPacket(PacketObject packet, string collection)
+        {
+            if (packet.GetSatDex() == 9) return;
+
+            Dictionary<string, object> DBPacket = new Dictionary<string, object>
+            {
+                {"packetString",packet.RawPacket },
+                {"time",DateTime.UtcNow }
+            };
+            if (packet.Type == -1)
+            {
+                DBPacket.Add("type", "Error");
+            }
+            else
+            {
+                DBPacket.Add("splID", packet.Id);
+                DBPacket.Add("type", packet.GetTypeName());
+                DBPacket.Add("subtype", packet.GetSubTypeName());
+                DBPacket.Add("lenght", packet.Length);
+                DBPacket.Add("satId", packet.GetSatDex());
+                DBPacket.Add("satName", packet.SateliteGroup);
+                foreach (var item in packet.DataCatalog) DBPacket.Add(item.Key, item.Value);
+            }
+
+            var result = await ProgramProps.Database.IndexAsync(
+                    new IndexRequest<Dictionary<string, object>>
+                        (DBPacket, collection));
+
+            Console.WriteLine(result);
+        }
+
+
 
         private IRedisTypedClient<int> IdClient;
         public Task<int> GetSplId(string group)

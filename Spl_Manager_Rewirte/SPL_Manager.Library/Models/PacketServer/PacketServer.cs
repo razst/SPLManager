@@ -26,19 +26,21 @@ namespace SPL_Manager.Library.Models.PacketServer
         }
         public void Start()
         {
+            if (IsRunning) return;
             Task.Factory.StartNew(Server_Thread,TaskCreationOptions.LongRunning);
         }
 
 
 
-        public Task Send(string msg)
+        public Task<bool> Send(string msg)
         {
-
+            if (!IsRunning) return Task.FromResult(false);
             byte[]? j = ConvertHexToBytes(msg);
             var command = new { Type = "RawTelecommand", Content = j };
             var toSend = JObject.FromObject(command);
             byte[] dataToSend = Encoding.Default.GetBytes(toSend.ToString());
-            return client.GetStream().WriteAsync(dataToSend, 0, dataToSend.Length);
+            client.GetStream().WriteAsync(dataToSend, 0, dataToSend.Length);
+            return Task.FromResult(true);
         }
         private byte[]? ConvertHexToBytes(string str)
         {
@@ -164,61 +166,46 @@ namespace SPL_Manager.Library.Models.PacketServer
 
     public class UDPServer: IPacketServer
     {
-        private Socket _serverSocket;
-        private Socket _cilentSocket;
+        private UdpClient _serverSocket;
+        private UdpClient _cilentSocket;
 
-        private const int bufSize = 8 * 1024;
-        private State state = new State();
-        private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0);
-        private AsyncCallback recv = null;
+        
         public bool IsRunning { get; private set; } = false;
         public event Action<string> OnPacketRecived;
 
-        private class State
-        {
-            public byte[] buffer = new byte[bufSize];
-        }
+
 
 
         public UDPServer()
         {
-            _cilentSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            _cilentSocket = new UdpClient("127.0.0.1", (int)ProgramProps.settings.UDP_ports.client)
+            {
+                EnableBroadcast = true
+            };
+            _serverSocket = new UdpClient((int)ProgramProps.settings.UDP_ports.server)
+            { 
+                EnableBroadcast = true 
+            };
         }
         public void Start()
         {
             IsRunning = true;
-            Server((int)ProgramProps.settings.UDP_ports.server);
-            Client("127.0.0.1", (int)ProgramProps.settings.UDP_ports.client);
+            _serverSocket.BeginReceive(ReceiveCallback, null);
         }
 
 
-        internal void Server(int port)
-        {
-            _serverSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.ReuseAddress, true);
-            _serverSocket.EnableBroadcast = true;
-            _serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
-            Receive(_serverSocket);
-        }
-        internal void Client(string address, int port)
-        {
-            _cilentSocket.Connect(IPAddress.Parse(address), port);
-            Receive(_cilentSocket); //TODO: figure this [[HYPERLINK BLOCKED]] out - do we even need this?
-        }
 
 
-        public Task Send(string text)
+        public Task<bool> Send(string text)
         {
+            if(!IsRunning) return Task.FromResult(false);
+
             byte[] data = Encoding.ASCII.GetBytes(text);
-            _cilentSocket.BeginSend(data, 0, data.Length, SocketFlags.None, (ar) =>
-            {
-                State? so = (State?)ar.AsyncState;
-                int bytes = _cilentSocket.EndSend(ar);
-                Console.WriteLine("SEND: {0}, {1}", bytes, text);
-            }, state);
-            return Task.CompletedTask;
-        }
 
+            _cilentSocket.SendAsync(data, data.Length);
+            
+            return Task.FromResult(true);
+        }
         public void Stop()
         {
             if (!IsRunning) return;
@@ -227,19 +214,15 @@ namespace SPL_Manager.Library.Models.PacketServer
             IsRunning = false;
         }
 
-        private void Receive(Socket socket)
+        private void ReceiveCallback(IAsyncResult res)
         {
-            socket.BeginReceiveFrom(state.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv = (ar) =>
-            {
-                State? so = (State?)ar.AsyncState;
-                int bytes = socket.EndReceiveFrom(ar, ref epFrom);
-                socket.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
-                Console.WriteLine("RECV: {0}: {1}, {2}", epFrom.ToString(), bytes, Encoding.ASCII.GetString(so.buffer, 0, bytes));
+            IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 8000);
+            byte[] received = _serverSocket.EndReceive(res, ref RemoteIpEndPoint);
 
-                string packet = Encoding.ASCII.GetString(so.buffer, 0, bytes);
-                OnPacketRecived.Invoke(packet);
+            string packet = Encoding.ASCII.GetString(received,0,received.Length);
+            OnPacketRecived.Invoke(packet);
 
-            }, state);
+            _serverSocket.BeginReceive(new AsyncCallback(ReceiveCallback), null);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SPL_Manager.Library.Models.PacketServer;
+﻿using SPL_Manager.Library.Models.DataAccess;
+using SPL_Manager.Library.Models.PacketServer;
 using SPL_Manager.Library.Models.SatPacketModels;
 using SPL_Manager.Library.Views;
 using SPL_Manager.Library.Views.RxTabViews;
@@ -15,11 +16,13 @@ namespace SPL_Manager.Library.Presenters
         private ITxTabView _txView;
         private IPacketDisplayView _rxView;
         private readonly IPacketServer _packetServer;
+        private readonly IPacketsRepository _repository;
 
-        public PacketServerPresenter(IPacketServer packetServer)
+        public PacketServerPresenter(IPacketServer packetServer, IPacketsRepository repository)
         {
             _packetServer = packetServer;
             _packetServer.OnPacketRecived += OnPacketRecived;
+            _repository = repository;
         }
 
         public void SetRxView(IPacketDisplayView rxView)
@@ -36,9 +39,12 @@ namespace SPL_Manager.Library.Presenters
             if (!_packetServer.IsRunning)
             {
                 if (count == 1)
+                {
+                    Console.WriteLine("SERVER OFFLINE");
                     // TODO notify user:
                     //MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                }
+                return;
             }
 
             PacketObject po =
@@ -49,7 +55,7 @@ namespace SPL_Manager.Library.Presenters
             _rxView.RxTabPresenter.AddSentPacket(po, DateTime.Now);
 
             if (ProgramProps.DataBaseEnabled)
-                await po.Upload("parsed-tx");
+                await _repository.UploadPacket(po, "parsed-tx");
         }
 
 
@@ -84,7 +90,7 @@ namespace SPL_Manager.Library.Presenters
             _rxView.RxTabPresenter.AddRecivedPacket(po, DateTime.Now);
 
             if (ProgramProps.DataBaseEnabled)
-                await po.Upload("parsed-rx");
+                await _repository.UploadPacket(po, "parsed-rx");
         }
 
 
@@ -98,13 +104,14 @@ namespace SPL_Manager.Library.Presenters
             _rxView.RxTabPresenter.AddSentPacket(po, DateTime.Now);
 
             if (ProgramProps.DataBaseEnabled)
-                await po.Upload("parsed-tx");
+                await _repository.UploadPacket(po, "parsed-tx");
         }
 
 
         public void OpenEndNode()
         {
-            if ((string)ProgramProps.settings.serverMode != "TCP") return; //TODO: popup to user? - "no need to init connection"
+            if (!_packetServer.IsRunning) StartServer();
+            if ((string)ProgramProps.settings.serverMode != "TCP") return;
             try
             {
                 System.Diagnostics.Process.Start((string)ProgramProps.settings.endNodePath);

@@ -16,6 +16,11 @@ namespace SPL_Manager.UI.Views.TxTabViews
         ITxTabView,
         IPlaylistsView
     {
+        public PacketServerPresenter PacketServerPresenter { get; set; }
+        public CreatePacketPresenter CreatePacketPresenter { get; set; }
+        public PlaylistsPresenter PlaylistsPresenter { get; set; }
+
+
         public TxTab()
         {
             InitializeComponent();
@@ -26,18 +31,20 @@ namespace SPL_Manager.UI.Views.TxTabViews
                 PacketServerPresenter.SetTxView(this);
                 CreatePacketPresenter = ContainerConfig.Resolve<CreatePacketPresenter>();
                 CreatePacketPresenter.SetView(this);
+                PlaylistsPresenter = ContainerConfig.Resolve<PlaylistsPresenter>();
+                PlaylistsPresenter.SetTxView(this);
+                PlaylistsPresenter.SetPlView(this);
 
                 TxSatGroupsCB.Items.AddRange(ProgramProps.groups.ToArray());
                 TxSatGroupsCB.SelectedIndex = (int)ProgramProps.settings.defaultSatGroup;
             }
         }
-        public void Init()
-        {
 
+        private void TxTab_Load(object sender, EventArgs e)
+        {
         }
 
-        
-        public PacketServerPresenter PacketServerPresenter { get; set; }
+
 
         private void TxTypesCB_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -57,7 +64,11 @@ namespace SPL_Manager.UI.Views.TxTabViews
 
         private async void TxCopyPacketBtn_Click(object sender, EventArgs e)
         {
-            await CreatePacketPresenter.GeneratePacket("clipboard");
+            await CreatePacketPresenter.GeneratePacket("none");
+            
+            string result = TxPacketHexStr;
+            if (result != null && result != "")
+                Clipboard.SetText(result);
         }
         private async void TxSendPacketBtn_Click(object sender, EventArgs e)
         {
@@ -197,7 +208,6 @@ namespace SPL_Manager.UI.Views.TxTabViews
         }
 
 
-        public CreatePacketPresenter CreatePacketPresenter { get; set; }
 
 
 
@@ -309,11 +319,12 @@ namespace SPL_Manager.UI.Views.TxTabViews
             set => PlPlaylistItemsLibx.SelectedIndex = value;
         }
 
-
-
-
-
-        public PlaylistsPresenter PlaylistsPresenter { get; set; }
-
+        private bool firstClick = false;
+        private async void PlPlaylistsCB_Click(object sender, EventArgs e)
+        {
+            if (firstClick) return;
+            firstClick = true;
+            await PlaylistsPresenter.LoadPlayLists();
+        }
     }
 }

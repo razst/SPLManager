@@ -32,14 +32,17 @@ namespace SPL_Manager.Library.Presenters.TxTabPresenters
             _repository = repository;
         }
 
-        public void SetViews(ITxTabView txView, IPlaylistsView plView)
+
+        public void SetTxView(ITxTabView txView)
         {
             _txView = txView;
+        }
+        public void SetPlView(IPlaylistsView plView)
+        {
             _plView = plView;
-            _plView.SafelyRun(LoadPlayLists);
         }
 
-        private async Task LoadPlayLists()
+        public async Task LoadPlayLists()
         {
             if (!ProgramProps.DataBaseEnabled) return;
 

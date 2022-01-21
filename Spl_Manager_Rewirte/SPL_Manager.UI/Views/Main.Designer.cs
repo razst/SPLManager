@@ -174,7 +174,6 @@ namespace SPL_Manager.UI
             this.RxTabControl.Location = new System.Drawing.Point(0, 6);
             this.RxTabControl.Name = "RxTabControl";
             this.RxTabControl.RxPacketHex = "";
-            this.RxTabControl.RxQueryPresenter = null;
             this.RxTabControl.RxItemsIndex = -1;
             this.RxTabControl.TxItemsIndex = -1;
             this.RxTabControl.Size = new System.Drawing.Size(1250, 558);

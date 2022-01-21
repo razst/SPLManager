@@ -90,12 +90,7 @@ namespace SPL_Manager.Library.Models.SatPacketModels
             return $"ID: {Id}, Type: {GetTypeName()}, SubType: {GetSubTypeName()}";
         }
 
-        public async Task Upload(string COLLECTION_NAME)
-        {
-            if (GetSatDex() == 9) return;
-            await ProgramProps.Database.IndexAsync(new IndexRequest<Dictionary<string, object>>
-                (this.CastToDict(), COLLECTION_NAME));
-        }
+
 
         public string GetDescriptionString()
         {
@@ -149,7 +144,7 @@ namespace SPL_Manager.Library.Models.SatPacketModels
         public int GetSubtypeIndex() => JsonObject?.Types?[GetTypeIndex()].SubTypes?.FindIndex(item => item.Id == Subtype) ?? -1;
         public string GetTypeName() => Type == -1 ? "Error" : JsonObject?.Types?[GetTypeIndex()]?.Name ?? "Error";
         public string GetSubTypeName() => Type == -1 ? "logs" : JsonObject?.Types?[GetTypeIndex()]?.SubTypes[GetSubtypeIndex()]?.Name ?? "nill";
-        public int GetSatDex() => Groups.FindIndex(x => x == SateliteGroup);
+        public int GetSatDex() => Type == -1 ? 0 : Groups.FindIndex(x => x == SateliteGroup);
     }
 
 
@@ -279,7 +274,7 @@ namespace SPL_Manager.Library.Models.SatPacketModels
 
         private static void HandeleDateParam()
         {
-            string temp;
+            dynamic temp;
             if (bitarr[j + 3][0] == 'N')
             {
                 temp = "now";
@@ -291,7 +286,7 @@ namespace SPL_Manager.Library.Models.SatPacketModels
             else
             {
                 string format = currentParams.ParamType == "date" ? "d" : "G";
-                temp = DateTimeOffset.FromUnixTimeSeconds(ConvertBytesToSplInt(4)).ToLocalTime().ToString(format);
+                temp = DateTimeOffset.FromUnixTimeSeconds(ConvertBytesToSplInt(4)).ToLocalTime();
             }
 
             pacObj.DataCatalog.Add(currentParams.Name, temp);
@@ -502,33 +497,5 @@ namespace SPL_Manager.Library.Models.SatPacketModels
 
 
         #endregion
-    }
-
-    static class PacketToDatabase
-    {
-        public static Dictionary<string, object?> CastToDict(this PacketObject PacObj)
-        {
-            Dictionary<string, object?> DBPacket = new Dictionary<string, object?>
-            {
-                {"packetString",PacObj.RawPacket },
-                {"time",DateTime.UtcNow }
-            };
-            if (PacObj.Type == -1)
-            {
-                DBPacket.Add("type", "Error");
-                return DBPacket;
-            }
-
-            DBPacket.Add("splID", PacObj.Id);
-            DBPacket.Add("type", PacObj.GetTypeName());
-            DBPacket.Add("subtype", PacObj.GetSubTypeName());
-            DBPacket.Add("lenght", PacObj.Length);
-            DBPacket.Add("satId", PacObj.GetSatDex());
-            DBPacket.Add("satName", PacObj.SateliteGroup);
-
-            foreach (var item in PacObj.DataCatalog) DBPacket.Add(item.Key, item.Value);
-
-            return DBPacket;
-        }
     }
 }

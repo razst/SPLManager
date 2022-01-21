@@ -1,4 +1,5 @@
 ﻿using SPL_Manager.Library.Models.SatPacketModels;
+using SPL_Manager.Library.Models.DataAccess;
 using SPL_Manager.Library.Views.RxTabViews;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,11 @@ namespace SPL_Manager.Library.Presenters.RxTabPresenters
     {
         private IPacketDisplayView _view;
         private readonly List<RxGroupData> SatGroupsData;
+        private readonly IPacketsRepository _repository;
 
-        public RxTabPresenter()
+        public RxTabPresenter(IPacketsRepository repository)
         {
+            _repository = repository;
             SatGroupsData = new List<RxGroupData>();
             ProgramProps.groups.ForEach(group =>
             {
@@ -85,11 +88,13 @@ namespace SPL_Manager.Library.Presenters.RxTabPresenters
             _view.Invoke((Action<string>)_view.AddRxItem, poFormated);
         }
 
-        public void AddTranslatedPacket()
+        public async Task AddTranslatedPacket()
         {
             PacketObject po = new PacketObject(_view.RxPacketHex);
             if (po.JsonObject == ProgramProps.PacketJsonFiles["Tx"]) return;
             AddRecivedPacket(po, DateTime.Now);
+            if (ProgramProps.DataBaseEnabled)
+                await _repository.UploadPacket(po, "parsed-rx");
         }
 
 

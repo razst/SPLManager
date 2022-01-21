@@ -671,7 +671,7 @@
           "desc": "update the time in the satellite",
           "inParams": [
             {
-              "name": "time",
+              "name": "new time",
               "desc": "what time we want to set",
               "type": "datetime"
             }

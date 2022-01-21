@@ -41,8 +41,8 @@ namespace SPL_Manager.UI.Views.RxTabViews
         }
 
         private PacketServerPresenter PacketServerPresenter;
-        public RxTabPresenter RxTabPresenter { get; set; }
-        public RxQueryPresenter RxQueryPresenter { get; set; }
+        public RxTabPresenter RxTabPresenter { get; private set; }
+        public RxQueryPresenter RxQueryPresenter { get; private set; }
 
 
 
@@ -74,9 +74,9 @@ namespace SPL_Manager.UI.Views.RxTabViews
         {
             await PacketServerPresenter.ResendCurrentTxItem();
         }
-        private void RxTranslatePacketBtn_Click(object sender, EventArgs e)
+        private async void RxTranslatePacketBtn_Click(object sender, EventArgs e)
         {
-            RxTabPresenter.AddTranslatedPacket();
+            await RxTabPresenter.AddTranslatedPacket();
         }
 
         private void RxClearBtn_Click(object sender, EventArgs e)

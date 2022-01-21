@@ -10,7 +10,7 @@ namespace SPL_Manager.Library.Models.PacketServer
         public bool IsRunning { get; }
         public void Start();
 
-        public Task Send(string msg);
+        public Task<bool> Send(string msg);
 
         public event Action<string> OnPacketRecived;
 

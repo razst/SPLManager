@@ -13,5 +13,7 @@ namespace SPL_Manager.Library.Models.DataAccess
         public Task<List<string>> LoadLastFrameDates(int groupIndex);
 
         public Task<int> GetSplId(string group);
+
+        public Task UploadPacket(PacketObject packet, string collection);
     }
 }

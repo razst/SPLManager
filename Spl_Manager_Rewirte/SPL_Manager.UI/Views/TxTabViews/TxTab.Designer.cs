@@ -295,6 +295,7 @@ namespace SPL_Manager.UI.Views.TxTabViews
             this.PlPlaylistsCB.Size = new System.Drawing.Size(192, 23);
             this.PlPlaylistsCB.TabIndex = 26;
             this.PlPlaylistsCB.SelectedIndexChanged += new System.EventHandler(this.PlPlaylistsCB_SelectedIndexChanged);
+            this.PlPlaylistsCB.Click += new System.EventHandler(this.PlPlaylistsCB_Click);
             // 
             // TxAddToPlaylistBtn
             // 
@@ -410,6 +411,7 @@ namespace SPL_Manager.UI.Views.TxTabViews
             this.Controls.Add(this.TxHexOutputTxb);
             this.Name = "TxTab";
             this.Size = new System.Drawing.Size(1260, 600);
+            this.Load += new System.EventHandler(this.TxTab_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TxPacketParamsDGV)).EndInit();

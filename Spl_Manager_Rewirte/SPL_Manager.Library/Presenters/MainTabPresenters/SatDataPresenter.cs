@@ -42,7 +42,7 @@ namespace SPL_Manager.Library.Presenters.MainTabPresenters
             _view.BatTempValue = ((float)po.DataCatalog["Battery Temperature"]) / 1000;
             _view.FreeSpaceValue = ((float)po.DataCatalog["free_memory"]) / 1000000;
 
-            _view.OBCTimeDate = (string)po.DataCatalog["sat_time"];
+            _view.OBCTimeDate = ((DateTimeOffset)po.DataCatalog["sat_time"]).ToString("G");
 
 
             _view.NumberOfSatResets = po.DataCatalog["number_of_resets"].ToString() ?? "-";

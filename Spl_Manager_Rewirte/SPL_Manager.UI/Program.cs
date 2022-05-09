@@ -1,3 +1,4 @@
+using SPL_Manager.Library.Shared;
 using System;
 using System.Windows.Forms;
 
@@ -12,7 +13,6 @@ namespace SPL_Manager.UI
         static void Main()
         {
             ProgramProps.Init();
-            ContainerConfig.ConfigMain();
 
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);

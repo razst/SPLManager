@@ -1,11 +1,8 @@
-using System;
 using Xunit;
-using Autofac;
 using SPL_Manager.Tests.Mucks.View;
-using SPL_Manager.Library.Presenters.MainTabPresenters;
 using System.Threading.Tasks;
 using FluentAssertions;
-using System.Threading;
+using SPL_Manager.Library.SatRadioPass;
 
 namespace SPL_Manager.Tests
 {
@@ -15,16 +12,15 @@ namespace SPL_Manager.Tests
         private RadioPassesPresenter _radioPassesPresenter;
         public RadioPassesTests()
         {
-            ContainerConfig.ConfigRadioTests();
             _radioViewMuck = new RadioPassViewMuck();
-            _radioPassesPresenter = ContainerConfig.Resolve<RadioPassesPresenter>();
+            _radioPassesPresenter = new RadioPassesPresenter();
             _radioPassesPresenter.SetView(_radioViewMuck);
         }
 
         [Fact /*(Skip = "Only works on Debug for some reason")*/]
-        public void BasicUtcTest()
+        public async void BasicUtcTest()
         {
-            Task.Delay(1000).GetAwaiter().GetResult();
+            await Task.Delay(1000);
 
             string time1 = _radioViewMuck.UtcDate;
             time1.Should().NotBeNullOrEmpty();

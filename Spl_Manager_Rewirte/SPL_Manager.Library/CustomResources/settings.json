@@ -8,7 +8,7 @@
   "widgetSettings": {
     "minThresholdSatPass": 5
   },
-  "serverMode": "TCP",
+  "serverMode": "UDP",
   "UDP_ports": {
     "client": 27002,
     "server": 27002

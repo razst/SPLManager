@@ -1,19 +1,17 @@
-﻿using SPL_Manager.Library.Presenters.QueryTabPresenters;
-using SPL_Manager.Library.Models.SatPacketModels.JsonModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using SPL_Manager.Library.Views.QueryTabViews;
+using SPL_Manager.Library.PacketLifecycle.Query.Simple;
+using SPL_Manager.Library.PacketModel;
+using SPL_Manager.Library.PacketLifecycle.Query.Advanced;
+using SPL_Manager.Library.Shared;
 
 namespace SPL_Manager.UI.Views.QueryTabViews
 {
     public partial class QueryTab : UserControl,
-        IQuerySelectionView,
-        IQueryPacketDisplayView
+        IAdvancedQueryView,
+        IQueryResultsView
     {
         public QueryTab()
         {
@@ -21,13 +19,13 @@ namespace SPL_Manager.UI.Views.QueryTabViews
 
             if(LicenseManager.UsageMode != LicenseUsageMode.Designtime)
             {
-                QuerySelctionPresenter = ContainerConfig.Resolve<QuerySelctionPresenter>();
-                QueryPacketDisplayPresenter = ContainerConfig.Resolve<QueryPacketDisplayPresenter>();
+                QuerySelctionPresenter = new AdvancedQueryPresenter();
+                QueryPacketDisplayPresenter = new AdvancedQueryResultsPresenter();
 
                 QuerySelctionPresenter.SetView(this);
                 QueryPacketDisplayPresenter.SetView(this);
 
-                JsonService service = new JsonService(ProgramProps.PacketJsonFiles["Rx"]);
+                PacketProtocolService service = new PacketProtocolService(ProgramProps.PacketJsonFiles["Rx"]);
 
                 QrySubtypeCB.Items.AddRange(service.GetAllSubtypes().ConvertAll(sub => sub.Name).ToArray());
 
@@ -65,9 +63,9 @@ namespace SPL_Manager.UI.Views.QueryTabViews
             TxPacQryLibx.Items.Clear();
         }
 
-        public QuerySelctionPresenter QuerySelctionPresenter { get; set; }
+        public AdvancedQueryPresenter QuerySelctionPresenter { get; set; }
 
-        public QueryPacketDisplayPresenter QueryPacketDisplayPresenter { get; set; }
+        public AdvancedQueryResultsPresenter QueryPacketDisplayPresenter { get; set; }
 
 
         public DateTime QueryMinTime => QryMinDateDtp.Value.ToUniversalTime();

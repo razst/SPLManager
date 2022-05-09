@@ -1,16 +1,10 @@
 ﻿//#define DB
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using SPL_Manager.Library.Presenters;
-using SPL_Manager.Library.Presenters.RxTabPresenters;
+using SPL_Manager.Library.PacketLifecycle.Send;
+using SPL_Manager.Library.PacketsFiles;
 using SPL_Manager.UI.Views.AboutView;
 
 namespace SPL_Manager.UI
@@ -27,8 +21,8 @@ namespace SPL_Manager.UI
 
             if(LicenseManager.UsageMode != LicenseUsageMode.Designtime)
             {
-                PacketFilesPresenter = ContainerConfig.Resolve<PacketFilesPresenter>();
-                PacketServerPresenter = ContainerConfig.Resolve<PacketServerPresenter>();
+                PacketFilesPresenter = new PacketFilesPresenter();
+                PacketServerPresenter = new PacketServerPresenter();
             }
         }
 

@@ -1,7 +1,6 @@
-﻿using SPL_Manager.Library.Models.RadioPassesModels;
+﻿using SPL_Manager.Library.SatRadioPass;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SPL_Manager.Tests.Mucks.Models

@@ -1,7 +1,6 @@
-﻿using SPL_Manager.Library.Views.MainTabViews;
+﻿using SPL_Manager.Library.SatRadioPass;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SPL_Manager.Tests.Mucks.View
 {

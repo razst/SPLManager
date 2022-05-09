@@ -2,18 +2,6 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "Autofac/6.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Diagnostics.DiagnosticSource": "4.7.1"
-        },
-        "compile": {
-          "lib/netstandard2.1/Autofac.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/Autofac.dll": {}
-        }
-      },
       "ClosedXML/0.95.4": {
         "type": "package",
         "dependencies": {
@@ -1679,7 +1667,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "Autofac": "6.3.0",
           "ClosedXML": "0.95.4",
           "NEST": "7.13.2",
           "Newtonsoft.Json": "13.0.1",
@@ -1695,27 +1682,6 @@
     }
   },
   "libraries": {
-    "Autofac/6.3.0": {
-      "sha512": "gO4bli0N8tDnBHzbYktcnbXlmN6T+IT5W+FUGgCUaM6pwwHXIxOPoUGvfGum7sZpJJgfQNgjFFv80ZPuARgRdA==",
-      "type": "package",
-      "path": "autofac/6.3.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "autofac.6.3.0.nupkg.sha512",
-        "autofac.nuspec",
-        "icon.png",
-        "lib/net5.0/Autofac.dll",
-        "lib/net5.0/Autofac.pdb",
-        "lib/net5.0/Autofac.xml",
-        "lib/netstandard2.0/Autofac.dll",
-        "lib/netstandard2.0/Autofac.pdb",
-        "lib/netstandard2.0/Autofac.xml",
-        "lib/netstandard2.1/Autofac.dll",
-        "lib/netstandard2.1/Autofac.pdb",
-        "lib/netstandard2.1/Autofac.xml"
-      ]
-    },
     "ClosedXML/0.95.4": {
       "sha512": "YixFPzUJ4Ni2AaW/FbPgzFvdtjIzE/4NKROwI1RqIQHWka7QN9Spt4sHuXaSk9PLmXBkk8newHGW0UWLcLs5GA==",
       "type": "package",

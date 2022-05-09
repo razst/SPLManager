@@ -1,22 +1,22 @@
-﻿using SPL_Manager.Library.Presenters.MainTabPresenters;
-using SPL_Manager.Library.Views.MainTabViews;
+﻿using SPL_Manager.Library.SatRadioPass;
+using SPL_Manager.Library.SatStatus;
+using SPL_Manager.Library.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SPL_Manager.UI.Views.MainTabViews
 {
     public partial class MainTab : UserControl,
         IRadioPassesView,
-        ISatDataView
+        ISatStatusView
     {
 
         public RadioPassesPresenter RadioPassesPresenter { private get; set; }
-        public SatDataPresenter SatDataPresenter { private get; set; }
+        public SatStatusPresenter SatDataPresenter { private get; set; }
 
 
         public MainTab()
@@ -59,8 +59,8 @@ namespace SPL_Manager.UI.Views.MainTabViews
 
 
 
-                RadioPassesPresenter = ContainerConfig.Resolve<RadioPassesPresenter>();
-                SatDataPresenter = ContainerConfig.Resolve<SatDataPresenter>();
+                RadioPassesPresenter = new RadioPassesPresenter();
+                SatDataPresenter = new SatStatusPresenter();
 
                 RadioPassesPresenter.SetView(this);
                 SatDataPresenter.SetView(this);
@@ -74,33 +74,38 @@ namespace SPL_Manager.UI.Views.MainTabViews
         public int MainTabGroupIndex => MainGroupsCB.SelectedIndex;
         private async void MainGroupsCB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ((ISatDataView)this).Clear();
+            ((ISatStatusView)this).Clear();
             ((IRadioPassesView)this).Clear();
 
-            await RadioPassesPresenter.LoadNextRadioPasses();
-            await SatDataPresenter.UpdateSatDataView();
+            await Task.WhenAll(
+                RadioPassesPresenter.LoadNextRadioPasses(), 
+                SatDataPresenter.UpdateSatDataView()
+                );
         }
         private void OnClosing(object? sender, EventArgs e)
         {
             RadioPassesPresenter.Dispose();
         }
 
-        // Radio Pass
-        public string TimeTillNextPass { set => MainTimeTillPassLbl.Text = value; }
+        // Radio Pass - invoking labels for thread safety
+        public string TimeTillNextPass { set => MainTimeTillPassLbl.Invoke((MethodInvoker)delegate { MainTimeTillPassLbl.Text = value; }); }
         public List<string> NextPassesDates
         {
             set
             {
-                MainNextPassLbl1.Text = value[1];
-                MainNextPassLbl2.Text = value[2];
-                MainNextPassLbl3.Text = value[3];
-                MainNextPassLbl4.Text = value[4];
+                Invoke((MethodInvoker)delegate
+                {
+                    MainNextPassLbl1.Text = value[1];
+                    MainNextPassLbl2.Text = value[2];
+                    MainNextPassLbl3.Text = value[3];
+                    MainNextPassLbl4.Text = value[4];
+                });
             }
         }
-        public string RadioPassStatus { set => MainPassStatusLbl.Text = value; }
-        public string LastPassDate { set => MainLastPassLbl.Text = value; }
+        public string RadioPassStatus { set => MainPassStatusLbl.Invoke((MethodInvoker)delegate { MainPassStatusLbl.Text = value; }); }
+        public string LastPassDate { set => MainLastPassLbl.Invoke((MethodInvoker)delegate { MainLastPassLbl.Text = value; }); }
 
-        public string UtcDate { set => MainUtcTimeLbl.Text = value; }
+        public string UtcDate { set => MainUtcTimeLbl.Invoke((MethodInvoker)delegate { MainUtcTimeLbl.Text = value; }); }
 
 
 

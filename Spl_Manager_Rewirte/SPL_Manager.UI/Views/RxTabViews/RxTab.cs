@@ -1,19 +1,16 @@
-﻿using SPL_Manager.Library.Presenters;
-using SPL_Manager.Library.Presenters.RxTabPresenters;
-using SPL_Manager.Library.Views.RxTabViews;
+﻿using SPL_Manager.Library.PacketLifecycle.History;
+using SPL_Manager.Library.PacketLifecycle.Query.Simple;
+using SPL_Manager.Library.PacketLifecycle.Send;
+using SPL_Manager.Library.Shared;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SPL_Manager.UI.Views.RxTabViews
 {
     public partial class RxTab : UserControl,
-        IPacketDisplayView,
-        IRxQueryView
+        IPacketHistoryView,
+        ISimpleQueryView
     {
         public RxTab()
         {
@@ -21,9 +18,9 @@ namespace SPL_Manager.UI.Views.RxTabViews
 
             if(LicenseManager.UsageMode != LicenseUsageMode.Designtime)
             {
-                RxTabPresenter = ContainerConfig.Resolve<RxTabPresenter>();
-                PacketServerPresenter = ContainerConfig.Resolve<PacketServerPresenter>();
-                RxQueryPresenter = ContainerConfig.Resolve<RxQueryPresenter>();
+                RxTabPresenter = new PacketHistoryPresenter();
+                PacketServerPresenter = new PacketServerPresenter();
+                RxQueryPresenter = new SimpleQueryPresenter();
 
                 RxTabPresenter.SetView(this);
                 RxQueryPresenter.SetView(this);
@@ -41,8 +38,8 @@ namespace SPL_Manager.UI.Views.RxTabViews
         }
 
         private PacketServerPresenter PacketServerPresenter;
-        public RxTabPresenter RxTabPresenter { get; private set; }
-        public RxQueryPresenter RxQueryPresenter { get; private set; }
+        public PacketHistoryPresenter RxTabPresenter { get; private set; }
+        public SimpleQueryPresenter RxQueryPresenter { get; private set; }
 
 
 

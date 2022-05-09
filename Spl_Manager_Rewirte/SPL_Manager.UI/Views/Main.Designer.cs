@@ -1,5 +1,4 @@
-﻿using Autofac;
-using System;
+﻿using System;
 
 namespace SPL_Manager.UI
 {

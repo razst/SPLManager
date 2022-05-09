@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using SPL_Manager.Library.Presenters;
-using SPL_Manager.Library.Presenters.TxTabPresenters;
-using SPL_Manager.Library.Views.TxTabViews;
+using SPL_Manager.Library.PacketLifecycle.Create;
+using SPL_Manager.Library.PacketLifecycle.Send;
+using SPL_Manager.Library.PacketsPlaylists;
+using SPL_Manager.Library.Shared;
 
 namespace SPL_Manager.UI.Views.TxTabViews
 {
     public partial class TxTab : UserControl,
-        ITxTabView,
+        ICreatePacketView,
         IPlaylistsView
     {
         public PacketServerPresenter PacketServerPresenter { get; set; }
@@ -27,11 +26,11 @@ namespace SPL_Manager.UI.Views.TxTabViews
 
             if(LicenseManager.UsageMode != LicenseUsageMode.Designtime)
             {
-                PacketServerPresenter = ContainerConfig.Resolve<PacketServerPresenter>();
+                PacketServerPresenter = new PacketServerPresenter();
                 PacketServerPresenter.SetTxView(this);
-                CreatePacketPresenter = ContainerConfig.Resolve<CreatePacketPresenter>();
+                CreatePacketPresenter = new CreatePacketPresenter();
                 CreatePacketPresenter.SetView(this);
-                PlaylistsPresenter = ContainerConfig.Resolve<PlaylistsPresenter>();
+                PlaylistsPresenter = new PlaylistsPresenter();
                 PlaylistsPresenter.SetTxView(this);
                 PlaylistsPresenter.SetPlView(this);
 
@@ -116,19 +115,19 @@ namespace SPL_Manager.UI.Views.TxTabViews
 
 
 
-        public List<TxDgvLine> TxDgvParams
+        public List<PacketParamView> TxDgvParams
         {
             get
             {
-                var Output = new List<TxDgvLine>();
+                var Output = new List<PacketParamView>();
 
                 for (int i = 0; i < TxPacketParamsDGV.Rows.Count; i++)
                 {
                     var row = TxPacketParamsDGV.Rows[i];
-                    Output.Add(new TxDgvLine()
+                    Output.Add(new PacketParamView()
                     {
-                        ParamName = row.Cells[0].Value?.ToString(),
-                        ParamValues = new List<string>() { row.Cells[1].Value?.ToString() }
+                        Name = row.Cells[0].Value?.ToString(),
+                        OptinalValues = new List<string>() { row.Cells[1].Value?.ToString() }
                     });
                 }
 
@@ -157,25 +156,25 @@ namespace SPL_Manager.UI.Views.TxTabViews
 
                     string CellValue = "";
 
-                    if (line.ParamType == "bytes") HasBitLine = true;
+                    if (line.ValueType == "bytes") HasBitLine = true;
 
-                    if (line.ParamType == "date") CellValue = DateTime.Now.ToString("d");
-                    if (line.ParamType == "datetime") CellValue = DateTime.Now.ToString("G");
+                    if (line.ValueType == "date") CellValue = DateTime.Now.ToString("d");
+                    if (line.ValueType == "datetime") CellValue = DateTime.Now.ToString("G");
 
-                    TxPacketParamsDGV.Rows.Add(line.ParamName, CellValue, line.ParamDescription);
+                    TxPacketParamsDGV.Rows.Add(line.Name, CellValue, line.Description);
 
 
-                    if (line.ParamValues == null) continue;
-                    if (line.ParamValues.Count == 0) continue;
-                    if (line.ParamValues.Count == 1)
+                    if (line.OptinalValues == null) continue;
+                    if (line.OptinalValues.Count == 0) continue;
+                    if (line.OptinalValues.Count == 1)
                     {
-                        TxPacketParamsDGV.Rows[i].Cells[1].Value = line.ParamValues[0];
+                        TxPacketParamsDGV.Rows[i].Cells[1].Value = line.OptinalValues[0];
                         continue;
                     }
-                    if (line.ParamValues.Count > 1)
+                    if (line.OptinalValues.Count > 1)
                     {
                         var cell = new DataGridViewComboBoxCell();
-                        line.ParamValues.ForEach(value => cell.Items.Add(value));
+                        line.OptinalValues.ForEach(value => cell.Items.Add(value));
 
                         TxPacketParamsDGV.Rows[i].Cells[1] = cell;
                         TxPacketParamsDGV.Rows[i].Cells[1].Value = cell.Items[0];

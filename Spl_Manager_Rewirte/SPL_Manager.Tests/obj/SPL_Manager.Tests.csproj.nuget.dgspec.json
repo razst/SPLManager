@@ -40,10 +40,6 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "Autofac": {
-              "target": "Package",
-              "version": "[6.3.0, )"
-            },
             "ClosedXML": {
               "target": "Package",
               "version": "[0.95.4, )"

@@ -24,13 +24,13 @@ namespace SPL_Manager.UI.Views.TxTabViews
         {
             InitializeComponent();
 
-            if(LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            if(!DesignMode)
             {
-                PacketServerPresenter = new PacketServerPresenter();
+                PacketServerPresenter = PacketServerPresenter.Instance;
                 PacketServerPresenter.SetTxView(this);
                 CreatePacketPresenter = new CreatePacketPresenter();
                 CreatePacketPresenter.SetView(this);
-                PlaylistsPresenter = new PlaylistsPresenter();
+                PlaylistsPresenter = PlaylistsPresenter.Instance;
                 PlaylistsPresenter.SetTxView(this);
                 PlaylistsPresenter.SetPlView(this);
 
@@ -39,9 +39,6 @@ namespace SPL_Manager.UI.Views.TxTabViews
             }
         }
 
-        private void TxTab_Load(object sender, EventArgs e)
-        {
-        }
 
 
 
@@ -73,6 +70,19 @@ namespace SPL_Manager.UI.Views.TxTabViews
         {
             await CreatePacketPresenter.GeneratePacket("testing");//TODO: change mode to satelite
             await PacketServerPresenter.SendCurrentPacket();
+        }
+
+
+
+
+        public void AlertUser(string title, string message)
+        {
+            CustomViewImplementation.AlertUser(title, message);
+        }
+
+        public void NotifyUser(string title, string message)
+        {
+            CustomViewImplementation.NotifyUser(title, message);
         }
 
 
@@ -232,20 +242,30 @@ namespace SPL_Manager.UI.Views.TxTabViews
         private async void TxAddToPlaylistBtn_Click(object sender, EventArgs e)
         {
             await PlaylistsPresenter.AddCurrentPacketToPlaylist();
-            //TODO: show errors when failing to add
             PlPlaylistItemsLibx.SelectedIndex = PlPlaylistItemsLibx.Items.Count - 1;
         }
 
         private async void PlSaveListBtn_Click(object sender, EventArgs e)
         {
-            if (!ProgramProps.GetIfOnline()) return; //TODO: error msg to user
+            if (!ProgramProps.GetIfOnline()) return;
             await PlaylistsPresenter.SaveCurrentPlaylist();
-            //TODO: add a popup window - playlist saved.
+        }
+
+        public bool AskUserToConfirm()
+        {
+            var result = MessageBox.Show(
+                "Are you sure?",
+                "Question",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            return result == DialogResult.Yes;
         }
         private async void PlDeleteListBtn_Click(object sender, EventArgs e)
         {
             await PlaylistsPresenter.DeleteCurrentPlaylist();
         }
+
         private async void PlSendListBtn_Click(object sender, EventArgs e)
         {
             await PlaylistsPresenter.SendAllItems();
@@ -289,6 +309,7 @@ namespace SPL_Manager.UI.Views.TxTabViews
             get => PlPlaylistsCB.Items.Cast<string>().ToList();
             set
             {
+                if (value == null) return;
                 PlPlaylistsCB.Items.Clear();
                 PlPlaylistsCB.Items.AddRange(value.ToArray());
             }
@@ -298,6 +319,7 @@ namespace SPL_Manager.UI.Views.TxTabViews
             get => PlPlaylistItemsLibx.Items.Cast<string>().ToList();
             set
             {
+                if (value == null) return;
                 PlPlaylistItemsLibx.Items.Clear();
                 PlPlaylistItemsLibx.Items.AddRange(value.ToArray());
             }
@@ -325,5 +347,7 @@ namespace SPL_Manager.UI.Views.TxTabViews
             firstClick = true;
             await PlaylistsPresenter.LoadPlayLists();
         }
+
+
     }
 }

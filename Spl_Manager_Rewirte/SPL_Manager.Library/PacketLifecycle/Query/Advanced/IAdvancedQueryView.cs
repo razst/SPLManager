@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SPL_Manager.Library.Shared;
+using System;
 using System.Collections.Generic;
 
 namespace SPL_Manager.Library.PacketLifecycle.Query.Advanced
 {
-    public interface IAdvancedQueryView
+    public interface IAdvancedQueryView : ICustomView
     {
         public DateTime QueryMinTime { get; }
         public DateTime QueryMaxTime { get; }

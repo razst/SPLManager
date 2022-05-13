@@ -1,14 +1,10 @@
 {
   "endNodePath": "C:/dev/GSC-EndNode/GSC-EndNode.exe",
-  "enableImage": false,
   "dataBaseEnabled": true,
-  "tcpPortNumber": 61015,
   "defaultSatGroup": 2,
   "enableExcel": true,
-  "widgetSettings": {
-    "minThresholdSatPass": 5
-  },
-  "serverMode": "UDP",
+  "serverMode": "TCP",
+  "tcpPortNumber": 61015,
   "UDP_ports": {
     "client": 27002,
     "server": 27002

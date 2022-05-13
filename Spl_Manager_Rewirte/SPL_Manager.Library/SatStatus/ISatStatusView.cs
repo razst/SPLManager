@@ -1,6 +1,8 @@
-﻿namespace SPL_Manager.Library.SatStatus
+﻿using SPL_Manager.Library.Shared;
+
+namespace SPL_Manager.Library.SatStatus
 {
-    public interface ISatStatusView
+    public interface ISatStatusView : ICustomView
     {
         public int MainTabGroupIndex { get; }
 

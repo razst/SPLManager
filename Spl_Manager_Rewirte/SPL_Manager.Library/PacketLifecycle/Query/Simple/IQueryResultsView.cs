@@ -1,8 +1,9 @@
 ﻿using SPL_Manager.Library.PacketLifecycle.Query.Advanced;
+using SPL_Manager.Library.Shared;
 
 namespace SPL_Manager.Library.PacketLifecycle.Query.Simple
 {
-    public interface IQueryResultsView
+    public interface IQueryResultsView : ICustomView
     {
         public void ClearPacketsOnDisplay();
 

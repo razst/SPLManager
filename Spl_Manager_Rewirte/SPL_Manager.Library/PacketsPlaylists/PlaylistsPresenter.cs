@@ -4,6 +4,7 @@ using SPL_Manager.Library.PacketModel.Converters;
 using SPL_Manager.Library.Shared;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SPL_Manager.Library.PacketsPlaylists
@@ -15,7 +16,7 @@ namespace SPL_Manager.Library.PacketsPlaylists
         internal int CmdSleep;
     }
 
-    public class PlaylistsPresenter
+    public class PlaylistsPresenter : GenericSingleton<PlaylistsPresenter>
     {
         private ICreatePacketView _txView;
         private IPlaylistsView _plView;
@@ -75,8 +76,7 @@ namespace SPL_Manager.Library.PacketsPlaylists
             }
             catch (Exception e)
             {
-                // TODO notify user
-                //MessageBox.Show($"invaled input: {Environment.NewLine}-{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _txView.AlertUser("Error", $"invaled input: \n-{e.Message}");
                 return;
             }
 
@@ -132,8 +132,19 @@ namespace SPL_Manager.Library.PacketsPlaylists
 
         public async Task SaveCurrentPlaylist()
         {
-            if (_plView.SelectedPlaylist == -1) return;
-            if (!ProgramProps.DataBaseEnabled) return;
+            bool isOk = true;
+            isOk &= _plView.SelectedPlaylist != -1;
+            isOk &= ProgramProps.DataBaseEnabled;
+            isOk &= ProgramProps.GetIfOnline();
+            if (!isOk)
+            {
+                _plView.AlertUser(
+                    "Error", "Something went worng! \n " +
+                    "make sure you have internet access \n" +
+                    "and db enabled in settings"
+                    );
+                return;
+            }
 
             var CurrentPl = GetCurrentPlaylist();
 
@@ -142,7 +153,7 @@ namespace SPL_Manager.Library.PacketsPlaylists
                 name = CurrentPl.Name,
                 sleepBetweenCommands = CurrentPl.CmdSleep,
 
-                commands = CurrentPl.Items.ConvertAll(item =>
+                commands = CurrentPl.Items.Select(item =>
                 {
 
                     item.Type = item.GetTypeIndex();
@@ -150,23 +161,20 @@ namespace SPL_Manager.Library.PacketsPlaylists
                     item.ToRawString("database");
                     return item.RawPacket;
 
-                })
+                }).ToList()
             };
 
             await _repository.UploadPlayList(PlData);
+            _plView.NotifyUser("Finished!", "Play list succesfully saved");
         }
         public async Task DeleteCurrentPlaylist()
         {
             if (_plView.SelectedPlaylist == -1) return;
             if (!ProgramProps.DataBaseEnabled) return;
 
+            bool UserHasConfirmed = _plView.AskUserToConfirm();
+            if (!UserHasConfirmed) return;
 
-            // TODO put this in view:
-            /*
-            if (MessageBox.Show
-                ("Are you sure?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                != DialogResult.Yes) return;
-            */
 
             await _repository.DeletePlaylist(GetCurrentPlaylist().Name);
             PlayLists.RemoveAt(_plView.SelectedPlaylist);

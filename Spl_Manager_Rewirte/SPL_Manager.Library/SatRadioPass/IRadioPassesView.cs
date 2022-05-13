@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using SPL_Manager.Library.Shared;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SPL_Manager.Library.SatRadioPass
 {
-    public interface IRadioPassesView
+    public interface IRadioPassesView : ICustomView
     {
         public int MainTabGroupIndex { get; }
 

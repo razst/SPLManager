@@ -26,5 +26,16 @@ namespace SPL_Manager.Library.Shared
                 _ => throw new Exception("invalid logic"),
             };
         }
+
+
+        /// <summary>
+        /// Utility function similar to "|>" in F# 
+        /// </summary>
+        /// <typeparam name="TIn"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
+        /// <param name="start"></param>
+        /// <param name="pipe"></param>
+        /// <returns></returns>
+        public static TOut Pipe<TIn, TOut>(this TIn start, Func<TIn, TOut> pipe) => pipe(start);
     }
 }

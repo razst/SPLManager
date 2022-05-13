@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using SPL_Manager.Library.Shared;
+using System.Collections.Generic;
 
 namespace SPL_Manager.Library.PacketsPlaylists
 {
-    public interface IPlaylistsView
+    public interface IPlaylistsView : ICustomView
     {
         public List<string> PlaylistsNames { get; set; }
         public int SelectedPlaylist { get; set; }
         public List<string> PlayListItems { get; set; }
         public int SelectedPlaylistItem { get; set; }
         public string CmdSleepValue { get; set; }
+        bool AskUserToConfirm();
 
         public PlaylistsPresenter PlaylistsPresenter { get; }
     }

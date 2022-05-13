@@ -23,38 +23,23 @@ namespace SPL_Manager.Library.PacketsFiles
             _view = view;
         }
 
-        private string AskUserForFileName()//TODO TODO -- right now it's broken
-        {
-            /*
-            SaveFileDialog saveFileDialog = new SaveFileDialog
-            {
-                Filter = "|",
-                Title = "Export history to a File",
-                FileName = $"Packets_Log_{DateTime.Now.ToString("dd-MM-yyyy")}"
-            };
-
-
-            if (saveFileDialog.ShowDialog() != DialogResult.OK) return "nill";
-            return saveFileDialog.FileName;
-            */
-            return "";
-        }
-
         public void SaveAllPacketsInOneFile()
         {
             var PacLst = _view.RxTabPresenter.GetAllRxPackets();
             var DateLst = _view.RxTabPresenter.GetAllRxDates();
 
+            var fileName = _view.AskUserForFileName(
+                "Export history to one file", 
+                $"Packets_Log_{DateTime.Now.ToString("dd-MM-yyyy")}");
 
-            var name = AskUserForFileName();
-            if (name == "null") return;
+            if (fileName == null) return;
 
             PacketFileData fileData = new PacketFileData()
             {
                 Packets = PacLst,
                 Dates = DateLst,
                 IsOneTypeFile = false,
-                FileLocation = name,
+                FileLocation = fileName,
             };
             try
             {
@@ -71,21 +56,23 @@ namespace SPL_Manager.Library.PacketsFiles
             }
             catch (Exception e)
             {
-                //TODO: notify user
-                //MessageBox.Show($"failed to save packet \n-{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _view.AlertUser("Error", $"failed to save packets \n-{e.Message}");
                 return;
             }
 
         }
 
-        public void SaveByPacketTypesInSeparateFiles()
+        public void SaveByPacketTypesInFolder()
         {
             var PacLst = _view.RxTabPresenter.GetAllRxPackets();
             var DateLst = _view.RxTabPresenter.GetAllRxDates();
 
-            var name = AskUserForFileName();
-            if (name == "null") return;
-            Directory.CreateDirectory(name);
+            var fileName = _view.AskUserForFileName(
+                "Export history to a folder",
+                $"Packets_Log_{DateTime.Now.ToString("dd-MM-yyyy")}");
+            
+            if (fileName == null) return;
+            Directory.CreateDirectory(fileName);
 
             Dictionary<string, List<PacketObject>> SortedPackets = new Dictionary<string, List<PacketObject>>();
             Dictionary<string, List<DateTime>> SortedPacketDates = new Dictionary<string, List<DateTime>>();
@@ -116,7 +103,7 @@ namespace SPL_Manager.Library.PacketsFiles
                     Packets = type.Value,
                     Dates = SortedPacketDates[type.Key],
                     IsOneTypeFile = true,
-                    FileLocation = $"{name}\\{type.Key}",
+                    FileLocation = $"{fileName}\\{type.Key}",
                 };
                 try
                 {
@@ -133,8 +120,7 @@ namespace SPL_Manager.Library.PacketsFiles
                 }
                 catch (Exception e)
                 {
-                    //TODO: notify user
-                    //MessageBox.Show($"failed to save packet \n-{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _view.AlertUser("Error", $"failed to save packets \n-{e.Message}");
                     return;
                 }
             }

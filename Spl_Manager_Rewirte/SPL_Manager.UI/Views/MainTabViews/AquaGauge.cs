@@ -509,7 +509,6 @@ namespace AquaControls
                 LinearGradientMode.Vertical);
             g.FillEllipse(gradientBrush, glossRect);
 
-            //TODO: Gradient from bottom
             glossRect = new RectangleF(
                x + (float)(width * 0.25),
                y + (float)(height * 0.77),

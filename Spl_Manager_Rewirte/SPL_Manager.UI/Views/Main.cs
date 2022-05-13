@@ -19,10 +19,11 @@ namespace SPL_Manager.UI
         {
             InitializeComponent();
 
-            if(LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            if(!DesignMode)
             {
                 PacketFilesPresenter = new PacketFilesPresenter();
-                PacketServerPresenter = new PacketServerPresenter();
+                PacketFilesPresenter.SetView(RxTabControl);
+                PacketServerPresenter = PacketServerPresenter.Instance;
             }
         }
 
@@ -44,12 +45,12 @@ namespace SPL_Manager.UI
 
         private void ExportToAFolderMenuItem_Click(object sender, EventArgs e)
         {
-            PacketFilesPresenter.SaveByPacketTypesInSeparateFiles();
+            PacketFilesPresenter.SaveByPacketTypesInFolder();
         }
 
 
 
-        // about form
+        // 'about us' form
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm frm = new AboutForm();

@@ -1,9 +1,10 @@
 ﻿using SPL_Manager.Library.PacketLifecycle.Send;
+using SPL_Manager.Library.Shared;
 using System.Collections.Generic;
 
 namespace SPL_Manager.Library.PacketLifecycle.Create
 {
-    public interface ICreatePacketView
+    public interface ICreatePacketView : ICustomView
     {
         public List<string> TxPacketsTypesList { set; }
         public List<string> TxPacketsSubtypesList { set; }

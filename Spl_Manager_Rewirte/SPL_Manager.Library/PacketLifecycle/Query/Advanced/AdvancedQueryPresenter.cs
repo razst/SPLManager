@@ -85,8 +85,7 @@ namespace SPL_Manager.Library.PacketLifecycle.Query.Advanced
             }
 
 
-            //TODO: notify user:
-            //MessageBox.Show($"{rxCount} RX packet were recived. \n{txCount} TX packet were recived.", "Query finished", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            _view.NotifyUser("Query finished", $"{rxCount} RX packet were recived. \n{txCount} TX packet were recived.");
 
             return result;
         }

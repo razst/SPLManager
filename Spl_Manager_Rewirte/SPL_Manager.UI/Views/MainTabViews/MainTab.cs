@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SPL_Manager.UI;
 
 namespace SPL_Manager.UI.Views.MainTabViews
 {
@@ -18,11 +19,11 @@ namespace SPL_Manager.UI.Views.MainTabViews
         public RadioPassesPresenter RadioPassesPresenter { private get; set; }
         public SatStatusPresenter SatDataPresenter { private get; set; }
 
-
+        
         public MainTab()
         {
             InitializeComponent();
-            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            if (!DesignMode)
             {
                 //Custom Gauges Setup
                 VBatGauge.ColorOfG = new Dictionary<string, AquaControls.valuesOfColors>
@@ -87,6 +88,16 @@ namespace SPL_Manager.UI.Views.MainTabViews
             RadioPassesPresenter.Dispose();
         }
 
+        public void AlertUser(string title, string message)
+        {
+            CustomViewImplementation.AlertUser(title, message);
+        }
+
+        public void NotifyUser(string title, string message)
+        {
+            CustomViewImplementation.NotifyUser(title, message);
+        }
+
         // Radio Pass - invoking labels for thread safety
         public string TimeTillNextPass { set => MainTimeTillPassLbl.Invoke((MethodInvoker)delegate { MainTimeTillPassLbl.Text = value; }); }
         public List<string> NextPassesDates
@@ -125,7 +136,5 @@ namespace SPL_Manager.UI.Views.MainTabViews
         public float BatTempValue { set => BatTempGauge.Value = value; }
         public float OBCTempValue { set => OBCTempGauge.Value = value; }
         public float VBatValue { set => VBatGauge.Value = value; }
-
-
     }
 }

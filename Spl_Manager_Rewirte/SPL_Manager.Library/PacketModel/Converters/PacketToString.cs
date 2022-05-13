@@ -106,7 +106,7 @@ namespace SPL_Manager.Library.PacketModel.Converters
             }
             catch
             {
-                throw new Exception("Int Caster did not work for float value");
+                throw new Exception("Int data type Handler did not work for float value");
             }
         }
         private static void HandeleDateParam()

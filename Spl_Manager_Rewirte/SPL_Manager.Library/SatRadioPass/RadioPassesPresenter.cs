@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPL_Manager.Library.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -45,11 +46,15 @@ namespace SPL_Manager.Library.SatRadioPass
 
             // put next pass on timer display
             UnixOfNextPass = NextRadioPasses[0].startUTC;
-            _view.TimeTillNextPass = GetTimeStringOf(GetSecondTill(UnixOfNextPass));
+            _view.TimeTillNextPass = UnixOfNextPass
+                                        .Pipe(GetSecondUntilDate)
+                                        .Pipe(ToTimeString);
 
             //put other passes on list display
-            _view.NextPassesDates = NextRadioPasses.Select(x =>
-                ConvertUnixToString(x.startUTC)).ToList();
+            _view.NextPassesDates = NextRadioPasses
+                                    .Select(x =>x.startUTC)
+                                    .Select(x => x.Pipe(ConvertUnixToString))
+                                    .ToList();
 
             doTick = true;
 
@@ -74,7 +79,7 @@ namespace SPL_Manager.Library.SatRadioPass
 
             if (!doTick) return;
 
-            long secondsTillNextPass = GetSecondTill(UnixOfNextPass);
+            long secondsTillNextPass = GetSecondUntilDate(UnixOfNextPass);
 
             if (secondsTillNextPass == 60)
             {
@@ -87,7 +92,7 @@ namespace SPL_Manager.Library.SatRadioPass
             string timeToSet;
             if (!passOccured)
             {
-                timeToSet = GetTimeStringOf(secondsTillNextPass);
+                timeToSet = ToTimeString(secondsTillNextPass);
                 _view.TimeTillNextPass = timeToSet;
                 return;
             }
@@ -118,18 +123,12 @@ namespace SPL_Manager.Library.SatRadioPass
 
 
         #region general
-        private long GetSecondTill(long unix) => unix - DateTimeOffset.Now.ToUnixTimeSeconds();
-        private string GetTimeStringOf(long SecondsTill) => TimeSpan.FromSeconds(SecondsTill).ToString(@"hh\:mm\:ss");
+        private long GetSecondUntilDate(long unix) => unix - DateTimeOffset.Now.ToUnixTimeSeconds();
+        private string ToTimeString(long seconds) => TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss");
         private string ConvertUnixToString(long unix) => DateTimeOffset.FromUnixTimeSeconds(unix).ToLocalTime().ToString("G");
 
 
-        public void Dispose()// TODO: use finalizer?
-        {
-            UtcTimer.Dispose();
-            EverySecondTimer.Dispose();
-            EveryHourTimer.Dispose();
-        }
-        ~RadioPassesPresenter()
+        public void Dispose()
         {
             UtcTimer.Dispose();
             EverySecondTimer.Dispose();

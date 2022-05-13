@@ -45,16 +45,9 @@ namespace SPL_Manager.Library.PacketLifecycle.Query.Simple
             AddTxQueryItems(TxDocs);
 
 
-            //TODO notify user:
-            /*
-            MessageBox.Show
-                (
-                $"{RxDocs.Count} Rx Packets Recived \n",
-                "Query Result",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-                );
-            */
+
+            _view.NotifyUser("Query Result",
+                            $"{RxDocs.Count} Rx Packets Recived \n");
         }
 
 

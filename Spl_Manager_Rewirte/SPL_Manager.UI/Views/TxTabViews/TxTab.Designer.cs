@@ -411,7 +411,6 @@ namespace SPL_Manager.UI.Views.TxTabViews
             this.Controls.Add(this.TxHexOutputTxb);
             this.Name = "TxTab";
             this.Size = new System.Drawing.Size(1260, 600);
-            this.Load += new System.EventHandler(this.TxTab_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TxPacketParamsDGV)).EndInit();

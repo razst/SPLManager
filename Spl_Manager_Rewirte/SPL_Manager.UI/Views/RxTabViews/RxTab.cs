@@ -16,10 +16,10 @@ namespace SPL_Manager.UI.Views.RxTabViews
         {
             InitializeComponent();
 
-            if(LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            if(!DesignMode)
             {
                 RxTabPresenter = new PacketHistoryPresenter();
-                PacketServerPresenter = new PacketServerPresenter();
+                PacketServerPresenter = PacketServerPresenter.Instance;
                 RxQueryPresenter = new SimpleQueryPresenter();
 
                 RxTabPresenter.SetView(this);
@@ -30,10 +30,6 @@ namespace SPL_Manager.UI.Views.RxTabViews
                 RxGroupsCB.SelectedIndex = 0;
                 RxLimitCB.SelectedIndex = 0;
             }
-
-        }
-        public void Init()
-        {
 
         }
 
@@ -126,6 +122,30 @@ namespace SPL_Manager.UI.Views.RxTabViews
 
 
         //// View Props
+
+        public void AlertUser(string title, string message)
+        {
+            CustomViewImplementation.AlertUser(title, message);
+        }
+
+        public void NotifyUser(string title, string message)
+        {
+            CustomViewImplementation.NotifyUser(title, message);
+        }
+
+        public string AskUserForFileName(string title, string defaultFileName)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "|",
+                Title = title,
+                FileName = defaultFileName
+            };
+
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return null;
+            return saveFileDialog.FileName;
+        }
+
 
         public int RxGroupIndex => RxGroupsCB.SelectedIndex;
 

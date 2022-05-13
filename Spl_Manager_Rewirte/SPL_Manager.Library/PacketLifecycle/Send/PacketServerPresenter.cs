@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SPL_Manager.Library.PacketLifecycle.Send
 {
-    public class PacketServerPresenter
+    public class PacketServerPresenter : GenericSingleton<PacketServerPresenter>
     {
         private ICreatePacketView _txView;
         private IPacketHistoryView _rxView;
@@ -35,15 +35,13 @@ namespace SPL_Manager.Library.PacketLifecycle.Send
             _txView = txView;
         }
 
-        public async Task SendCurrentPacket(int count = 1)
+        public async Task SendCurrentPacket(int numOfPackets = 1)
         {
             if (!_packetServer.IsRunning)
             {
-                if (count == 1)
+                if (numOfPackets == 1)
                 {
-                    Console.WriteLine("SERVER OFFLINE");
-                    // TODO notify user:
-                    //MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _txView.AlertUser("Error", "server is not online");
                 }
                 return;
             }
@@ -111,13 +109,14 @@ namespace SPL_Manager.Library.PacketLifecycle.Send
 
         public void OpenEndNode()
         {
-            if (!_packetServer.IsRunning) StartServer();
+            if (!_packetServer.IsRunning) 
+                StartServer();
             if ((string)ProgramProps.settings.serverMode != "TCP") return;
             try
             {
-                System.Diagnostics.Process.Start((string)ProgramProps.settings.endNodePath);
+                System.Diagnostics.Process.Start($@"{ProgramProps.settings.endNodePath}");
             }
-            catch
+            finally
             {
 
             }

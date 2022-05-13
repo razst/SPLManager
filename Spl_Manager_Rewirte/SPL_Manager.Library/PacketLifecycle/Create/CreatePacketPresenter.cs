@@ -72,8 +72,7 @@ namespace SPL_Manager.Library.PacketLifecycle.Create
             }
             catch (Exception e)
             {
-                //TODO notify user
-                //MessageBox.Show($"invaled input: {Environment.NewLine}-{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _view.AlertUser("Error", $"invaled input: \n-{e.Message}");
                 _view.TxPacketHexStr = "";
                 return;
             }

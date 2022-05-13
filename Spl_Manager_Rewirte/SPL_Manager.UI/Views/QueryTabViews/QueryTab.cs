@@ -17,7 +17,7 @@ namespace SPL_Manager.UI.Views.QueryTabViews
         {
             InitializeComponent();
 
-            if(LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            if(!DesignMode)
             {
                 QuerySelctionPresenter = new AdvancedQueryPresenter();
                 QueryPacketDisplayPresenter = new AdvancedQueryResultsPresenter();
@@ -34,10 +34,20 @@ namespace SPL_Manager.UI.Views.QueryTabViews
                 QryLimitCB.SelectedIndex = 0;
             }
         }
-        public void Init()
-        {
 
+
+
+
+        public void AlertUser(string title, string message)
+        {
+            CustomViewImplementation.AlertUser(title, message);
         }
+
+        public void NotifyUser(string title, string message)
+        {
+            CustomViewImplementation.NotifyUser(title, message);
+        }
+
 
         private void TxPacQryLibx_SelectedIndexChanged(object sender, EventArgs e)
         {

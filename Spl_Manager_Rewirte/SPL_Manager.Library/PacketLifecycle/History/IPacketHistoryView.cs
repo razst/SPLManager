@@ -1,6 +1,8 @@
-﻿namespace SPL_Manager.Library.PacketLifecycle.History
+﻿using SPL_Manager.Library.Shared;
+
+namespace SPL_Manager.Library.PacketLifecycle.History
 {
-    public interface IPacketHistoryView
+    public interface IPacketHistoryView : ICustomView
     {
         public void AddTxItem(string DisplayText);
         public void AddRxItem(string DisplayText);
@@ -16,6 +18,7 @@
         public int TxItemsIndex { get; set; }
         public int RxItemsIndex { get; set; }
 
+        string AskUserForFileName(string title, string defaultFileName);
 
         public PacketHistoryPresenter RxTabPresenter { get; }
     }

@@ -145,7 +145,6 @@ C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Ma
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\Elasticsearch.Net.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\ExcelNumberFormat.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\FluentAssertions.dll
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CoreUtilities.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
@@ -157,10 +156,6 @@ C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Ma
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\Nest.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\ServiceStack.Common.dll
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\ServiceStack.Interfaces.dll
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\ServiceStack.Redis.dll
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\ServiceStack.Text.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.Tests\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll

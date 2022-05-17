@@ -90,7 +90,7 @@ namespace SPL_Manager.Library.PacketLifecycle.Create
 
         public async Task<PacketObject> CreatePacketFromView(string mode)
         {
-            int id = await _repository.GetSplId(_view.TxCurrentSatGroup);
+            long id = await _repository.GetSplId(_view.TxCurrentSatGroup);
             PacketObject txPac = new PacketObject()
             {
                 JsonObject = TxOptions,

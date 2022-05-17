@@ -9,7 +9,7 @@ namespace SPL_Manager.Library.PacketModel
     {
         private static readonly List<string> Groups = ProgramProps.groups;
 
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public string SateliteGroup { get; set; } = Groups[0];
 

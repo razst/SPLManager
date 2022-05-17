@@ -92,13 +92,8 @@ C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Ma
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\Elasticsearch.Net.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\ExcelNumberFormat.dll
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\Nest.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\ServiceStack.Common.dll
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\ServiceStack.Interfaces.dll
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\ServiceStack.Redis.dll
-C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\ServiceStack.Text.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\SPL_Manager.Library.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\Spl_Manager_Rewirte\SPL_Manager.UI\bin\Debug\netcoreapp3.1\SPL_Manager.Library.pdb

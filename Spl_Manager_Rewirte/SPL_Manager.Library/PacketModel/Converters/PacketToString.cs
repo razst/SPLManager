@@ -64,7 +64,7 @@ namespace SPL_Manager.Library.PacketModel.Converters
         }
 
 
-        private static string ConvertToHexBytes(int value, int numberOfBytes)
+        private static string ConvertToHexBytes(long value, int numberOfBytes)
         {
             string format = "X" + numberOfBytes * 2;
             string Tid = value.ToString(format);

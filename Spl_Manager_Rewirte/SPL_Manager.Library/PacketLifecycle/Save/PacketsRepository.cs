@@ -1,17 +1,16 @@
 ﻿using Nest;
-using ServiceStack.Redis;
-using ServiceStack.Redis.Generic;
 using SPL_Manager.Library.PacketModel;
 using SPL_Manager.Library.Shared;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SPL_Manager.Library.PacketLifecycle.Save
 {
     public interface IPacketsRepository
     {
-        public Task<int> GetSplId(string group);
+        public Task<long> GetSplId(string group);
 
         public Task UploadPacket(PacketObject packet, string collection);
     }
@@ -20,12 +19,6 @@ namespace SPL_Manager.Library.PacketLifecycle.Save
     {
         public PacketsRepository()
         {
-            RedisEndpoint ep = new RedisEndpoint(
-                "redis-10182.c17.us-east-1-4.ec2.cloud.redislabs.com",
-                10182,
-                "nOv4AXTkjIjweZ6DxPlX48qcettKpFDW");
-
-            IdClient = new RedisClient(ep).As<int>();
         }
 
         public async Task UploadPacket(PacketObject packet, string collection)
@@ -61,25 +54,37 @@ namespace SPL_Manager.Library.PacketLifecycle.Save
 
 
 
-        private IRedisTypedClient<int> IdClient;
-        public Task<int> GetSplId(string group)
+        public async Task<long> GetSplId(string group)
         {
             if (!ProgramProps.GetIfOnline())
             {
-                return Task.FromResult(20);
+                return 20;
             }
 
             string SatIndex = $"SAT{ProgramProps.groups.FindIndex(g => g == group)}";
-            int id = 20;
+
+            var searchTask =  ProgramProps.Database.SearchAsync<Dictionary<string, object>>(s => s
+                                    .Query(q => q.Ids(c => c.Values(SatIndex)))
+                                    .Index("local-data"));
+
+            var searchResponse = await searchTask;
+            long currenId = (long)searchResponse.Documents.First().First().Value;
+
+
+            currenId += 1;
+
+
             try
             {
-                id = IdClient.GetValue(SatIndex);
-                IdClient.IncrementValue(SatIndex);
+                var dict = new Dictionary<string, object> { { "CommandId", currenId } };
+                var incrementIdTask = ProgramProps.Database.IndexAsync(new IndexRequest<Dictionary<string, object>>(dict, "local-data", SatIndex));
+                await incrementIdTask;
             }
             finally
             {
+                //TODO? if something went worng, idk why
             }
-            return Task.FromResult(id);
+            return currenId;
         }
     }
 }

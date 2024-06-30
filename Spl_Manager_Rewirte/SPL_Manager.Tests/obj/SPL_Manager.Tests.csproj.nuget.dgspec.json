@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj": {}
+    "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
+    "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
+        "projectUniqueName": "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
         "projectName": "SPL_Manager.Library",
-        "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\obj\\",
+        "projectPath": "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj",
+        "packagesPath": "C:\\Users\\email\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\email\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -59,30 +64,45 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj": {
+    "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
+        "projectUniqueName": "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
         "projectName": "SPL_Manager.Tests",
-        "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\obj\\",
+        "projectPath": "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\SPL_Manager.Tests.csproj",
+        "packagesPath": "C:\\Users\\email\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\email\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -96,8 +116,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
-                "projectPath": "C:\\Users\\User\\OneDrive\\מסמכים\\github\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj"
+              "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj": {
+                "projectPath": "C:\\dev\\SPLManager\\Spl_Manager_Rewirte\\SPL_Manager.Library\\SPL_Manager.Library.csproj"
               }
             }
           }
@@ -106,6 +126,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -147,7 +172,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -156,7 +182,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

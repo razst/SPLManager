@@ -112,7 +112,7 @@ namespace packet_maker.MainComponents
         private async Task GetNextPass(int satId)
         {
             DateTime dt = new DateTime();
-            dynamic t = 43199;
+            dynamic t = 51069;
 
             var a = ((IEnumerable<dynamic>)Program.settings.satInfo).AsEnumerable().ToList().Find(x => x.id == satId);
             if (a.noradID == null) throw new Exception();//TODO:Show an error
@@ -128,8 +128,9 @@ namespace packet_maker.MainComponents
                 client.BaseAddress = new Uri("https://api.n2yo.com");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage response = await client.GetAsync($"/rest/v1/satellite/radiopasses/{t}/{t2.lat}/{t2.lng}/{t2.alt}/7/{t2.minElevation}/&apiKey=78C29S-25XY9W-E8SWZD-4L2F");
+                String t_url = $"/rest/v1/satellite/radiopasses/{t}/{t2.lat}/{t2.lng}/{t2.alt}/7/{t2.minElevation}/&apiKey=78C29S-25XY9W-E8SWZD-4L2F";
+                Console.WriteLine(t_url);
+                HttpResponseMessage response = await client.GetAsync(t_url);
                 if (response.IsSuccessStatusCode)
                 {
                     var txtResponse = await response.Content.ReadAsStringAsync();
@@ -138,8 +139,9 @@ namespace packet_maker.MainComponents
                 }
             }
 
-            if (data == null) return;
+            if (data == null || data.passescount==0) return;
 
+            
             long time = (long)data.passes[0].startUTC;
 
             dt = DateTimeOffset.FromUnixTimeSeconds(time).LocalDateTime;

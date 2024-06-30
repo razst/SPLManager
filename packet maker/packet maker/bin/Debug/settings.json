@@ -31,49 +31,49 @@
       "id": 1,
       "name": "T1OFK",
       "desc": "Ofakim",
-      "noradID": 43199
+      "noradID": 51013
     },
     {
       "id": 2,
       "name": "T2YRC",
       "desc": "Yerucham",
-      "noradID": 43199
+      "noradID": 51069
     },
     {
       "id": 3,
       "name": "T3TYB",
       "desc": "Taybe",
-      "noradID": 43199
+      "noradID": 50988
     },
     {
       "id": 4,
       "name": "T4ATA",
       "desc": "Kiryat Ata",
-      "noradID": 43199
+      "noradID": 51063
     },
     {
       "id": 5,
       "name": "T5SNG",
       "desc": "Shaar HaNegev",
-      "noradID": 43199
+      "noradID": 50998
     },
     {
       "id": 6,
       "name": "T6NZR",
       "desc": "Nazareth",
-      "noradID": 43199
+      "noradID": 50999
     },
     {
       "id": 7,
       "name": "T7ADM",
       "desc": "Maale Adomim",
-      "noradID": 43199
+      "noradID": 51062
     },
     {
       "id": 8,
       "name": "T8GBS",
       "desc": "Guvat Shmuel",
-      "noradID": 43199
+      "noradID": 50989
     },
     {
       "id": 9,

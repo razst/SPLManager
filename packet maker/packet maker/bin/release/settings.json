@@ -4,13 +4,13 @@
   "dataBaseEnabled": true,
   "pacCurId": 0,
   "tcpPortNumber": 4,
-  "defultSatGroup": 2,
+  "defaultSatGroup": 2,
   "enableExcel": false,
   "widgetSettings": {
-    "minThersholdSatPass": 5
+    "minThresholdSatPass": 5
   },
   "serverMode": "TCP",
-  "UDPports": {
+  "UDP_ports": {
     "client": 27002,
     "server": 27002
   },
@@ -25,71 +25,61 @@
       "id": 0,
       "name": "Any",
       "desc": "all sats",
-      "noradID": -1,
-      "isUnique": false
+      "noradID": -1
     },
     {
       "id": 1,
       "name": "T1OFK",
       "desc": "Ofakim",
-      "noradID": 43199,
-      "isUnique": false
+      "noradID": 51013
     },
     {
       "id": 2,
       "name": "T2YRC",
       "desc": "Yerucham",
-      "noradID": 43199,
-      "isUnique": false
+      "noradID": 51069
     },
     {
       "id": 3,
       "name": "T3TYB",
       "desc": "Taybe",
-      "noradID": 43199,
-      "isUnique": false
+      "noradID": 50988
     },
     {
       "id": 4,
       "name": "T4ATA",
       "desc": "Kiryat Ata",
-      "noradID": 43199,
-      "isUnique": false
+      "noradID": 51063
     },
     {
       "id": 5,
       "name": "T5SNG",
       "desc": "Shaar HaNegev",
-      "noradID": 43199,
-      "isUnique": false
+      "noradID": 50998
     },
     {
       "id": 6,
       "name": "T6NZR",
       "desc": "Nazareth",
-      "noradID": 43199,
-      "isUnique": false
+      "noradID": 50999
     },
     {
       "id": 7,
       "name": "T7ADM",
       "desc": "Maale Adomim",
-      "noradID": 43199,
-      "isUnique": false
+      "noradID": 51062
     },
     {
       "id": 8,
       "name": "T8GBS",
       "desc": "Guvat Shmuel",
-      "noradID": 43199,
-      "isUnique": false
+      "noradID": 50989
     },
     {
       "id": 9,
       "name": "TAUSAT1",
       "desc": "TA",
-      "noradID": 47926,
-      "isUnique": true
+      "noradID": 47926
     }
   ]
 }

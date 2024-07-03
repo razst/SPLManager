@@ -158,7 +158,7 @@ namespace packet_maker
             this.label39 = new System.Windows.Forms.Label();
             this.PassStatusLabel = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.label32 = new System.Windows.Forms.Label();
+            this.lblLAstBeacon = new System.Windows.Forms.Label();
             this.mainLastBeaconLabel = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label38 = new System.Windows.Forms.Label();
@@ -229,7 +229,7 @@ namespace packet_maker
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1271, 26);
+            this.menuStrip1.Size = new System.Drawing.Size(1271, 30);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -238,7 +238,7 @@ namespace packet_maker
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.modifyToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 28);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // modifyToolStripMenuItem
@@ -269,7 +269,7 @@ namespace packet_maker
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 28);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
@@ -285,7 +285,7 @@ namespace packet_maker
             this.toAFileToolStripMenuItem,
             this.toAFolderToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(66, 28);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // toAFileToolStripMenuItem
@@ -324,7 +324,7 @@ namespace packet_maker
             this.tabQuery.Location = new System.Drawing.Point(4, 25);
             this.tabQuery.Name = "tabQuery";
             this.tabQuery.Padding = new System.Windows.Forms.Padding(3);
-            this.tabQuery.Size = new System.Drawing.Size(1263, 592);
+            this.tabQuery.Size = new System.Drawing.Size(1263, 596);
             this.tabQuery.TabIndex = 3;
             this.tabQuery.Text = "Query";
             this.tabQuery.UseVisualStyleBackColor = true;
@@ -1319,7 +1319,7 @@ namespace packet_maker
             this.MainTab.Location = new System.Drawing.Point(4, 25);
             this.MainTab.Name = "MainTab";
             this.MainTab.Padding = new System.Windows.Forms.Padding(3);
-            this.MainTab.Size = new System.Drawing.Size(1263, 596);
+            this.MainTab.Size = new System.Drawing.Size(1263, 592);
             this.MainTab.TabIndex = 4;
             this.MainTab.Text = "Main";
             // 
@@ -1557,24 +1557,23 @@ namespace packet_maker
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.Color.DimGray;
-            this.panel10.Controls.Add(this.label32);
+            this.panel10.Controls.Add(this.lblLAstBeacon);
             this.panel10.Controls.Add(this.mainLastBeaconLabel);
             this.panel10.Location = new System.Drawing.Point(630, 282);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(410, 100);
             this.panel10.TabIndex = 31;
             // 
-            // label32
+            // lblLAstBeacon
             // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label32.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label32.Location = new System.Drawing.Point(141, 13);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(140, 26);
-            this.label32.TabIndex = 1;
-            this.label32.Text = "Last Beacon";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLAstBeacon.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblLAstBeacon.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblLAstBeacon.Location = new System.Drawing.Point(3, 13);
+            this.lblLAstBeacon.Name = "lblLAstBeacon";
+            this.lblLAstBeacon.Size = new System.Drawing.Size(404, 26);
+            this.lblLAstBeacon.TabIndex = 1;
+            this.lblLAstBeacon.Text = "Last";
+            this.lblLAstBeacon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // mainLastBeaconLabel
             // 
@@ -1876,10 +1875,10 @@ namespace packet_maker
             this.TabControl.Controls.Add(this.RxTab);
             this.TabControl.Controls.Add(this.tabQuery);
             this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TabControl.Location = new System.Drawing.Point(0, 26);
+            this.TabControl.Location = new System.Drawing.Point(0, 30);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(1271, 625);
+            this.TabControl.Size = new System.Drawing.Size(1271, 621);
             this.TabControl.TabIndex = 17;
             // 
             // MainLabelsWorker
@@ -2008,7 +2007,6 @@ namespace packet_maker
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -2163,7 +2161,7 @@ namespace packet_maker
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label PassStatusLabel;
         private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label lblLAstBeacon;
         private System.Windows.Forms.Label mainLastBeaconLabel;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label38;

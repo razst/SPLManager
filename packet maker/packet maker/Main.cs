@@ -16,13 +16,16 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Office.Interop;
 using Nest;
 using System.Xml.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Helpers;
 using packet_maker.MainComponents;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System.Collections.ObjectModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace packet_maker
 {
@@ -199,16 +202,15 @@ namespace packet_maker
                 return Program.settings.pacCurId;
 
             }
-            var searchResponse = await Program.db.SearchAsync<Dictionary<string, object>>(s => s
-            .Query(q => q.Ids(c => c.Values($"SAT{groupDex}")))
-            .Index("local-data"));
 
-            Program.settings.pacCurId = int.Parse(searchResponse.Documents.First().First().Value.ToString());
-
+            var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("local_data");
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", "SAT"+ groupDex);
+            BsonDocument firstDocument = dbCollection.Find(filter).FirstOrDefault();
+            Program.settings.pacCurId = int.Parse(firstDocument.GetValue("CommandId").ToString());
             Program.settings.pacCurId += 1;
+            var update = Builders<BsonDocument>.Update.Set("CommandId", Program.settings.pacCurId);
+            dbCollection.UpdateOne(filter, update);
 
-            Dictionary<string, object> dd = new Dictionary<string, object> { { "CommandId", Program.settings.pacCurId } };
-            var indexResponse = await Program.db.IndexAsync(new IndexRequest<Dictionary<string, object>>(dd, "local-data", $"SAT{groupDex}"));
             return Program.settings.pacCurId;
         }
 
@@ -303,7 +305,11 @@ namespace packet_maker
 
         private void add2PLBtn_Click(object sender, EventArgs e)
         {
-
+            if (PlaylistCB.SelectedIndex < 0)
+            {
+                MessageBox.Show("No playlist selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             CreateTxPacket(256, Packet_Mode.database);
             PacketObject po = new PacketObject(options, makeOut.Text.Trim());
             PLitemsLibx.Items.Add(po.GetSubTypeName());
@@ -319,9 +325,28 @@ namespace packet_maker
                 Playlists[PlaylistCB.SelectedIndex].sleepBetweenCommands = int.Parse(sleepCmdTxb.Text);
 
 
+                BsonArray bArray = new BsonArray();
+                foreach (var cmd in Playlists[PlaylistCB.SelectedIndex].commands)
+                {
+                    bArray.Add(cmd);
+                }
 
-                var response = await Program.db.IndexAsync(new IndexRequest<PLInfo>(Playlists[PlaylistCB.SelectedIndex], "playlist-info", PlaylistCB.SelectedItem.ToString()));
 
+                var document = new BsonDocument{{ "_id", Playlists[PlaylistCB.SelectedIndex].name},
+                                                { "sleepBetweenCommands", int.Parse(sleepCmdTxb.Text) },
+                                                {"commands",bArray} };
+
+
+                var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("playlist_info");
+                var filter = Builders<BsonDocument>.Filter.Eq("_id", Playlists[PlaylistCB.SelectedIndex].name);
+                var update = Builders<BsonDocument>.Update.Set("sleepBetweenCommands", int.Parse(sleepCmdTxb.Text)).Set("commands", bArray); ;
+                
+
+                UpdateOptions opts = new UpdateOptions()
+                {
+                    IsUpsert = true
+                };
+                dbCollection.UpdateOne(filter, update,opts);
 
             }
         }
@@ -332,11 +357,12 @@ namespace packet_maker
                 if (MessageBox.Show("Are you sure?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     PLitemsLibx.Items.Clear();
-                    sleepCmdTxb.Text = "";
+                    sleepCmdTxb.Text = "0";
                     Playlists.RemoveAt(PlaylistCB.SelectedIndex);
-                    var DelResult = await Program.db.DeleteAsync<dynamic>(
-                        PlaylistCB.SelectedItem.ToString(),
-                        d => d.Index("playlist-info"));
+                    var filter = Builders<BsonDocument>.Filter.Eq("_id", PlaylistCB.Text);
+                    var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("playlist_info");
+
+                    dbCollection.DeleteOne(filter);
 
                     PlaylistCB.Items.RemoveAt(PlaylistCB.SelectedIndex);
                 }
@@ -406,15 +432,23 @@ namespace packet_maker
         #region funcs
         public async void PoupolatePL()
         {
-            var searchResponse = await Program.db.SearchAsync<PLInfo>(s => s
-                    .Index("playlist-info")
-                    .Query(q => q.MatchAll()));
-
-            Playlists = searchResponse.Documents.ToList();
-
-            foreach (var list in Playlists)
+            Playlists.Clear();
+            var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("playlist_info");
+            var documents = dbCollection.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument doc in documents)
             {
-                PlaylistCB.Items.Add(list.name);
+                PLInfo p = new PLInfo { commands = new List<string>(), 
+                                            name = doc.GetValue("_id").ToString(), 
+                                            sleepBetweenCommands = doc.GetValue("sleepBetweenCommands").ToInt32() };
+                //BsonArray bArray = doc.GetElement("_id").Value;
+                BsonArray cmds = doc.GetElement("commands").Value.AsBsonArray;
+                foreach (var c in cmds)
+                {
+                    p.commands.Add(c.ToString());
+                }
+                Playlists.Add(p);
+                PlaylistCB.Items.Add(doc.GetValue("_id"));
+
             }
         }
 
@@ -445,11 +479,6 @@ namespace packet_maker
             PlaylistCB.Items.Add(item);
             Playlists.Add(new PLInfo { commands = new List<string>(), name = item, sleepBetweenCommands = 0 });
             PlaylistCB.SelectedIndex = PlaylistCB.Items.Count - 1;
-
-            await Program.db.IndexAsync(new IndexRequest<PLInfo>(
-                new PLInfo { commands = new List<string>(), name = item, sleepBetweenCommands = 0 },
-                "playListInfo",
-                "item"));
 
         }
 
@@ -1253,15 +1282,17 @@ namespace packet_maker
         {
             mainLastRxLabel.Text = "-- : -- : --";
             mainLastTxLabel.Text = "-- : -- : --";
+            mainLastBeaconLabel.Text = "-- : -- : --";
             MainSatTimeLabel.Text = "-- : -- : --";
             MainSatUptimeLabel.Text = "-- : -- : --";
             MainSatResetsLabel.Text = "---";
             MainCmdRestesLabel.Text = "---";
             MainCorruptLabel.Text = "---";
 
-            await UpdateControlFormDB("parsed-rx", mainLastRxLabel);
-            await UpdateControlFormDB("parsed-tx", mainLastTxLabel);
-            await UpdateControlFormDB("parsed-rx", mainLastBeaconLabel,"Beacon");
+
+            await UpdateLastTimeLabel("parsed_rx", mainLastRxLabel);
+            await UpdateLastTimeLabel("parsed_tx", mainLastTxLabel);
+            await UpdateBeaconData();
 
             NextPass.SetCurrentGroup(MainSatCB.SelectedIndex);
         }
@@ -1272,38 +1303,84 @@ namespace packet_maker
 
         #region funcs
 
-        private async Task UpdateControlFormDB(string collection, Label label, string type = null)
+        private async Task UpdateLastTimeLabel(string collection, Label label)
         {
             if (!Program.settings.dataBaseEnabled) return;
             if (MainSatCB.SelectedIndex == 9) return;
-
-            var lastTimeSnapshot = new DataBaseWorker();
-            lastTimeSnapshot.AddMatchFilter("satId", MainSatCB.SelectedIndex.ToString());
-            if (type != null)
-                lastTimeSnapshot.AddTermFilter("subtype", type);
-            await lastTimeSnapshot.StartWork(10, collection, "time");
-
-            if (lastTimeSnapshot.Documents.Count <= 0) return;
-
-            var temp = DateTime.Parse(lastTimeSnapshot.Documents[0]["time"].ToString()).ToLocalTime().ToString();
-            label.Text = temp;
-
-            if (type == "Beacon")
+            BsonDocument firstDocument = null;
+            //
+            var dbCollection = Program.mongoDB.GetCollection<BsonDocument>(collection);
+            var sort = Builders<BsonDocument>.Sort.Descending("time");
+            if (MainSatCB.SelectedIndex == 0)
             {
-                po = new PacketObject(transOptions, lastTimeSnapshot.Documents[0]["packetString"].ToString());
+                firstDocument = dbCollection.Find(new BsonDocument()).Sort(sort).FirstOrDefault();
+            }
+            else
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("satId", MainSatCB.SelectedIndex);
+                firstDocument = dbCollection.Find(filter).Sort(sort).FirstOrDefault();
+            }
+            if (firstDocument != null)
+            {
+                var temp = DateTime.Parse(firstDocument.GetValue("time").ToString()).ToLocalTime().ToString();
+                label.Text = temp;
+            }
+
+
+            return;
+        }
+
+
+        private async Task UpdateBeaconData()
+        {
+            if (!Program.settings.dataBaseEnabled) return;
+            if (MainSatCB.SelectedIndex == 9) return;
+            BsonDocument firstDocument = null;
+            //
+            var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("parsed_rx");
+            var sort = Builders<BsonDocument>.Sort.Descending("time");
+            if (MainSatCB.SelectedIndex == 0)
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("subtype", "Beacon");
+                firstDocument = dbCollection.Find(new BsonDocument()).Sort(sort).FirstOrDefault();
+                lblLAstBeacon.Text = "Last Beacon ("+ firstDocument.GetValue("satName").ToString()+")";
+            }
+            else
+            {
+                lblLAstBeacon.Text = "Last Beacon";
+                var filter = Builders<BsonDocument>.Filter.Eq("satId", MainSatCB.SelectedIndex)
+                     & Builders<BsonDocument>.Filter.Eq("subtype", "Beacon");
+                firstDocument = dbCollection.Find(filter).Sort(sort).FirstOrDefault();                
+            }
+
+            if (firstDocument != null)
+            {
+                
+                var temp = DateTime.Parse(firstDocument.GetValue("time").ToString()).ToLocalTime().ToString();
+                mainLastBeaconLabel.Text = temp;
+
+                po = new PacketObject(transOptions, firstDocument.GetValue("packetString").ToString());
                 VBatGauge.Value = float.Parse(po.DataCatalog["vbat"].ToString()) / 1000;
                 OBCGauge.Value = float.Parse(po.DataCatalog["MCU Temperature"].ToString()) / 100;
                 BatTempGauge.Value = float.Parse(po.DataCatalog["Battery Temperature"].ToString()) / 1000;
                 FreeSpaceGauge.Value = float.Parse(po.DataCatalog["free_memory"].ToString()) / 1000000;
-                MainSatTimeLabel.Text = DateTime.Parse(lastTimeSnapshot.Documents[0]["sat_time"].ToString()).ToLocalTime().ToString();
-                MainSatResetsLabel.Text = lastTimeSnapshot.Documents[0]["number_of_resets"].ToString();
-                MainCmdRestesLabel.Text = lastTimeSnapshot.Documents[0]["number_of_cmd_resets"].ToString();
-                MainCorruptLabel.Text = lastTimeSnapshot.Documents[0]["corrupt_bytes"].ToString();
-                var tempTS = TimeSpan.FromSeconds(int.Parse(lastTimeSnapshot.Documents[0]["sat_uptime"].ToString()));
+                MainSatTimeLabel.Text = DateTime.Parse(firstDocument.GetValue("sat_time").ToString()).ToLocalTime().ToString();
+                MainSatResetsLabel.Text = firstDocument.GetValue("number_of_resets").ToString();
+                MainCmdRestesLabel.Text = firstDocument.GetValue("number_of_cmd_resets").ToString();
+                MainCorruptLabel.Text = firstDocument.GetValue("corrupt_bytes").ToString();
+                var tempTS = TimeSpan.FromSeconds(int.Parse(firstDocument.GetValue("sat_uptime").ToString()));
                 MainSatUptimeLabel.Text = $"{tempTS.Days}:{tempTS.Hours}:{tempTS.Seconds + tempTS.Minutes * 60}";
 
+
             }
+
+
+
+            return;
+
         }
+
+
         #endregion
 
 

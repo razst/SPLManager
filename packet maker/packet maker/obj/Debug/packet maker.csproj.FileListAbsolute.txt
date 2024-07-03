@@ -394,3 +394,43 @@ C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCo
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet m.478DE3C1.Up2Date
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\mongocrypt.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.Core.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.SecurityToken.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\DnsClient.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Win32.Registry.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Bson.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.Core.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Libmongocrypt.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\SharpCompress.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Snappier.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Memory.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Numerics.Vectors.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Security.AccessControl.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Security.Principal.Windows.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Text.Encoding.CodePages.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\ZstdSharp.dll
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.Core.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.Core.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.SecurityToken.pdb
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.SecurityToken.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\DnsClient.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Win32.Registry.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Bson.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.Core.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\Snappier.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Memory.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Numerics.Vectors.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Security.AccessControl.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Security.Principal.Windows.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Text.Encoding.CodePages.xml
+C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Threading.Tasks.Extensions.xml

@@ -9,6 +9,7 @@ using Google.Cloud.Firestore;
 using Nest;
 using System.Web.Helpers;
 using System.Net.NetworkInformation;
+using MongoDB.Driver;
 
 namespace packet_maker
 {
@@ -19,6 +20,7 @@ namespace packet_maker
 
 
         static public ElasticClient db;
+        static public MongoClient mongoDB;
         static public dynamic settings = null;
         public static List<string> groups = new List<string>();
         public static bool Online;
@@ -62,6 +64,11 @@ namespace packet_maker
                                     .DefaultIndex("testing_index");
 
                 db = new ElasticClient(settings);
+
+                mongoDB = new MongoClient("mongodb+srv://raz:raz@cluster0.mzxtq.mongodb.net/");
+                Console.WriteLine("Connected to Mongo DB");
+
+
             }
 
 

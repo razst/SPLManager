@@ -836,6 +836,7 @@ namespace packet_maker
                     foreach (var doc in RxQryWorker.Documents)
                     {
                         po =  new PacketObject(transOptions, doc["packetString"].ToString());
+                        Console.WriteLine(doc);
                         RxPacQryList.Add(po);
                         RxPacQryLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
                     }

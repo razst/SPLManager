@@ -1,9 +1,22 @@
 {
+  "ReverseBytes": true,
   "spl_header": {
-    "ID": { "startByte": 0, "length": 4 },
-    "Type": { "startByte": 4, "length": 1 },
-    "Subtype": { "startByte": 5, "length": 1 },
-    "Length": { "startByte": 6, "length": 2 },
+    "ID": {
+      "startByte": 0,
+      "length": 4
+    },
+    "Type": {
+      "startByte": 4,
+      "length": 1
+    },
+    "Subtype": {
+      "startByte": 5,
+      "length": 1
+    },
+    "Length": {
+      "startByte": 6,
+      "length": 2
+    },
     "DataStartingByte": 8
   },
   "types": [
@@ -658,7 +671,7 @@
           "desc": "update the time in the satellite",
           "inParams": [
             {
-              "name": "time",
+              "name": "new time",
               "desc": "what time we want to set",
               "type": "datetime"
             }

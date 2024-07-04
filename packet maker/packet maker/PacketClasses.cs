@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Nest;
 using System.Threading.Tasks;
+using MongoDB.Bson;
+using System.Collections.ObjectModel;
 
 namespace packet_maker
 {
@@ -94,8 +96,11 @@ namespace packet_maker
         public async Task Upload(string COLLECTION_NAME)
         {
             if (GetSatDex() == 9) return;
-            await Program.db.IndexAsync(new IndexRequest<Dictionary<string, object>>
-                (this.CastToDict(), COLLECTION_NAME));
+            Dictionary<string, object> data = this.CastToDict();
+
+            var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("parsed2_tx");
+            dbCollection.InsertOne(data.ToBsonDocument());
+
         }
 
         public string GetDescriptionString()
@@ -482,6 +487,7 @@ namespace packet_maker
             }
 
             DBPacket.Add("splID", PacObj.Id);
+            DBPacket.Add("_id", PacObj.Id);
             DBPacket.Add("type", PacObj.GetTypeName());
             DBPacket.Add("subtype", PacObj.GetSubTypeName());
             DBPacket.Add("lenght", PacObj.Length);

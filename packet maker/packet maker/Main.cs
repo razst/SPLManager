@@ -553,19 +553,21 @@ namespace packet_maker
         }
         private async void sendPacketBtn_Click(object sender, EventArgs e)
         {
+            /*
             if (!RadioServer.isOnline)
             {
                 MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            */
+             
             CreateTxPacket(await getSplCurIdAsync(groupsCB.SelectedIndex), Packet_Mode.satelite);
 
             po = new PacketObject(options, makeOut.Text.Trim());
             rawTxPacHisList.Add(po);
             addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
 
-            await RadioServer.Send(makeOut.Text.Trim());
+            //await RadioServer.Send(makeOut.Text.Trim());
             TabControl.SelectedTab = RxTab;
         }
 

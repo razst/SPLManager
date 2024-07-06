@@ -530,7 +530,7 @@ namespace packet_maker
             {
                 if (success && mode == Packet_Mode.satelite)
                 {
-                    await new PacketObject(options, makeOut.Text).Upload("parsed-tx");
+                    await new PacketObject(options, makeOut.Text).Upload("parsed_tx");
                 }
             }
         }
@@ -553,13 +553,11 @@ namespace packet_maker
         }
         private async void sendPacketBtn_Click(object sender, EventArgs e)
         {
-            /*
             if (!RadioServer.isOnline)
             {
                 MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            */
              
             CreateTxPacket(await getSplCurIdAsync(groupsCB.SelectedIndex), Packet_Mode.satelite);
 
@@ -567,7 +565,7 @@ namespace packet_maker
             rawTxPacHisList.Add(po);
             addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
 
-            //await RadioServer.Send(makeOut.Text.Trim());
+            await RadioServer.Send(makeOut.Text.Trim());
             TabControl.SelectedTab = RxTab;
         }
 
@@ -737,7 +735,7 @@ namespace packet_maker
             po = new PacketObject(options, tPac);
             rawTxPacHisList.Add(po);
             addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
-            await po.Upload("tx-packets");
+            await po.Upload("parsed_tx");
         }
         #endregion
 
@@ -758,7 +756,7 @@ namespace packet_maker
 
             RxHisTracker.AddPacket(po);
 
-            await po.Upload("parsed-rx");
+            await po.Upload("parsed_rx");
         }
         #endregion
 

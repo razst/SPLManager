@@ -458,6 +458,8 @@ namespace packet_maker
             // qryTxChbx
             // 
             this.qryTxChbx.AutoSize = true;
+            this.qryTxChbx.Checked = true;
+            this.qryTxChbx.CheckState = System.Windows.Forms.CheckState.Checked;
             this.qryTxChbx.Location = new System.Drawing.Point(911, 9);
             this.qryTxChbx.Name = "qryTxChbx";
             this.qryTxChbx.Size = new System.Drawing.Size(46, 20);

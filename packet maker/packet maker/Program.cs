@@ -19,7 +19,7 @@ namespace packet_maker
     {
 
 
-        static public ElasticClient db;
+        //static public ElasticClient db;
         static public IMongoDatabase mongoDB;
         
         static public dynamic settings = null;
@@ -64,7 +64,7 @@ namespace packet_maker
                 var settings = new ConnectionSettings(new Uri("https://tevel:tevelData1!@search-satpackets-wmzdkqufk2m6tr6zyz4n6zfuhu.us-east-2.es.amazonaws.com"))
                                     .DefaultIndex("testing_index");
 
-                db = new ElasticClient(settings);
+                //db = new ElasticClient(settings);
 
                 MongoClient clientDB = new MongoClient("mongodb+srv://raz:raz@cluster0.mzxtq.mongodb.net/");
                 mongoDB = clientDB.GetDatabase("Tevel");

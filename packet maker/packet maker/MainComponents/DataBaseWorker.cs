@@ -23,8 +23,8 @@ namespace packet_maker.MainComponents
             searchDisc.Index(targetIndex);
             searchDisc.Size(qrySize);
             if (sortBy != null) searchDisc.Sort(q => q.Ascending(obj => obj["time"]));
-            var work = await Program.db.SearchAsync<Dictionary<string, object>>(s => searchDisc);
-            Documents = work.Documents;
+            //var work = await Program.db.SearchAsync<Dictionary<string, object>>(s => searchDisc);
+            //Documents = work.Documents;
         }
 
         public void AddTermFilter(string fieldName, string WantedTerm)

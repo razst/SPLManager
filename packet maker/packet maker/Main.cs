@@ -781,11 +781,20 @@ namespace packet_maker
                 MessageBox.Show("database is disabled in the settings", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+
+            if (qrySatCB.SelectedIndex != 0)
+            {
+                //filter = filter & Builders<BsonDocument>.Filter.Eq("satId", qrySatCB.SelectedIndex.ToString());
+            }
+
+
             try
             {
                 qryClearBtn.PerformClick();
                 UseWaitCursor = true;
                 clearRxBtn.PerformClick();
+                System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
 
                 int qrySize = 20000;
                 if (qryLimitCB.SelectedItem.ToString() != "No Limit")
@@ -798,6 +807,27 @@ namespace packet_maker
 
                 if (qryRxChbx.Checked)
                 {
+
+                    var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("parsed_rx");
+
+                    //var filter = Builders<BsonDocument>.Filter.Gt("time", qryMinDtp.Value.ToUniversalTime()) &
+                    //  Builders<BsonDocument>.Filter.Lt("time", qryMaxDtp.Value.ToUniversalTime());
+                    var filter = Builders<BsonDocument>.Filter.Eq("satId", qrySatCB.SelectedIndex);
+                          //& Builders<BsonDocument>.Filter.Eq("subtype", "Beacon");
+                    var sort = Builders<BsonDocument>.Sort.Descending("time");
+                    List<BsonDocument> documents = dbCollection.Find(filter).Limit(qrySize).Sort(sort).ToList(); ;
+                    //var temp = DateTime.Parse(firstDocument.GetValue("time").ToString()).ToLocalTime().ToString();
+
+
+                    foreach (BsonDocument doc in documents)
+                    {
+                        po = new PacketObject(transOptions, doc["packetString"].ToString());
+                        RxPacQryList.Add(po);
+                        RxPacQryLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
+                    }
+
+
+                    /*
                     #region rxHistory
 
                     //define worker logic
@@ -868,16 +898,36 @@ namespace packet_maker
                         Console.WriteLine(doc);
                         RxPacQryList.Add(po);
                         RxPacQryLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
-                    }
+                    }*/
                     #endregion
 
-                    rxQryCount = RxQryWorker.Documents.Count;
+
+                    rxQryCount = documents.Count;
+                
                 }
 
                 if (qryTxChbx.Checked)
                 {
                     #region txHistory
+                    var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("parsed_tx");
 
+                    //var filter = Builders<BsonDocument>.Filter.Gt("time", qryMinDtp.Value.ToUniversalTime()) &
+                    //  Builders<BsonDocument>.Filter.Lt("time", qryMaxDtp.Value.ToUniversalTime());
+                    var filter = Builders<BsonDocument>.Filter.Eq("satId", qrySatCB.SelectedIndex);
+                    //& Builders<BsonDocument>.Filter.Eq("subtype", "Beacon");
+                    var sort = Builders<BsonDocument>.Sort.Descending("time");
+                    List<BsonDocument> documents = dbCollection.Find(filter).Limit(qrySize).Sort(sort).ToList(); ;
+                    //var temp = DateTime.Parse(firstDocument.GetValue("time").ToString()).ToLocalTime().ToString();
+
+
+                    foreach (BsonDocument doc in documents)
+                    {
+                        po = new PacketObject(transOptions, doc["packetString"].ToString());
+                        TxPacQryList.Add(po);
+                        TxPacQryLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
+                    }
+
+                    /*
 
                     //define query
                     var TxQryWorker = new DataBaseWorker();
@@ -902,9 +952,9 @@ namespace packet_maker
 
                         TxPacQryLibx.Items.Add(po.ToHeaderString(DateTime.Parse(doc["time"].ToString())));
                     }
-                    #endregion
+                    #endregion */
 
-                    txQryCount = TxQryWorker.Documents.Count;
+                    txQryCount = documents.Count;
                 }
 
                 MessageBox.Show($"{rxQryCount} RX packet were recived. {Environment.NewLine}{txQryCount} TX packet were recived.", "Query finished", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -912,6 +962,7 @@ namespace packet_maker
             finally
             {
                 UseWaitCursor = false;
+                System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
             }
 
         }

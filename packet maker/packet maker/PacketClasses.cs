@@ -98,7 +98,7 @@ namespace packet_maker
             if (GetSatDex() == 9) return;
             Dictionary<string, object> data = this.CastToDict();
 
-            var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("parsed2_tx");
+            var dbCollection = Program.mongoDB.GetCollection<BsonDocument>(COLLECTION_NAME);
             dbCollection.InsertOne(data.ToBsonDocument());
 
         }
@@ -487,7 +487,7 @@ namespace packet_maker
             }
 
             DBPacket.Add("splID", PacObj.Id);
-            DBPacket.Add("_id", PacObj.Id);
+            //DBPacket.Add("_id", PacObj.Id); we wnat mongo to choose the ID
             DBPacket.Add("type", PacObj.GetTypeName());
             DBPacket.Add("subtype", PacObj.GetSubTypeName());
             DBPacket.Add("lenght", PacObj.Length);

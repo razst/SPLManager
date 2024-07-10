@@ -20,73 +20,6 @@ C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker
 C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
 C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
 C:\Users\ילדי סגמן\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Main.resources
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe.config
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.exe
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\packet maker.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Main.resources
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Properties.Resources.resources
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.GenerateResource.cache
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCompileInputs.cache
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x86.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x64.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.so
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.so
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.dylib
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.dylib
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.PlatformServices.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.PlatformServices.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.xml
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x86.dll
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x64.dll
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.so
@@ -154,8 +87,6 @@ C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreC
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
 C:\ISIS\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.PacketListFrm.resources
@@ -166,36 +97,6 @@ C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
 C:\ISIS\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.pdb
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Web.Infrastructure.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.dll
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x86.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x64.dll
 C:\Users\User\OneDrive\מסמכים\github\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.so
@@ -434,3 +335,142 @@ C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCo
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet m.478DE3C1.Up2Date
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.exe
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x86.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x64.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.so
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.so
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.dylib
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.dylib
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\mongocrypt.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.Core.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.SecurityToken.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\DnsClient.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Bson.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.Core.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Libmongocrypt.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\SharpCompress.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Snappier.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Memory.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Security.AccessControl.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Text.Encoding.CodePages.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\ZstdSharp.dll
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.Core.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.Core.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.SecurityToken.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.SecurityToken.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\DnsClient.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Win32.Registry.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Bson.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.Core.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nest.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\Snappier.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Memory.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Security.AccessControl.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Text.Encoding.CodePages.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Main.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Properties.Resources.resources
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.GenerateResource.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCompileInputs.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\SPL Manager.exe.config
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\SPL Manager.exe
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\bin\Debug\SPL Manager.pdb
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csprojAssemblyReference.cache
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\SPL Manager.exe
+C:\Users\pc\Documents\GitHub\SPLManager\packet maker\packet maker\obj\Debug\SPL Manager.pdb

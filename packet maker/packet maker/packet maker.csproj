@@ -7,7 +7,7 @@
     <ProjectGuid>{EA439641-3DA8-4D3F-861C-C1BF9672DA40}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>packet_maker</RootNamespace>
-    <AssemblyName>packet maker</AssemblyName>
+    <AssemblyName>SPL Manager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,6 +33,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>planet_icon_234447.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
@@ -353,6 +356,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="mongocrypt.dll" />
+    <Content Include="planet_icon_234447.ico" />
     <Content Include="Resources\space.jpg" />
     <None Include="Resources\space1.jpg" />
   </ItemGroup>

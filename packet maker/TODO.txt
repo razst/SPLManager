@@ -1,2 +1,4 @@
 Fix all query tab filters
 in query tab, add raw packet edit box that will be updated on list change with the raw's data
+in next passes, show maxE + hover time
+in next passes, also include the next pass so we could see all info 

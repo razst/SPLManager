@@ -1419,6 +1419,7 @@ namespace packet_maker
                 MainSatResetsLabel.Text = firstDocument.GetValue("number_of_resets").ToString();
                 MainCmdRestesLabel.Text = firstDocument.GetValue("number_of_cmd_resets").ToString();
                 MainCorruptLabel.Text = firstDocument.GetValue("corrupt_bytes").ToString();
+                Console.WriteLine(firstDocument.GetValue("sat_uptime").ToString());
                 var tempTS = TimeSpan.FromSeconds(int.Parse(firstDocument.GetValue("sat_uptime").ToString()));
                 MainSatUptimeLabel.Text = $"{tempTS.Days}:{tempTS.Hours}:{tempTS.Seconds + tempTS.Minutes * 60}";
 

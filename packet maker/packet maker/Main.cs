@@ -1319,9 +1319,19 @@ namespace packet_maker
         {
             if (NextPass.passesArr == null) return;
 
-            for (int i = 0; i < 4; i++)
+            int listCount = 0;
+            for (int i = 0; i < NextPass.passesArr.Count; i++)
             {
-                nextPassLabels[i].Text = DateTimeOffset.FromUnixTimeSeconds(NextPass.passesArr[i + 1].startUTC).LocalDateTime.ToString();
+                if (NextPass.passesArr[i].maxEl > 8)
+                {
+                    string txt = DateTimeOffset.FromUnixTimeSeconds(NextPass.passesArr[i].startUTC).LocalDateTime.ToString();
+                    txt += " Max El:" + (int)NextPass.passesArr[i].maxEl;
+                    int dur = (NextPass.passesArr[i].endUTC - NextPass.passesArr[i].startUTC)/60;
+                    txt += " Duration:" + dur +" min";
+                    nextPassLabels[listCount].Text = txt;
+                    listCount++;
+                    if (listCount >= 4) break;
+                }
             }
             nextPassLabel.Text = NextPass.TimeTilPassStr;
             PassStatusLabel.Text = NextPass.PassStatus;

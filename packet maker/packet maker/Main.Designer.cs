@@ -152,9 +152,6 @@ namespace packet_maker
             this.panel15 = new System.Windows.Forms.Panel();
             this.label43 = new System.Windows.Forms.Label();
             this.MainSatTimeLabel = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.label41 = new System.Windows.Forms.Label();
-            this.mainLastPassLabel = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
             this.label39 = new System.Windows.Forms.Label();
             this.PassStatusLabel = new System.Windows.Forms.Label();
@@ -207,7 +204,6 @@ namespace packet_maker
             this.panel16.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel15.SuspendLayout();
-            this.panel12.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -1306,6 +1302,7 @@ namespace packet_maker
             // MainTab
             // 
             this.MainTab.BackColor = System.Drawing.Color.Black;
+            this.MainTab.Controls.Add(this.panel7);
             this.MainTab.Controls.Add(this.panel19);
             this.MainTab.Controls.Add(this.panel18);
             this.MainTab.Controls.Add(this.panel16);
@@ -1315,15 +1312,13 @@ namespace packet_maker
             this.MainTab.Controls.Add(this.panel15);
             this.MainTab.Controls.Add(this.OBCGauge);
             this.MainTab.Controls.Add(this.VBatGauge);
-            this.MainTab.Controls.Add(this.panel12);
-            this.MainTab.Controls.Add(this.panel11);
             this.MainTab.Controls.Add(this.panel10);
             this.MainTab.Controls.Add(this.panel9);
             this.MainTab.Controls.Add(this.panel8);
-            this.MainTab.Controls.Add(this.panel7);
             this.MainTab.Controls.Add(this.panel6);
             this.MainTab.Controls.Add(this.panel5);
             this.MainTab.Controls.Add(this.MainSatCB);
+            this.MainTab.Controls.Add(this.panel11);
             this.MainTab.Location = new System.Drawing.Point(4, 25);
             this.MainTab.Name = "MainTab";
             this.MainTab.Padding = new System.Windows.Forms.Padding(3);
@@ -1495,39 +1490,6 @@ namespace packet_maker
             this.MainSatTimeLabel.TabIndex = 7;
             this.MainSatTimeLabel.Text = "-- : -- : --";
             this.MainSatTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.DimGray;
-            this.panel12.Controls.Add(this.label41);
-            this.panel12.Controls.Add(this.mainLastPassLabel);
-            this.panel12.Location = new System.Drawing.Point(214, 176);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(410, 100);
-            this.panel12.TabIndex = 33;
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label41.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label41.Location = new System.Drawing.Point(157, 13);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(113, 26);
-            this.label41.TabIndex = 1;
-            this.label41.Text = "Last Pass";
-            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // mainLastPassLabel
-            // 
-            this.mainLastPassLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.mainLastPassLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.mainLastPassLabel.Location = new System.Drawing.Point(3, 40);
-            this.mainLastPassLabel.Name = "mainLastPassLabel";
-            this.mainLastPassLabel.Size = new System.Drawing.Size(406, 56);
-            this.mainLastPassLabel.TabIndex = 24;
-            this.mainLastPassLabel.Text = "-- : -- : --";
-            this.mainLastPassLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel11
             // 
@@ -1733,7 +1695,7 @@ namespace packet_maker
             this.panel7.BackColor = System.Drawing.Color.DimGray;
             this.panel7.Controls.Add(this.utcTitle);
             this.panel7.Controls.Add(this.mainUtcLabel);
-            this.panel7.Location = new System.Drawing.Point(214, 282);
+            this.panel7.Location = new System.Drawing.Point(214, 70);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(409, 100);
             this.panel7.TabIndex = 27;
@@ -1771,7 +1733,7 @@ namespace packet_maker
             this.panel6.Controls.Add(this.nextPass4Label);
             this.panel6.Location = new System.Drawing.Point(8, 176);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(200, 206);
+            this.panel6.Size = new System.Drawing.Size(615, 206);
             this.panel6.TabIndex = 26;
             // 
             // label33
@@ -1782,9 +1744,9 @@ namespace packet_maker
             this.label33.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label33.Location = new System.Drawing.Point(21, 13);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(192, 26);
+            this.label33.Size = new System.Drawing.Size(316, 26);
             this.label33.TabIndex = 1;
-            this.label33.Text = "Following Passes";
+            this.label33.Text = "Following Passes (Max El > 7)";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // nextPass1Label
@@ -2012,8 +1974,6 @@ namespace packet_maker
             this.panel17.PerformLayout();
             this.panel15.ResumeLayout(false);
             this.panel15.PerformLayout();
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.panel10.ResumeLayout(false);
@@ -2164,9 +2124,6 @@ namespace packet_maker
         private System.Windows.Forms.Label MainSatTimeLabel;
         private AquaControls.AquaGauge OBCGauge;
         private AquaControls.AquaGauge VBatGauge;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label mainLastPassLabel;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label PassStatusLabel;

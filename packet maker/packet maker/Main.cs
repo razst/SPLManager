@@ -1322,7 +1322,7 @@ namespace packet_maker
             int listCount = 0;
             for (int i = 0; i < NextPass.passesArr.Count; i++)
             {
-                if (NextPass.passesArr[i].maxEl > 8)
+                if (NextPass.passesArr[i].maxEl >= 7)
                 {
                     string txt = DateTimeOffset.FromUnixTimeSeconds(NextPass.passesArr[i].startUTC).LocalDateTime.ToString();
                     txt += " Max El:" + (int)NextPass.passesArr[i].maxEl;

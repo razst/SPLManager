@@ -137,6 +137,9 @@ namespace packet_maker
             this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.makeOut = new System.Windows.Forms.TextBox();
             this.MainTab = new System.Windows.Forms.TabPage();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.utcTitle = new System.Windows.Forms.Label();
+            this.mainUtcLabel = new System.Windows.Forms.Label();
             this.panel19 = new System.Windows.Forms.Panel();
             this.label44 = new System.Windows.Forms.Label();
             this.MainCorruptLabel = new System.Windows.Forms.Label();
@@ -149,12 +152,13 @@ namespace packet_maker
             this.panel17 = new System.Windows.Forms.Panel();
             this.label47 = new System.Windows.Forms.Label();
             this.MainSatUptimeLabel = new System.Windows.Forms.Label();
+            this.FreeSpaceGauge = new AquaControls.AquaGauge();
+            this.BatTempGauge = new AquaControls.AquaGauge();
             this.panel15 = new System.Windows.Forms.Panel();
             this.label43 = new System.Windows.Forms.Label();
             this.MainSatTimeLabel = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.label39 = new System.Windows.Forms.Label();
-            this.PassStatusLabel = new System.Windows.Forms.Label();
+            this.OBCGauge = new AquaControls.AquaGauge();
+            this.VBatGauge = new AquaControls.AquaGauge();
             this.panel10 = new System.Windows.Forms.Panel();
             this.lblLAstBeacon = new System.Windows.Forms.Label();
             this.mainLastBeaconLabel = new System.Windows.Forms.Label();
@@ -170,9 +174,6 @@ namespace packet_maker
             this.label42 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.mainLastRxLabel = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.utcTitle = new System.Windows.Forms.Label();
-            this.mainUtcLabel = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label33 = new System.Windows.Forms.Label();
             this.nextPass1Label = new System.Windows.Forms.Label();
@@ -183,12 +184,11 @@ namespace packet_maker
             this.label30 = new System.Windows.Forms.Label();
             this.nextPassLabel = new System.Windows.Forms.Label();
             this.MainSatCB = new System.Windows.Forms.ComboBox();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label39 = new System.Windows.Forms.Label();
+            this.PassStatusLabel = new System.Windows.Forms.Label();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainLabelsWorker = new System.Windows.Forms.Timer(this.components);
-            this.FreeSpaceGauge = new AquaControls.AquaGauge();
-            this.BatTempGauge = new AquaControls.AquaGauge();
-            this.OBCGauge = new AquaControls.AquaGauge();
-            this.VBatGauge = new AquaControls.AquaGauge();
             this.menuStrip1.SuspendLayout();
             this.tabQuery.SuspendLayout();
             this.qrySettingsPnl.SuspendLayout();
@@ -199,20 +199,20 @@ namespace packet_maker
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).BeginInit();
             this.MainTab.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel18.SuspendLayout();
             this.panel16.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel15.SuspendLayout();
-            this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel14.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -226,7 +226,7 @@ namespace packet_maker
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1271, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1271, 26);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -235,7 +235,7 @@ namespace packet_maker
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.modifyToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 28);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // modifyToolStripMenuItem
@@ -266,7 +266,7 @@ namespace packet_maker
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 28);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
@@ -282,7 +282,7 @@ namespace packet_maker
             this.toAFileToolStripMenuItem,
             this.toAFolderToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(66, 28);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // toAFileToolStripMenuItem
@@ -695,7 +695,7 @@ namespace packet_maker
             this.RxTab.Location = new System.Drawing.Point(4, 25);
             this.RxTab.Name = "RxTab";
             this.RxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.RxTab.Size = new System.Drawing.Size(1263, 592);
+            this.RxTab.Size = new System.Drawing.Size(1263, 596);
             this.RxTab.TabIndex = 1;
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
@@ -973,7 +973,7 @@ namespace packet_maker
             this.TxTab.Location = new System.Drawing.Point(4, 25);
             this.TxTab.Name = "TxTab";
             this.TxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.TxTab.Size = new System.Drawing.Size(1263, 592);
+            this.TxTab.Size = new System.Drawing.Size(1263, 596);
             this.TxTab.TabIndex = 0;
             this.TxTab.Text = "TX";
             this.TxTab.UseVisualStyleBackColor = true;
@@ -981,7 +981,7 @@ namespace packet_maker
             // descSubType
             // 
             this.descSubType.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.descSubType.Location = new System.Drawing.Point(422, 49);
+            this.descSubType.Location = new System.Drawing.Point(422, 51);
             this.descSubType.Name = "descSubType";
             this.descSubType.Size = new System.Drawing.Size(144, 28);
             this.descSubType.TabIndex = 18;
@@ -1322,9 +1322,42 @@ namespace packet_maker
             this.MainTab.Location = new System.Drawing.Point(4, 25);
             this.MainTab.Name = "MainTab";
             this.MainTab.Padding = new System.Windows.Forms.Padding(3);
-            this.MainTab.Size = new System.Drawing.Size(1263, 592);
+            this.MainTab.Size = new System.Drawing.Size(1263, 596);
             this.MainTab.TabIndex = 4;
             this.MainTab.Text = "Main";
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.DimGray;
+            this.panel7.Controls.Add(this.utcTitle);
+            this.panel7.Controls.Add(this.mainUtcLabel);
+            this.panel7.Location = new System.Drawing.Point(214, 70);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(409, 100);
+            this.panel7.TabIndex = 27;
+            // 
+            // utcTitle
+            // 
+            this.utcTitle.AutoSize = true;
+            this.utcTitle.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.utcTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.utcTitle.Location = new System.Drawing.Point(180, 13);
+            this.utcTitle.Name = "utcTitle";
+            this.utcTitle.Size = new System.Drawing.Size(59, 26);
+            this.utcTitle.TabIndex = 1;
+            this.utcTitle.Text = "UTC";
+            this.utcTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mainUtcLabel
+            // 
+            this.mainUtcLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.mainUtcLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.mainUtcLabel.Location = new System.Drawing.Point(3, 40);
+            this.mainUtcLabel.Name = "mainUtcLabel";
+            this.mainUtcLabel.Size = new System.Drawing.Size(406, 56);
+            this.mainUtcLabel.TabIndex = 1;
+            this.mainUtcLabel.Text = "-- : -- : --";
+            this.mainUtcLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel19
             // 
@@ -1458,6 +1491,44 @@ namespace packet_maker
             this.MainSatUptimeLabel.Text = "-- : -- : --";
             this.MainSatUptimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // FreeSpaceGauge
+            // 
+            this.FreeSpaceGauge.BackColor = System.Drawing.Color.Transparent;
+            this.FreeSpaceGauge.DialColor = System.Drawing.Color.Lavender;
+            this.FreeSpaceGauge.DialText = "Free Space (MB)";
+            this.FreeSpaceGauge.Glossiness = 11.36364F;
+            this.FreeSpaceGauge.Location = new System.Drawing.Point(630, 388);
+            this.FreeSpaceGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FreeSpaceGauge.MaxValue = 2200F;
+            this.FreeSpaceGauge.MinValue = 0F;
+            this.FreeSpaceGauge.Name = "FreeSpaceGauge";
+            this.FreeSpaceGauge.NoOfDivisions = 11;
+            this.FreeSpaceGauge.NoOfSubDivisions = 1;
+            this.FreeSpaceGauge.RecommendedValue = 150F;
+            this.FreeSpaceGauge.Size = new System.Drawing.Size(200, 200);
+            this.FreeSpaceGauge.TabIndex = 40;
+            this.FreeSpaceGauge.ThresholdPercent = 15F;
+            this.FreeSpaceGauge.Value = 900F;
+            // 
+            // BatTempGauge
+            // 
+            this.BatTempGauge.BackColor = System.Drawing.Color.Transparent;
+            this.BatTempGauge.DialColor = System.Drawing.Color.Lavender;
+            this.BatTempGauge.DialText = "Bat Temp";
+            this.BatTempGauge.Glossiness = 11.36364F;
+            this.BatTempGauge.Location = new System.Drawing.Point(423, 388);
+            this.BatTempGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BatTempGauge.MaxValue = 80F;
+            this.BatTempGauge.MinValue = -40F;
+            this.BatTempGauge.Name = "BatTempGauge";
+            this.BatTempGauge.NoOfDivisions = 12;
+            this.BatTempGauge.NoOfSubDivisions = 8;
+            this.BatTempGauge.RecommendedValue = 5F;
+            this.BatTempGauge.Size = new System.Drawing.Size(200, 200);
+            this.BatTempGauge.TabIndex = 38;
+            this.BatTempGauge.ThresholdPercent = 0.0001F;
+            this.BatTempGauge.Value = 0F;
+            // 
             // panel15
             // 
             this.panel15.BackColor = System.Drawing.Color.DimGray;
@@ -1491,38 +1562,42 @@ namespace packet_maker
             this.MainSatTimeLabel.Text = "-- : -- : --";
             this.MainSatTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel11
+            // OBCGauge
             // 
-            this.panel11.BackColor = System.Drawing.Color.DimGray;
-            this.panel11.Controls.Add(this.label39);
-            this.panel11.Controls.Add(this.PassStatusLabel);
-            this.panel11.Location = new System.Drawing.Point(214, 70);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(410, 100);
-            this.panel11.TabIndex = 32;
+            this.OBCGauge.BackColor = System.Drawing.Color.Transparent;
+            this.OBCGauge.DialColor = System.Drawing.Color.Lavender;
+            this.OBCGauge.DialText = "OBC Temp";
+            this.OBCGauge.Glossiness = 11.36364F;
+            this.OBCGauge.Location = new System.Drawing.Point(214, 389);
+            this.OBCGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OBCGauge.MaxValue = 80F;
+            this.OBCGauge.MinValue = -40F;
+            this.OBCGauge.Name = "OBCGauge";
+            this.OBCGauge.NoOfDivisions = 12;
+            this.OBCGauge.NoOfSubDivisions = 8;
+            this.OBCGauge.RecommendedValue = -30F;
+            this.OBCGauge.Size = new System.Drawing.Size(200, 200);
+            this.OBCGauge.TabIndex = 0;
+            this.OBCGauge.ThresholdPercent = 20F;
+            this.OBCGauge.Value = 0F;
             // 
-            // label39
+            // VBatGauge
             // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label39.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label39.Location = new System.Drawing.Point(171, 13);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(78, 26);
-            this.label39.TabIndex = 1;
-            this.label39.Text = "Status";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // PassStatusLabel
-            // 
-            this.PassStatusLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.PassStatusLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.PassStatusLabel.Location = new System.Drawing.Point(35, 37);
-            this.PassStatusLabel.Name = "PassStatusLabel";
-            this.PassStatusLabel.Size = new System.Drawing.Size(319, 56);
-            this.PassStatusLabel.TabIndex = 1;
-            this.PassStatusLabel.Text = "Before Pass";
-            this.PassStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.VBatGauge.BackColor = System.Drawing.Color.Transparent;
+            this.VBatGauge.DialColor = System.Drawing.Color.Lavender;
+            this.VBatGauge.DialText = "VBat";
+            this.VBatGauge.Glossiness = 11.36364F;
+            this.VBatGauge.Location = new System.Drawing.Point(8, 389);
+            this.VBatGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.VBatGauge.MaxValue = 9F;
+            this.VBatGauge.MinValue = 0F;
+            this.VBatGauge.Name = "VBatGauge";
+            this.VBatGauge.NoOfDivisions = 9;
+            this.VBatGauge.RecommendedValue = 8.25F;
+            this.VBatGauge.Size = new System.Drawing.Size(200, 200);
+            this.VBatGauge.TabIndex = 36;
+            this.VBatGauge.ThresholdPercent = 1E-05F;
+            this.VBatGauge.Value = 8F;
             // 
             // panel10
             // 
@@ -1690,39 +1765,6 @@ namespace packet_maker
             this.mainLastRxLabel.Text = "-- : -- : --";
             this.mainLastRxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.DimGray;
-            this.panel7.Controls.Add(this.utcTitle);
-            this.panel7.Controls.Add(this.mainUtcLabel);
-            this.panel7.Location = new System.Drawing.Point(214, 70);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(409, 100);
-            this.panel7.TabIndex = 27;
-            // 
-            // utcTitle
-            // 
-            this.utcTitle.AutoSize = true;
-            this.utcTitle.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.utcTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.utcTitle.Location = new System.Drawing.Point(180, 13);
-            this.utcTitle.Name = "utcTitle";
-            this.utcTitle.Size = new System.Drawing.Size(59, 26);
-            this.utcTitle.TabIndex = 1;
-            this.utcTitle.Text = "UTC";
-            this.utcTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // mainUtcLabel
-            // 
-            this.mainUtcLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.mainUtcLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.mainUtcLabel.Location = new System.Drawing.Point(3, 40);
-            this.mainUtcLabel.Name = "mainUtcLabel";
-            this.mainUtcLabel.Size = new System.Drawing.Size(406, 56);
-            this.mainUtcLabel.TabIndex = 1;
-            this.mainUtcLabel.Text = "-- : -- : --";
-            this.mainUtcLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.DimGray;
@@ -1742,7 +1784,7 @@ namespace packet_maker
             this.label33.Cursor = System.Windows.Forms.Cursors.AppStarting;
             this.label33.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label33.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label33.Location = new System.Drawing.Point(21, 13);
+            this.label33.Location = new System.Drawing.Point(134, 13);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(316, 26);
             this.label33.TabIndex = 1;
@@ -1838,6 +1880,39 @@ namespace packet_maker
             this.MainSatCB.TabIndex = 22;
             this.MainSatCB.SelectedIndexChanged += new System.EventHandler(this.MainSatCB_SelectedIndexChanged);
             // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.DimGray;
+            this.panel11.Controls.Add(this.label39);
+            this.panel11.Controls.Add(this.PassStatusLabel);
+            this.panel11.Location = new System.Drawing.Point(214, 70);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(410, 100);
+            this.panel11.TabIndex = 32;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label39.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label39.Location = new System.Drawing.Point(171, 13);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(78, 26);
+            this.label39.TabIndex = 1;
+            this.label39.Text = "Status";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // PassStatusLabel
+            // 
+            this.PassStatusLabel.Font = new System.Drawing.Font("Arial Black", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.PassStatusLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.PassStatusLabel.Location = new System.Drawing.Point(35, 37);
+            this.PassStatusLabel.Name = "PassStatusLabel";
+            this.PassStatusLabel.Size = new System.Drawing.Size(319, 56);
+            this.PassStatusLabel.TabIndex = 1;
+            this.PassStatusLabel.Text = "Before Pass";
+            this.PassStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // TabControl
             // 
             this.TabControl.Controls.Add(this.MainTab);
@@ -1845,90 +1920,15 @@ namespace packet_maker
             this.TabControl.Controls.Add(this.RxTab);
             this.TabControl.Controls.Add(this.tabQuery);
             this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TabControl.Location = new System.Drawing.Point(0, 30);
+            this.TabControl.Location = new System.Drawing.Point(0, 26);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(1271, 621);
+            this.TabControl.Size = new System.Drawing.Size(1271, 625);
             this.TabControl.TabIndex = 17;
             // 
             // MainLabelsWorker
             // 
             this.MainLabelsWorker.Tick += new System.EventHandler(this.MainLabelsWorker_Tick);
-            // 
-            // FreeSpaceGauge
-            // 
-            this.FreeSpaceGauge.BackColor = System.Drawing.Color.Transparent;
-            this.FreeSpaceGauge.DialColor = System.Drawing.Color.Lavender;
-            this.FreeSpaceGauge.DialText = "Free Space (MB)";
-            this.FreeSpaceGauge.Glossiness = 11.36364F;
-            this.FreeSpaceGauge.Location = new System.Drawing.Point(630, 388);
-            this.FreeSpaceGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.FreeSpaceGauge.MaxValue = 2200F;
-            this.FreeSpaceGauge.MinValue = 0F;
-            this.FreeSpaceGauge.Name = "FreeSpaceGauge";
-            this.FreeSpaceGauge.NoOfDivisions = 11;
-            this.FreeSpaceGauge.NoOfSubDivisions = 1;
-            this.FreeSpaceGauge.RecommendedValue = 150F;
-            this.FreeSpaceGauge.Size = new System.Drawing.Size(200, 200);
-            this.FreeSpaceGauge.TabIndex = 40;
-            this.FreeSpaceGauge.ThresholdPercent = 15F;
-            this.FreeSpaceGauge.Value = 900F;
-            // 
-            // BatTempGauge
-            // 
-            this.BatTempGauge.BackColor = System.Drawing.Color.Transparent;
-            this.BatTempGauge.DialColor = System.Drawing.Color.Lavender;
-            this.BatTempGauge.DialText = "Bat Temp";
-            this.BatTempGauge.Glossiness = 11.36364F;
-            this.BatTempGauge.Location = new System.Drawing.Point(423, 388);
-            this.BatTempGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.BatTempGauge.MaxValue = 80F;
-            this.BatTempGauge.MinValue = -40F;
-            this.BatTempGauge.Name = "BatTempGauge";
-            this.BatTempGauge.NoOfDivisions = 12;
-            this.BatTempGauge.NoOfSubDivisions = 8;
-            this.BatTempGauge.RecommendedValue = 5F;
-            this.BatTempGauge.Size = new System.Drawing.Size(200, 200);
-            this.BatTempGauge.TabIndex = 38;
-            this.BatTempGauge.ThresholdPercent = 0.0001F;
-            this.BatTempGauge.Value = 0F;
-            // 
-            // OBCGauge
-            // 
-            this.OBCGauge.BackColor = System.Drawing.Color.Transparent;
-            this.OBCGauge.DialColor = System.Drawing.Color.Lavender;
-            this.OBCGauge.DialText = "OBC Temp";
-            this.OBCGauge.Glossiness = 11.36364F;
-            this.OBCGauge.Location = new System.Drawing.Point(214, 389);
-            this.OBCGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.OBCGauge.MaxValue = 80F;
-            this.OBCGauge.MinValue = -40F;
-            this.OBCGauge.Name = "OBCGauge";
-            this.OBCGauge.NoOfDivisions = 12;
-            this.OBCGauge.NoOfSubDivisions = 8;
-            this.OBCGauge.RecommendedValue = -30F;
-            this.OBCGauge.Size = new System.Drawing.Size(200, 200);
-            this.OBCGauge.TabIndex = 0;
-            this.OBCGauge.ThresholdPercent = 20F;
-            this.OBCGauge.Value = 0F;
-            // 
-            // VBatGauge
-            // 
-            this.VBatGauge.BackColor = System.Drawing.Color.Transparent;
-            this.VBatGauge.DialColor = System.Drawing.Color.Lavender;
-            this.VBatGauge.DialText = "VBat";
-            this.VBatGauge.Glossiness = 11.36364F;
-            this.VBatGauge.Location = new System.Drawing.Point(8, 389);
-            this.VBatGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.VBatGauge.MaxValue = 9F;
-            this.VBatGauge.MinValue = 0F;
-            this.VBatGauge.Name = "VBatGauge";
-            this.VBatGauge.NoOfDivisions = 9;
-            this.VBatGauge.RecommendedValue = 8.25F;
-            this.VBatGauge.Size = new System.Drawing.Size(200, 200);
-            this.VBatGauge.TabIndex = 36;
-            this.VBatGauge.ThresholdPercent = 1E-05F;
-            this.VBatGauge.Value = 8F;
             // 
             // Main
             // 
@@ -1964,6 +1964,8 @@ namespace packet_maker
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTypesDGV)).EndInit();
             this.MainTab.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel19.ResumeLayout(false);
             this.panel19.PerformLayout();
             this.panel18.ResumeLayout(false);
@@ -1974,8 +1976,6 @@ namespace packet_maker
             this.panel17.PerformLayout();
             this.panel15.ResumeLayout(false);
             this.panel15.PerformLayout();
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
             this.panel10.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
@@ -1985,12 +1985,12 @@ namespace packet_maker
             this.panel13.PerformLayout();
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.TabControl.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

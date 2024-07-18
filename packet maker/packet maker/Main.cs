@@ -756,7 +756,7 @@ namespace packet_maker
 
             RxHisTracker.AddPacket(po);
 
-            //await po.Upload("parsed_rx");
+            await po.Upload("parsed_rx");
         }
         #endregion
 

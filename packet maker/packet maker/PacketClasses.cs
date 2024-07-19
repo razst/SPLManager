@@ -10,6 +10,7 @@ using Nest;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using System.Collections.ObjectModel;
+using System.Web.Helpers;
 
 namespace packet_maker
 {
@@ -99,7 +100,8 @@ namespace packet_maker
             Dictionary<string, object> data = this.CastToDict();
 
             var dbCollection = Program.mongoDB.GetCollection<BsonDocument>(COLLECTION_NAME);
-            dbCollection.InsertOne(data.ToBsonDocument());
+            BsonDocument bson = data.ToBsonDocument();
+            dbCollection.InsertOne(bson);
 
         }
 
@@ -239,12 +241,12 @@ namespace packet_maker
         #region Data types handelers
         private static void HandeleIntParam()
         {
-            pacObj.DataCatalog.Add(currentParams.name, Calibrate(ConvertBytesToSplInt(4)));
+            pacObj.DataCatalog.Add(currentParams.name, (int)Calibrate(ConvertBytesToSplInt(4)));
             j += 4;
         }
         private static void HandeleShortParam()
         {
-            pacObj.DataCatalog.Add(currentParams.name, Calibrate(ConvertBytesToSplInt(2)));
+            pacObj.DataCatalog.Add(currentParams.name, (int)Calibrate(ConvertBytesToSplInt(2)));
             j += 2;
         }
         private static void HandeleCharParam()

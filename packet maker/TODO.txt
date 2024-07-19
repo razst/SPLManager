@@ -1,5 +1,6 @@
 Fix all query tab filters
 in query tab, add raw packet edit box that will be updated on list change with the raw's data
 change background to green while passing - use NextPass.PassStatus to check
-Choosing Tevel6 gets an error
 next pass time uses pass that is less then 7 Max Elevation 
+clicking on the RX / TX item in the list in the RX tab sometimes doesn't show the correct detail parsing
+RX packets are not stored in DB

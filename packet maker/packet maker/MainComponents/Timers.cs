@@ -40,7 +40,8 @@ namespace packet_maker.MainComponents
             await GetNextPass(newCurrentGroup);
             for (int i = 0; i < 4; i++)
             {
-                NextPassesArr[i] = DateTimeOffset.FromUnixTimeSeconds((long)passesArr[i + 1].startUTC).LocalDateTime.ToString();
+                if (passesArr.Count>i+1)
+                    NextPassesArr[i] = DateTimeOffset.FromUnixTimeSeconds((long)passesArr[i + 1].startUTC).LocalDateTime.ToString();
             }
 
             EverySecondTimer.Start();

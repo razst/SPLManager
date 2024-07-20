@@ -4,3 +4,4 @@ change background to green while passing - use NextPass.PassStatus to check
 next pass time uses pass that is less then 7 Max Elevation 
 clicking on the RX / TX item in the list in the RX tab sometimes doesn't show the correct detail parsing
 RX packets are not stored in DB
+TX packets shows error on query tab

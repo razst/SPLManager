@@ -1067,17 +1067,28 @@ namespace packet_maker
         #region controls
         private void toAFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            if (RxPacQryLibx.Items.Count == 0)
+            {
+                MessageBox.Show("No RX query data to export", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+                
+
+
             saveFileDialog.Filter = Program.settings.enableExcel ? "excel|*.xlsx" : "excel|*.csv";
 
             saveFileDialog.Title = "Export history to a File";
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
             int j = 0;
             List<List<string>> T = new List<List<string>> { new List<string> { "Date", "Id", "SatGroup", "Type", "Subtype", "Lenght", "Raw packet", "Data" } };
-            foreach (var packet in RxHisTracker.GetCurrentPacketList())
+            foreach (var packet in RxPacQryList)
+            //foreach (var packet in RxHisTracker.GetCurrentPacketList())
             {
                 if (packet.Type == -1)
                 {
-                    T.Add(new List<string> { privHex.Items[j].ToString().Split('[', ']')[1], "-1", "-", "ERROR", "-", "-", packet.RawPacket, "manager was not able to translate this packet" });
+                    //T.Add(new List<string> { privHex.Items[j].ToString().Split('[', ']')[1], "-1", "-", "ERROR", "-", "-", packet.RawPacket, "manager was not able to translate this packet" });
+                    T.Add(new List<string> { RxPacQryLibx.Items[j].ToString().Split('[', ']')[1], "-1", "-", "ERROR", "-", "-", packet.RawPacket, "manager was not able to translate this packet" });
                     j++;
                     continue;
                 }
@@ -1087,7 +1098,8 @@ namespace packet_maker
                 {
                     dataStr += $"{packet.DataCatalog.ElementAt(i).Key}: {packet.DataCatalog.ElementAt(i).Value}. ";
                 }
-                T.Add(new List<string> { privHex.Items[j].ToString().Split('[', ']')[1], packet.Id.ToString(), packet.SateliteGroup, packet.GetTypeName(), packet.GetSubTypeName(), packet.Length.ToString(), packet.RawPacket, dataStr });
+                //T.Add(new List<string> { privHex.Items[j].ToString().Split('[', ']')[1], packet.Id.ToString(), packet.SateliteGroup, packet.GetTypeName(), packet.GetSubTypeName(), packet.Length.ToString(), packet.RawPacket, dataStr });
+                T.Add(new List<string> { RxPacQryLibx.Items[j].ToString().Split('[', ']')[1], packet.Id.ToString(), packet.SateliteGroup, packet.GetTypeName(), packet.GetSubTypeName(), packet.Length.ToString(), packet.RawPacket, dataStr });
 
 
 
@@ -1115,7 +1127,9 @@ namespace packet_maker
 
             //sorting packets to files
             int j = 0;
-            foreach (var packet in RxHisTracker.GetCurrentPacketList())
+            
+            //foreach (var packet in RxHisTracker.GetCurrentPacketList())
+            foreach (var packet in RxPacQryList)
             {
                 string timeStr = privHex.Items[j].ToString().Split('[', ']')[1];
 

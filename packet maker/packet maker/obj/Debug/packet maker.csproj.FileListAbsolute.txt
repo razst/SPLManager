@@ -341,7 +341,6 @@ C:\dev\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.so
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.so
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.dylib
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.dylib
-C:\dev\SPLManager\packet maker\packet maker\bin\Debug\mongocrypt.dll
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\SPL Manager.exe.config
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\SPL Manager.exe
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\SPL Manager.pdb
@@ -462,6 +461,7 @@ C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\dev\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.xml
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.AssemblyReference.cache
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.SuggestedBindingRedirects.cache
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
@@ -471,6 +471,6 @@ C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDi
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Properties.Resources.resources
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.GenerateResource.cache
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCompileInputs.cache
-C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet m.478DE3C1.Up2Date
+C:\dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\SPL Manager.exe
 C:\dev\SPLManager\packet maker\packet maker\obj\Debug\SPL Manager.pdb

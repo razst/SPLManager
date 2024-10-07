@@ -140,10 +140,12 @@ namespace packet_maker.MainComponents
                 }
             }
 
+            
             if (data == null || data.passescount==0) return;
 
-            
+
             long time = (long)data.passes[0].startUTC;
+
 
             dt = DateTimeOffset.FromUnixTimeSeconds(time).LocalDateTime;
 

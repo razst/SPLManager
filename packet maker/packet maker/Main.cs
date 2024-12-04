@@ -298,7 +298,7 @@ namespace packet_maker
             }
             else
             {
-                MessageBox.Show("server is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("EndNode is not online", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -707,7 +707,11 @@ namespace packet_maker
                 System.Diagnostics.Process.Start(Program.settings.endNodePath);
             }
             catch
-            { connectBtn.Enabled = true; }
+            { 
+                connectBtn.Enabled = true;
+                MessageBox.Show("Unable to start EndNode", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
 
         private void tx2rxBtn_Click(object sender, EventArgs e)

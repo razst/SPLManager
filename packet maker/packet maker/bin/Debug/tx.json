@@ -1,4 +1,24 @@
 {
+	"ReverseBytes": true,
+  "spl_header": {
+    "ID": {
+      "startByte": 0,
+      "length": 4
+    },
+    "Type": {
+      "startByte": 4,
+      "length": 1
+    },
+    "Subtype": {
+      "startByte": 5,
+      "length": 1
+    },
+    "Length": {
+      "startByte": 6,
+      "length": 2
+    },
+    "DataStartingByte": 8
+  },
   "types": [
     {
 		"id": "0",

@@ -23,7 +23,7 @@ namespace packet_maker
         static public IMongoDatabase mongoDB;
         
         static public dynamic settings = null;
-        public static List<string> groups = new List<string>();
+        public static List<Group> groups = new List<Group>();
         public static bool Online;
 
         /// <summary>
@@ -43,7 +43,8 @@ namespace packet_maker
                 settings = Json.Decode(Tsettings.ReadToEnd());
                 foreach (var group in settings.satInfo)
                 {
-                    groups.Add($"{group.name} ({group.desc})");
+                    Group item = new Group(){ Id = group.id, Str = $"{group.name} ({group.desc})" };
+                    groups.Add(item);
                 }
 
                 try

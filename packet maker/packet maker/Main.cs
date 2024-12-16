@@ -95,12 +95,12 @@ namespace packet_maker
             {
                 typeCB.Items.Add(t.name);
             }
-            foreach (string s in Program.groups)
+            foreach (Group s in Program.groups)
             {
-                groupsCB.Items.Add(s);
-                RxGroupsCB.Items.Add(s);
-                qrySatCB.Items.Add(s);
-                MainSatCB.Items.Add(s);
+                groupsCB.Items.Add(s.Str);
+                RxGroupsCB.Items.Add(s.Str);
+                qrySatCB.Items.Add(s.Str);
+                MainSatCB.Items.Add(s.Str);
             }
             foreach (Type t in transOptions)
             {
@@ -1429,7 +1429,7 @@ namespace packet_maker
                 lblLAstBeacon.Text = "Last Beacon";
                 var filter = Builders<BsonDocument>.Filter.Eq("satId", MainSatCB.SelectedIndex)
                      & Builders<BsonDocument>.Filter.Eq("subtype", "Beacon");
-                firstDocument = dbCollection.Find(filter).Sort(sort).FirstOrDefault();                
+                firstDocument = dbCollection.Find(filter).Sort(sort).FirstOrDefault();
             }
 
             if (firstDocument != null)

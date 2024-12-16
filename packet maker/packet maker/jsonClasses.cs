@@ -135,6 +135,13 @@ namespace packet_maker
         }
     }
 
+
+    public class Group
+    {
+        public int Id { get; set; }
+        public string Str { get; set; }
+    }
+
     #endregion
 }
 

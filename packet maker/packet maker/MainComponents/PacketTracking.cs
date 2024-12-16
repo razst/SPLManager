@@ -20,14 +20,14 @@ namespace packet_maker.MainComponents
             PacketsListBox = toInsert;
             PacketDisplayTextbox = toDisplay;
             Packets = new Dictionary<string, List<PacketObject>>();
-            foreach (string g in Program.groups)
+            foreach (Group g in Program.groups)
             {
-                Packets.Add(g, new List<PacketObject>());
+                Packets.Add(g.Str, new List<PacketObject>());
             }
         }
         public void AddPacket(PacketObject PacObj)
         {
-            Packets[Program.groups[0]].Add(PacObj);
+            Packets[Program.groups[0].Str].Add(PacObj);
             if (PacObj.Type == -1)
             {
                 GetCurrentPacketList().Add(PacObj);

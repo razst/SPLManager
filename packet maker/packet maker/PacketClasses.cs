@@ -37,7 +37,7 @@ namespace packet_maker
 
     public class PacketObject
     {
-        private static readonly List<string> Groups = Program.groups;
+        private static readonly List<Group> Groups = Program.groups;
 
         public int Id { get; set; }
 
@@ -146,7 +146,7 @@ namespace packet_maker
         private int GetSubtypeDex() => JsonObject.typenum[GetTypeDex()].subTypes.FindIndex(item => item.id == Subtype);
         public string GetTypeName() => JsonObject.typenum[GetTypeDex()].name;
         public string GetSubTypeName() => JsonObject.typenum[GetTypeDex()].subTypes[GetSubtypeDex()].name;
-        public int GetSatDex() => Groups.FindIndex(x => x == SateliteGroup);
+        public int GetSatDex() => Groups.Find(x => x.Str == SateliteGroup).Id;
     }
 
 
@@ -186,11 +186,11 @@ namespace packet_maker
             po.Length = ConvertBytesToSplInt(json.header.Length);
             if (groupDex == -1)
             {
-                po.SateliteGroup = Program.groups[Convert.ToInt32(bitarr[3])];
+                po.SateliteGroup = Program.groups.Find(x => x.Id == Convert.ToInt32(bitarr[3], 16)).Str;
             }
             else
             {
-                po.SateliteGroup = Program.groups[groupDex];
+                po.SateliteGroup = Program.groups[groupDex].Str;
             }
 
             var typeDex = json.typenum.FindIndex(item => item.id == po.Type);

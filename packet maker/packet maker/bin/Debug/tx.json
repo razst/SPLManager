@@ -38,7 +38,7 @@
           ]
         },
         {
-          "id": "20",
+          "id": "19",
           "name": "Get baud rate",
           "desc": "Get the bitrate of the TRXVU.",
           "inParams": []
@@ -353,68 +353,17 @@
         {
           "id": "178",
           "name": "ANT get arm status",
-          "desc": "Get the arm status of the antenna.",
-          "inParams": [
-            {
-              "name": "ANT side",
-              "desc": "Side A (00) / Side B (01).",
-              "type": "char",
-              "values": [
-                {
-                  "id": "00",
-                  "name": "Side A"
-                },
-                {
-                  "id": "01",
-                  "name": "Side B"
-                }
-              ]
-            }
-          ]
+          "desc": "Get the arm status of the antenna."
         },
         {
           "id": "179",
           "name": "ANT get uptime",
-          "desc": "Get the uptime of one of the antennas.",
-          "inParams": [
-            {
-              "name": "ANT side",
-              "desc": "Side A (00) / Side B (01).",
-              "type": "char",
-              "values": [
-                {
-                  "id": "00",
-                  "name": "Side A"
-                },
-                {
-                  "id": "01",
-                  "name": "Side B"
-                }
-              ]
-            }
-          ]
+          "desc": "Get the uptime of one of the antennas."
         },
         {
           "id": "183",
           "name": "ANT cancel deploy",
-          "desc": "Command that stops the deployment of the antenna.",
-          "inParams": [
-            {
-              "name": "ANT side",
-              "desc": "Side A (00) / Side B (01).",
-              "type": "char",
-              "values": [
-                {
-                  "id": "00",
-                  "name": "Side A"
-                },
-                {
-                  "id": "01",
-                  "name": "Side B"
-                }
-              ]
-            }
-          ]
+          "desc": "Command that stops the deployment of the antenna."
         },
         {
           "id": "185",
@@ -655,14 +604,6 @@
 				{
                   "id": "7",
                   "name": "Seu"
-                },
-				{
-                  "id": "9",
-                  "name": "RX"
-                },
-				{
-                  "id": "16",
-                  "name": "Log"
                 }
 				]
 			},
@@ -748,7 +689,7 @@
                 },
 				{
                   "id": "1",
-                  "name": "Hard reset"
+                  "name": "EPS reset"
                 },
 				{
                   "id": "2",

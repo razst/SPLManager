@@ -280,21 +280,27 @@ namespace packet_maker
         {
             if (RadioServer.isOnline)
             {
-                var tem = Playlists[PlaylistCB.SelectedIndex].commands;
-
-                int i = 0;
-                Action<int> f = sendAutoWorker;
-                foreach (var packet in tem)
+                for(int i = 0; i < PLitemsLibx.Items.Count; i++)
                 {
-                    string pac = (string)Invoke(f, i);
+                    PLitemsLibx.SetSelected(i, true);
+                    sendPacketBtn.PerformClick();
                     await Task.Delay(int.Parse(sleepCmdTxb.Text));
-
-                    po = new PacketObject(options, makeOut.Text.Trim());
-                    rawTxPacHisList.Add(po);
-                    addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
-                    i++;
-
                 }
+                //var tem = Playlists[PlaylistCB.SelectedIndex].commands;
+
+                //int i = 0;
+                //Action<int> f = sendAutoWorker;
+                //foreach (var packet in tem)
+                //{
+                //    string pac = (string)Invoke(f, i);
+                //    await Task.Delay(int.Parse(sleepCmdTxb.Text));
+
+                //    po = new PacketObject(options, makeOut.Text.Trim());
+                //    rawTxPacHisList.Add(po);
+                //    addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
+                //    i++;
+
+                //}
             }
             else
             {

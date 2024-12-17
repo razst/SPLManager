@@ -97,10 +97,10 @@ namespace packet_maker
             }
             foreach (Group s in Program.groups)
             {
-                groupsCB.Items.Add(s.Str);
-                RxGroupsCB.Items.Add(s.Str);
-                qrySatCB.Items.Add(s.Str);
-                MainSatCB.Items.Add(s.Str);
+                groupsCB.Items.Add(s);
+                RxGroupsCB.Items.Add(s);
+                qrySatCB.Items.Add(s);
+                MainSatCB.Items.Add(s);
             }
             foreach (Type t in transOptions)
             {
@@ -120,12 +120,12 @@ namespace packet_maker
             qryCondvalDtp.CustomFormat = "dd/MM/yyyy HH:mm";
 
             //Combo boxes selected index
-            groupsCB.SelectedIndex = Program.settings.defaultSatGroup;
-            RxGroupsCB.SelectedIndex = Program.settings.defaultSatGroup;
-            MainSatCB.SelectedIndex = Program.settings.defaultSatGroup;
+            groupsCB.SelectedIndex = Program.settings.defaultSatGroup % 10;
+            RxGroupsCB.SelectedIndex = Program.settings.defaultSatGroup % 10;
+            MainSatCB.SelectedIndex = Program.settings.defaultSatGroup % 10;
             DBLimitCB.SelectedItem = "100";
             qrySubtypeCB.SelectedItem = "All";
-            qrySatCB.SelectedIndex = Program.settings.defaultSatGroup;
+            qrySatCB.SelectedIndex = Program.settings.defaultSatGroup % 10;
             qryConditionCB.SelectedIndex = 1;
             qryLimitCB.SelectedIndex = 1;
 
@@ -1373,7 +1373,7 @@ namespace packet_maker
             await UpdateLastTimeLabel("parsed_tx", mainLastTxLabel);
             await UpdateBeaconData();
 
-            NextPass.SetCurrentGroup(MainSatCB.SelectedIndex);
+            NextPass.SetCurrentGroup(((Group)MainSatCB.SelectedItem).Id);
         }
         #endregion
 

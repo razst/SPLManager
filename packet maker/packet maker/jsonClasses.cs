@@ -140,6 +140,11 @@ namespace packet_maker
     {
         public int Id { get; set; }
         public string Str { get; set; }
+
+        public override string ToString()
+        {
+            return Str;
+        }
     }
 
     #endregion

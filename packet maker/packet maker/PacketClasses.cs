@@ -186,7 +186,7 @@ namespace packet_maker
             po.Length = ConvertBytesToSplInt(json.header.Length);
             if (groupDex == -1)
             {
-                po.SateliteGroup = Program.groups.Find(x => x.Id%10 == Convert.ToInt32(bitarr[3], 16)).Str;
+                po.SateliteGroup = Program.groups.Find(x => x.Id % 10 == Convert.ToInt32(bitarr[3], 16) % 10).Str;
             }
             else
             {

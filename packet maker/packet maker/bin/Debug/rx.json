@@ -466,6 +466,18 @@
           "inParams": []
         },
         {
+          "id": "193",
+          "name": "ACK_AUTHORIZED",
+          "desc": "when the secured command is succesfull",
+          "inParams": [
+			{
+			  "name": "Satellite Hash",
+			  "desc": "The hash that the satellite calculated",
+			  "type": "bytes"
+			}
+		  ]
+        },
+        {
           "id": "255",
           "name": "ACK_ERROR_MSG",
           "desc": "when error has occurred",
@@ -1105,7 +1117,6 @@
             }
           ]
         },
-
         {
           "id": "9",
           "name": "RX",
@@ -1162,6 +1173,24 @@
               "type": "short"
             }
           ]
+        },
+        {
+          "id": "5",
+          "name": "Radfet",
+          "desc": "The radfet experiment",
+          "inParams": []
+        },
+        {
+          "id": "6",
+          "name": "Sel",
+          "desc": "The Sel experiment",
+          "inParams": []
+        },
+        {
+          "id": "7",
+          "name": "Seu",
+          "desc": "The Seu experiment",
+          "inParams": []
         }
       ]
     },

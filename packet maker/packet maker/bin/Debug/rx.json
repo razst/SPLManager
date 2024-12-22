@@ -813,6 +813,132 @@
           ]
         },
         {
+          "id": "1",
+          "name": "TX",
+          "desc": "TX - TODO",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "tx_reflpwr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "tx_fwrdpwr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "bus_volt",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vutotal_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vutx_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vurx_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vupa_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "pa_temp",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "board_temp",
+              "desc": "battery voltage",
+              "type": "short"
+            }
+          ]
+        },
+		{
+          "id": "2",
+          "name": "ANT",
+          "desc": "ANT DATA",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "ants_temperature",
+              "desc": "ants_temperature",
+              "type": "short"
+            },
+            {
+              "name": "ants_deployment",
+              "desc": "ants_deployment",
+              "type": "short"
+            },
+            {
+              "name": "ants_uptime",
+              "desc": "ants_uptime",
+              "type": "int"
+            }
+          ]
+        },
+		{
+          "id": "3",
+          "name": "Solar Panels",
+          "desc": "Solar Panels TLM DATA",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "Solar panel 1 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 2 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 3 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 4 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 5 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 6 Temperature",
+              "desc": "",
+              "type": "int"
+            }
+          ]
+        },		
+		{
           "id": "4",
           "name": "WOD",
           "desc": "World orbit data",
@@ -965,157 +1091,106 @@
             }
           ]
         },
-
-        {
-          "id": "16",
-          "name": "LOG",
-          "desc": "LOG DATA",
+		{
+          "id": "5",
+          "name": "Radfet",
+          "desc": "The radfet experiment",
           "inParams": [
             {
               "name": "timestamp",
               "desc": "timestamp",
               "type": "datetime"
             },
+			{
+				"name": "another something",
+				"desc": "idk",
+				"type": "int"
+			},
             {
-              "name": "error number",
-              "desc": "error number",
+              "name": "radfet time",
+              "desc": "when the radfet started calculating",
+              "type": "datetime"
+            },
+            {
+              "name": "adc conversion radfet1",
+              "desc": "ADC conversion result for radfet 1",
               "type": "int"
             },
             {
-              "name": "message",
-              "desc": "message",
-              "type": "ascii"
-            }
-          ]
+              "name": "adc conversion radfet2",
+              "desc": "ADC conversion result for radfet 2",
+              "type": "int"
+            },
+            {
+              "name": "temp time",
+              "desc": "when the radfet stopped calculating",
+              "type": "datetime"
+            },
+            {
+              "name": "tempature",
+              "desc": "tempature",
+              "type": "float"
+            },
+			]
         },
-
         {
-          "id": "3",
-          "name": "Solar Panels",
-          "desc": "Solar Panels TLM DATA",
+          "id": "6",
+          "name": "Sel",
+          "desc": "The Sel experiment",
           "inParams": [
-            {
-              "name": "timestamp",
-              "desc": "timestamp",
-              "type": "datetime"
-            },
-            {
-              "name": "Solar panel 1 Temperature",
-              "desc": "",
-              "type": "int"
-            },
-            {
-              "name": "Solar panel 2 Temperature",
-              "desc": "",
-              "type": "int"
-            },
-            {
-              "name": "Solar panel 3 Temperature",
-              "desc": "",
-              "type": "int"
-            },
-            {
-              "name": "Solar panel 4 Temperature",
-              "desc": "",
-              "type": "int"
-            },
-            {
-              "name": "Solar panel 5 Temperature",
-              "desc": "",
-              "type": "int"
-            },
-            {
-              "name": "Solar panel 6 Temperature",
-              "desc": "",
-              "type": "int"
-            }
-          ]
+			{
+			  "name": "timestamp",
+			  "desc": "timestamp",
+			  "type": "datetime"
+			},
+			{
+			  "name": "time",
+			  "desc": "when the seu was calculated",
+			  "type": "datetime"
+			},
+			{
+			  "name": "latch-up count",
+			  "desc": "latch-up count",
+			  "type": "int"
+			},
+			{
+			  "name": "Sat Reset count",
+			  "desc": "how manny soft resets",
+			  "type": "int"
+			},
+			{
+			  "name": "EPS Reset count",
+			  "desc": "how many hard resets",
+			  "type": "int"
+			},
+			{
+			  "name": "Battery state changed",
+			  "desc": "did the battery state change",
+			  "type": "int"
+			}
+		  ]
         },
-
         {
-          "id": "2",
-          "name": "ANT",
-          "desc": "ANT DATA",
+          "id": "7",
+          "name": "Seu",
+          "desc": "The Seu experiment",
           "inParams": [
-            {
-              "name": "timestamp",
-              "desc": "timestamp",
-              "type": "datetime"
-            },
-            {
-              "name": "ants_temperature",
-              "desc": "ants_temperature",
-              "type": "short"
-            },
-            {
-              "name": "ants_deployment",
-              "desc": "ants_deployment",
-              "type": "short"
-            },
-            {
-              "name": "ants_uptime",
-              "desc": "ants_uptime",
-              "type": "int"
-            }
-          ]
-        },
-
-        {
-          "id": "1",
-          "name": "TX",
-          "desc": "TX - TODO",
-          "inParams": [
-            {
-              "name": "timestamp",
-              "desc": "timestamp",
-              "type": "datetime"
-            },
-            {
-              "name": "tx_reflpwr",
-              "desc": "battery voltage",
-              "type": "short"
-            },
-            {
-              "name": "tx_fwrdpwr",
-              "desc": "battery voltage",
-              "type": "short"
-            },
-            {
-              "name": "bus_volt",
-              "desc": "battery voltage",
-              "type": "short"
-            },
-            {
-              "name": "vutotal_curr",
-              "desc": "battery voltage",
-              "type": "short"
-            },
-            {
-              "name": "vutx_curr",
-              "desc": "battery voltage",
-              "type": "short"
-            },
-            {
-              "name": "vurx_curr",
-              "desc": "battery voltage",
-              "type": "short"
-            },
-            {
-              "name": "vupa_curr",
-              "desc": "battery voltage",
-              "type": "short"
-            },
-            {
-              "name": "pa_temp",
-              "desc": "battery voltage",
-              "type": "short"
-            },
-            {
-              "name": "board_temp",
-              "desc": "battery voltage",
-              "type": "short"
-            }
-          ]
+			{
+			  "name": "timestamp",
+			  "desc": "timestamp",
+			  "type": "datetime"
+			},
+			{
+			  "name": "time",
+			  "desc": "when the seu was calculated",
+			  "type": "datetime"
+			},
+			{
+			  "name": "bitflips",
+			  "desc": "how many bitflips",
+			  "type": "int"
+			}
+		  ]
         },
         {
           "id": "9",
@@ -1174,23 +1249,27 @@
             }
           ]
         },
-        {
-          "id": "5",
-          "name": "Radfet",
-          "desc": "The radfet experiment",
-          "inParams": []
-        },
-        {
-          "id": "6",
-          "name": "Sel",
-          "desc": "The Sel experiment",
-          "inParams": []
-        },
-        {
-          "id": "7",
-          "name": "Seu",
-          "desc": "The Seu experiment",
-          "inParams": []
+		{
+          "id": "16",
+          "name": "LOG",
+          "desc": "LOG DATA",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "error number",
+              "desc": "error number",
+              "type": "int"
+            },
+            {
+              "name": "message",
+              "desc": "message",
+              "type": "ascii"
+            }
+          ]
         }
       ]
     },
@@ -1212,7 +1291,8 @@
             {
               "name": "TRXVU interval",
               "desc": "",
-              "type": "int"
+              "type": "
+			  int"
             },
             {
               "name": "Ant interval",

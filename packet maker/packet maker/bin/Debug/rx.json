@@ -1163,7 +1163,6 @@
 			  "desc": "how many time OBC reset the payload (e.g. power state change or user command)",
 			  "type": "int"
 			}
-			
 		  ]
         },
         {
@@ -1265,8 +1264,7 @@
             {
               "name": "TRXVU interval",
               "desc": "",
-              "type": "
-			  int"
+              "type": "int"
             },
             {
               "name": "Ant interval",

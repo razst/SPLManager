@@ -492,6 +492,18 @@
           "name": "Reset EPS WDT",
           "desc": "Resets the EPS WatchDog timer.",
           "inParams": []
+        },
+		{
+          "id": "5",
+          "name": "Payload operations",
+          "desc": "turn on/off/reset payload channel",
+          "inParams": [
+			{
+			  "name": "Operation",
+              "desc": "1 - on, 2 - off, 3 - reset",
+              "type": "int"
+			}
+		  ]
         }
 		]
 	},

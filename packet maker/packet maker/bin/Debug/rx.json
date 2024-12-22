@@ -1101,11 +1101,6 @@
               "desc": "timestamp",
               "type": "datetime"
             },
-			{
-				"name": "another something",
-				"desc": "idk",
-				"type": "int"
-			},
             {
               "name": "radfet time",
               "desc": "when the radfet started calculating",
@@ -1129,14 +1124,14 @@
             {
               "name": "tempature",
               "desc": "tempature",
-              "type": "float"
+              "type": "bytes"
             },
 			]
         },
         {
-          "id": "6",
-          "name": "Sel",
-          "desc": "The Sel experiment",
+          "id": "7",
+          "name": "Payload Events",
+          "desc": "The Payload SEL and SEU data",
           "inParams": [
 			{
 			  "name": "timestamp",
@@ -1149,8 +1144,13 @@
 			  "type": "datetime"
 			},
 			{
-			  "name": "latch-up count",
-			  "desc": "latch-up count",
+			  "name": "SEU count",
+			  "desc": "Bit flip count",
+			  "type": "int"
+			},
+			{
+			  "name": "SEL count",
+			  "desc": "Latch-up count",
 			  "type": "int"
 			},
 			{
@@ -1160,36 +1160,10 @@
 			},
 			{
 			  "name": "EPS Reset count",
-			  "desc": "how many hard resets",
-			  "type": "int"
-			},
-			{
-			  "name": "Battery state changed",
-			  "desc": "did the battery state change",
+			  "desc": "how many time OBC reset the payload (e.g. power state change or user command)",
 			  "type": "int"
 			}
-		  ]
-        },
-        {
-          "id": "7",
-          "name": "Seu",
-          "desc": "The Seu experiment",
-          "inParams": [
-			{
-			  "name": "timestamp",
-			  "desc": "timestamp",
-			  "type": "datetime"
-			},
-			{
-			  "name": "time",
-			  "desc": "when the seu was calculated",
-			  "type": "datetime"
-			},
-			{
-			  "name": "bitflips",
-			  "desc": "how many bitflips",
-			  "type": "int"
-			}
+			
 		  ]
         },
         {

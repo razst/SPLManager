@@ -153,15 +153,11 @@
                 },
                 {
                   "id": "5",
-                  "name": "Radfet"
-                },
-                {
-                  "id": "6",
-                  "name": "Sel"
+                  "name": "Payload Radfet"
                 },
                 {
                   "id": "7",
-                  "name": "Seu"
+                  "name": "Payload Events"
                 },
                 {
                   "id": "9",
@@ -222,15 +218,11 @@
                 },
                 {
                   "id": "5",
-                  "name": "Radfet"
-                },
-                {
-                  "id": "6",
-                  "name": "Sel"
+                  "name": "Payload Radfet"
                 },
                 {
                   "id": "7",
-                  "name": "Seu"
+                  "name": "Payload Events"
                 },
                 {
                   "id": "9",
@@ -427,15 +419,11 @@
                 },
                 {
                   "id": "05",
-                  "name": "Radfet"
-                },
-                {
-                  "id": "06",
-                  "name": "Sel"
+                  "name": "Payload Radfet"
                 },
                 {
                   "id": "07",
-                  "name": "Seu"
+                  "name": "Payload Events"
                 }
               ]
             },
@@ -543,15 +531,11 @@
                 },
 				{
                   "id": "5",
-                  "name": "Radfet"
+                  "name": "Payload Radfet"
                 },
-				{
-                  "id": "6",
-                  "name": "Sel"
-                },
-				{
+                {
                   "id": "7",
-                  "name": "Seu"
+                  "name": "Payload Events"
                 },
 				{
                   "id": "9",
@@ -619,15 +603,11 @@
                 },
 				{
                   "id": "5",
-                  "name": "Radfet"
+                  "name": "Payload Radfet"
                 },
-				{
-                  "id": "6",
-                  "name": "Sel"
-                },
-				{
+                {
                   "id": "7",
-                  "name": "Seu"
+                  "name": "Payload Events"
                 }
 				]
 			},

@@ -1139,8 +1139,8 @@
 			  "type": "datetime"
 			},
 			{
-			  "name": "time",
-			  "desc": "when the seu was calculated",
+			  "name": "calc time",
+			  "desc": "when the payload events were calculated",
 			  "type": "datetime"
 			},
 			{

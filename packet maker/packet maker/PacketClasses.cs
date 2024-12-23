@@ -234,8 +234,8 @@ namespace packet_maker
         }
         private static float ConvertBytesToSplFloat(List<string> bits)
         {
-            if (json.ReverseBytes)
-                bits.Reverse();
+            //if (json.ReverseBytes)
+            //    bits.Reverse();
             var t = String.Join("", bits);
 
             byte[] byteArray = new byte[t.Length / 2];
@@ -254,8 +254,8 @@ namespace packet_maker
         }
         private static double ConvertBytesToSplDouble(List<string> bits)
         {
-            if (json.ReverseBytes)
-                bits.Reverse();
+            //if (json.ReverseBytes)
+            //    bits.Reverse();
             var t = String.Join("", bits);
 
             byte[] byteArray = new byte[t.Length / 2];

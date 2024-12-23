@@ -29,6 +29,7 @@ namespace packet_maker
     class RadioServer //this server simulates trans button click in main
     {
         private Thread childThread = null;
+        private Thread RXhandlerThread = null;
         private TcpClient client = null;
         private TcpListener server = null;
         private UDPSocket UDPserver = null;
@@ -52,6 +53,13 @@ namespace packet_maker
                         IsBackground = true
                     };
                     childThread.Start();
+
+                    //ThreadStart RXHandler = new ThreadStart(HandleRX.TranslatePackThread);
+                    //RXhandlerThread = new Thread(RXHandler)
+                    //{
+                    //    IsBackground = true
+                    //};
+                    //RXhandlerThread.Start();
                     break;
                 case "UDP":
                     UDPclient = new UDPSocket();
@@ -166,9 +174,16 @@ namespace packet_maker
                                         sArr[k] = bbb[k].ToString("X2");
                                     }
 
+
                                     string packetRecived = String.Join(" ", sArr);
                                     Action<string> clickCall = Main.frm.trasBtn_click;
                                     Main.frm.BeginInvoke(clickCall, packetRecived);
+
+                                    //lock(HandleRX.RXQLock)
+                                    //{
+                                    //    HandleRX.RXQ.Enqueue(packetRecived);
+                                    //}
+                                    
                                     break;
                             }
                         }
@@ -230,6 +245,8 @@ namespace packet_maker
             childThread = null;
             isOnline = false;
             Main.frm.connectBtn.Enabled = true;
+
+            HandleRX.run = false;
         }
 
     }
@@ -291,6 +308,31 @@ namespace packet_maker
 
 
             }, state);
+        }
+    }
+
+
+    public class HandleRX
+    {
+        public static Queue<string> RXQ = new Queue<string>();
+        public static object RXQLock = new object();
+        public static bool run = false;
+
+        public static void TranslatePackThread()
+        {
+            while (run)
+            {
+                lock (RXQLock)
+                {
+                    if (RXQ.Count > 0)
+                    {
+                        string packetRecived = RXQ.Dequeue();
+                        Action<string> clickCall = Main.frm.trasBtn_click;
+                        Main.frm.BeginInvoke(clickCall, packetRecived);
+                    }
+                }
+                Thread.Sleep(75);
+            }
         }
     }
 

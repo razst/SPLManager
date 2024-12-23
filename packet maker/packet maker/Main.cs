@@ -707,7 +707,7 @@ namespace packet_maker
 
         private void connectBtn_Click(object sender, EventArgs e)
         {
-            //connectBtn.Enabled = false;
+            connectBtn.Enabled = true;
             try
             {
                 System.Diagnostics.Process.Start(Program.settings.endNodePath);

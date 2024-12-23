@@ -1124,7 +1124,7 @@
             {
               "name": "tempature",
               "desc": "tempature",
-              "type": "bytes"
+              "type": "double"
             },
 			]
         },

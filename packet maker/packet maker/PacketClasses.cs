@@ -169,7 +169,9 @@ namespace packet_maker
             {"datetime", HandeleDateParam},
             {"ascii", HandeleAsciiParam},
             {"bytes", HandeleBytesParam},
-            {"bitwise", HandeleBitwiseParam}
+            {"bitwise", HandeleBitwiseParam},
+            {"float", HandeleFloatParam},
+            {"double", HandeleDoubleParam}
         };
 
 
@@ -224,6 +226,47 @@ namespace packet_maker
             var t = String.Join("", bits);
             return Convert.ToInt32(t, 16);
         }
+
+        private static float ConvertBytesToSplFloat(int NumOfBytes)
+        {
+            List<string> r = bitarr.GetRange(j, NumOfBytes);
+            return ConvertBytesToSplFloat(r);
+        }
+        private static float ConvertBytesToSplFloat(List<string> bits)
+        {
+            if (json.ReverseBytes)
+                bits.Reverse();
+            var t = String.Join("", bits);
+
+            byte[] byteArray = new byte[t.Length / 2];
+            for (int i = 0; i < byteArray.Length; i++)
+            {
+                byteArray[i] = Convert.ToByte(t.Substring(i * 2, 2), 16);
+            }
+
+            return BitConverter.ToSingle(byteArray, 0);
+        }
+
+        private static double ConvertBytesToSplDouble(int NumOfBytes)
+        {
+            List<string> r = bitarr.GetRange(j, NumOfBytes);
+            return ConvertBytesToSplDouble(r);
+        }
+        private static double ConvertBytesToSplDouble(List<string> bits)
+        {
+            if (json.ReverseBytes)
+                bits.Reverse();
+            var t = String.Join("", bits);
+
+            byte[] byteArray = new byte[t.Length / 2];
+            for (int i = 0; i < byteArray.Length; i++)
+            {
+                byteArray[i] = Convert.ToByte(t.Substring(i * 2, 2), 16);
+            }
+
+            return BitConverter.ToDouble(byteArray, 0);
+        }
+
         static float Calibrate(int input)
         {
             if (currentParams.calibration != null)
@@ -322,6 +365,17 @@ namespace packet_maker
             }
             j += numOfBytes;
         }
+        private static void HandeleFloatParam()
+        {
+            pacObj.DataCatalog.Add(currentParams.name, ConvertBytesToSplFloat(4));
+            j += 4;
+        }
+        private static void HandeleDoubleParam()
+        {
+            pacObj.DataCatalog.Add(currentParams.name, ConvertBytesToSplDouble(8));
+            j += 8;
+        }
+
 
 
         #endregion
@@ -350,7 +404,9 @@ namespace packet_maker
             {"datetime", HandeleDateParam},
             {"ascii", HandeleAsciiParam},
             {"bytes", HandeleBytesParam},
-            {"bitwise", HandeleBitwiseParam}
+            {"bitwise", HandeleBitwiseParam},
+            {"float", HandeleFloatParam},
+            {"double", HandeleDoubleParam}
         };
 
         public static string CastToString(this PacketObject po, int packetMode)
@@ -466,8 +522,28 @@ namespace packet_maker
         {
 
         }
-
-
+        private static void HandeleFloatParam()
+        {
+            byte[] bytesArr = BitConverter.GetBytes(float.Parse(currentField));
+            string str = "";
+            foreach(byte b in bytesArr)
+            {
+                str += b.ToString("X2") + " ";
+            }
+            HexBytes.Add(str.Trim());
+            Length += 4;
+        }
+        private static void HandeleDoubleParam()
+        {
+            byte[] bytesArr = BitConverter.GetBytes(double.Parse(currentField));
+            string str = "";
+            foreach (byte b in bytesArr)
+            {
+                str += b.ToString("X2") + " ";
+            }
+            HexBytes.Add(str.Trim());
+            Length += 8;
+        }
         #endregion
     }
 

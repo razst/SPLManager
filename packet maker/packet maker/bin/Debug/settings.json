@@ -4,7 +4,7 @@
   "dataBaseEnabled": true,
   "pacCurId": 0,
   "tcpPortNumber": 4,
-  "defaultSatGroup": 2,
+  "defaultSatGroup": 12,
   "enableExcel": false,
   "widgetSettings": {
     "minThresholdSatPass": 5
@@ -22,61 +22,61 @@
   },
   "satInfo": [
     {
-      "id": 0,
+      "id": 10,
       "name": "Any",
       "desc": "all sats",
       "noradID": -1
     },
     {
-      "id": 1,
+      "id": 11,
       "name": "T1OFK",
       "desc": "Ofakim",
       "noradID": 25544
     },
     {
-      "id": 2,
+      "id": 12,
       "name": "T2YRC",
       "desc": "Yerucham",
       "noradID": 25544
     },
     {
-      "id": 3,
+      "id": 13,
       "name": "T3TYB",
       "desc": "Taybe",
       "noradID": 25544
     },
     {
-      "id": 4,
+      "id": 14,
       "name": "T4ATA",
       "desc": "Kiryat Ata",
       "noradID": 25544
     },
     {
-      "id": 5,
+      "id": 15,
       "name": "T5SNG",
       "desc": "Shaar HaNegev",
       "noradID": 25544
     },
     {
-      "id": 6,
+      "id": 16,
       "name": "T6NZR",
       "desc": "Nazareth",
       "noradID": 25544
     },
     {
-      "id": 7,
+      "id": 17,
       "name": "T7ADM",
       "desc": "Maale Adomim",
       "noradID": 25544
     },
     {
-      "id": 8,
+      "id": 18,
       "name": "T8GBS",
       "desc": "Guvat Shmuel",
       "noradID": 25544
     },
     {
-      "id": 9,
+      "id": 19,
       "name": "TAUSAT1",
       "desc": "TA",
       "noradID": 25544

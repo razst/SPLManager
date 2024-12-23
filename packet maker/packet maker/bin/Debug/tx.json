@@ -501,7 +501,21 @@
 			{
 			  "name": "Operation",
               "desc": "1 - on, 2 - off, 3 - reset (RISKY! - stops the sat for a second)",
-              "type": "int"
+              "type": "char",
+			  "values": [
+                {
+                  "id": "1",
+                  "name": "on"
+                },
+				{
+                  "id": "2",
+                  "name": "off"
+                },
+				{
+                  "id": "3",
+                  "name": "reset"
+                }
+				]
 			}
 		  ]
         }

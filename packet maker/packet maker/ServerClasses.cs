@@ -179,11 +179,11 @@ namespace packet_maker
                                     Action<string> clickCall = Main.frm.trasBtn_click;
                                     Main.frm.BeginInvoke(clickCall, packetRecived);
 
-                                    //lock(HandleRX.RXQLock)
+                                    //lock (HandleRX.RXQLock)
                                     //{
                                     //    HandleRX.RXQ.Enqueue(packetRecived);
                                     //}
-                                    
+
                                     break;
                             }
                         }
@@ -322,16 +322,22 @@ namespace packet_maker
         {
             while (run)
             {
+                string packetRecived = null;
+                bool translate = false;
                 lock (RXQLock)
                 {
                     if (RXQ.Count > 0)
                     {
-                        string packetRecived = RXQ.Dequeue();
-                        Action<string> clickCall = Main.frm.trasBtn_click;
-                        Main.frm.BeginInvoke(clickCall, packetRecived);
+                        packetRecived = RXQ.Dequeue();
+                        translate = true;
                     }
                 }
-                Thread.Sleep(75);
+                if (translate)
+                {
+                    Action<string> clickCall = Main.frm.trasBtn_click;
+                    Main.frm.BeginInvoke(clickCall, packetRecived);
+                }
+                Thread.Sleep(100);
             }
         }
     }

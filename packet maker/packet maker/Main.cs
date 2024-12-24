@@ -200,7 +200,6 @@ namespace packet_maker
             {
                 Program.settings.pacCurId = 20;
                 return Program.settings.pacCurId;
-
             }
 
             var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("local_data");
@@ -283,7 +282,15 @@ namespace packet_maker
                 for(int i = 0; i < PLitemsLibx.Items.Count; i++)
                 {
                     PLitemsLibx.SetSelected(i, true);
-                    sendPacketBtn.PerformClick();
+                    
+                    CreateTxPacket(await getSplCurIdAsync(((Group)groupsCB.SelectedItem).Id), Packet_Mode.satelite);
+
+                    po = new PacketObject(options, makeOut.Text.Trim());
+                    rawTxPacHisList.Add(po);
+                    addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
+
+                    await RadioServer.Send(makeOut.Text.Trim());
+
                     await Task.Delay(int.Parse(sleepCmdTxb.Text));
                 }
                 //var tem = Playlists[PlaylistCB.SelectedIndex].commands;
@@ -475,7 +482,7 @@ namespace packet_maker
 
         private async void sendAutoWorker(int index)
         {
-            await getSplCurIdAsync(groupsCB.SelectedIndex);
+            await getSplCurIdAsync(((Group)groupsCB.SelectedItem).Id);
             PLitemsLibx.SelectedIndex = -1;
             PLitemsLibx.SelectedIndex = index;
         }
@@ -552,7 +559,7 @@ namespace packet_maker
 
         private async void copyBTN_Click(object sender, EventArgs e)
         {
-            CreateTxPacket(await getSplCurIdAsync(groupsCB.SelectedIndex), Packet_Mode.none);
+            CreateTxPacket(await getSplCurIdAsync(((Group)groupsCB.SelectedItem).Id), Packet_Mode.none);
 
             if (makeOut.Text != null && makeOut.Text != "")
                 Clipboard.SetText(makeOut.Text.ToString());
@@ -565,7 +572,7 @@ namespace packet_maker
                 return;
             }
              
-            CreateTxPacket(await getSplCurIdAsync(groupsCB.SelectedIndex), Packet_Mode.satelite);
+            CreateTxPacket(await getSplCurIdAsync(((Group)groupsCB.SelectedItem).Id), Packet_Mode.satelite);
 
             po = new PacketObject(options, makeOut.Text.Trim());
             rawTxPacHisList.Add(po);
@@ -738,8 +745,8 @@ namespace packet_maker
 
         private async void resendTxBtn_Click(object sender, EventArgs e)
         {
-            string id = ConvertToHexBytes(await getSplCurIdAsync(RxGroupsCB.SelectedIndex), 3);
-            string tPac = $"{id} 0{groupsCB.SelectedIndex}{rawTxPacHisList[TxPacLibx.SelectedIndex].RawPacket.Substring(11)}";
+            string id = ConvertToHexBytes(await getSplCurIdAsync(((Group)RxGroupsCB.SelectedItem).Id), 3);
+            string tPac = $"{id} {((Group)groupsCB.SelectedItem).Id.ToString("X2")}{rawTxPacHisList[TxPacLibx.SelectedIndex].RawPacket.Substring(11)}";
             await RadioServer.Send(tPac); //0-9 only
 
             po = new PacketObject(options, tPac);
@@ -822,7 +829,7 @@ namespace packet_maker
 
                     //var filter = Builders<BsonDocument>.Filter.Gt("time", qryMinDtp.Value.ToUniversalTime()) &
                     //  Builders<BsonDocument>.Filter.Lt("time", qryMaxDtp.Value.ToUniversalTime());
-                    var filter = Builders<BsonDocument>.Filter.Eq("satId", qrySatCB.SelectedIndex);
+                    var filter = Builders<BsonDocument>.Filter.Eq("satId", ((Group)qrySatCB.SelectedItem).Id);
                           //& Builders<BsonDocument>.Filter.Eq("subtype", "Beacon");
                     var sort = Builders<BsonDocument>.Sort.Descending("time");
                     List<BsonDocument> documents = dbCollection.Find(filter).Limit(qrySize).Sort(sort).ToList(); ;
@@ -923,7 +930,7 @@ namespace packet_maker
 
                     //var filter = Builders<BsonDocument>.Filter.Gt("time", qryMinDtp.Value.ToUniversalTime()) &
                     //  Builders<BsonDocument>.Filter.Lt("time", qryMaxDtp.Value.ToUniversalTime());
-                    var filter = Builders<BsonDocument>.Filter.Eq("satId", qrySatCB.SelectedIndex);
+                    var filter = Builders<BsonDocument>.Filter.Eq("satId", ((Group)qrySatCB.SelectedItem).Id);
                     //& Builders<BsonDocument>.Filter.Eq("subtype", "Beacon");
                     var sort = Builders<BsonDocument>.Sort.Descending("time");
                     List<BsonDocument> documents = dbCollection.Find(filter).Limit(qrySize).Sort(sort).ToList(); ;
@@ -1402,7 +1409,7 @@ namespace packet_maker
             }
             else
             {
-                var filter = Builders<BsonDocument>.Filter.Eq("satId", MainSatCB.SelectedIndex);
+                var filter = Builders<BsonDocument>.Filter.Eq("satId", ((Group)MainSatCB.SelectedItem).Id);
                 firstDocument = dbCollection.Find(filter).Sort(sort).FirstOrDefault();
             }
             if (firstDocument != null)
@@ -1433,7 +1440,7 @@ namespace packet_maker
             else
             {
                 lblLAstBeacon.Text = "Last Beacon";
-                var filter = Builders<BsonDocument>.Filter.Eq("satId", MainSatCB.SelectedIndex)
+                var filter = Builders<BsonDocument>.Filter.Eq("satId", ((Group)MainSatCB.SelectedItem).Id)
                      & Builders<BsonDocument>.Filter.Eq("subtype", "Beacon");
                 firstDocument = dbCollection.Find(filter).Sort(sort).FirstOrDefault();
             }

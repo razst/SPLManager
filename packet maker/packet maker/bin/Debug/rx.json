@@ -161,6 +161,11 @@
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",
               "type": "int"
+            },
+            {
+              "name": "The name",
+              "desc": "A name of someone who perished in the war",
+              "type": "bytes"
             }
           ]
         },

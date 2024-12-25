@@ -500,7 +500,7 @@
           "inParams": [
 			{
 			  "name": "Operation",
-              "desc": "1 - on, 2 - off, 3 - reset (RISKY! - stops the sat for a second)",
+              "desc": "1 - on, 2 - off, 3 - reset",
               "type": "char",
 			  "values": [
                 {
@@ -518,6 +518,12 @@
 				]
 			}
 		  ]
+        },
+        {
+          "id": "6",
+          "name": "change initial payload state",
+          "desc": "changes the fram value for turning payload on/off in restart",
+          "inParams": []
         }
 		]
 	},

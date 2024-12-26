@@ -163,7 +163,7 @@
               "type": "int"
             },
             {
-              "name": "The name",
+              "name": "In memory of",
               "desc": "A name of someone who perished in the war",
               "type": "bytes"
             }

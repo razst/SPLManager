@@ -205,10 +205,19 @@ namespace packet_maker
             var dbCollection = Program.mongoDB.GetCollection<BsonDocument>("local_data");
             var filter = Builders<BsonDocument>.Filter.Eq("_id", "SAT"+ groupDex);
             BsonDocument firstDocument = dbCollection.Find(filter).FirstOrDefault();
-            Program.settings.pacCurId = int.Parse(firstDocument.GetValue("CommandId").ToString());
-            Program.settings.pacCurId += 1;
-            var update = Builders<BsonDocument>.Update.Set("CommandId", Program.settings.pacCurId);
-            dbCollection.UpdateOne(filter, update);
+            if (firstDocument == null)
+            {
+                Program.settings.pacCurId = 1;
+                var newDoc = new BsonDocument { { "_id", "SAT" + groupDex }, { "CommandId", Program.settings.pacCurId } };
+                dbCollection.InsertOne(newDoc);
+            }
+            else
+            {
+                Program.settings.pacCurId = int.Parse(firstDocument.GetValue("CommandId").ToString());
+                Program.settings.pacCurId += 1;
+                var update = Builders<BsonDocument>.Update.Set("CommandId", Program.settings.pacCurId);
+                dbCollection.UpdateOne(filter, update);
+            }
 
             return Program.settings.pacCurId;
         }

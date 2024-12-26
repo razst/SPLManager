@@ -163,9 +163,14 @@
               "type": "int"
             },
             {
+              "name": "is payload disabled",
+              "desc": "1 - disabled, 0 - enabled",
+              "type": "char"
+            },
+            {
               "name": "In memory of",
               "desc": "A name of someone who perished in the war",
-              "type": "bytes"
+              "type": "ascii"
             }
           ]
         },
@@ -1093,6 +1098,16 @@
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",
               "type": "int"
+            },
+            {
+              "name": "is payload disabled",
+              "desc": "1 - disabled, 0 - enabled",
+              "type": "char"
+            },
+			{
+              "name": "In memory of",
+              "desc": "A name of someone who perished in the war",
+              "type": "ascii"
             }
           ]
         },
@@ -1299,6 +1314,83 @@
               "type": "int"
             }
           ]
+        },
+        {
+          "id": "227",
+          "name": "Get TLM info",
+          "desc": "Gets extra info about TLM files.",
+          "inParams": [
+            {
+              "name": "Total",
+              "desc": "Total drive space",
+              "type": "int"
+            },
+			{
+              "name": "Free",
+              "desc": "Free space remaining",
+              "type": "int"
+            },
+			{
+              "name": "used",
+              "desc": "Used space",
+              "type": "int"
+            },
+			{
+              "name": "Bad",
+              "desc": "Unusable (bad) size",
+              "type": "int"
+            },
+			{
+              "name": "minFileDate",
+              "desc": "Min TLM file date",
+              "type": "short"
+            },
+			{
+              "name": "maxFileDate",
+              "desc": "Max TLM file date",
+              "type": "short"
+            },
+			{
+              "name": "minLogRamDate",
+              "desc": "Min LOG TLM RAM date",
+              "type": "datetime"
+            },
+			{
+              "name": "maxLogRamDate",
+              "desc": "Max LOG TLM RAM date",
+              "type": "datetime"
+            },
+			{
+              "name": "minWodRamDate",
+              "desc": "Min WOD TLM RAM date",
+              "type": "datetime"
+            },
+			{
+              "name": "maxWodRamDate",
+              "desc": "Max WOD TLM RAM date",
+              "type": "datetime"
+            },
+			{
+              "name": "minRadfetRamDate",
+              "desc": "Min Radfet TLM RAM date",
+              "type": "datetime"
+            },
+			{
+              "name": "maxRadfetRamDate",
+              "desc": "Max Radfet TLM RAM date",
+              "type": "datetime"
+            },
+			{
+              "name": "minEventsRamDate",
+              "desc": "Min Payload Events TLM RAM date",
+              "type": "datetime"
+            },
+			{
+              "name": "maxEventsRamDate",
+              "desc": "Max Payload Events TLM RAM date",
+              "type": "datetime"
+            }			
+          ]
         }
       ]
     },
@@ -1421,6 +1513,18 @@
               "name": "Uptime",
               "desc": "",
               "type": "int"
+            }
+          ]
+        },
+        {
+          "id": "228",
+          "name": "Get developer info",
+          "desc": "",
+          "inParams": [
+            {
+              "name": "info",
+              "desc": "msg",
+              "type": "ascii"
             }
           ]
         }

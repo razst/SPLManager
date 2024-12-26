@@ -496,7 +496,7 @@
 		{
           "id": "5",
           "name": "Payload operations",
-          "desc": "turn on/off/reset payload channel",
+          "desc": "Turn on/off/reset payload channel. NOTE: If payload is disabled it'll not turn on (use 'change initial payload state')",
           "inParams": [
 			{
 			  "name": "Operation",
@@ -521,9 +521,25 @@
         },
         {
           "id": "6",
-          "name": "change initial payload state",
-          "desc": "changes the fram value for turning payload on/off in restart",
-          "inParams": []
+          "name": "Change initial payload state",
+          "desc": "Changes the fram value for turning payload on/off in restart. NOTE: Use 'Payload operations' to turn on after enabling",
+          "inParams": [
+		  {
+			  "name": "Operation",
+              "desc": "1 - enable, 2 - disable",
+              "type": "char",
+			  "values": [
+                {
+                  "id": "1",
+                  "name": "enable"
+                },
+				{
+                  "id": "2",
+                  "name": "disable"
+                }
+				]
+			}
+		  ]
         }
 		]
 	},
@@ -848,6 +864,12 @@
           "id": "227",
           "name": "Get sat uptime",
           "desc": "Gets for how long the satellite was up.",
+          "inParams": []
+        },
+		{
+          "id": "228",
+          "name": "Get developer info",
+          "desc": "",
           "inParams": []
         }
 		]

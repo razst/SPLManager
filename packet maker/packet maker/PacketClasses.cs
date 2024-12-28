@@ -171,7 +171,8 @@ namespace packet_maker
             {"bytes", HandeleBytesParam},
             {"bitwise", HandeleBitwiseParam},
             {"float", HandeleFloatParam},
-            {"double", HandeleDoubleParam}
+            {"double", HandeleDoubleParam},
+            {"hebrew", HandeleHebrewParam}
         };
 
 
@@ -375,6 +376,20 @@ namespace packet_maker
             pacObj.DataCatalog.Add(currentParams.name, ConvertBytesToSplDouble(8));
             j += 8;
         }
+        private static void HandeleHebrewParam()
+        {
+            List<char> letters = new List<char>();
+            for (int i = j; i < bitarr.Count - 1; i++)
+            {
+                if (Convert.ToInt32(bitarr[i], 16) == 0)
+                    break;
+                var intedChar = 0x0500 + Convert.ToInt32(bitarr[i], 16);
+                letters.Add(Convert.ToChar(intedChar));
+            }
+            string temp = string.Join("", letters);
+            pacObj.DataCatalog.Add(currentParams.name, temp);
+            j = bitarr.Count;
+        }
 
 
 
@@ -406,7 +421,8 @@ namespace packet_maker
             {"bytes", HandeleBytesParam},
             {"bitwise", HandeleBitwiseParam},
             {"float", HandeleFloatParam},
-            {"double", HandeleDoubleParam}
+            {"double", HandeleDoubleParam},
+            {"hebrew", HandeleHebrewParam}
         };
 
         public static string CastToString(this PacketObject po, int packetMode)
@@ -543,6 +559,10 @@ namespace packet_maker
             }
             HexBytes.Add(str.Trim());
             Length += 8;
+        }
+        private static void HandeleHebrewParam()
+        {
+
         }
         #endregion
     }

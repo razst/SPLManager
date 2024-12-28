@@ -170,7 +170,7 @@
             {
               "name": "In memory of",
               "desc": "A name of someone who perished in the war",
-              "type": "ascii"
+              "type": "hebrew"
             }
           ]
         },

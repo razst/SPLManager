@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using System.Collections.ObjectModel;
 using System.Web.Helpers;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace packet_maker
 {
@@ -422,7 +424,8 @@ namespace packet_maker
             {"bitwise", HandeleBitwiseParam},
             {"float", HandeleFloatParam},
             {"double", HandeleDoubleParam},
-            {"hebrew", HandeleHebrewParam}
+            {"hebrew", HandeleHebrewParam},
+            {"secured", HandeleSecuredParam}
         };
 
         public static string CastToString(this PacketObject po, int packetMode)
@@ -464,6 +467,25 @@ namespace packet_maker
             string[] TidArr = Regex.Replace(Tid, ".{2}", "$0 ").Trim().Split(' ');
             Array.Reverse(TidArr);
             return String.Join(" ", TidArr).Trim();
+        }
+
+
+        private static string stringToHash256(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                // Convert the input string to a byte array and compute the hash
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                byte[] hashAsBytes = new byte[8];
+                Array.Copy(bytes, hashAsBytes, 8);
+
+                password = "";
+                for (int i = 0; i < hashAsBytes.Length; i++)
+                {
+                    password += bytes[i].ToString("X2") + " ";
+                }
+                return password.Trim();
+            }
         }
 
 
@@ -563,6 +585,23 @@ namespace packet_maker
         private static void HandeleHebrewParam()
         {
 
+        }
+        private static void HandeleSecuredParam()
+        {
+            string password = "";
+            password = HexBytes[0] + " " + HexBytes[1]; // Gets the ID
+
+            string[] passwordList = password.Split(' ');
+            byte[] bytesArr = new byte[4];
+            for(int i = 0; i < passwordList.Length; i++)
+                bytesArr[i] = Convert.ToByte(passwordList[i], 16); // Converts the ID from HEX to bytes
+
+            password = BitConverter.ToUInt32(bytesArr, 0).ToString() + currentField; // Combines the ID with the password
+            
+            password = stringToHash256(password);
+
+            HexBytes.Add(password.Trim());
+            Length += 8;
         }
         #endregion
     }

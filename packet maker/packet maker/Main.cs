@@ -291,16 +291,12 @@ namespace packet_maker
                 for(int i = 0; i < PLitemsLibx.Items.Count; i++)
                 {
                     PLitemsLibx.SetSelected(i, true);
-                    
-                    CreateTxPacket(await getSplCurIdAsync(((Group)groupsCB.SelectedItem).Id), Packet_Mode.satelite);
 
-                    po = new PacketObject(options, makeOut.Text.Trim());
-                    rawTxPacHisList.Add(po);
-                    addItemToListbox(po.ToHeaderString(DateTime.Now), TxPacLibx);
+                    sendPacketBtn.PerformClick();
 
-                    await RadioServer.Send(makeOut.Text.Trim());
-
-                    await Task.Delay(int.Parse(sleepCmdTxb.Text));
+                    await Task.Delay((int)(int.Parse(sleepCmdTxb.Text) * 0.8));
+                    TabControl.SelectedTab = TxTab;
+                    await Task.Delay((int)(int.Parse(sleepCmdTxb.Text) * 0.2));
                 }
                 //var tem = Playlists[PlaylistCB.SelectedIndex].commands;
 

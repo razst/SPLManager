@@ -54,12 +54,12 @@ namespace packet_maker
                     };
                     childThread.Start();
 
-                    //ThreadStart RXHandler = new ThreadStart(HandleRX.TranslatePackThread);
-                    //RXhandlerThread = new Thread(RXHandler)
-                    //{
-                    //    IsBackground = true
-                    //};
-                    //RXhandlerThread.Start();
+                    ThreadStart RXHandler = new ThreadStart(HandleRX.TranslatePackThread);
+                    RXhandlerThread = new Thread(RXHandler)
+                    {
+                        IsBackground = true
+                    };
+                    RXhandlerThread.Start();
                     break;
                 case "UDP":
                     UDPclient = new UDPSocket();
@@ -176,13 +176,13 @@ namespace packet_maker
 
 
                                     string packetRecived = String.Join(" ", sArr);
-                                    Action<string> clickCall = Main.frm.trasBtn_click;
-                                    Main.frm.BeginInvoke(clickCall, packetRecived);
+                                    //Action<string> clickCall = Main.frm.trasBtn_click;
+                                    //Main.frm.BeginInvoke(clickCall, packetRecived);
 
-                                    //lock (HandleRX.RXQLock)
-                                    //{
-                                    //    HandleRX.RXQ.Enqueue(packetRecived);
-                                    //}
+                                    lock (HandleRX.RXQLock)
+                                    {
+                                        HandleRX.RXQ.Enqueue(packetRecived);
+                                    }
 
                                     break;
                             }
@@ -316,7 +316,7 @@ namespace packet_maker
     {
         public static Queue<string> RXQ = new Queue<string>();
         public static object RXQLock = new object();
-        public static bool run = false;
+        public static bool run = true;
 
         public static void TranslatePackThread()
         {

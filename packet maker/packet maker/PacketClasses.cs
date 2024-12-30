@@ -380,13 +380,28 @@ namespace packet_maker
         }
         private static void HandeleHebrewParam()
         {
+            Dictionary<int, char> specialChars = new Dictionary<int, char>
+            {
+            { 0xF0, ' ' },
+            { 0xF1, '(' },
+            { 0xF2, ')' },
+            { 0xF3, '\'' },
+            { 0xF4, '-' },
+            { 0xF5, '"' },
+            };
             List<char> letters = new List<char>();
             for (int i = j; i < bitarr.Count - 1; i++)
             {
-                if (Convert.ToInt32(bitarr[i], 16) == 0)
+                int intedChar = Convert.ToInt32(bitarr[i], 16);
+                char charedChar;
+                if (intedChar == 0)
                     break;
-                var intedChar = 0x0500 + Convert.ToInt32(bitarr[i], 16);
-                letters.Add(Convert.ToChar(intedChar));
+                else if (specialChars.ContainsKey(intedChar))
+                    charedChar = specialChars[intedChar];
+                else
+                    charedChar = Convert.ToChar(0x0500 + intedChar);
+
+                letters.Add(charedChar);
             }
             string temp = string.Join("", letters);
             pacObj.DataCatalog.Add(currentParams.name, temp);

@@ -810,7 +810,7 @@
 			},
 			{
 			  "name": "Data",
-              "desc": "The data to send.",
+              "desc": "The data to send. (In little endian)",
               "type": "bytes"
 			}
 			]
@@ -832,7 +832,7 @@
 			},
 			{
 			  "name": "Data",
-              "desc": "The data to write.",
+              "desc": "The data to write. (In little endian)",
               "type": "bytes"
 			}
 			]

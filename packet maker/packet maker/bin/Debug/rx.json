@@ -62,6 +62,16 @@
               "type": "short"
             },
             {
+              "name": "Payload Volt",
+              "desc": "The volt of payload 5V channel",
+              "type": "short"
+            },
+            {
+              "name": "Payload Current",
+              "desc": "The current of payload 5V channel",
+              "type": "short"
+            },
+            {
               "name": "MCU Temperature",
               "desc": "",
               "type": "short"
@@ -166,6 +176,36 @@
               "name": "is payload disabled",
               "desc": "1 - disabled, 0 - enabled",
               "type": "char"
+            },
+            {
+              "name": "rx_doppler",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "rx_rssi",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "tx_reflpwr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "tx_fwrdpwr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "pa_temp",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "board_temp",
+              "desc": "battery voltage",
+              "type": "short"
             },
             {
               "name": "In memory of",
@@ -999,6 +1039,16 @@
               "type": "short"
             },
             {
+              "name": "Payload Volt",
+              "desc": "The volt of payload 5V channel",
+              "type": "short"
+            },
+            {
+              "name": "Payload Current",
+              "desc": "The current of payload 5V channel",
+              "type": "short"
+            },
+            {
               "name": "MCU Temperature",
               "desc": "",
               "type": "short"
@@ -1104,10 +1154,40 @@
               "desc": "1 - disabled, 0 - enabled",
               "type": "char"
             },
-			{
+            {
+              "name": "rx_doppler",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "rx_rssi",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "tx_reflpwr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "tx_fwrdpwr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "pa_temp",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "board_temp",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
               "name": "In memory of",
               "desc": "A name of someone who perished in the war",
-              "type": "ascii"
+              "type": "hebrew"
             }
           ]
         },

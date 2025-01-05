@@ -287,11 +287,11 @@
         {
           "id": "165",
           "name": "SET_RSSI_TRANSPONDER",
-          "desc": "Change the RSSI value (frequency) for the transponder, then update the value in FRAM.",
+          "desc": "Change the min RSSI value for the transponder to turn on its amp",
           "inParams": [
             {
               "name": "RSSI Value",
-              "desc": "The RSSI frequency to switch to.",
+              "desc": "The RSSI frequency to switch to. values 0-4095",
               "type": "short"
             }
           ]

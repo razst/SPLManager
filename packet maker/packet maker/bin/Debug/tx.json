@@ -369,17 +369,20 @@
         {
           "id": "178",
           "name": "ANT get arm status",
-          "desc": "Get the arm status of the antenna."
+          "desc": "Get the arm status of the antenna.",
+          "inParams": []
         },
         {
           "id": "179",
           "name": "ANT get uptime",
-          "desc": "Get the uptime of one of the antennas."
+          "desc": "Get the uptime of one of the antennas.",
+          "inParams": []
         },
         {
           "id": "183",
           "name": "ANT cancel deploy",
-          "desc": "Command that stops the deployment of the antenna."
+          "desc": "Command that stops the deployment of the antenna.",
+          "inParams": []
         },
         {
           "id": "185",
@@ -754,6 +757,10 @@
 				{
                   "id": "4",
                   "name": "Ant side A reset"
+                },
+				{
+                  "id": "5",
+                  "name": "Ant side B reset"
                 },
 				{
                   "id": "6",

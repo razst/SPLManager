@@ -83,7 +83,7 @@ namespace packet_maker
             MainLabelsWorker.Start();
 
             SatRxOptions.Add("TEVEL", transOptions);
-            SatRxOptions.Add("TAU", new TypeList(@"TauRx.json"));
+            //SatRxOptions.Add("TAU", new TypeList(@"TauRx.json"));
 
             NextPass = new NextPassWorker(Program.settings.defaultSatGroup);
             RxHisTracker = new PacketHistoryTracker(RxGroupsCB, privHex, transOut);

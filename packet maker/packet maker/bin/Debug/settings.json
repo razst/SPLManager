@@ -29,56 +29,56 @@
     },
     {
       "id": 11,
-      "name": "T1OFK",
-      "desc": "Ofakim",
+      "name": "Tevel1",
+      "desc": "Kara",
       "noradID": 25544
     },
     {
       "id": 12,
-      "name": "T2YRC",
+      "name": "Tevel2Y",
       "desc": "Yerucham",
       "noradID": 25544
     },
     {
       "id": 13,
-      "name": "T3TYB",
-      "desc": "Taybe",
+      "name": "Tevel3",
+      "desc": "Guvat Shmuel",
       "noradID": 25544
     },
     {
       "id": 14,
-      "name": "T4ATA",
-      "desc": "Kiryat Ata",
+      "name": "Tevel4",
+      "desc": "Herzliya",
       "noradID": 25544
     },
     {
       "id": 15,
-      "name": "T5SNG",
+      "name": "Tevel5Y",
       "desc": "Shaar HaNegev",
       "noradID": 25544
     },
     {
       "id": 16,
-      "name": "T6NZR",
-      "desc": "Nazareth",
+      "name": "Tevel6",
+      "desc": "Ein Mahil",
       "noradID": 25544
     },
     {
       "id": 17,
-      "name": "T7ADM",
+      "name": "Tevel7Y",
       "desc": "Maale Adomim",
       "noradID": 25544
     },
     {
       "id": 18,
-      "name": "T8GBS",
-      "desc": "Guvat Shmuel",
+      "name": "Tevel8Y",
+      "desc": "Yarka",
       "noradID": 25544
     },
     {
       "id": 19,
-      "name": "TAUSAT1",
-      "desc": "TA",
+      "name": "Tevel9",
+      "desc": "Taybe",
       "noradID": 25544
     }
   ]

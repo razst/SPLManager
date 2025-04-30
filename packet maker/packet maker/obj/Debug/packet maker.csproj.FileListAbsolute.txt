@@ -752,3 +752,143 @@ C:\Users\ADMIN\Dev\SPLManager\packet maker\packet maker\obj\Debug\packet maker.c
 C:\Users\ADMIN\Dev\SPLManager\packet maker\packet maker\obj\Debug\packet m.478DE3C1.Up2Date
 C:\Users\ADMIN\Dev\SPLManager\packet maker\packet maker\obj\Debug\SPL Manager.exe
 C:\Users\ADMIN\Dev\SPLManager\packet maker\packet maker\obj\Debug\SPL Manager.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x86.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\grpc_csharp_ext.x64.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.so
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.so
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x86.dylib
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\libgrpc_csharp_ext.x64.dylib
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\mongocrypt.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\SPL Manager.exe.config
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\SPL Manager.exe
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\SPL Manager.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.Core.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.SecurityToken.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\DnsClient.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.PlatformServices.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Win32.Registry.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Bson.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.Core.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Libmongocrypt.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Nest.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\SharpCompress.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Snappier.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Memory.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Numerics.Vectors.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Security.AccessControl.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Security.Principal.Windows.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Text.Encoding.CodePages.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\ZstdSharp.dll
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.Core.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.Core.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.SecurityToken.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\AWSSDK.SecurityToken.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\DnsClient.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Elasticsearch.Net.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.CommonProtos.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Api.Gax.Grpc.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Auth.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Apis.Core.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Cloud.Firestore.V1.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.LongRunning.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Google.Protobuf.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Auth.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Grpc.Core.Api.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Microsoft.Win32.Registry.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Bson.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\MongoDB.Driver.Core.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Nest.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Nest.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Newtonsoft.Json.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Context.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Nito.AsyncEx.Tasks.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.pdb
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Nito.Disposables.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\Snappier.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Buffers.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Collections.Immutable.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Interactive.Async.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Memory.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Numerics.Vectors.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Security.AccessControl.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Security.Principal.Windows.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Text.Encoding.CodePages.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.ValueTuple.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Helpers.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Web.Razor.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\bin\Debug\System.Web.WebPages.Razor.xml
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.AssemblyReference.cache
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.SuggestedBindingRedirects.cache
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.About.resources
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\AquaControls.valuesOfColors.resources
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonFrm.resources
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.jsonValSetFrm.resources
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Main.resources
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.NewPlaylistDialog.resources
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet_maker.Properties.Resources.resources
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.GenerateResource.cache
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CoreCompileInputs.cache
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\packet maker.csproj.CopyComplete
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\SPL Manager.exe
+C:\ISIS\workspace\SPLManager\packet maker\packet maker\obj\Debug\SPL Manager.pdb

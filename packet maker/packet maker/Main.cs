@@ -765,20 +765,28 @@ namespace packet_maker
         #region funcs
         public async void trasBtn_click(string msg)
         {
-            string mess = msg.Trim().Replace('-', ' ');
-
-            foreach (var RxOption in SatRxOptions)
+            try
             {
-                int currentGroupDex = -1;
-                if (RxOption.Key == "TAU") currentGroupDex = 9;
+                string mess = msg.Trim().Replace('-', ' ');
 
-                po = new PacketObject(RxOption.Value, mess, currentGroupDex);
-                if (po.Type != -1) break;
+                foreach (var RxOption in SatRxOptions)
+                {
+                    int currentGroupDex = -1;
+                    if (RxOption.Key == "TAU") currentGroupDex = 9;
+
+                    po = new PacketObject(RxOption.Value, mess, currentGroupDex);
+                    if (po.Type != -1) break;
+                }
+
+                RxHisTracker.AddPacket(po);
+
+                await po.Upload("parsed_rx");
             }
-
-            RxHisTracker.AddPacket(po);
-
-            await po.Upload("parsed_rx");
+            catch (Exception e)
+            {
+                Console.WriteLine("Unable to parse rx msg:"+ msg);
+                Console.WriteLine(e);
+            }
         }
         #endregion
 

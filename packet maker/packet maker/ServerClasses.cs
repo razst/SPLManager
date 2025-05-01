@@ -187,9 +187,9 @@ namespace packet_maker
                                     break;
                             }
                         }
-                        finally
+                        catch (Exception )
                         {
-                            Console.WriteLine("*******************");
+                            Console.WriteLine("Unable to parse RX data:"+ data);
                         }
 
                     }

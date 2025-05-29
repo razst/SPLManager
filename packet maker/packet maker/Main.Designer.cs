@@ -226,7 +226,7 @@ namespace packet_maker
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1271, 26);
+            this.menuStrip1.Size = new System.Drawing.Size(1271, 24);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -235,7 +235,7 @@ namespace packet_maker
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.modifyToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // modifyToolStripMenuItem
@@ -244,20 +244,20 @@ namespace packet_maker
             this.tXToolStripMenuItem,
             this.rXToolStripMenuItem});
             this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
-            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.modifyToolStripMenuItem.Text = "modify";
             // 
             // tXToolStripMenuItem
             // 
             this.tXToolStripMenuItem.Name = "tXToolStripMenuItem";
-            this.tXToolStripMenuItem.Size = new System.Drawing.Size(110, 26);
+            this.tXToolStripMenuItem.Size = new System.Drawing.Size(88, 22);
             this.tXToolStripMenuItem.Text = "TX";
             this.tXToolStripMenuItem.Click += new System.EventHandler(this.tXToolStripMenuItem_Click);
             // 
             // rXToolStripMenuItem
             // 
             this.rXToolStripMenuItem.Name = "rXToolStripMenuItem";
-            this.rXToolStripMenuItem.Size = new System.Drawing.Size(110, 26);
+            this.rXToolStripMenuItem.Size = new System.Drawing.Size(88, 22);
             this.rXToolStripMenuItem.Text = "RX";
             this.rXToolStripMenuItem.Click += new System.EventHandler(this.rXToolStripMenuItem_Click);
             // 
@@ -266,13 +266,13 @@ namespace packet_maker
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -282,20 +282,20 @@ namespace packet_maker
             this.toAFileToolStripMenuItem,
             this.toAFolderToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(52, 22);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // toAFileToolStripMenuItem
             // 
             this.toAFileToolStripMenuItem.Name = "toAFileToolStripMenuItem";
-            this.toAFileToolStripMenuItem.Size = new System.Drawing.Size(279, 26);
+            this.toAFileToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.toAFileToolStripMenuItem.Text = "RX query data to a file";
             this.toAFileToolStripMenuItem.Click += new System.EventHandler(this.toAFileToolStripMenuItem_Click);
             // 
             // toAFolderToolStripMenuItem
             // 
             this.toAFolderToolStripMenuItem.Name = "toAFolderToolStripMenuItem";
-            this.toAFolderToolStripMenuItem.Size = new System.Drawing.Size(279, 26);
+            this.toAFolderToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.toAFolderToolStripMenuItem.Text = "to a folder (not working yet)";
             this.toAFolderToolStripMenuItem.Click += new System.EventHandler(this.toAFolderToolStripMenuItem_Click);
             // 
@@ -318,10 +318,10 @@ namespace packet_maker
             this.tabQuery.Controls.Add(this.label28);
             this.tabQuery.Controls.Add(this.label29);
             this.tabQuery.Controls.Add(this.RxPacQryLibx);
-            this.tabQuery.Location = new System.Drawing.Point(4, 25);
+            this.tabQuery.Location = new System.Drawing.Point(4, 22);
             this.tabQuery.Name = "tabQuery";
             this.tabQuery.Padding = new System.Windows.Forms.Padding(3);
-            this.tabQuery.Size = new System.Drawing.Size(1263, 596);
+            this.tabQuery.Size = new System.Drawing.Size(1263, 601);
             this.tabQuery.TabIndex = 3;
             this.tabQuery.Text = "Query";
             this.tabQuery.UseVisualStyleBackColor = true;
@@ -361,7 +361,7 @@ namespace packet_maker
             "No Limit"});
             this.qryLimitCB.Location = new System.Drawing.Point(993, 26);
             this.qryLimitCB.Name = "qryLimitCB";
-            this.qryLimitCB.Size = new System.Drawing.Size(128, 24);
+            this.qryLimitCB.Size = new System.Drawing.Size(128, 21);
             this.qryLimitCB.TabIndex = 32;
             // 
             // label23
@@ -369,7 +369,7 @@ namespace packet_maker
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(956, 29);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(37, 16);
+            this.label23.Size = new System.Drawing.Size(31, 13);
             this.label23.TabIndex = 33;
             this.label23.Text = "Limit:";
             // 
@@ -392,7 +392,7 @@ namespace packet_maker
             this.qryFieldCB.FormattingEnabled = true;
             this.qryFieldCB.Location = new System.Drawing.Point(10, 6);
             this.qryFieldCB.Name = "qryFieldCB";
-            this.qryFieldCB.Size = new System.Drawing.Size(128, 24);
+            this.qryFieldCB.Size = new System.Drawing.Size(128, 21);
             this.qryFieldCB.TabIndex = 44;
             this.qryFieldCB.SelectedIndexChanged += new System.EventHandler(this.qryFieldCB_SelectedIndexChanged);
             // 
@@ -408,7 +408,7 @@ namespace packet_maker
             "="});
             this.qryConditionCB.Location = new System.Drawing.Point(144, 6);
             this.qryConditionCB.Name = "qryConditionCB";
-            this.qryConditionCB.Size = new System.Drawing.Size(55, 24);
+            this.qryConditionCB.Size = new System.Drawing.Size(55, 21);
             this.qryConditionCB.TabIndex = 45;
             // 
             // qryCondvalDtp
@@ -416,7 +416,7 @@ namespace packet_maker
             this.qryCondvalDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.qryCondvalDtp.Location = new System.Drawing.Point(205, 6);
             this.qryCondvalDtp.Name = "qryCondvalDtp";
-            this.qryCondvalDtp.Size = new System.Drawing.Size(128, 22);
+            this.qryCondvalDtp.Size = new System.Drawing.Size(128, 20);
             this.qryCondvalDtp.TabIndex = 47;
             this.qryCondvalDtp.Visible = false;
             // 
@@ -424,7 +424,7 @@ namespace packet_maker
             // 
             this.qryCondvalTxb.Location = new System.Drawing.Point(205, 6);
             this.qryCondvalTxb.Name = "qryCondvalTxb";
-            this.qryCondvalTxb.Size = new System.Drawing.Size(115, 22);
+            this.qryCondvalTxb.Size = new System.Drawing.Size(115, 20);
             this.qryCondvalTxb.TabIndex = 46;
             // 
             // qrySubtypeCB
@@ -436,7 +436,7 @@ namespace packet_maker
             "All"});
             this.qrySubtypeCB.Location = new System.Drawing.Point(593, 9);
             this.qrySubtypeCB.Name = "qrySubtypeCB";
-            this.qrySubtypeCB.Size = new System.Drawing.Size(128, 24);
+            this.qrySubtypeCB.Size = new System.Drawing.Size(128, 21);
             this.qrySubtypeCB.TabIndex = 48;
             this.qrySubtypeCB.SelectedIndexChanged += new System.EventHandler(this.qrySubtypeCB_SelectedIndexChanged);
             // 
@@ -445,7 +445,7 @@ namespace packet_maker
             this.qryFieldChbx.AutoSize = true;
             this.qryFieldChbx.Location = new System.Drawing.Point(199, 49);
             this.qryFieldChbx.Name = "qryFieldChbx";
-            this.qryFieldChbx.Size = new System.Drawing.Size(57, 20);
+            this.qryFieldChbx.Size = new System.Drawing.Size(48, 17);
             this.qryFieldChbx.TabIndex = 49;
             this.qryFieldChbx.Text = "field:";
             this.qryFieldChbx.UseVisualStyleBackColor = true;
@@ -454,11 +454,9 @@ namespace packet_maker
             // qryTxChbx
             // 
             this.qryTxChbx.AutoSize = true;
-            this.qryTxChbx.Checked = true;
-            this.qryTxChbx.CheckState = System.Windows.Forms.CheckState.Checked;
             this.qryTxChbx.Location = new System.Drawing.Point(911, 9);
             this.qryTxChbx.Name = "qryTxChbx";
-            this.qryTxChbx.Size = new System.Drawing.Size(46, 20);
+            this.qryTxChbx.Size = new System.Drawing.Size(40, 17);
             this.qryTxChbx.TabIndex = 37;
             this.qryTxChbx.Text = "TX";
             this.qryTxChbx.UseVisualStyleBackColor = true;
@@ -470,7 +468,7 @@ namespace packet_maker
             this.qryRxChbx.CheckState = System.Windows.Forms.CheckState.Checked;
             this.qryRxChbx.Location = new System.Drawing.Point(910, 44);
             this.qryRxChbx.Name = "qryRxChbx";
-            this.qryRxChbx.Size = new System.Drawing.Size(47, 20);
+            this.qryRxChbx.Size = new System.Drawing.Size(41, 17);
             this.qryRxChbx.TabIndex = 36;
             this.qryRxChbx.Text = "RX";
             this.qryRxChbx.UseVisualStyleBackColor = true;
@@ -480,7 +478,7 @@ namespace packet_maker
             this.label25.AutoSize = true;
             this.label25.Location = new System.Drawing.Point(16, 13);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(36, 16);
+            this.label25.Size = new System.Drawing.Size(30, 13);
             this.label25.TabIndex = 30;
             this.label25.Text = "from:";
             // 
@@ -490,7 +488,7 @@ namespace packet_maker
             this.qrySatCB.FormattingEnabled = true;
             this.qrySatCB.Location = new System.Drawing.Point(394, 9);
             this.qrySatCB.Name = "qrySatCB";
-            this.qrySatCB.Size = new System.Drawing.Size(136, 24);
+            this.qrySatCB.Size = new System.Drawing.Size(136, 21);
             this.qrySatCB.TabIndex = 40;
             // 
             // label22
@@ -498,7 +496,7 @@ namespace packet_maker
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(540, 13);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(58, 16);
+            this.label22.Size = new System.Drawing.Size(47, 13);
             this.label22.TabIndex = 34;
             this.label22.Text = "subtype:";
             // 
@@ -507,7 +505,7 @@ namespace packet_maker
             this.label31.AutoSize = true;
             this.label31.Location = new System.Drawing.Point(355, 13);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(53, 16);
+            this.label31.Size = new System.Drawing.Size(43, 13);
             this.label31.TabIndex = 41;
             this.label31.Text = "satelite:";
             // 
@@ -526,7 +524,7 @@ namespace packet_maker
             this.qryMinDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.qryMinDtp.Location = new System.Drawing.Point(52, 10);
             this.qryMinDtp.Name = "qryMinDtp";
-            this.qryMinDtp.Size = new System.Drawing.Size(128, 22);
+            this.qryMinDtp.Size = new System.Drawing.Size(128, 20);
             this.qryMinDtp.TabIndex = 28;
             // 
             // label24
@@ -534,7 +532,7 @@ namespace packet_maker
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(196, 13);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(21, 16);
+            this.label24.Size = new System.Drawing.Size(19, 13);
             this.label24.TabIndex = 31;
             this.label24.Text = "to:";
             // 
@@ -543,7 +541,7 @@ namespace packet_maker
             this.qryIdTxb.Location = new System.Drawing.Point(65, 49);
             this.qryIdTxb.Name = "qryIdTxb";
             this.qryIdTxb.ReadOnly = true;
-            this.qryIdTxb.Size = new System.Drawing.Size(115, 22);
+            this.qryIdTxb.Size = new System.Drawing.Size(115, 20);
             this.qryIdTxb.TabIndex = 38;
             // 
             // qryIdChbx
@@ -551,7 +549,7 @@ namespace packet_maker
             this.qryIdChbx.AutoSize = true;
             this.qryIdChbx.Location = new System.Drawing.Point(19, 51);
             this.qryIdChbx.Name = "qryIdChbx";
-            this.qryIdChbx.Size = new System.Drawing.Size(42, 20);
+            this.qryIdChbx.Size = new System.Drawing.Size(37, 17);
             this.qryIdChbx.TabIndex = 42;
             this.qryIdChbx.Text = "ID";
             this.qryIdChbx.UseVisualStyleBackColor = true;
@@ -562,7 +560,7 @@ namespace packet_maker
             this.qryMaxDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.qryMaxDtp.Location = new System.Drawing.Point(221, 10);
             this.qryMaxDtp.Name = "qryMaxDtp";
-            this.qryMaxDtp.Size = new System.Drawing.Size(128, 22);
+            this.qryMaxDtp.Size = new System.Drawing.Size(128, 20);
             this.qryMaxDtp.TabIndex = 29;
             // 
             // qryRx2TxBtn
@@ -590,7 +588,7 @@ namespace packet_maker
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(392, 58);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(53, 16);
+            this.label26.Size = new System.Drawing.Size(43, 13);
             this.label26.TabIndex = 47;
             this.label26.Text = "satelite:";
             // 
@@ -600,7 +598,7 @@ namespace packet_maker
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(441, 51);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(136, 24);
+            this.comboBox3.Size = new System.Drawing.Size(136, 21);
             this.comboBox3.TabIndex = 46;
             // 
             // label27
@@ -608,7 +606,7 @@ namespace packet_maker
             this.label27.AutoSize = true;
             this.label27.Location = new System.Drawing.Point(2, 87);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(27, 16);
+            this.label27.Size = new System.Drawing.Size(24, 13);
             this.label27.TabIndex = 45;
             this.label27.Text = "TX:";
             // 
@@ -616,10 +614,9 @@ namespace packet_maker
             // 
             this.TxPacQryLibx.FormattingEnabled = true;
             this.TxPacQryLibx.HorizontalScrollbar = true;
-            this.TxPacQryLibx.ItemHeight = 16;
             this.TxPacQryLibx.Location = new System.Drawing.Point(27, 87);
             this.TxPacQryLibx.Name = "TxPacQryLibx";
-            this.TxPacQryLibx.Size = new System.Drawing.Size(359, 292);
+            this.TxPacQryLibx.Size = new System.Drawing.Size(359, 290);
             this.TxPacQryLibx.TabIndex = 44;
             this.TxPacQryLibx.SelectedIndexChanged += new System.EventHandler(this.TxPacQryLibx_SelectedIndexChanged);
             // 
@@ -648,7 +645,7 @@ namespace packet_maker
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(713, 87);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(45, 16);
+            this.label28.Size = new System.Drawing.Size(37, 13);
             this.label28.TabIndex = 39;
             this.label28.Text = "Detail:";
             // 
@@ -657,7 +654,7 @@ namespace packet_maker
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(399, 87);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(28, 16);
+            this.label29.Size = new System.Drawing.Size(25, 13);
             this.label29.TabIndex = 38;
             this.label29.Text = "RX:";
             // 
@@ -665,10 +662,9 @@ namespace packet_maker
             // 
             this.RxPacQryLibx.FormattingEnabled = true;
             this.RxPacQryLibx.HorizontalScrollbar = true;
-            this.RxPacQryLibx.ItemHeight = 16;
             this.RxPacQryLibx.Location = new System.Drawing.Point(455, 87);
             this.RxPacQryLibx.Name = "RxPacQryLibx";
-            this.RxPacQryLibx.Size = new System.Drawing.Size(252, 292);
+            this.RxPacQryLibx.Size = new System.Drawing.Size(252, 290);
             this.RxPacQryLibx.TabIndex = 36;
             this.RxPacQryLibx.SelectedIndexChanged += new System.EventHandler(this.RxPacQryLibx_SelectedIndexChanged);
             // 
@@ -692,10 +688,10 @@ namespace packet_maker
             this.RxTab.Controls.Add(this.label5);
             this.RxTab.Controls.Add(this.privHex);
             this.RxTab.Controls.Add(this.trasBtn);
-            this.RxTab.Location = new System.Drawing.Point(4, 25);
+            this.RxTab.Location = new System.Drawing.Point(4, 22);
             this.RxTab.Name = "RxTab";
             this.RxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.RxTab.Size = new System.Drawing.Size(1263, 596);
+            this.RxTab.Size = new System.Drawing.Size(1263, 599);
             this.RxTab.TabIndex = 1;
             this.RxTab.Text = "RX";
             this.RxTab.UseVisualStyleBackColor = true;
@@ -730,7 +726,7 @@ namespace packet_maker
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(12, 39);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(37, 16);
+            this.label20.Size = new System.Drawing.Size(31, 13);
             this.label20.TabIndex = 33;
             this.label20.Text = "Limit:";
             // 
@@ -745,7 +741,7 @@ namespace packet_maker
             "No Limit"});
             this.DBLimitCB.Location = new System.Drawing.Point(49, 36);
             this.DBLimitCB.Name = "DBLimitCB";
-            this.DBLimitCB.Size = new System.Drawing.Size(128, 24);
+            this.DBLimitCB.Size = new System.Drawing.Size(128, 21);
             this.DBLimitCB.TabIndex = 32;
             this.DBLimitCB.Visible = false;
             // 
@@ -754,7 +750,7 @@ namespace packet_maker
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(183, 10);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(21, 16);
+            this.label19.Size = new System.Drawing.Size(19, 13);
             this.label19.TabIndex = 31;
             this.label19.Text = "to:";
             // 
@@ -763,7 +759,7 @@ namespace packet_maker
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(13, 10);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(36, 16);
+            this.label18.Size = new System.Drawing.Size(30, 13);
             this.label18.TabIndex = 30;
             this.label18.Text = "from:";
             // 
@@ -772,7 +768,7 @@ namespace packet_maker
             this.maxExportDateDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.maxExportDateDtp.Location = new System.Drawing.Point(208, 8);
             this.maxExportDateDtp.Name = "maxExportDateDtp";
-            this.maxExportDateDtp.Size = new System.Drawing.Size(128, 22);
+            this.maxExportDateDtp.Size = new System.Drawing.Size(128, 20);
             this.maxExportDateDtp.TabIndex = 29;
             this.maxExportDateDtp.Visible = false;
             // 
@@ -781,7 +777,7 @@ namespace packet_maker
             this.minExportDateDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.minExportDateDtp.Location = new System.Drawing.Point(49, 8);
             this.minExportDateDtp.Name = "minExportDateDtp";
-            this.minExportDateDtp.Size = new System.Drawing.Size(128, 22);
+            this.minExportDateDtp.Size = new System.Drawing.Size(128, 20);
             this.minExportDateDtp.TabIndex = 28;
             this.minExportDateDtp.Visible = false;
             // 
@@ -821,7 +817,7 @@ namespace packet_maker
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(390, 62);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(53, 16);
+            this.label17.Size = new System.Drawing.Size(43, 13);
             this.label17.TabIndex = 24;
             this.label17.Text = "satelite:";
             // 
@@ -831,7 +827,7 @@ namespace packet_maker
             this.RxGroupsCB.FormattingEnabled = true;
             this.RxGroupsCB.Location = new System.Drawing.Point(439, 55);
             this.RxGroupsCB.Name = "RxGroupsCB";
-            this.RxGroupsCB.Size = new System.Drawing.Size(136, 24);
+            this.RxGroupsCB.Size = new System.Drawing.Size(136, 21);
             this.RxGroupsCB.TabIndex = 23;
             this.RxGroupsCB.SelectedIndexChanged += new System.EventHandler(this.RxGroupsCB_SelectedIndexChanged);
             // 
@@ -840,7 +836,7 @@ namespace packet_maker
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(0, 91);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(37, 16);
+            this.label16.Size = new System.Drawing.Size(32, 13);
             this.label16.TabIndex = 13;
             this.label16.Text = "Sent:";
             // 
@@ -848,10 +844,9 @@ namespace packet_maker
             // 
             this.TxPacLibx.FormattingEnabled = true;
             this.TxPacLibx.HorizontalScrollbar = true;
-            this.TxPacLibx.ItemHeight = 16;
             this.TxPacLibx.Location = new System.Drawing.Point(48, 91);
             this.TxPacLibx.Name = "TxPacLibx";
-            this.TxPacLibx.Size = new System.Drawing.Size(336, 388);
+            this.TxPacLibx.Size = new System.Drawing.Size(336, 381);
             this.TxPacLibx.TabIndex = 12;
             this.TxPacLibx.SelectedIndexChanged += new System.EventHandler(this.TxPacLibx_SelectedIndexChanged);
             // 
@@ -870,7 +865,7 @@ namespace packet_maker
             this.transIn.Location = new System.Drawing.Point(48, 21);
             this.transIn.Name = "transIn";
             this.transIn.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.transIn.Size = new System.Drawing.Size(550, 22);
+            this.transIn.Size = new System.Drawing.Size(550, 20);
             this.transIn.TabIndex = 0;
             this.transIn.WordWrap = false;
             // 
@@ -909,7 +904,7 @@ namespace packet_maker
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(711, 91);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 16);
+            this.label7.Size = new System.Drawing.Size(37, 13);
             this.label7.TabIndex = 6;
             this.label7.Text = "Detail:";
             // 
@@ -918,7 +913,7 @@ namespace packet_maker
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(397, 91);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 16);
+            this.label6.Size = new System.Drawing.Size(50, 13);
             this.label6.TabIndex = 5;
             this.label6.Text = "Recived:";
             // 
@@ -927,7 +922,7 @@ namespace packet_maker
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(8, 24);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 16);
+            this.label5.Size = new System.Drawing.Size(34, 13);
             this.label5.TabIndex = 4;
             this.label5.Text = "Input:";
             // 
@@ -935,10 +930,9 @@ namespace packet_maker
             // 
             this.privHex.FormattingEnabled = true;
             this.privHex.HorizontalScrollbar = true;
-            this.privHex.ItemHeight = 16;
             this.privHex.Location = new System.Drawing.Point(453, 91);
             this.privHex.Name = "privHex";
-            this.privHex.Size = new System.Drawing.Size(252, 388);
+            this.privHex.Size = new System.Drawing.Size(252, 381);
             this.privHex.TabIndex = 3;
             this.privHex.SelectedIndexChanged += new System.EventHandler(this.privHex_SelectedIndexChanged);
             // 
@@ -970,10 +964,10 @@ namespace packet_maker
             this.TxTab.Controls.Add(this.label3);
             this.TxTab.Controls.Add(this.dataTypesDGV);
             this.TxTab.Controls.Add(this.makeOut);
-            this.TxTab.Location = new System.Drawing.Point(4, 25);
+            this.TxTab.Location = new System.Drawing.Point(4, 22);
             this.TxTab.Name = "TxTab";
             this.TxTab.Padding = new System.Windows.Forms.Padding(3);
-            this.TxTab.Size = new System.Drawing.Size(1263, 596);
+            this.TxTab.Size = new System.Drawing.Size(1263, 599);
             this.TxTab.TabIndex = 0;
             this.TxTab.Text = "TX";
             this.TxTab.UseVisualStyleBackColor = true;
@@ -981,7 +975,7 @@ namespace packet_maker
             // descSubType
             // 
             this.descSubType.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.descSubType.Location = new System.Drawing.Point(422, 51);
+            this.descSubType.Location = new System.Drawing.Point(422, 52);
             this.descSubType.Name = "descSubType";
             this.descSubType.Size = new System.Drawing.Size(144, 28);
             this.descSubType.TabIndex = 18;
@@ -1001,7 +995,7 @@ namespace packet_maker
             this.subtypeCB.FormattingEnabled = true;
             this.subtypeCB.Location = new System.Drawing.Point(477, 21);
             this.subtypeCB.Name = "subtypeCB";
-            this.subtypeCB.Size = new System.Drawing.Size(143, 24);
+            this.subtypeCB.Size = new System.Drawing.Size(143, 21);
             this.subtypeCB.TabIndex = 2;
             this.subtypeCB.SelectedIndexChanged += new System.EventHandler(this.subtypeCB_SelectedIndexChanged);
             // 
@@ -1010,7 +1004,7 @@ namespace packet_maker
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(422, 29);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 16);
+            this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Subtype:";
             // 
@@ -1021,7 +1015,7 @@ namespace packet_maker
             this.typeCB.FormattingEnabled = true;
             this.typeCB.Location = new System.Drawing.Point(278, 21);
             this.typeCB.Name = "typeCB";
-            this.typeCB.Size = new System.Drawing.Size(121, 24);
+            this.typeCB.Size = new System.Drawing.Size(121, 21);
             this.typeCB.TabIndex = 1;
             this.typeCB.SelectedIndexChanged += new System.EventHandler(this.typeCB_SelectedIndexChanged);
             // 
@@ -1030,7 +1024,7 @@ namespace packet_maker
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(238, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 16);
+            this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Type:";
             // 
@@ -1040,7 +1034,7 @@ namespace packet_maker
             this.groupsCB.FormattingEnabled = true;
             this.groupsCB.Location = new System.Drawing.Point(81, 21);
             this.groupsCB.Name = "groupsCB";
-            this.groupsCB.Size = new System.Drawing.Size(136, 24);
+            this.groupsCB.Size = new System.Drawing.Size(136, 21);
             this.groupsCB.TabIndex = 21;
             // 
             // label4
@@ -1048,7 +1042,7 @@ namespace packet_maker
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(22, 29);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 16);
+            this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 22;
             this.label4.Text = "satelite:";
             // 
@@ -1058,7 +1052,7 @@ namespace packet_maker
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label14.Location = new System.Drawing.Point(1000, 103);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(83, 20);
+            this.label14.Size = new System.Drawing.Size(68, 17);
             this.label14.TabIndex = 32;
             this.label14.Text = "Play Lists";
             // 
@@ -1108,7 +1102,7 @@ namespace packet_maker
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(11, 229);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(205, 16);
+            this.label15.Size = new System.Drawing.Size(160, 13);
             this.label15.TabIndex = 37;
             this.label15.Text = "Sleep between commands (milis)";
             // 
@@ -1116,7 +1110,7 @@ namespace packet_maker
             // 
             this.sleepCmdTxb.Location = new System.Drawing.Point(171, 225);
             this.sleepCmdTxb.Name = "sleepCmdTxb";
-            this.sleepCmdTxb.Size = new System.Drawing.Size(91, 22);
+            this.sleepCmdTxb.Size = new System.Drawing.Size(91, 20);
             this.sleepCmdTxb.TabIndex = 36;
             // 
             // DelLItemBtn
@@ -1172,10 +1166,9 @@ namespace packet_maker
             // PLitemsLibx
             // 
             this.PLitemsLibx.FormattingEnabled = true;
-            this.PLitemsLibx.ItemHeight = 16;
             this.PLitemsLibx.Location = new System.Drawing.Point(70, 59);
             this.PLitemsLibx.Name = "PLitemsLibx";
-            this.PLitemsLibx.Size = new System.Drawing.Size(192, 148);
+            this.PLitemsLibx.Size = new System.Drawing.Size(192, 147);
             this.PLitemsLibx.TabIndex = 30;
             this.PLitemsLibx.SelectedIndexChanged += new System.EventHandler(this.PLitemsLibx_SelectedIndexChanged);
             // 
@@ -1184,7 +1177,7 @@ namespace packet_maker
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(21, 59);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(47, 16);
+            this.label13.Size = new System.Drawing.Size(41, 13);
             this.label13.TabIndex = 29;
             this.label13.Text = "PL Info";
             // 
@@ -1193,7 +1186,7 @@ namespace packet_maker
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(11, 19);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(63, 16);
+            this.label12.Size = new System.Drawing.Size(51, 13);
             this.label12.TabIndex = 28;
             this.label12.Text = "PL Name";
             // 
@@ -1203,7 +1196,7 @@ namespace packet_maker
             this.PlaylistCB.FormattingEnabled = true;
             this.PlaylistCB.Location = new System.Drawing.Point(70, 18);
             this.PlaylistCB.Name = "PlaylistCB";
-            this.PlaylistCB.Size = new System.Drawing.Size(192, 24);
+            this.PlaylistCB.Size = new System.Drawing.Size(192, 21);
             this.PlaylistCB.TabIndex = 26;
             this.PlaylistCB.SelectedIndexChanged += new System.EventHandler(this.PlaylistCB_SelectedIndexChanged);
             // 
@@ -1242,7 +1235,7 @@ namespace packet_maker
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(17, 488);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 16);
+            this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 20;
             this.label3.Text = "Output:";
             // 
@@ -1296,7 +1289,7 @@ namespace packet_maker
             // 
             this.makeOut.Location = new System.Drawing.Point(65, 481);
             this.makeOut.Name = "makeOut";
-            this.makeOut.Size = new System.Drawing.Size(700, 22);
+            this.makeOut.Size = new System.Drawing.Size(700, 20);
             this.makeOut.TabIndex = 4;
             // 
             // MainTab
@@ -1319,10 +1312,10 @@ namespace packet_maker
             this.MainTab.Controls.Add(this.panel5);
             this.MainTab.Controls.Add(this.MainSatCB);
             this.MainTab.Controls.Add(this.panel11);
-            this.MainTab.Location = new System.Drawing.Point(4, 25);
+            this.MainTab.Location = new System.Drawing.Point(4, 22);
             this.MainTab.Name = "MainTab";
             this.MainTab.Padding = new System.Windows.Forms.Padding(3);
-            this.MainTab.Size = new System.Drawing.Size(1263, 596);
+            this.MainTab.Size = new System.Drawing.Size(1263, 601);
             this.MainTab.TabIndex = 4;
             this.MainTab.Text = "Main";
             // 
@@ -1343,7 +1336,7 @@ namespace packet_maker
             this.utcTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.utcTitle.Location = new System.Drawing.Point(180, 13);
             this.utcTitle.Name = "utcTitle";
-            this.utcTitle.Size = new System.Drawing.Size(59, 26);
+            this.utcTitle.Size = new System.Drawing.Size(47, 21);
             this.utcTitle.TabIndex = 1;
             this.utcTitle.Text = "UTC";
             this.utcTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1376,7 +1369,7 @@ namespace packet_maker
             this.label44.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label44.Location = new System.Drawing.Point(39, 13);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(154, 26);
+            this.label44.Size = new System.Drawing.Size(132, 21);
             this.label44.TabIndex = 1;
             this.label44.Text = "Corrupt Bytes";
             this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1409,7 +1402,7 @@ namespace packet_maker
             this.label49.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label49.Location = new System.Drawing.Point(39, 13);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(159, 26);
+            this.label49.Size = new System.Drawing.Size(136, 21);
             this.label49.TabIndex = 1;
             this.label49.Text = "Planed Restes";
             this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1442,7 +1435,7 @@ namespace packet_maker
             this.label45.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label45.Location = new System.Drawing.Point(25, 13);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(186, 26);
+            this.label45.Size = new System.Drawing.Size(159, 21);
             this.label45.TabIndex = 1;
             this.label45.Text = "Unplaned Restes";
             this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1475,7 +1468,7 @@ namespace packet_maker
             this.label47.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label47.Location = new System.Drawing.Point(160, 15);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(124, 26);
+            this.label47.Size = new System.Drawing.Size(106, 21);
             this.label47.TabIndex = 1;
             this.label47.Text = "Sat Uptime";
             this.label47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1498,7 +1491,7 @@ namespace packet_maker
             this.FreeSpaceGauge.DialText = "Free Space (MB)";
             this.FreeSpaceGauge.Glossiness = 11.36364F;
             this.FreeSpaceGauge.Location = new System.Drawing.Point(630, 388);
-            this.FreeSpaceGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FreeSpaceGauge.Margin = new System.Windows.Forms.Padding(4);
             this.FreeSpaceGauge.MaxValue = 2200F;
             this.FreeSpaceGauge.MinValue = 0F;
             this.FreeSpaceGauge.Name = "FreeSpaceGauge";
@@ -1517,7 +1510,7 @@ namespace packet_maker
             this.BatTempGauge.DialText = "Bat Temp";
             this.BatTempGauge.Glossiness = 11.36364F;
             this.BatTempGauge.Location = new System.Drawing.Point(423, 388);
-            this.BatTempGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BatTempGauge.Margin = new System.Windows.Forms.Padding(4);
             this.BatTempGauge.MaxValue = 80F;
             this.BatTempGauge.MinValue = -40F;
             this.BatTempGauge.Name = "BatTempGauge";
@@ -1546,7 +1539,7 @@ namespace packet_maker
             this.label43.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label43.Location = new System.Drawing.Point(160, 9);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(118, 26);
+            this.label43.Size = new System.Drawing.Size(99, 21);
             this.label43.TabIndex = 1;
             this.label43.Text = "OBC Time";
             this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1569,7 +1562,7 @@ namespace packet_maker
             this.OBCGauge.DialText = "OBC Temp";
             this.OBCGauge.Glossiness = 11.36364F;
             this.OBCGauge.Location = new System.Drawing.Point(214, 389);
-            this.OBCGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OBCGauge.Margin = new System.Windows.Forms.Padding(4);
             this.OBCGauge.MaxValue = 80F;
             this.OBCGauge.MinValue = -40F;
             this.OBCGauge.Name = "OBCGauge";
@@ -1588,7 +1581,7 @@ namespace packet_maker
             this.VBatGauge.DialText = "VBat";
             this.VBatGauge.Glossiness = 11.36364F;
             this.VBatGauge.Location = new System.Drawing.Point(8, 389);
-            this.VBatGauge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.VBatGauge.Margin = new System.Windows.Forms.Padding(4);
             this.VBatGauge.MaxValue = 9F;
             this.VBatGauge.MinValue = 0F;
             this.VBatGauge.Name = "VBatGauge";
@@ -1648,7 +1641,7 @@ namespace packet_maker
             this.label38.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label38.Location = new System.Drawing.Point(123, 13);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(162, 26);
+            this.label38.Size = new System.Drawing.Size(136, 21);
             this.label38.TabIndex = 1;
             this.label38.Text = "Last Frame TX";
             this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1693,7 +1686,7 @@ namespace packet_maker
             this.label34.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label34.Location = new System.Drawing.Point(141, 13);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(140, 26);
+            this.label34.Size = new System.Drawing.Size(118, 21);
             this.label34.TabIndex = 1;
             this.label34.Text = "Last Beacon";
             this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1726,7 +1719,7 @@ namespace packet_maker
             this.label36.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label36.Location = new System.Drawing.Point(123, 13);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(162, 26);
+            this.label36.Size = new System.Drawing.Size(136, 21);
             this.label36.TabIndex = 1;
             this.label36.Text = "Last Frame TX";
             this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1749,7 +1742,7 @@ namespace packet_maker
             this.label37.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label37.Location = new System.Drawing.Point(121, 13);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(163, 26);
+            this.label37.Size = new System.Drawing.Size(138, 21);
             this.label37.TabIndex = 1;
             this.label37.Text = "Last Frame RX";
             this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1786,7 +1779,7 @@ namespace packet_maker
             this.label33.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label33.Location = new System.Drawing.Point(134, 13);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(316, 26);
+            this.label33.Size = new System.Drawing.Size(269, 21);
             this.label33.TabIndex = 1;
             this.label33.Text = "Following Passes (Max El > 7)";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1798,7 +1791,7 @@ namespace packet_maker
             this.nextPass1Label.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.nextPass1Label.Location = new System.Drawing.Point(25, 45);
             this.nextPass1Label.Name = "nextPass1Label";
-            this.nextPass1Label.Size = new System.Drawing.Size(45, 20);
+            this.nextPass1Label.Size = new System.Drawing.Size(40, 17);
             this.nextPass1Label.TabIndex = 2;
             this.nextPass1Label.Text = "____";
             // 
@@ -1809,7 +1802,7 @@ namespace packet_maker
             this.nextPass2Label.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.nextPass2Label.Location = new System.Drawing.Point(25, 86);
             this.nextPass2Label.Name = "nextPass2Label";
-            this.nextPass2Label.Size = new System.Drawing.Size(45, 20);
+            this.nextPass2Label.Size = new System.Drawing.Size(40, 17);
             this.nextPass2Label.TabIndex = 3;
             this.nextPass2Label.Text = "____";
             // 
@@ -1820,7 +1813,7 @@ namespace packet_maker
             this.nextPass3Label.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.nextPass3Label.Location = new System.Drawing.Point(25, 127);
             this.nextPass3Label.Name = "nextPass3Label";
-            this.nextPass3Label.Size = new System.Drawing.Size(45, 20);
+            this.nextPass3Label.Size = new System.Drawing.Size(40, 17);
             this.nextPass3Label.TabIndex = 4;
             this.nextPass3Label.Text = "____";
             // 
@@ -1831,7 +1824,7 @@ namespace packet_maker
             this.nextPass4Label.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.nextPass4Label.Location = new System.Drawing.Point(25, 168);
             this.nextPass4Label.Name = "nextPass4Label";
-            this.nextPass4Label.Size = new System.Drawing.Size(45, 20);
+            this.nextPass4Label.Size = new System.Drawing.Size(40, 17);
             this.nextPass4Label.TabIndex = 5;
             this.nextPass4Label.Text = "____";
             // 
@@ -1852,7 +1845,7 @@ namespace packet_maker
             this.label30.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label30.Location = new System.Drawing.Point(51, 13);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(116, 26);
+            this.label30.Size = new System.Drawing.Size(98, 21);
             this.label30.TabIndex = 1;
             this.label30.Text = "Next Pass";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1864,7 +1857,7 @@ namespace packet_maker
             this.nextPassLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.nextPassLabel.Location = new System.Drawing.Point(22, 44);
             this.nextPassLabel.Name = "nextPassLabel";
-            this.nextPassLabel.Size = new System.Drawing.Size(182, 49);
+            this.nextPassLabel.Size = new System.Drawing.Size(141, 40);
             this.nextPassLabel.TabIndex = 1;
             this.nextPassLabel.Text = "-- : -- : --";
             this.nextPassLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1876,7 +1869,7 @@ namespace packet_maker
             this.MainSatCB.FormattingEnabled = true;
             this.MainSatCB.Location = new System.Drawing.Point(505, 18);
             this.MainSatCB.Name = "MainSatCB";
-            this.MainSatCB.Size = new System.Drawing.Size(261, 37);
+            this.MainSatCB.Size = new System.Drawing.Size(261, 33);
             this.MainSatCB.TabIndex = 22;
             this.MainSatCB.SelectedIndexChanged += new System.EventHandler(this.MainSatCB_SelectedIndexChanged);
             // 
@@ -1897,7 +1890,7 @@ namespace packet_maker
             this.label39.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label39.Location = new System.Drawing.Point(171, 13);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(78, 26);
+            this.label39.Size = new System.Drawing.Size(65, 21);
             this.label39.TabIndex = 1;
             this.label39.Text = "Status";
             this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1920,10 +1913,10 @@ namespace packet_maker
             this.TabControl.Controls.Add(this.RxTab);
             this.TabControl.Controls.Add(this.tabQuery);
             this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TabControl.Location = new System.Drawing.Point(0, 26);
+            this.TabControl.Location = new System.Drawing.Point(0, 24);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(1271, 625);
+            this.TabControl.Size = new System.Drawing.Size(1271, 627);
             this.TabControl.TabIndex = 17;
             // 
             // MainLabelsWorker

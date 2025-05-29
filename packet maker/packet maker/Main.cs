@@ -843,7 +843,9 @@ namespace packet_maker
                     //var filter = Builders<BsonDocument>.Filter.Gt("time", qryMinDtp.Value.ToUniversalTime()) &
                     //  Builders<BsonDocument>.Filter.Lt("time", qryMaxDtp.Value.ToUniversalTime());
                     var filter = Builders<BsonDocument>.Filter.Eq("satId", ((Group)qrySatCB.SelectedItem).Id);
-                          //& Builders<BsonDocument>.Filter.Eq("subtype", "Beacon");
+                    if (!qrySubtypeCB.Text.Equals("All")){
+                        filter = filter & Builders<BsonDocument>.Filter.Eq("subtype", qrySubtypeCB.Text);
+                    }
                     var sort = Builders<BsonDocument>.Sort.Descending("time");
                     List<BsonDocument> documents = dbCollection.Find(filter).Limit(qrySize).Sort(sort).ToList(); ;
                     //var temp = DateTime.Parse(firstDocument.GetValue("time").ToString()).ToLocalTime().ToString();

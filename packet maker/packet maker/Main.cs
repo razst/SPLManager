@@ -116,7 +116,9 @@ namespace packet_maker
             minExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
             maxExportDateDtp.CustomFormat = "dd/MM/yyyy HH:mm";
             qryMinDtp.CustomFormat = "dd/MM/yyyy HH:mm";
+            qryMinDtp.Value = DateTime.Now.AddDays(-1);
             qryMaxDtp.CustomFormat = "dd/MM/yyyy HH:mm";
+            qryMaxDtp.Value = DateTime.Now;
             qryCondvalDtp.CustomFormat = "dd/MM/yyyy HH:mm";
 
             //Combo boxes selected index
@@ -843,13 +845,15 @@ namespace packet_maker
                     //var filter = Builders<BsonDocument>.Filter.Gt("time", qryMinDtp.Value.ToUniversalTime()) &
                     //  Builders<BsonDocument>.Filter.Lt("time", qryMaxDtp.Value.ToUniversalTime());
                     var filter = Builders<BsonDocument>.Filter.Eq("satId", ((Group)qrySatCB.SelectedItem).Id);
+                    filter = filter & Builders<BsonDocument>.Filter.Lt("time", qryMaxDtp.Value);
+                    filter = filter & Builders<BsonDocument>.Filter.Gt("time", qryMinDtp.Value);
                     if (!qrySubtypeCB.Text.Equals("All")){
                         filter = filter & Builders<BsonDocument>.Filter.Eq("subtype", qrySubtypeCB.Text);
                     }
                     var sort = Builders<BsonDocument>.Sort.Descending("time");
                     List<BsonDocument> documents = dbCollection.Find(filter).Limit(qrySize).Sort(sort).ToList(); ;
                     //var temp = DateTime.Parse(firstDocument.GetValue("time").ToString()).ToLocalTime().ToString();
-
+                    
 
                     foreach (BsonDocument doc in documents)
                     {
@@ -1495,11 +1499,91 @@ namespace packet_maker
         #region objects
         private Label[] nextPassLabels = new Label[4];
 
-        #endregion
 
         #endregion
 
+        #endregion
 
+
+        private void radfatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            string subType = qrySubtypeCB.Text;
+            if (RxPacQryLibx.Items.Count == 0)
+            {
+                MessageBox.Show("No RX query data to export", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (subType.Equals("All"))
+            {
+                MessageBox.Show("Please select SubTYpe (Beacon/Log/Radfat) and load from DB)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
+
+
+
+            saveFileDialog.Filter = Program.settings.enableExcel ? "excel|*.xlsx" : "excel|*.csv";
+
+            saveFileDialog.Title = "Export history to a File";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+            int j = 0;
+            List<List<string>> rows;
+            if (qrySubtypeCB.Text.Equals("All"))
+            {
+
+            }
+            if (subType.Equals("Radfet"))
+            {
+                rows = new List<List<string>> { new List<string> { "Sat Log Time", "Radfat Time", "ADC1", "ADC2", "Temparture Time", "Temparture" } };
+            }
+            else if (subType.Equals("Beacon"))
+            {
+                rows = new List<List<string>> { new List<string> { "vbat","volt_5v","volt_3v3","charging_power","consumed_power","electric_current","current_3v3","current_5v","Payload_Volt","Payload_Current","MCU_Temperature","Battery_Temperature","Solar_panel_1_Temperature","Solar_panel_2_Temperature","Solar_panel_3_Temperature","Solar_panel_4_Temperature","Solar_panel_5_Temperature","Solar_panel_6_Temperature","sat_time","free_memory","corrupt_bytes","number_of_resets","sat_uptime","ADC_channel_0_(mV)","ADC_channel_1_(mV)","ADC_channel_2_(mV)","ADC_channel_3_(mV)","ADC_channel_4_(mV)","number_of_cmd_resets","is_payload_disabled","rx_doppler","rx_rssi","tx_reflpwr","tx_fwrdpwr","pa_temp","board_temp","In_memory_of" } };
+            }
+            else if (subType.Equals("LOG"))
+            {
+                rows = new List<List<string>> { new List<string> { "Sat Log Time", "Error Number", "Error Message"} };
+            }
+            else
+            {
+                MessageBox.Show("Please select SubTYpe (Beacon/Log/Radfat) and load from DB)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
+
+            foreach (var packet in RxPacQryList)
+            //foreach (var packet in RxHisTracker.GetCurrentPacketList())
+            {
+                if (packet.Type == -1)
+                {
+                    rows.Add(new List<string> { RxPacQryLibx.Items[j].ToString().Split('[', ']')[1], "-1", "-", "ERROR", "-", "-", packet.RawPacket, "manager was not able to translate this packet" });
+                    j++;
+                    continue;
+                }
+
+                string dataStr = "";
+                for (int i = 0; i < packet.DataCatalog.Count; i++)
+                {
+                    dataStr += $"{packet.DataCatalog.ElementAt(i).Value},".Replace(" +00:00","");
+                }
+                rows.Add(new List<string> { dataStr });
+
+
+
+                j++;
+            }
+            try
+            {
+                Application.UseWaitCursor = true;
+                CreateCSV(rows, saveFileDialog.FileName);
+            }
+            finally
+            {
+                Application.UseWaitCursor = false;
+            }
+
+        }
     }
 }
 
